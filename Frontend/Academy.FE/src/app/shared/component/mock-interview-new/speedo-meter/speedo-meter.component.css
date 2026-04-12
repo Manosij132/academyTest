@@ -1,0 +1,10 @@
+#power-gauge {
+  margin-top: 20px;
+  margin-bottom: -120px;
+}
+
+.score-label {
+  text-align: center;
+  font-weight: bold;
+  font-size: 32px;
+}

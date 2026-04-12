@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Report List</h3>
+    <div class="card main-card">
+      <div class="card-body">
+        <button
+          mat-flat-button
+          color="primary"
+          class="mb-3 report-button"
+          (click)="createNewReport()"
+        >
+          New Report
+        </button>
+
+        <div *ngIf="bookmarks.length === 0" class="alert alert-info">
+          No bookmarks available. Please create a new report.
+        </div>
+
+        <div class="row">
+          <div class="col-4 mb-4" *ngFor="let bookmark of bookmarks">
+            <mat-card class="custom-card">
+              <mat-card-header>
+                <mat-card-title>{{ bookmark.bookMarkName }}</mat-card-title>
+                <mat-card-subtitle *ngIf="bookmark.emailSubject">
+                  Subject: {{ bookmark.emailSubject }}
+                </mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-content class="card-content-email-fields">
+                <div *ngIf="bookmark.emailTo" class="email-recipient-line">
+                  <span class="field-label">To:</span>
+                  <span class="field-value">{{ bookmark.emailTo }}</span>
+                </div>
+
+                <div *ngIf="bookmark.emailCC" class="email-recipient-line">
+                  <span class="field-label">CC:</span>
+                  <span class="field-value">{{ bookmark.emailCC }}</span>
+                </div>
+              </mat-card-content>
+
+              <mat-card-actions class="card-buttons-bottom-right">
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  class="report-button"
+                  (click)="viewBookmark(bookmark.bookMarkId, bookmark.bookMarkName)"
+                >
+                  View
+                </button>
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  class="report-button"
+                  (click)="editBookmark(bookmark.bookMarkId)"
+                >
+                  Edit
+                </button>
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  class="report-button"
+                  (click)="deleteBookmark(bookmark.bookMarkId)"
+                >
+                  Delete
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

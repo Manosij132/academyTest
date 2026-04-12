@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h5 mat-dialog-title>{{ popupTitle }}</h5>
+  <button mat-dialog-close class="btn" (click)="onClose(true)">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+<mat-dialog-content>
+  <app-create-skill (closepopup)="onClose($event)"></app-create-skill>
+</mat-dialog-content>
+<!-- <mat-dialog-actions>
+      <button mat-button (click)="onClose()">Close</button>
+      <button mat-button color="primary" (click)="onSave()">Save</button>
+    </mat-dialog-actions> -->

@@ -1,0 +1,275 @@
+@if(error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else{
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Model Scoring</h3>
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          class="search"
+          [(ngModel)]="searchText"
+          (keyup)="applyFilter()"
+          placeholder="Search here"
+        />
+      </mat-form-field>
+      <div class="right-flex-container">
+        <button class="header-btn" (click)="onCreateInterviewModelScore()">
+          Create
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body">
+      @if (dataSource.data.length === 0) {
+      <div class="p-8 text-center text-gray-500">
+        <i class="fa fa-star fa-3x mb-3"></i>
+        <h5>No model scoring found</h5>
+        <p>No scoring data available for models.</p>
+      </div>
+      } @else {
+      <div class="table-container-wrapper">
+        <div class="scrollable-table-wrapper">
+          <table mat-table [dataSource]="dataSource" matSort class="table">
+            <!-- Interview Detail Id -->
+            <ng-container matColumnDef="interviewDetailId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Evaluation Code
+              </th>
+              <td mat-cell *matCellDef="let row" class="font-medium py-2">
+                {{ row.interviewCode || "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Model -->
+            <ng-container matColumnDef="modelId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Model</th>
+              <td mat-cell *matCellDef="let row" class="font-medium py-2">
+                {{
+                  row?.aiModelName
+                    ? row.aiModelName
+                    : row.model
+                    ? row.model
+                    : "-"
+                }}
+              </td>
+            </ng-container>
+
+            <!-- Prompt -->
+            <ng-container matColumnDef="prompt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Prompt</th>
+              <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+                <div
+                  style="
+                    max-width: 220px;
+                    min-width: 160px;
+                    white-space: pre-line;
+                    word-break: break-word;
+                    overflow-wrap: break-word;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    line-clamp: 3;
+                    -webkit-line-clamp: 3; /* This sets the maximum number of lines to 3 */
+                    white-space: normal;
+                    max-height: 70px;
+                  "
+                >
+                  {{ row.prompt || "-" }}
+                </div>
+                <div>
+                  <button class="showMoreButton" (click)="onToggle(row)">
+                    {{ activePromptID == row.id ? "Show Less" : "Show More" }}
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Score -->
+            <ng-container matColumnDef="score">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Score</th>
+              <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+                {{ row?.modelScore || "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Comments -->
+            <ng-container matColumnDef="comments">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Comments
+              </th>
+              <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+                {{ row.modelComments || "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+                <div class="flex gap-2">
+                  <mat-icon
+                    (click)="editInterviewDetails(row)"
+                    style="cursor: pointer"
+                    >edit</mat-icon
+                  >
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          [pageSize]="pageSize"
+          [length]="totalItems"
+          (page)="onPageChanged($event)"
+          showFirstLastButtons
+        >
+        </mat-paginator>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}
+
+<!-- Template for Add Model Scoring Dialog -->
+<ng-template #addModelScoringTemplate>
+  <form [formGroup]="form" (ngSubmit)="onSubmitDialog()" class="dialog-form">
+    <!-- Basic Information -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Evaluation Code</mat-label>
+      <input
+        matInput
+        formControlName="interviewCode"
+        placeholder="Enter evaluation code"
+      />
+      <mat-error *ngIf="form.get('interviewCode')?.hasError('required')"
+        >Evaluation code is required</mat-error
+      >
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Model</mat-label>
+      <input matInput formControlName="model" placeholder="Enter model name" />
+      <mat-error *ngIf="form.get('model')?.hasError('required')"
+        >Model is required</mat-error
+      >
+    </mat-form-field> -->
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Model</mat-label>
+      <mat-select
+        formControlName="model"
+        required
+        placeholder="Enter model name"
+      >
+        <mat-option *ngFor="let ai of aimodels" [value]="ai.id">{{
+          ai.modelName
+        }}</mat-option>
+        <mat-option value="null">Any</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Prompt -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Prompt</mat-label>
+      <textarea
+        matInput
+        formControlName="prompt"
+        placeholder="Enter prompt"
+        rows="3"
+      ></textarea>
+      <mat-error *ngIf="form.get('prompt')?.hasError('required')"
+        >Prompt is required</mat-error
+      >
+    </mat-form-field>
+
+    <!-- Model Scoring -->
+    <!-- Model Scoring Row -->
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Model Score</mat-label>
+          <input
+            matInput
+            formControlName="modelScore"
+            placeholder="Enter model score"
+            type="number"
+          />
+          <mat-error *ngIf="form.get('modelScore')?.hasError('required')"
+            >Model score is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Manual Override Score</mat-label>
+          <input
+            matInput
+            formControlName="manualOverrideScore"
+            placeholder="Enter override score"
+            type="number"
+          />
+          <mat-error
+            *ngIf="form.get('manualOverrideScore')?.hasError('required')"
+            >Manual override score is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Comments Row -->
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Model Comments</mat-label>
+          <textarea
+            matInput
+            formControlName="modelComments"
+            placeholder="Enter model comments"
+            rows="3"
+          ></textarea>
+          <mat-error *ngIf="form.get('modelComments')?.hasError('required')"
+            >Model comments are required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Manual Override Comments</mat-label>
+          <textarea
+            matInput
+            formControlName="manualOverrideComments"
+            placeholder="Enter override comments"
+            rows="3"
+          ></textarea>
+          <mat-error
+            *ngIf="form.get('manualOverrideComments')?.hasError('required')"
+            >Manual override comments are required</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div *ngIf="dialogError" class="form-error">
+      {{ dialogError }}
+    </div>
+
+    <div class="form-actions">
+      <button class="cancel-btn" type="button" (click)="onCancelDialog()">
+        Cancel
+      </button>
+      <button class="action-btn" type="submit" [disabled]="form.invalid">
+        <span>{{ selectedModelScoring ? "Update" : "Add" }}</span>
+      </button>
+    </div>
+  </form>
+</ng-template>

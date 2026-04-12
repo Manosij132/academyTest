@@ -1,0 +1,17 @@
+.panel-efficiency-evaluation-border {
+     border: 2px solid #b2adc5;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 1px;
+}
+.header {
+  display: flex;
+  justify-content: space-between; /* pushes spans to edges */
+  align-items: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}

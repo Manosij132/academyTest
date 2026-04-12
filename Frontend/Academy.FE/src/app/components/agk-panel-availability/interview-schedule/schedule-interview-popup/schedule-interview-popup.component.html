@@ -1,0 +1,107 @@
+
+<mat-dialog-content class="dialog-content">
+    <div class="modal-header">
+        <h1 mat-dialog-title class="modal-heading">{{ popUpHeader }}</h1>
+        <button type="button" class="btn" mat-dialog-close>
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div [ngClass]="{'disabled': loading}">
+        <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+    
+            <mat-form-field appearance="outline" class="form-group">
+                <mat-label>Event Title *</mat-label>
+                <!-- <mat-select placeholder="Select Event Titles" formControlName="eventTitle">
+                  <mat-option *ngFor="let title of eventTitles" [value]="title">
+                    {{ title }}
+                  </mat-option>
+                </mat-select> -->
+                <input matInput type="text" formControlName="eventTitle"  value="L1 Technical interview Slot" >
+                <mat-error *ngIf="scheduleForm.get('eventTitle')?.invalid && scheduleForm.get('eventTitle')?.touched">
+                  At least one Event Title is required.
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="form-group">
+                <mat-label>Panel *</mat-label>
+                <mat-chip-grid  #chipList>
+                    <mat-chip-row *ngFor="let email of panels" 
+                        [removable]="removable"
+                        (removed)="remove(email)">
+                        {{email}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip-row>
+                    <input placeholder="Add email and press Enter" 
+                        [formControl]="panelControl" 
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-grid >
+                <mat-error *ngIf="panelControl.invalid && panelControl.touched">
+                    <div *ngIf="panelControl.errors?.['required']">Panel is required.</div>
+                    <div *ngIf="panelControl.errors?.['email']">Invalid email format.</div>
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="form-group">
+                <mat-label>Candidate email *</mat-label>
+                <input matInput placeholder="Email" formControlName="candidate" type="email">
+                <mat-error *ngIf="scheduleForm.get('candidate')?.touched">
+                    <ng-container *ngIf="scheduleForm.get('candidate')?.hasError('required')">
+                        Candidate email is required.
+                    </ng-container>
+                    <ng-container *ngIf="scheduleForm.get('candidate')?.hasError('email')">
+                        Please enter a valid email address.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+    
+            <div class="resume">
+                <mat-label>Resume </mat-label> 
+                <app-file-upload #fileInput
+                    formControlName="resume" 
+                    placeholder="Attach Resume">
+                </app-file-upload>
+                <mat-error *ngIf="scheduleForm.get('resume')?.hasError('invalidFileType')">
+                    {{ scheduleForm.get('resume')?.getError('invalidFileType') }}
+                </mat-error>
+                <mat-error *ngIf="scheduleForm.get('resume')?.hasError('fileTooLarge')">
+                    {{ scheduleForm.get('resume')?.getError('fileTooLarge') }}
+                </mat-error>
+            </div>
+    
+            <div class="group-btn">
+                <mat-form-field appearance="outline" class="date-field">
+                    <mat-label>Schedule On *</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="scheduleDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error
+                        *ngIf="scheduleForm.get('scheduleDate')?.invalid && scheduleForm.get('scheduleDate')?.touched">
+                        Date is required.
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline" class="time-field">
+                    <mat-label>Time *</mat-label>
+                    <input matInput type="time" formControlName="scheduleTime">
+                    <mat-error
+                        *ngIf="scheduleForm.get('scheduleTime')?.invalid && scheduleForm.get('scheduleTime')?.touched">
+                        Time is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="button-algin">
+                <button mat-raised-button color="accent" class="schedule-btn">
+                    {{ loading ? 'Submitting...' : popUpHeader}}
+                </button>
+                <button mat-raised-button (click)="onClose('false')"  color="accent" class="schedule-btn">
+                    {{ loading ? 'Cancel' : popUpHeaderCancel }}
+                </button>
+            </div>
+        </form>
+    </div>
+    
+</mat-dialog-content>

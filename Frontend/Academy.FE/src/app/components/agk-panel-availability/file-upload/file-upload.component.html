@@ -1,0 +1,26 @@
+<div class="file-upload-container">
+  <label
+    [ngClass]="{
+      'file-upload-label': true,
+      'file-clear-button-disabled': disabled
+    }"
+    tabindex="0">
+    <span class="file-upload-button">
+      <mat-icon>attachment</mat-icon>
+      <span>{{ placeholder }}</span>
+    </span>
+    <input
+      type="file"
+      class="file-upload-input"
+      (change)="onFileChange($event)"
+      [disabled]="disabled"
+      aria-hidden="true"
+      #fileInput/>
+  </label>
+  <div *ngIf="file" class="file-info">
+    <span class="file-name" (click)="downloadFile()">{{ file.name }}</span>
+    <mat-icon role="button" class="file-clear-button" (click)="clearFile()">
+      clear
+    </mat-icon>
+  </div>
+</div>

@@ -1,0 +1,232 @@
+.title {
+  margin-top: 77px;
+}
+
+
+table {
+  width: 100%;
+}
+
+.send-email {
+  margin: 20px;
+}
+.proposed-leader-ddl {
+  padding: 5px;
+}
+#edit {
+  /* background: rgba(191, 215, 50, 1); */
+  opacity: 1;
+  top: 0px;
+  left: 0px;
+  border: 0px solid rgba(150, 150, 150, 1);
+  border-radius: 2vw !important;
+  overflow: hidden;
+  color: rgba(191, 215, 50, 1);
+  cursor: pointer;
+  float: center;
+}
+.navbar-nav>.active>a {
+  border-bottom: 2px solid rgba(191, 215, 50, 1);
+  font-weight: 700;
+}
+.nav-link {
+font-weight: 400;
+}
+
+.mat-table {
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.panelRow .mat-form-field{
+  display:unset;
+}
+
+.panelRow div{
+  margin-right:20px;
+}
+
+
+::ng-deep .th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding:12px;
+}
+
+::ng-deep .panelSearch.mat-form-field-appearance-standard .mat-form-field-flex{
+  padding-top:unset;
+}
+
+.mat-cell-gap{
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 32%!important;
+}
+
+  .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red; /* Change color as per your risk level */
+  }
+
+  ::ng-deep input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 70px;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 120px;
+}
+
+::ng-deep .panelDateRange.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  padding-bottom: 1.4em !important;
+}
+
+.panelSearch{
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+
+.headercolor{
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  background: #FFFFFF;
+  /* box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1); */
+}
+
+.button {
+  background-color: pink;
+  color: white; /* Text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 16px; /* Adjust font size as needed */
+  float: right;
+  position: absolute;
+  right: 0;
+}
+
+.updateButton {
+  background: rgba(191, 215, 50, 1);
+  opacity: 1;
+  top: 0px;
+  left: 0px;
+  border: 0px solid rgba(150, 150, 150, 1);
+  border-radius: 2vw !important;
+  overflow: hidden;
+  color: #ffffff;
+  cursor: pointer;
+  float: center;
+}
+
+.save-button {
+  background: rgba(191, 215, 50, 1);
+  opacity: 1;
+  top: 0px;
+  left: 0px;
+  border: 0px solid rgba(150, 150, 150, 1);
+  border-radius: 1vw !important;
+  overflow: hidden;
+  color: #ffffff;
+  cursor: pointer;
+  float: center;
+  margin: 20px;
+}
+
+.update-button {
+  background: rgba(191, 215, 50, 1);
+  opacity: 1;
+  top: 0px;
+  left: 0px;
+  border: 0px solid rgba(150, 150, 150, 1);
+  border-radius: 1vw !important;
+  overflow: hidden;
+  color: #ffffff;
+  cursor: pointer;
+  float: center;
+}
+
+/* Hover effect */
+.button:hover {
+  background-color: #ff69b4; /* Change to a different shade of pink on hover */
+}
+
+.sideNavInActive {
+  /* position: fixed; */
+  width: 100%;
+  z-index: 1;
+}
+.sideNavActive {
+  /* position: fixed; */
+  width: 100%;
+  z-index: 1;
+}
+
+::ng-deep .panelDatePicker .mat-icon-button {
+  width: unset;
+  height: unset;
+  line-height: 20px;
+  margin-top:12px;
+}
+
+.mat-cell-customwidth{
+  max-width: 17%!important;      
+}
+
+.flex-directionright{
+  flex-direction: row-reverse !important;      
+}
+
+
+
+::ng-deep .searchFilterButton .mat-mdc-text-field-wrapper {
+  height: 44px !important;
+  width: 170px !important; 
+}
+
+::ng-deep .searchFilterButton .mdc-floating-label {
+  padding-bottom: 14px;
+}
+
+::ng-deep .searchFilterButton .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+}
+
+.flex-container {
+  display: flex;                  /* enable flex layout */
+  align-items: center;            /* vertically center items */
+  justify-content: space-between; /* left group left, right button right */
+  gap: 10px;                      /* optional spacing between items */
+  width: 100%;                    /* full width container */
+}
+
+.left-group {
+  display: flex;                  /* make filter + search in a row */
+  align-items: center;
+  gap: 10px;                      /* space between button and input */
+}
+
+.headercolor{
+  background: #FFFFFF;
+  /* box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1); */
+}
+
+.custom-table th {
+  background-color: rgb(191, 215, 50);
+  font-weight: bold;
+  font-size: 13px;
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: #f2f4e7;
+}
+
+tr.mat-mdc-row:nth-child(odd) {
+  background-color: #FFFFFF;
+}

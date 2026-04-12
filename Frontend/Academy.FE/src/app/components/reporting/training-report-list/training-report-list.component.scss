@@ -1,0 +1,71 @@
+@import url("../../../shared/styles/training-reports.css");
+
+/* General card styling */
+.custom-card {
+  border-left: 5px solid #c0d715; /* Visual accent */
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.custom-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Override default mat-card-header padding for better spacing */
+mat-card-header {
+  padding-bottom: 0 !important;
+}
+
+/* Style for the subtitle (Subject) */
+mat-card-subtitle {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+  margin-top: 4px; /* Space between title and subtitle */
+}
+
+/* Style for the card content containing email fields */
+.card-content-email-fields {
+  padding: 8px 16px 0 16px; /* Adjust padding to be less top-heavy */
+  flex-grow: 1; /* Ensures content pushes buttons to the bottom */
+  font-size: 0.9rem;
+}
+
+/* Style for each email recipient line */
+.email-recipient-line {
+  margin-bottom: 4px;
+  display: flex;
+  flex-wrap: wrap; /* Allows text to wrap if it's too long */
+}
+
+/* Style for the labels (e.g., "To:", "CC:") */
+.field-label {
+  font-weight: 500;
+  color: #444;
+  margin-right: 8px;
+  min-width: 30px; /* Ensures consistent alignment */
+}
+
+/* Style for the values */
+.field-value {
+  color: #666;
+  word-break: break-all; /* Prevents overflow for long emails */
+}
+
+/* Actions button styling */
+.card-buttons-bottom-right {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  border-top: 1px solid #eee;
+}
+
+.report-button{
+  border-radius: 5px;
+}

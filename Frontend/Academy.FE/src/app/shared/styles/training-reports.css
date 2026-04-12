@@ -1,0 +1,16 @@
+:host {
+  --theme-primary: #ccd324;
+  --primary-white: #ffffff;
+  --primary-black: #000000;
+
+  --mdc-outlined-button-label-text-color: var(--primary-black);
+  --mdc-outlined-button-outline-color: var(--theme-primary);
+  --mdc-outlined-button-text-size: 1rem;
+
+  --mdc-filled-button-container-color: var(--theme-primary);
+  --mdc-filled-button-label-text-color: var(--primary-white);
+  --mdc-filled-button-label-text-size: 1rem;
+
+  --mdc-protected-button-label-text-color: var(--theme-primary);
+  --mdc-protected-button-label-text-size: 1rem;
+}

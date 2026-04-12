@@ -1,0 +1,190 @@
+.inner-table-lable {
+  align-items: left;
+  background-color: rgb(238, 238, 238);
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.mat-mdc-row:hover {
+  background-color: #dee2e6 !important;
+  /* Slightly lighter background on hover */
+}
+
+::ng-deep .example-element-detail .mat-mdc-table {
+  margin: 15px auto;
+  box-shadow: none;
+  background-color: white;
+}
+
+//to change the font size of circle percentage
+::ng-deep tspan.ng-star-inserted {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+//to hide the "progress" word
+::ng-deep tspan.ng-star-inserted:nth-child(3) {
+  display: none;
+}
+
+::ng-deep circle.ng-star-inserted {
+  display: none;
+}
+
+p.ng-star-inserted {
+  padding: 6px 8px;
+  background: rgba(99, 227, 207, 0.3);
+  font-size: 14px;
+  font-family: Heebo;
+  line-height: 14px;
+}
+
+.mat-mdc-header-row .mat-mdc-header-cell:last-child,
+.mat-mdc-row .mat-mdc-cell:last-child {
+  border-right: none;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  gap: 5px;
+}
+
+/* Training column */
+.mat-column-trainingUrl {
+  width: 50%;
+  text-align: left;
+  justify-content: left;
+}
+
+/* Remaining columns share 50% */
+.mat-column-skillName,
+.mat-column-startDate,
+.mat-column-expectedEndDate,
+.mat-column-status,
+.mat-column-trainingScore {
+  width: 10%;
+  text-align: center;
+  justify-content: center;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.progress-bar {
+  width: 30px;
+  height: 6px;
+  border-radius: 5px;
+}
+
+.progress-text {
+  font-size: 12px;
+  min-width: 35px;
+}
+
+.mvpBadge {
+  background-color: black;
+  color: #fff !important;
+  padding: 0.35em 0.65em;
+  box-sizing: border-box;
+  border-radius: 50rem;
+  font-weight: 700;
+  border-radius: 50rem;
+  line-height: 1;
+  font-size: 0.75em;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.updateAbilityButton {
+  background-color: transparent;
+  line-height: 30px;
+  border-top: 1px solid #ebecec !important;
+  font-size: 13px;
+  padding: 5px 15px 5px 5px;
+}
+
+.updateAbilityBtn {
+  background-color: #6c757d !important;
+  color: #fff !important;
+  float: right;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 1;
+  border-radius: 3px;
+  margin-left: 2.5rem;
+}
+
+::ng-deep .mat-mdc-footer-cell {
+  display: table;
+}
+
+.badge {
+  padding: 5px 10px;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 12px;
+  margin: 0; // additional margin added on button
+}
+
+.bg-success {
+  background-color: #bfd732 !important;
+  color: #1a1b1f;
+  font-family: Roboto, sans-serif;
+}
+
+.inner-table-lable {
+  color: #818D00;
+  background-color: #EFEFEF;
+
+}
+
+.inner {
+  border: 1px solid #DCDCDC;
+}
+
+mat-row.mat-mdc-row.mdc-data-table__row.cdk-row.ng-star-inserted:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+
+mat-row.mat-mdc-row.mdc-data-table__row.cdk-row.ng-star-inserted:nth-child(even) {
+  background-color: #f2f4e7;
+}
+
+mat-row.mat-mdc-row.mdc-data-table__row.cdk-row.ng-star-inserted:nth-child(odd):hover {
+  background-color: #F1F3F6 !important;
+}
+
+mat-row.mat-mdc-row.mdc-data-table__row.cdk-row.ng-star-inserted:nth-child(even):hover {
+  background-color: #e6e9d6 !important;
+}
+
+.mat-mdc-cell {
+  border: none;
+}
+.inner-table-label {
+  text-align: left;
+}
+
+.ellipsis-cell {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ellipsis-link {
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}

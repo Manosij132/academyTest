@@ -1,0 +1,45 @@
+<!-- <h2 mat-dialog-title>Interview Evaluation</h2> -->
+ <div class="dialog-header">
+    <h2 mat-dialog-title class="dialog-title">Evaluation evaluation</h2>
+    <button 
+        mat-icon-button 
+        class="close-button"
+         mat-dialog-close
+        aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content class="dialog-content">
+  <section>
+    <h4> Evaluation Context</h4>
+    <p>{{ data.role }}</p>
+  </section>
+
+  <section>
+    <h4>Question</h4>
+    <p>{{ data.question }}</p>
+  </section>
+
+  <section>
+    <h4>Score Guideline</h4>
+    <pre>{{ data.scoreGuideline }}</pre>
+  </section>
+
+  <section>
+    <h4>Candidate Answer</h4>
+    <p>{{ data.candidateAnswer }}</p>
+  </section>
+
+  <section>
+    <h5>Evaluation Instructions</h5>
+      <p *ngFor="let item of data.evaluationInstructions">
+        {{ item }}
+      </p>
+  </section>
+
+  <section>
+    <h4>Output Format</h4>
+    <pre>{{ data.outputFormat }}</pre>
+  </section>
+</mat-dialog-content>

@@ -1,0 +1,145 @@
+@if (error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Seniority List</h3>
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          (keyup)="applyFilter()"
+          placeholder="Search here"
+          class="search"
+        />
+      </mat-form-field>
+
+      <div class="right-flex-container">
+        <button class="header-btn" (click)="onCreateSeniority()">Create</button>
+      </div>
+    </div>
+
+    <div class="card-body">
+      @if(dataSource.data.length === 0) {
+      <div class="p-8 text-center text-gray-500">
+        <i class="fa fa-users-slash fa-3x mb-3"></i>
+        <h5>No seniorities found</h5>
+        <p>Start by adding a new seniority level.</p>
+      </div>
+      } @else {
+      <div class="scrollable-table-wrapper">
+        <table mat-table [dataSource]="dataSource" matSort class="table">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let seniority" class="font-medium">
+              {{ seniority.id || "-" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let seniority">
+              {{ seniority.name || "-" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+            <td mat-cell *matCellDef="let seniority">
+              {{ seniority.createdAt | date : "medium" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated</th>
+            <td mat-cell *matCellDef="let seniority">
+              {{ seniority.updatedAt | date : "medium" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let seniority">
+              <div class="buttons">
+                <mat-icon
+                  (click)="onEditSeniority(seniority)"
+                  style="cursor: pointer"
+                  >edit</mat-icon
+                >
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        [pageSize]="pageSize"
+        [length]="totalItems"
+        (page)="onPageChanged($event)"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+
+      }
+    </div>
+  </div>
+</div>
+}
+
+<!-- Add Seniority Template -->
+<ng-template #addSeniorityTemplate>
+  <form [formGroup]="form" (ngSubmit)="onSubmitDialog()" class="dialog-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Seniority Name</mat-label>
+      <input
+        matInput
+        formControlName="name"
+        placeholder="Enter seniority name"
+      />
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        Seniority name is required
+      </mat-error>
+      <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
+        Seniority name cannot exceed 100 characters
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="dialogError" class="form-error">
+      {{ dialogError }}
+    </div>
+  </form>
+</ng-template>
+
+<!-- Edit Seniority Template -->
+<ng-template #editSeniorityTemplate>
+  <form
+    [formGroup]="editForm"
+    (ngSubmit)="onSubmitEditDialog()"
+    class="dialog-form"
+  >
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Seniority Name</mat-label>
+      <input
+        matInput
+        formControlName="name"
+        placeholder="Enter seniority name"
+      />
+      <mat-error *ngIf="editForm.get('name')?.hasError('required')">
+        Seniority name is required
+      </mat-error>
+      <mat-error *ngIf="editForm.get('name')?.hasError('maxlength')">
+        Seniority name cannot exceed 100 characters
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="dialogError" class="form-error">
+      {{ dialogError }}
+    </div>
+  </form>
+</ng-template>

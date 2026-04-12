@@ -1,0 +1,9 @@
+<ul class="nav nav-collapse">
+    <li *ngFor="let item of subMenuItems" [class.active]="isActive(item.path)">
+        <a [routerLink]="item.path ? ['/staffing', item.path] : ['/staffing']"
+           (click)="getMenuClick && getMenuClick()">
+            <i class="menu-icon" [ngClass]="item.icon"></i>
+            <span class="sub-item">{{ item.name }}</span>
+        </a>
+    </li>
+</ul>

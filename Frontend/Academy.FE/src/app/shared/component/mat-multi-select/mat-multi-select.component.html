@@ -1,0 +1,25 @@
+<div class="material-wrapper-outline" [class.filled]="selectedValues && selectedValues.length > 0"
+  [class.focused]="isFocused">
+  <ng-select [multiple]="true" [items]="options" [bindLabel]="displayKey" [bindValue]="valueKey"
+    [(ngModel)]="selectedValues" [placeholder]="placeholder" [closeOnSelect]="false" [disabled]="isDisabled"
+    [appendTo]="'body'" (change)="onModelChange($event)" (focus)="isFocused = true" (blur)="isFocused = false"
+    [compareWith]="compareOptions" (open)="onOpen()" class="ng-select-material" [clearSearchOnAdd]="true">
+    <!-- Select All Header -->
+    <ng-template ng-header-tmp>
+      <div class="ng-select-option-wrapper">
+        <mat-checkbox [checked]="isSelectAllChecked" (change)="toggleSelectAll($event)" color="primary" disableRipple>
+          Select All
+        </mat-checkbox>
+      </div>
+    </ng-template>
+
+    <!-- Each Option -->
+    <ng-template ng-option-tmp let-item="item">
+      <div class="ng-select-option-wrapper">
+        <mat-checkbox [checked]="isItemSelected(item)" color="primary" disableRipple>
+          {{ displayKey ? item[displayKey] : item }}
+        </mat-checkbox>
+      </div>
+    </ng-template>
+  </ng-select>
+</div>

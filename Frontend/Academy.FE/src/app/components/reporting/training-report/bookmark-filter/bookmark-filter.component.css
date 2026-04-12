@@ -1,0 +1,29 @@
+/* Define the animation */
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mat-multi-select-error-msg {
+  color: #ba1a1a;
+  margin-left: 21px;
+  font-size: 0.75rem;
+  position: relative;
+  top: 2px;
+  animation: fadeInFromTop 0.4s ease-out forwards;
+}
+
+.hide{
+  display: none;
+  visibility: hidden;
+}
+
+.report-button{
+  border-radius: 5px;
+}

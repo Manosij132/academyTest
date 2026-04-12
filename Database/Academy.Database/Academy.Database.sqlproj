@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Academy.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{5545ea8a-9f0c-4e44-9f6b-db02ba40da18}</ProjectGuid>
+    <OutputType>Database</OutputType>
+    <RootPath />
+    <RootNamespace>Academy.Database</RootNamespace>
+    <AssemblyName>Academy.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <!-- ================================================= -->
+  <!-- SQL Server Target Selection -->
+  <!-- ================================================= -->
+  <!-- SQL Server 2019 -->
+  <PropertyGroup Condition="'$(SqlTarget)' == '2019'">
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
+  </PropertyGroup>
+  <!-- SQL Server 2022 -->
+  <PropertyGroup Condition="'$(SqlTarget)' == '2022'">
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+  </PropertyGroup>
+  <!-- Default (SAFE): SQL Server 2019 -->
+  <PropertyGroup Condition="'$(SqlTarget)' == ''">
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
+  </PropertyGroup>
+  <!-- ================================================= -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="dbo\StoredProcedures" />
+    <Folder Include="dbo\Views" />
+    <Folder Include="MasterDataScripts" />
+    <Folder Include="sysdata" />
+    <Folder Include="sysdata\Functions" />
+    <Folder Include="sysdata\StoredProcedures" />
+    <Folder Include="sysdata\Tables" />
+    <Folder Include="dbo\UserDefinedTypes" />
+    <Folder Include="MigrationScripts" />
+    <Folder Include="MigrationScripts\release_v1.0" />
+    <Folder Include="dbo\UserDefinedFunctions" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="MasterDataScripts\SeniorityMasterUpdate.sql" />
+    <None Include="dbo\UserDefinedTypes\udt_EmployeeActivityMapType.sql" />
+    <None Include="dbo\StoredProcedures\usp_BulkInsertEmployeeActivityMaps.sql" />
+    <Build Include="dbo\Tables\BookMarkRequests.sql" />
+    <Build Include="dbo\Tables\BookMarkTemplates.sql" />
+    <Build Include="dbo\Tables\ReportColumnConfiguration.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchDynamicEmployeeTrainingReport_Compliance.sql" />
+    <None Include="MasterDataScripts\ReportColumnConfigurationMasterInsert.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Employee.sql" />
+    <Build Include="dbo\Tables\SkillMaster.sql" />
+    <Build Include="dbo\Tables\SkillEndorsementMap.sql" />
+    <Build Include="dbo\Tables\TrainingMaster.sql" />
+    <Build Include="dbo\Tables\SeniorityMaster.sql" />
+    <Build Include="dbo\Tables\TrainingProficiencyMap.sql" />
+    <Build Include="dbo\Tables\EcosystemMaster.sql" />
+    <Build Include="dbo\Tables\TrainingStatusMaster.sql" />
+    <Build Include="dbo\Tables\RoleMaster.sql" />
+    <Build Include="dbo\Tables\EmployeeRoleMap.sql" />
+    <Build Include="dbo\Tables\EmployeeTrainingMap.sql" />
+    <Build Include="dbo\Tables\Comment.sql" />
+    <Build Include="dbo\Tables\ProficiencyMaster.sql" />
+    <Build Include="dbo\Tables\EmployeeTrainingReminder.sql" />
+    <Build Include="dbo\Tables\EmailDump.sql" />
+    <None Include="MasterDataScripts\EcosystemMasterInsert.sql" />
+    <Build Include="sysdata\Functions\GetDbVersion.sql" />
+    <Build Include="sysdata\Functions\IsDbVersionApplied.sql" />
+    <Build Include="sysdata\StoredProcedures\SetDbVersion.sql" />
+    <Build Include="sysdata\Tables\SystemVersion.sql" />
+    <Build Include="sysdata\sysdata.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertComment.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertOrUpdateEmployee.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchDashboardTrainings.sql" />
+    <Build Include="dbo\Views\vwDashboard.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchLatestComment.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchProficiencies.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchEmployeesStartsWith.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchSkillTrainingsMetaData.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchSkillEndorsement.sql" />
+    <Build Include="dbo\StoredProcedures\usp_CreateEcosystemIfNotExists.sql" />
+    <Build Include="dbo\StoredProcedures\usp_MapSeniority.sql" />
+    <Build Include="dbo\Tables\JobRequest.sql" />
+    <Build Include="dbo\Tables\JobRequestDetail.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ProcessTrainingAssignment.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ProcessAutoTrainingAssignment.sql" />
+    <Build Include="dbo\Tables\CategoryMaster.sql" />
+    <Build Include="dbo\Tables\KnowledgeMaster.sql" />
+    <None Include="MasterDataScripts\KnowledgeMasterInsert.sql" />
+    <Build Include="dbo\Tables\Configuration.sql" />
+    <Build Include="dbo\Tables\DojoDetail.sql" />
+    <Build Include="dbo\Views\vwCMRawData.sql" />
+    <Build Include="dbo\Views\vwProficiencyTable.sql" />
+    <Build Include="dbo\Views\vwProficiencyDataReport.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertDefaultMVPSkillEndorsement.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_GloberTrainingStatus.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateGloberTrainingStatus.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_Employees.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateToSyncEmployees.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateDojoDetailForEmpSync.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertDeleteToSyncEmployees.sql" />
+    <Build Include="dbo\StoredProcedures\usp_SyncTrainingReminders.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ProcessReminders.sql" />
+    <Build Include="dbo\Tables\EmployeeMetadata.sql" />
+    <Build Include="dbo\Tables\ActivityMaster.sql" />
+    <None Include="MasterDataScripts\ActivityMasterInsert.sql" />
+    <Build Include="dbo\Tables\EmployeeActivityMap.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchDojoGexLeaderStartsWith.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertOrUpdateEmployeeActivityMap.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetActivitiesByEmployeeId.sql" />
+    <Build Include="dbo\Views\vwDojoActivityReport.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_EmployeeTrainingDetail.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchEmployeesWithIncompleteTraining.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateEmployeeTrainingStatus.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchAssignedActivityDetails.sql" />
+    <Build Include="dbo\Tables\Profile.sql" />
+    <Build Include="dbo\Tables\InterviewQuestions.sql" />
+    <Build Include="dbo\Tables\InterviewDetail.sql" />
+    <Build Include="dbo\Tables\ModelMaster.sql" />
+    <Build Include="dbo\Tables\PromptMaster.sql" />
+    <Build Include="dbo\Tables\ModelScoring.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_DojoEmployeeList.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetActiveDojoGlobers.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertDojoWfoEmailEntries.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetDojoGlobarDetails.sql" />
+    <Build Include="dbo\Views\vwAssignedTrainingReport.sql" />
+    <Build Include="dbo\Tables\LearningPath.sql" />
+    <Build Include="dbo\Tables\LearningPathTrainingMap.sql" />
+    <Build Include="dbo\Tables\ReportColumnConfiguration.sql" />
+    <Build Include="dbo\Tables\ReportType.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchDynamicEmployeeTrainingReport_Detailed.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchDynamicEmployeeTrainingReport_Summary.sql" />
+    <None Include="MasterDataScripts\ReportTypeMasterInsert.sql" />
+    <Build Include="dbo\Tables\EmployeeTrainingReminder.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ProcessReminders.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetDojoActivityReport.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetFiltersForDojoActivityReport.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAssignedThroughTrainingReport.sql" />
+    <Build Include="dbo\Tables\DojoProjectsConfiguration.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.0.sql">
+      <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
+    </None>
+    <None Include="MigrationScripts\release_v1.0\Academy_1.1.sql">
+      <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
+    </None>
+    <None Include="MigrationScripts\release_v1.0\Academy_1.2.sql">
+      <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
+    </None>
+    <None Include="MigrationScripts\release_v1.0\Academy_1.4.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.3.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.5.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchTrainingReminderDetails.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchUnsentEmails.sql" />
+    <Build Include="dbo\Tables\ProposedDojoGxLeader.sql" />
+    <Build Include="dbo\Tables\DojoGxLeaderAssignment.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.6.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchAreaPathReport_Summary.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchAreaPathReport_Detailed.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.7.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetEmployeesToSyncGUTraining.sql" />
+    <None Include="MasterDataScripts\SkillMasterInsert.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.8.sql" />
+    <Build Include="dbo\StoredProcedures\usp_FetchProficiencyDataReport_Detailed.sql" />
+    <Build Include="dbo\Views\vwFetchProficiencyDataReport.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertOrUpdateEmployeeDocument.sql" />
+    <Build Include="dbo\Tables\EmployeeDocument.sql" />
+    <Build Include="dbo\Tables\ScheduledJob.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.9.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetEmployeeDocumentDetails.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ProcessDocumentUpdateReminder.sql" />
+    <Build Include="dbo\Tables\EmployeeDocumentTypeMaster.sql" />
+    <None Include="MasterDataScripts\EmployeeDocumentTypeMasterInsert.sql" />
+    <Build Include="dbo\Tables\Community.sql" />
+    <Build Include="dbo\Tables\CommunityGKFocal.sql" />
+    <Build Include="dbo\Tables\CommunitySelectionRatio.sql" />
+    <Build Include="dbo\Tables\Defaulters.sql" />
+    <Build Include="dbo\Tables\InterviewData.sql" />
+    <Build Include="dbo\Tables\InterviewPanelDetails.sql" />
+    <Build Include="dbo\Tables\PanelSlots.sql" />
+    <Build Include="dbo\Tables\PanelSlotsRequirement.sql" />
+    <Build Include="dbo\Tables\PanelSlotUtilization.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_PanelSeniority.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_KeyValuePair.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InterviewPanelDetailsSave.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InterviewPanelSenioritySave.sql" />
+    <Build Include="dbo\Tables\PanelUserCredential.sql" />
+    <Build Include="dbo\Tables\PanelAIEvaluation.sql" />
+    <Build Include="dbo\Tables\PanelDetails.sql" />
+    <Build Include="dbo\Tables\EmployeeCommunityMap.sql" />
+    <Build Include="dbo\Tables\AiStudioClientMap.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.10.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.11.sql" />
+    <None Include="MigrationScripts\release_v1.0\Academy_1.12.sql" />
+    <Build Include="dbo\Views\vwDojoGxLeadersReport.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetActiveFTEEmployees.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetActivePositionsWithAssignment.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllEmployees.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetGoogleSheetConfigByRefType.sql" />
+    <Build Include="dbo\StoredProcedures\usp_SyncPositionAssignment.sql" />
+    <Build Include="dbo\Tables\APACSSF.sql" />
+    <Build Include="dbo\Tables\BetterMeLeader.sql" />
+    <Build Include="dbo\Tables\CareerReport.sql" />
+    <Build Include="dbo\Tables\CountryLocation.sql" />
+    <Build Include="dbo\Tables\DataEntry.sql" />
+    <Build Include="dbo\Tables\Glow.sql" />
+    <Build Include="dbo\Tables\GlowEmployeeData.sql" />
+    <Build Include="dbo\Tables\GlowEmployeeDetails.sql" />
+    <Build Include="dbo\Tables\GoogleSheetConfiguration.sql" />
+    <Build Include="dbo\Tables\LocationChange.sql" />
+    <Build Include="dbo\Tables\LookupData.sql" />
+    <Build Include="dbo\Tables\OnboardingData.sql" />
+    <Build Include="dbo\Tables\Portfolio.sql" />
+    <Build Include="dbo\Tables\Resignation.sql" />
+    <Build Include="dbo\Tables\SSF.sql" />
+    <Build Include="dbo\Tables\SSFRegion.sql" />
+    <Build Include="dbo\Views\vwEmployeeDataGlow.sql" />
+    <Build Include="dbo\UserDefinedFunctions\FormatMobileNumber.sql" />
+    <Build Include="dbo\Tables\PositionAssignment.sql" />
+    <None Include="MasterDataScripts\CountryLocationInsert.sql" />
+    <None Include="MasterDataScripts\GoogleSheetConfigurationInsert.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetFTEEmployeeData.sql" />
+    <Build Include="dbo\StoredProcedures\usp_SyncPositions.sql" />
+    <Build Include="dbo\Views\vwPositionDetails.sql" />
+    <Build Include="dbo\Tables\Position.sql" />
+    <Build Include="dbo\Tables\PositionNote.sql" />
+    <Build Include="dbo\Tables\PositionPlan.sql" />
+    <Build Include="dbo\Tables\PositionSkill.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_DefaulterType.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_InterviewPanelDetails.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_PanelSlotsType.sql" />
+    <Build Include="dbo\UserDefinedTypes\udt_PanelSlotUtilizationType.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateDefaulters.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetDefaultersSlots.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetInterviewPanelList.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertPanelSlotUtilization.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertPanelSlots.sql" />
+    <Build Include="dbo\StoredProcedures\usp_SaveDefaulters.sql" />
+    <Build Include="dbo\StoredProcedures\usp_RemoveDefaulters.sql" />
+    <Build Include="dbo\StoredProcedures\usp_RemoveDbDuplicateSlot.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MasterDataScripts\RoleMasterInsert.sql" />
+    <None Include="MasterDataScripts\TrainingStatusMasterInsert.sql" />
+    <None Include="MasterDataScripts\ProficiencyMasterInsert.sql" />
+    <None Include="MasterDataScripts\SeniorityMasterInsert.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Academy.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
+</Project>

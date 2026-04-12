@@ -1,0 +1,38 @@
+@import url("../../../shared/styles/training-reports.css");
+
+.eval-card{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 50rem;
+    margin-top: 4rem;
+}
+
+.report-button {
+    border-radius: 20px;
+    font-size: x-large;
+    font-weight: 600;
+    width: 285px;
+    height: 55px;
+    margin-top: 40px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 
+              0 6px 6px rgba(0, 0, 0, 0.28);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.report-button:hover:not([disabled]) {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.30), 
+              0 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+.report-button:active:not([disabled]) {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.report-button:disabled {
+  box-shadow: none;
+}
+
+.file-downoad-icon {
+  margin-left: 5px;
+}

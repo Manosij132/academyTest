@@ -1,0 +1,18 @@
+<!-- panel-efficiency-graph-dialog.component.html -->
+<h2 mat-dialog-title>{{ data.panelName }}</h2>
+<mat-dialog-content>
+  <ngx-charts-bar-vertical
+    [results]="data.graphData"
+    [view]="[400, 300]"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="false"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="'Efficiency'"
+    [yAxisLabel]="'Percentage'">
+  </ngx-charts-bar-vertical>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

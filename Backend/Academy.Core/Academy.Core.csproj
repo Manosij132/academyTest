@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Configurations>Debug;Release;Development;QA;Production</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Abstraction\Infrastructure\ILLModelConfigurationService.cs" />
+    <Compile Remove="Services\LLModelConfigurationService.cs" />
+  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Google.Apis.Auth" Version="1.68.0" />
+		<PackageReference Include="Google.Apis.Calendar.v3" Version="1.68.0.3374" />
+		<PackageReference Include="Google.Apis.Drive.v3" Version="1.57.0.2746" />
+		<PackageReference Include="Google.Apis.Sheets.v4" Version="1.57.0.2727" />
+		<PackageReference Include="LangChain.Core" Version="0.17.0" />
+		<PackageReference Include="LangChain.Providers.Ollama" Version="0.17.0" />
+		<PackageReference Include="LangChain.Providers.OpenAI" Version="0.17.0" />
+		<PackageReference Include="Mapster" Version="7.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.7" />
+		<PackageReference Include="Arch.EntityFrameworkCore" Version="2.1.15" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.UnitOfWork" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.ML" Version="5.0.0" />
+		<PackageReference Include="Microsoft.ML.DataView" Version="5.0.0" />
+		<PackageReference Include="Microsoft.ML.FastTree" Version="5.0.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.2" />
+		<PackageReference Include="Microsoft.Extensions.AI" Version="9.8.0" />
+		<PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.3.0-preview.1.25161.3" />
+		<PackageReference Include="OllamaSharp" Version="5.3.6" />
+		<PackageReference Include="TimeZoneConverter" Version="7.2.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Academy.Domain\Academy.Domain.csproj" />
+	  <ProjectReference Include="..\Academy.Shared\Academy.Shared.csproj" />
+	</ItemGroup>
+</Project>

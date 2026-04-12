@@ -1,0 +1,49 @@
+<!-- <table class="table table-bordered">
+    <thead>
+        <tr>
+            @for (header of headers; track header ){
+            <th> {{header}}</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (row of data; track row ){
+
+        <tr >
+
+            @for (key of keys; track key ; let index = $index){
+            
+                @if(routes.has(key) ){
+                    <td (click)="rowClicked.emit(index)"> <a>{{row[key]}}</a></td>
+                  
+                } @else {
+                    <td>{{row[key]}}</td>
+                    
+                }
+
+            }
+        </tr>
+        }
+
+    </tbody>
+</table> -->
+
+<div class="table">
+    <div class="header">
+        @for (header of headers; track header ){
+        <div class="header-title"> {{header}}</div>
+        }
+    </div>
+    <div class="table-content">
+        <div class="table-data"
+            *ngFor="let row of data; let i = index" [ngClass]="{ 'even-row' : i % 2 !== 0, 'odd-row': i % 2 === 0 }">
+            @for (key of keys; track key ;let index = $index ){
+            @if(routes.has(key) ){
+            <div class="data-feilds" (click)="rowClick(i)" style="cursor: pointer;" [ngClass]="{ 'even-row' : i % 2 !== 0, 'odd-row': i % 2 === 0 }"><a>{{row[key]}}</a></div>
+            } @else {
+            <div class="data-feilds" [ngClass]="{ 'even-row' : i % 2 !== 0, 'odd-row': i % 2 === 0 }">{{row[key]}}</div>
+            }
+            }
+        </div>
+    </div>
+</div>

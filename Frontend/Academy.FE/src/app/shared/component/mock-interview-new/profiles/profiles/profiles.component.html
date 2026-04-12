@@ -1,0 +1,404 @@
+@if (error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Profiles List</h3>
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput class="search" [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Search here" />
+      </mat-form-field>
+      <div>
+        <!-- <button class="btn btn-secondary btn-sm me-2" (click)="fetchProfiles()" [disabled]="loading">
+						 Refresh
+					</button> -->
+        <button class="header-btn" (click)="openAddProfile()">Create</button>
+      </div>
+    </div>
+  </div>
+
+  @if(!(loaderService.loaderState | async)) {
+  <div class="card-body">
+    @if(dataSource.data.length === 0) {
+    <div class="p-8 text-center text-gray-500">
+      <i class="fa fa-id-card fa-3x mb-3"></i>
+      <h5>No profiles found</h5>
+      <p>Start by creating a new profile.</p>
+    </div>
+    } @else {
+    <div class="scrollable-table-wrapper table-view">
+      <table mat-table [dataSource]="dataSource" matSort class="table">
+        <!-- ID Column -->
+        <ng-container matColumnDef="profileId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let profile" class="font-medium">
+            {{ profile.profileId || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Name -->
+        <ng-container matColumnDef="profileName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Profile Name</th>
+          <td mat-cell *matCellDef="let profile">{{ profile.profileName || "-" }}</td>
+        </ng-container>
+
+        <!-- Seniority -->
+        <ng-container matColumnDef="seniority">
+          <th mat-header-cell *matHeaderCellDef>Seniority</th>
+          <td mat-cell *matCellDef="let profile">
+            <ng-container *ngIf="profile.seniorityName; else showSeniorityId">
+              {{ profile.seniorityName }}
+            </ng-container>
+            <ng-template #showSeniorityId>
+              <span *ngIf="profile.seniority">ID: {{ profile.seniorityId }}</span>
+              <span *ngIf="!profile.seniority">N/A</span>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <!-- Skills -->
+        <ng-container matColumnDef="skills">
+          <th mat-header-cell *matHeaderCellDef>Skills</th>
+          <td mat-cell *matCellDef="let profile">
+            <ng-container *ngIf="profile.skills?.length; else showSkillIds">
+              <span *ngFor="let skill of profile.skills; let last = last">
+                {{ skill.name || skill.id }}<span *ngIf="!last">, </span>
+              </span>
+            </ng-container>
+            <ng-template #showSkillIds>
+              <span *ngFor="let id of profile.skillIds; let last = last">
+                {{ id }}<span *ngIf="!last">, </span>
+              </span>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <!-- Created At -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Created On</th>
+          <td mat-cell *matCellDef="let profile" [matTooltip]="profile.createdAt">
+            {{ profile.createdAt | date : "dd-MMM-yyyy" }}
+          </td>
+        </ng-container>
+
+        <!-- Updated At -->
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated On</th>
+          <td mat-cell *matCellDef="let profile" [matTooltip]="profile.updatedAt">
+            {{ profile.updatedAt | date : "dd-MMM-yyyy" }}
+          </td>
+        </ng-container>
+
+        <!-- Options -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let profile">
+            <div class="buttons">
+              <mat-icon (click)="openEditProfile(profile)" style="cursor: pointer">edit</mat-icon>
+              <mat-icon (click)="openDeletePopup(profile)" style="cursor: pointer">delete</mat-icon>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="totalItems"
+      (page)="onPageChanged($event)" showFirstLastButtons>
+    </mat-paginator>
+    }
+  </div>
+  }
+  @else {
+  <div class="p-8 text-center text-gray-500">
+    <h5>Loading profiles...…</h5>
+  </div>
+  }
+</div>
+}
+
+<!-- Add Profile Dialog Template -->
+<ng-template #addProfileTemplate>
+  <form [formGroup]="form" (ngSubmit)="onSubmitDialog()" class="form-container">
+
+    <!-- Evaluation Type -->
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Evaluation Type</mat-label>
+        <mat-select required formControlName="fitmentType">
+          <mat-option *ngFor="let option of fitmentType" [value]="option.id">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('fitmentType')?.hasError('required')">
+          Evaluation Type is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Evaluation Context -->
+    <div class="form-group" *ngIf="isAccountFit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Evaluation Context</mat-label>
+        <mat-select required formControlName="clients">
+          <mat-option *ngFor="let option of clients" [value]="option.id">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('clients')?.hasError('required')">
+          Evaluation Context is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Position -->
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Position</mat-label>
+        <input matInput formControlName="position" placeholder="Position" required />
+        <mat-error *ngIf="form.get('position')?.hasError('required')">Position is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Seniority -->
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Seniority</mat-label>
+        <input type="text" matInput [formControl]="seniorityControl" [matAutocomplete]="auto" required />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySeniority"
+          (optionSelected)="onSenioritySelectionChange($event.option.value)">
+          <mat-option *ngFor="let c of filteredSeniorities | async" [value]="c">
+            {{ c.name | titlecase }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="form.get('seniorityId')?.hasError('required')">Seniority is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Skill + Topic Selection -->
+    <div class="skill-topic-container">
+      <h3 class="section-title">Add Skills & Sections</h3>
+
+      <!-- Skill Selector -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Select Skill</mat-label>
+        <input type="text" matInput [formControl]="skillControl" [matAutocomplete]="autoSkill" required />
+        <mat-autocomplete #autoSkill="matAutocomplete" [displayWith]="displaySkill"
+          (optionSelected)="onSkillSelectionChange($event.option.value)">
+          <mat-option *ngFor="let c of filteredSkills | async" [value]="c">
+            {{ c.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Primary Skill checkbox -->
+      <div class="checkbox-row checkbox-layout" *ngIf="selectedSkillId">
+        <mat-checkbox [checked]="primarySkillId === selectedSkillId" (change)="onPrimarySkillChange()">
+          Primary Skill
+        </mat-checkbox>
+      </div>
+
+      <!-- Topics for Selected Skill -->
+      <div *ngIf="selectedSkillId" class="topic-selection">
+        <p class="topic-header">
+          Sections for {{ getSkillName(selectedSkillId) }}
+        </p>
+        <div class="topic-grid">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Topic</mat-label>
+            <mat-select [(value)]="selectedTopics" multiple>
+              @for (topic of skillTopicMap[selectedSkillId]; track topic) {
+              <mat-option [value]="topic">
+                {{ topic }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="topic-actions">
+          <button mat-raised-button color="primary" type="button" (click)="addSkillWithTopics()"
+            [disabled]="isAddSkillButtonDisabled()">
+            Add Skill + Sections
+          </button>
+        </div>
+      </div>
+
+      <!-- Selected Skills -->
+      <div *ngIf="getSectionSkillIds().length" class="selected-skills-list">
+        <h4 class="section-subtitle">Selected Skills & Sections</h4>
+        <div *ngFor="let skillId of getSectionSkillIds()" class="selected-skill-item">
+          <div>
+            <div class="selected-skill-name">{{ getSkillName(skillId) }}
+              <span *ngIf="primarySkillId === skillId">*</span>
+            </div>
+            <div class="selected-skill-topics">
+              <span *ngFor="let topic of sections[skillId]; let last = last">
+                {{ topic }}<span *ngIf="!last">, </span>
+              </span>
+            </div>
+          </div>
+          <button mat-icon-button type="button" (click)="removeSkill(skillId)" aria-label="Delete topic">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Profile Name -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Profile Name</mat-label>
+        <input matInput formControlName="name" readonly [value]="getGeneratedProfileName()" />
+      </mat-form-field>
+    </div>
+
+
+
+
+    <!-- Error -->
+    <div *ngIf="dialogError" class="form-error">{{ dialogError }}</div>
+
+    <!-- Actions -->
+  </form>
+</ng-template>
+
+<!-- Edit Profile Dialog Template -->
+<ng-template #editProfileTemplate>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmitEditDialog()" class="form-container">
+
+    <!-- Evaluation Type -->
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Evaluation Type</mat-label>
+        <mat-select required formControlName="fitmentType">
+          <mat-option *ngFor="let option of fitmentType" [value]="option.id">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.get('fitmentType')?.hasError('required')">
+          Evaluation Type is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Evaluation Context -->
+    <div class="form-group" *ngIf="isAccountFit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Evaluation Context</mat-label>
+        <mat-select required formControlName="clients">
+          <mat-option *ngFor="let option of clients" [value]="option.id">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.get('clients')?.hasError('required')">
+          Evaluation Context is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Position -->
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Position</mat-label>
+        <input matInput formControlName="position" placeholder="Position" required />
+        <mat-error *ngIf="editForm.get('position')?.hasError('required')">Position is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Seniority -->
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Seniority</mat-label>
+        <input type="text" matInput [formControl]="seniorityControl" [matAutocomplete]="auto" required />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySeniority"
+          (optionSelected)="onSenioritySelectionChange($event.option.value)">
+          <mat-option *ngFor="let c of filteredSeniorities | async" [value]="c">
+            {{ c.name | titlecase }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="editForm.get('seniorityId')?.hasError('required')">Seniority is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Skill + Topic Editing -->
+    <div class="skill-topic-container">
+      <h3 class="section-title">Edit Skills & Sections</h3>
+
+      <!-- Skill Selector -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Select Skill</mat-label>
+        <input type="text" matInput [formControl]="skillControl" [matAutocomplete]="autoSkill" required />
+        <mat-autocomplete #autoSkill="matAutocomplete" [displayWith]="displaySkill"
+          (optionSelected)="onSkillSelectionChange($event.option.value)">
+          <mat-option *ngFor="let c of filteredSkills | async" [value]="c">
+            {{ c.name | titlecase }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Primary Skill checkbox -->
+      <div class="checkbox-row checkbox-layout" *ngIf="selectedSkillId">
+        <mat-checkbox [checked]="primarySkillId === selectedSkillId" (change)="onPrimarySkillChange()">
+          Primary Skill
+        </mat-checkbox>
+      </div>
+
+
+      <!-- Topics -->
+      <div *ngIf="selectedSkillId" class="topic-selection">
+        <p class="topic-header">
+          Sections for {{ getSkillName(selectedSkillId) }}
+        </p>
+        <div class="topic-grid">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Topic</mat-label>
+            <mat-select [(value)]="selectedTopics" multiple>
+              @for (topic of skillTopicMap[selectedSkillId]; track topic) {
+              <mat-option [value]="topic">
+                {{ topic }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="topic-actions">
+          <button mat-raised-button color="primary" type="button" (click)="addSkillWithTopics()"
+            [disabled]="isAddSkillButtonDisabled()">
+            Add/Update Skill + Sections
+          </button>
+        </div>
+      </div>
+
+      <!-- Existing Skills -->
+      <div *ngIf="getSectionSkillIds().length" class="selected-skills-list">
+        <h4 class="section-subtitle">Selected Skills & Sections</h4>
+        <div *ngFor="let skillId of getSectionSkillIds()" class="selected-skill-item">
+          <div>
+            <div class="selected-skill-name">{{ getSkillName(skillId) }} <span
+                *ngIf="primarySkillId === skillId">*</span></div>
+            <div class="selected-skill-topics">
+              <span *ngFor="let topic of sections[skillId]; let last = last">
+                {{ topic }}<span *ngIf="!last">, </span>
+              </span>
+            </div>
+          </div>
+          <button mat-icon-button type="button" (click)="removeSkill(skillId)" aria-label="Delete topic">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Profile Name</mat-label>
+        <input matInput formControlName="name" readonly />
+      </mat-form-field>
+
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="dialogError" class="form-error">{{ dialogError }}</div>
+
+    <!-- Actions -->
+  </form>
+</ng-template>

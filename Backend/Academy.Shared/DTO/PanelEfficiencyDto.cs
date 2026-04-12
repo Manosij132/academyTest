@@ -1,0 +1,23 @@
+﻿namespace Academy.Shared.DTO
+{
+    public class PanelEfficiencyDto
+    {
+        public string? PanelName { get; set; }
+        //public string L1PanelName { get; set; }
+        public string? GKPanelName { get; set; }
+        public string? PanelType { get; set; }
+        public int L1Conducted { get; set; }
+        public int L1Selected { get; set; }
+        public int GKConducted { get; set; }
+        public int GKSelected { get; set; }
+        //public string Selection { get; set; }
+        public double Efficiency { get; set; }
+        public double CountwiseEfficiency { get; set; }
+        public string? StartDate { get; set; }
+        public string? EndDate { get; set; }
+        public string? TDC { get; set; }
+        public string? Community { get; set; }
+        public string? L1Seniority { get; set; }
+        public string? GKSeniority { get; set; }
+    }
+}

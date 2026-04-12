@@ -1,0 +1,109 @@
+/* Container mimicking mat-form-field outline */
+.material-wrapper-outline {
+  position: relative;
+  border: 1px solid #74777f;
+  border-radius: 4px;
+  padding: 24px 12px 6px 12px;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.material-wrapper-outline.focused {
+  border-color: #3f51b5;
+}
+
+.material-wrapper-outline .mat-label {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  background: white;
+  padding: 0 4px;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+/* Ensure ng-select fills the area */
+::ng-deep .ng-select-material {
+  width: 100%;
+  font-size: 14px;
+  border: none !important;
+  background: transparent;
+  min-height: 28px;
+}
+
+::ng-deep .ng-select-container {
+  border: none !important;
+  box-shadow: none;
+  padding: 0 !important;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep  .ng-select-container .ng-value-label {
+    text-wrap: auto;
+    overflow-wrap: break-word;
+    overflow: auto;
+}
+
+
+/* Dropdown panel */
+::ng-deep .ng-dropdown-panel {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+/* Each option row with checkbox */
+::ng-deep .ng-select-option-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-checkbox {
+  display: flex !important;
+  align-items: center !important;
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-checkbox .mdc-form-field {
+  display: flex !important;
+  align-items: center !important;
+  width: 100%;
+  margin: 0 !important;
+  gap: 8px;
+}
+
+::ng-deep .mat-mdc-checkbox .mdc-label {
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-wrap: auto;
+  overflow-wrap: break-word;
+  overflow: auto;
+}
+
+::ng-deep .ng-dropdown-panel-items {
+  background-color: white;
+}
+
+::ng-deep .ng-dropdown-header {
+  background-color: white;
+}
+
+::ng-deep .mat-multi-select-error .material-wrapper-outline {
+  border-color: #ba1a1a !important;
+}
+
+::ng-deep .mat-multi-select-error .ng-select .ng-arrow-wrapper .ng-arrow {
+  color: #ba1a1a;
+ }

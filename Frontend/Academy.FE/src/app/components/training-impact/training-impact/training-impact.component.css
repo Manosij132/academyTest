@@ -1,0 +1,278 @@
+.mat-row {
+  background-color: #333333;
+  /* Set the background color of the table rows */
+  color: white;
+  /* Set the text color of the table rows */
+}
+
+/* Optional: Change the background color on hover for better UX */
+.mat-row:hover {
+  background-color: #444444;
+  /* Slightly lighter background on hover */
+}
+
+/* Style for the cells to ensure text is white */
+.mat-cell,
+.mat-header-cell {
+  color: white;
+  /* Ensure the text color in cells is white */
+}
+
+.example-element-detail table {
+  border-collapse: collapse;
+  width: 100%;
+  /* Optional: makes the table take full width */
+}
+
+.example-element-detail th,
+.example-element-detail td {
+  border: 1px solid #ddd;
+  /* Change color as needed */
+  padding: 8px;
+  /* Adds padding for better appearance */
+  text-align: left;
+  /* Align text to the left */
+}
+
+.example-element-detail th {
+  background-color: #f2f2f2;
+  /* Light gray background for header */
+  font-weight: bold;
+  /* Make header text bold */
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+mat-progress-bar {
+  width: 25px;
+  height: 25px;
+}
+
+.header-bold {
+  font-weight: bold;
+  font-size: 13px;
+}
+::ng-deep .mdc-switch__track {
+  height: 25px !important;
+  width: 50px !important;
+}
+
+::ng-deep .mdc-switch__handle {
+  height: 24px !important;
+  width: 24px !important;
+}
+
+::ng-deep
+  .mat-mdc-slide-toggle
+  .mdc-switch--unselected
+  .mdc-switch__handle:has(.mdc-switch__icons) {
+  left: -5px;
+}
+
+::ng-deep
+  .mat-mdc-slide-toggle
+  .mdc-switch--selected
+  .mdc-switch__handle:has(.mdc-switch__icons) {
+  left: 5px;
+}
+
+::ng-deep .custom-menu {
+  width: 250px;
+  /* Set your desired width */
+
+  ::ng-deep .mat-mdc-form-field {
+    margin-left: 20px;
+  }
+}
+
+/* Optional: If you want to ensure items stretch to full width */
+::ng-deep .custom-menu .mat-menu-item {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background-color: white !important;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.left-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.right-icons {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.right-flex-container {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 25px;
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  width: fit-content;
+  margin-left: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.right-flex-container > * {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.left-toggle {
+  margin: 0;
+  font-weight: 500;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.right-toggle {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Removed ml-20 class as we're using gap instead */
+
+.ml-10 {
+  margin: 10px 10px;
+}
+
+::ng-deep .searchFilterButton .mat-mdc-text-field-wrapper {
+  height: 44px !important;
+}
+
+::ng-deep .searchFilterButton .mdc-floating-label {
+  padding-bottom: 14px;
+}
+
+::ng-deep .searchFilterButton .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+}
+.add-btn {
+  width: 150px;
+  margin-left: 5px;
+  background: #bfd732;
+  border-color: #bfd732;
+}
+.page-inner {
+  margin-top: 75px;
+}
+
+.activity-action {
+  text-align: right; /* Aligns inline content to the right */
+  /* border: 1px solid green; */ 
+  width: 100%; /* Ensure the container takes full width */
+  /* box-sizing: border-box; */
+}
+
+.activity-action span {
+  margin-right: 10px;
+}
+
+/* Removed .filter-actions as it's no longer needed */
+
+/* In your component's CSS file (.css, .scss) */
+.custom-tooltip {
+  /* For Angular versions >= 15 */
+  .mdc-tooltip__surface {
+    max-width: none !important; /* or a specific value like 500px */
+    white-space: pre-line; /* for line breaks if needed */
+  }
+
+  /* For Angular versions < 15 */
+  .mat-tooltip {
+    max-width: none !important; /* or a specific value like 500px */
+    white-space: pre-line; /* for line breaks if needed */
+  }
+}
+
+.filters {
+  display: flex;
+  align-items: center; /* vertically center items in the row */
+  gap: 10px;
+  max-height: 43px;
+}
+
+.mat-mdc-cell {
+  border: none;
+}
+
+.mat-mdc-row.mdc-data-table__row:nth-child(odd) {
+background-color: #f2f4e7;
+}
+
+.mat-mdc-row.mdc-data-table__row:nth-child(even) {
+background-color: #ffffff;
+}
+
+@media (min-width: 1445px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1445px !important;
+    background: #f7f8f8;
+  }
+}
+
+.page-inner {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-checkmark-color: white;   
+  --mdc-checkbox-selected-icon-color: #818D00;      
+  --mdc-checkbox-selected-focus-icon-color: #818D00;
+  --mdc-checkbox-selected-hover-icon-color: #818D00;
+  --mdc-checkbox-selected-pressed-icon-color: #818D00;
+}
+
+.reset-btn:hover {
+opacity: 0.9;
+background-color: #b7bd20;
+color: white;
+border: 1px solid white;
+}
+
+.reset-btn {
+  border-radius: 30px;
+}

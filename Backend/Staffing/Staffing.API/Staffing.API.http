@@ -1,0 +1,6 @@
+@Staffing.API_HostAddress = http://localhost:5041
+
+GET {{Staffing.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

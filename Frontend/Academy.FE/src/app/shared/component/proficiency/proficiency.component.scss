@@ -1,0 +1,37 @@
+.proficiency-table th {
+    font-family: Heebo;
+    font-size: 14px;
+    text-align:center;
+    text-transform: unset;
+  }
+  .proficiency-table td {
+    font-family: Heebo;
+    font-size: 14px;
+    padding: 10px 10px !important;
+  }
+
+.mvpBadge{
+    background-color: black;
+    color: #fff !important;
+    padding: 0.35em 0.65em;
+    box-sizing: border-box;
+    border-radius: 50rem;
+    font-weight: 700;
+    border-radius: 50rem;
+    line-height: 1;
+    font-size: 0.75em;
+    display: inline-block;
+    margin-right: 5px; 
+    min-width: 45px;
+    width: 45px;
+}
+  
+/* icon css */
+.save-btn-icon{
+  background-color: unset;
+  border: none;
+}
+
+.star-icon-color-green{
+  color: rgba(25, 135, 84);
+}

@@ -1,0 +1,442 @@
+@if(error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Evaluations List</h3>
+    <div class="filter-container searchFilterButton filter-list">
+      <div class="sort-by-container">
+        <span class="sort-by-label">Sort By</span>
+        <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color" hideSingleSelectionIndicator="true"
+          class="sort-pill-container" (change)="filterByStatus($event)" [value]="sortByStatusValue">
+          <mat-button-toggle [disableRipple]="true" class="filter-pill" value="assigned">Assigned</mat-button-toggle>
+          <mat-button-toggle [disableRipple]="true" class="filter-pill"
+            value="in progress">In-Progress</mat-button-toggle>
+          <mat-button-toggle [disableRipple]="true" class="filter-pill" value="completed">Completed</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+
+      <div class="search-container">
+        <mat-form-field appearance="outline" class="custom-search-field" subscriptSizing="dynamic"> <mat-icon matPrefix
+            class="global-search-icon" (click)="applyGlobalSearch()">search</mat-icon>
+
+          <input matInput placeholder="Search" [(ngModel)]="searchText" (keyup)="applyGlobalSearch()">
+
+          @if (searchText) {
+          <button mat-icon-button matSuffix (click)="clearSearch()" class="clear-button">
+            <mat-icon>close</mat-icon>
+          </button>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="date-range-wrapper">
+        <div class="start-date-filter">
+          <mat-form-field appearance="outline">
+            <!-- <mat-label>Dojo Start date</mat-label> -->
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker1" [(ngModel)]="interviewFilter.interviewStartDate"
+              (dateChange)="onInterviewStartDateChange()">
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+        </div>
+        <div class="end-date-filter">
+
+          <mat-form-field appearance="outline">
+            <!-- <mat-label>Dojo End date</mat-label> -->
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker2" [(ngModel)]="interviewFilter.interviewEndDate"
+              (dateChange)="onInterviewEndDateChange()" [disabled]="!(isStartDateSelected)">
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div class="reset-date-filter">
+        <button type="button" class="btn btn-outline-secondary btn-sm tooltip-btn" (click)="clearDateFilter()"
+          style="margin-right: 5px;">
+          <i class="fas fa-redo-alt"></i>
+          <span class="tooltip-text">Reset Filters</span>
+        </button>
+      </div>
+
+
+      <div class="create-interview-container">
+        <button class="header-btn btn-sm tooltip-btn" (click)="onCreateInterview()">Schedule
+          <span class="tooltip-text">Schedule Evaluation</span>
+        </button>
+        <div [matMenuTriggerFor]="menu" class="adv-filter-container" #menuTrigger="matMenuTrigger">
+          <button class="filter-btn ml-20">
+            <i class="fa-solid fa-sliders"></i>
+          </button>
+        </div>
+        <mat-menu #menu="matMenu" class="custom-menu" (click)="$event.stopPropagation()">
+          <div class="mt-20" (click)="$event.stopPropagation()">
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Filter By</mat-label>
+                <mat-select multiple [(value)]="selectedFilterColumns"
+                  (selectionChange)="onFilterOptionChanged($event)">
+                  <mat-select-trigger>
+                    <ng-container *ngIf="selectedFilterColumns.length; else placeholder">
+                      {{ selectedFilterColumns[0] }}
+                      <span *ngIf="selectedFilterColumns.length > 1">
+                        +{{ selectedFilterColumns.length - 1 }} more
+                      </span>
+                    </ng-container>
+                    <ng-template #placeholder>
+                      Select Filter(s)
+                    </ng-template>
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let column of columns" [value]="column.value">
+                    {{ column.colName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Filter Values:</mat-label>
+
+                <mat-select [disabled]="selectedFilterColumns.length === 0" multiple [(value)]="selectedValues"
+                  [compareWith]="compareFilters" (selectionChange)="onFilterValueChanged($event)">
+
+                  <ng-container *ngFor="let column of selectedFilterColumns">
+
+                    <!-- HEADER (Custom Styled Option) -->
+                    <mat-option class="group-header" [value]="null" (click)="toggleGroup(column, $event)" disableRipple
+                      disabled>
+                      <mat-icon>
+                        {{ expandedGroups[column] ? 'expand_more' : 'chevron_right' }}
+                      </mat-icon>
+
+                      <span class="header-label">
+                        {{ column }}
+                      </span>
+                    </mat-option>
+
+                    <!-- OPTIONS (Always Rendered, Only Hidden via CSS) -->
+                    <mat-option *ngFor="let f of groupedFilterValues[column]"
+                      [value]="{ column: column, value: f.value }" [class.hidden-option]="!expandedGroups[column]">
+                      {{ f.value }}
+                    </mat-option>
+
+                  </ng-container>
+
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+            <div>
+              <mat-form-field appearance="outline" *ngIf="showAccountDropdown">
+                <mat-label>Account</mat-label>
+
+                <mat-select multiple [(value)]="selectedAccounts" (selectionChange)="onAccountChanged($event)">
+
+                  <mat-option *ngFor="let acc of accountOptions" [value]="acc">
+                    {{ acc }}
+                  </mat-option>
+
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <hr class="mt-8" />
+            <div class="row ml-10">
+              <div class="col-6">
+                <button mat-raised-button color="warn" (click)="resetFilters()">
+                  Reset
+                </button>
+              </div>
+              <div class="col-6 text-end">
+                <button mat-raised-button color="primary" (click)="onApplyFilters(menuTrigger)" class="apply-button">
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+
+    <div class="chip-groups-container">
+      @for (group of advanceFilterCriteria; track group) {
+      <div class="chip-group">
+        <span class="group-label">{{ group.name }}:</span>
+        <mat-chip-set class="inline-chip-set">
+          @for (chip of group.chips; track chip) {
+          <mat-chip class="filter-chip">
+            {{chip}}
+          </mat-chip>
+          }
+        </mat-chip-set>
+      </div>
+      }
+    </div>
+  </div>
+
+  @if(!(loaderService.loaderState | async)) {
+  <div class="card-body">
+    @if(filteredInterviews.length === 0 && isDataLoaded) {
+      @if(interviews.length === 0) {
+      <div class="p-8 text-center empty-state-container">
+        <i class="fa fa-calendar-alt fa-3x mb-3 empty-state-icon"></i>
+        <h5 class="empty-state-title">No Evaluations Scheduled</h5>
+        <p class="empty-state-subtitle">No evaluations have been scheduled yet. Click <strong>Schedule</strong> to create one.</p>
+      </div>
+      } @else {
+      <div class="p-8 text-center text-gray-500">
+        <i class="fa fa-search fa-3x mb-3"></i>
+        <h5>No results found.</h5>
+        <p>Try adjusting your filters or search keyword.</p>
+      </div>
+      }
+    } @else if(filteredInterviews.length > 0) {
+    <div class="cards-container">
+      @for (interview of pagedInterviews; track interview.id; let i = $index) {
+      <div class="card" [class.assigned-card]="interview.status ==='Assigned'">
+        <!-- Header -->
+        <div class="card-header">
+          <span class="date">{{ interview.createdAt | date:'dd MMM yyyy' }} | {{ interview.createdAt | date:'hh:mm a'
+            }}</span>
+          <span class="status">{{ capitalizeFirst(interview.status) || "-" }}</span>
+          @if(interview.status ==='Assigned'){
+          <button mat-icon-button class="delete-interview-button" aria-label="Delete Evaluation"
+            matTooltip="Delete Evaluation" matTooltipPosition="above" (click)="deleteInterview(interview?.id)">
+            <mat-icon class="delete-interview-icon">delete</mat-icon>
+          </button>
+          }
+        </div>
+
+        <div class="card-content">
+          <!-- Profile -->
+          <div class="profile">
+            <img [src]="interview?.profileImage" alt="Profile" />
+            <div class="profile-info">
+              <h2>{{ interview.candidate.name|| "-" }}</h2>
+              <p class="email">{{ interview.candidate.email || "-" }}</p>
+              <p class="role">{{interview?.profile?.seniority?.name}}</p>
+            </div>
+          </div>
+
+          <!-- Interview -->
+          <div class="interview">
+            <mat-icon class="material-symbols-outlined interview-icon">video_chat</mat-icon>
+            <div class="profile-skills">
+              <span class="profile-name" [title]="evaluationType(interview?.profile)">Evaluation Type: {{
+                evaluationType(interview?.profile)}}
+              </span>
+              <span class="profile-name" [title]="profileName(interview?.profile)">Profile:
+                {{profileName(interview?.profile)}}
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Skills -->
+          <div class="skills">
+            <span class="skill" *ngFor="let skill of getTopSkills(interview?.profile?.skillsAndSections)">
+              {{ skill.skillName }}
+            </span>
+
+            <span *ngIf="(interview?.profile?.skillsAndSections?.length || 0) > 3">
+              <span class="skill skills-toggle" [title]="getRemainingSkills(interview?.profile?.skillsAndSections)">
+                {{ '+ ' + (interview?.profile?.skillsAndSections?.length - 3) }}
+              </span>
+            </span>
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="card-footer">
+          <ng-container *ngIf="interview.status !== 'Completed'">
+            <button class="link-btn" (click)="onEditInterview(interview)">EDIT</button>
+            <div class="divider"></div>
+          </ng-container>
+          <button class="link-btn" (click)="viewSummary(interview.interviewCode)">VIEW</button>
+          <ng-container *ngIf="interview.status === 'Completed'">
+            <div class="divider"></div>
+            <button class="share-link-btn" (click)="onShareInterview(interview)">SHARE</button>
+          </ng-container>
+
+        </div>
+      </div>
+      }
+    </div>
+    }
+    <div class="paginator-container">
+      <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[8, 16, 24]" showFirstLastButtons
+        (page)="onPageChanged($event)">
+      </mat-paginator>
+    </div>
+  </div>
+  }
+  @else {
+  <div class="p-8 text-center text-gray-500">
+    <h5>Loading Evaluations…</h5>
+  </div>
+  }
+</div>
+}
+
+<!-- Template for Add Interview Dialog -->
+<ng-template #addInterviewTemplate>
+  <form [formGroup]="form" (ngSubmit)="onSubmitDialog()" class="dialog-form">
+
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Select Candidate</mat-label>
+      <input type="text" matInput [formControl]="candidateControl" [matAutocomplete]="auto" required />
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCandidate"
+        (optionSelected)="onCandidateSelectionChange($event.option.value)">
+        <mat-option *ngFor="let c of filteredCandidates | async" [value]="c">
+          {{ c.employeeName }}
+        </mat-option>
+        <mat-option *ngIf="(filteredCandidates | async)?.length === 0" disabled>
+          No candidates found
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Evaluation Type</mat-label>
+      <mat-select required formControlName="interviewType" (selectionChange)="onInterviewTypeChange($event.value)">
+        <mat-option *ngFor="let option of fitmentType" [value]="option.id">
+          {{ option.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Select Profile</mat-label>
+      <input type="text" matInput [formControl]="profileControl" [matAutocomplete]="autoProfile" required />
+      <mat-autocomplete #autoProfile="matAutocomplete" [displayWith]="displayProfile"
+        (optionSelected)="onProfileSelectionChange($event.option.value)">
+        <mat-option *ngFor="let p of filteredProfiles | async" [value]="p">
+          {{ p.profileName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Evaluation Date & Time</mat-label>
+      <input matInput mwlFlatpickr formControlName="interviewDateTime" placeholder="Select Date & Time"
+        [enableTime]="true" dateFormat="Y-m-d H:i" [minDate]="minDate" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>CC E-mail</mat-label>
+      <input matInput formControlName="ccEmail" placeholder="CC E-mail" />
+    </mat-form-field>
+
+    <div *ngIf="dialogError" class="text-red-600 text-sm mb-2">
+      {{ dialogError }}
+    </div>
+  </form>
+</ng-template>
+
+<!-- Template for Edit Interview Dialog -->
+<ng-template #editInterviewTemplate>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmitEditDialog()" class="dialog-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Evaluation Code</mat-label>
+      <input matInput readonly formControlName="interviewCode" placeholder="Enter evaluation code" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Candidate</mat-label>
+      <input type="text" matInput [formControl]="candidateControl" [matAutocomplete]="auto" required readonly />
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCandidateEdit"
+        (optionSelected)="onCandidateSelectionChange($event.option.value)">
+        <mat-option *ngFor="let c of filteredCandidates | async" [value]="c">
+          {{ c.name }}
+        </mat-option>
+        <mat-option *ngIf="(filteredCandidates | async)?.length === 0" disabled>
+          No candidates found
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="editForm.get('candidateId')?.hasError('required')">
+        Candidate is required
+      </mat-error>
+      <mat-error *ngIf="candidateControl.hasError('notFound')" class="text-red-600 text-sm mb-2">
+        No such candidate found
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Evaluation Type</mat-label>
+      <input matInput formControlName="interviewType" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Profile</mat-label>
+      <input type="text" matInput [formControl]="profileControl" [matAutocomplete]="autoProfile" required />
+      <mat-autocomplete #autoProfile="matAutocomplete" [displayWith]="displayProfile"
+        (optionSelected)="onEditProfileSelectionChange($event.option.value)">
+        <mat-option *ngFor="let p of filteredProfiles | async" [value]="p">
+          {{ p.profileName }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="editForm.get('profileId')?.hasError('required')">
+        Profile is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Evaluation Date & Time</mat-label>
+      <input matInput mwlFlatpickr formControlName="interviewDateTime" placeholder="Select Date & Time"
+        [enableTime]="true" dateFormat="Y-m-d H:i" [minDate]="minDate" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="Assigned">ASSIGNED</mat-option>
+        <mat-option value="In Progress">IN PROGRESS</mat-option>
+        <mat-option value="Completed">COMPLETED</mat-option>
+        <mat-option value="Cancelled">CANCELLED</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="dialogError" class="error-message mb-4">
+      {{ dialogError }}
+    </div>
+  </form>
+</ng-template>
+
+<!-- share details modal -->
+<ng-template #shareInterviewTemplate>
+  <form [formGroup]="shareForm" class="dialog-form space-y-4">
+    <div formArrayName="email" class="gap-3">
+      <div *ngFor="let control of Emails.controls; let i = index" class="items-center gap-2"
+        style="padding-bottom: 10px">
+        <div class="input-field">
+          <input type="email" class="form-input flex-1 px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring"
+            [formControlName]="i" placeholder="Enter email" />
+
+          <button *ngIf="Emails.length > 1" mat-icon-button color="warn" (click)="removeEmail(i)" type="button"
+            aria-label="Remove email">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+
+        <div *ngIf="control.touched">
+          <div *ngIf="control.errors?.['email']" class="text-red-500 text-sm mt-1 error-message ">
+            Please enter a valid email.
+          </div>
+
+          <div *ngIf="control.errors?.['invalidCompanyEmail'] && !control.errors?.['email']"
+            class="text-red-500 text-sm mt-1 error-message ">
+            Only Globant email IDs are allowed.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button mat-stroked-button color="primary" type="button" (click)="addEmail()" class="mt-2 btn-add-email">
+      <mat-icon class="mr-1">add</mat-icon> Add Email
+    </button>
+
+  </form>
+</ng-template>

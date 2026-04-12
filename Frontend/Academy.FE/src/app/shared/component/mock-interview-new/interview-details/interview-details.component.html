@@ -1,0 +1,250 @@
+@if(loading) {
+<div class="p-8 text-center text-gray-500">Loading Evaluation...</div>
+} @else if(error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else if(!addInterviewDetails && !loading && !error) {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Evaluation Details List</h3>
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          class="search"
+          [(ngModel)]="searchText"
+          (keyup)="applyFilter()"
+          placeholder="Search here"
+        />
+      </mat-form-field>
+      <div>
+        <button class="header-btn" (click)="onCreateInterviewDetails()">
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    @if (dataSource.data.length === 0) {
+    <div class="p-8 text-center text-gray-500">
+      <i class="fa fa-file-text fa-3x mb-3"></i>
+      <h5>No evaluation details found</h5>
+      <p>No evaluation details available.</p>
+    </div>
+    } @else {
+    <div class="scrollable-table-wrapper">
+      <table mat-table [dataSource]="dataSource" matSort class="table">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+          <td mat-cell *matCellDef="let row" class="font-medium py-2">
+            {{ row.id || "-" }}
+          </td>
+        </ng-container>
+        <!-- Interview Code -->
+        <ng-container matColumnDef="interviewCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Evaluation Code
+          </th>
+          <td mat-cell *matCellDef="let row" class="font-medium py-2">
+            {{ row.interviewCode || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Seq Id -->
+        <ng-container matColumnDef="seqId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Question Seq Id
+          </th>
+          <td mat-cell *matCellDef="let row" class="font-medium py-2">
+            {{ row.seqId || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Session Start Times -->
+        <ng-container matColumnDef="sessionStartTimes">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Session Start Times
+          </th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+            {{ row?.sessionStartTimes[0] || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Session End Times -->
+        <ng-container matColumnDef="sessionEndTimes">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Session End Times
+          </th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+            {{ row.sessionEndTimes[0] || "-" }}
+          </td>
+        </ng-container>
+        <!-- video Path -->
+        <ng-container matColumnDef="videoPath">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Video Path</th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto wrap-text">
+            {{ row.videoPath || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- audio Path -->
+        <ng-container matColumnDef="audioPath">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Audio Path</th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto wrap-text">
+            {{ row.audioPath || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- transcript Path -->
+        <ng-container matColumnDef="transcriptPath">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Transcript Path
+          </th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto wrap-text">
+            {{ row.transcriptPath || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+            <div class="flex gap-2">
+              <!-- <button mat-flat-button color="primary" class="py-1 px-2 text-sm" 
+                          (click)="editInterviewDetails(row)">
+                    Edit
+                  </button> -->
+              <mat-icon
+                (click)="editInterviewDetails(row)"
+                style="cursor: pointer"
+                >edit</mat-icon
+              >
+              <!-- <button mat-flat-button color="warn" class="py-1 px-2 text-sm"
+                          (click)="onDeleteInterviewDetails(row)">
+                    Delete
+                  </button> -->
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+    }
+  </div>
+</div>
+}
+
+<!-- Template for Add Interview Details Dialog -->
+<ng-template #addInterviewDetailTemplate>
+  <div class="dialog-container">
+    <mat-dialog-content>
+      <form [formGroup]="form" class="interview-details-form">
+        <div class="row mb-3">
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Evaluation Code</mat-label>
+              <input
+                matInput
+                formControlName="interviewCode"
+                placeholder="Enter evaluation code"
+              />
+              <mat-error *ngIf="form.get('interviewCode')?.hasError('required')"
+                >Evaluation code is required</mat-error
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Sequence ID</mat-label>
+              <input
+                matInput
+                formControlName="seqId"
+                placeholder="Enter sequence ID"
+              />
+              <mat-error *ngIf="form.get('seqId')?.hasError('required')"
+                >Sequence ID is required</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Transcript Path</mat-label>
+              <input
+                matInput
+                formControlName="transcriptPath"
+                placeholder="Enter transcript path"
+              />
+              <mat-error
+                *ngIf="form.get('transcriptPath')?.hasError('required')"
+                >Transcript path is required</mat-error
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Video Path</mat-label>
+              <input
+                matInput
+                formControlName="videoPath"
+                placeholder="Enter video path"
+              />
+              <mat-error *ngIf="form.get('videoPath')?.hasError('required')"
+                >Video path is required</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Audio Path</mat-label>
+              <input
+                matInput
+                formControlName="audioPath"
+                placeholder="Enter audio path"
+              />
+              <mat-error *ngIf="form.get('audioPath')?.hasError('required')"
+                >Audio path is required</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div
+          *ngIf="dialogError"
+          class="alert alert-danger d-flex align-items-center mt-3"
+        >
+          <mat-icon class="me-2">error</mat-icon>
+          <span>{{ dialogError }}</span>
+        </div>
+      </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button class="cancel-btn" (click)="onCancelDialog()">Cancel</button>
+      <button
+        class="action-btn"
+        type="button"
+        (click)="onSubmitDialog()"
+        [disabled]="dialogLoading || form.invalid"
+      >
+        <mat-spinner *ngIf="dialogLoading" diameter="20"></mat-spinner>
+        <span *ngIf="!dialogLoading">{{
+          selectedInterviewDetails ? "Update" : "Add"
+        }}</span>
+      </button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>

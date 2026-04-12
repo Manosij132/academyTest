@@ -1,0 +1,73 @@
+name: Academy Docker Deployment (Multi Env + Versioned)
+
+on:
+  push:
+    branches:
+      - feature/docker-infra
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod
+
+env:
+  COMPOSE_FILE: docker-compose.yml
+
+jobs:
+  deploy:
+    runs-on:
+      - self-hosted
+      - linux
+      - ${{ github.event.inputs.target || 'qa' }}
+
+    steps:
+      # 1. Checkout
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set ENV + IMAGE TAG
+      - name: Set environment variables
+        run: |
+          echo "IMAGE_TAG=${{ github.event.inputs.target }}-${{ github.run_number }}" >> .env
+          echo "APP_ENV=${{ github.event.inputs.target }}" >> .env
+          echo "ASPNETCORE_ENVIRONMENT=${{ github.event.inputs.target }}" >> .env
+
+      # 3. Verify SSL
+      - name: Verify SSL certificates
+        run: |
+          if [ ! -f nginx/certs/fullchain.pem ] || [ ! -f nginx/certs/privkey.pem ]; then
+            echo " SSL certificates missing"
+            exit 1
+          fi
+
+      # 4. Build Images
+      - name: Build Images
+        run: |
+          docker build -t academy-api:${{ github.event.inputs.target }}-${{ github.run_number }} -f Backend/Academy.API/dockerfile .
+          docker build -t staffing-api:${{ github.event.inputs.target }}-${{ github.run_number }} -f Backend/Staffing/Staffing.API/dockerfile .
+          docker build -t academy-fe:${{ github.event.inputs.target }}-${{ github.run_number }} -f Frontend/Academy.FE/dockerfile .
+
+      # 5. Stop old containers
+      - name: Stop containers
+        run: docker compose -f $COMPOSE_FILE down || true
+
+      # 6. Start new containers
+      - name: Start containers
+        run: docker compose -f $COMPOSE_FILE up -d
+
+      # 7. Wait
+      - name: Wait for services
+        run: sleep 20
+
+      # 8. Health check
+      - name: Health check
+        run: curl -f http://localhost:8084 || exit 1
+
+      # 9. Done
+      - name: Deployment complete
+        run: echo "Deployment completed"

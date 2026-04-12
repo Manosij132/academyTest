@@ -1,0 +1,75 @@
+<ng-container [ngSwitch]="controlType">
+  <mat-radio-group
+    dense
+    *ngSwitchCase="'radio'"
+    aria-label="Select an option"
+    [(ngModel)]="selectedValue"
+    (ngModelChange)="onSelectionChange()"
+  >
+    <mat-radio-button
+      *ngFor="let option of displayedOptions; trackBy: trackByFn"
+      [value]="option.value"
+    >
+      {{ option.viewValue }}
+    </mat-radio-button>
+  </mat-radio-group>
+<!-- 
+  <mat-form-field dense *ngSwitchCase="'select'" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <mat-select
+      [(ngModel)]="selectedValue"
+      (ngModelChange)="onSelectionChange()"
+    >
+      <mat-option
+        *ngFor="let option of displayedOptions; trackBy: trackByFn"
+        [value]="option.value"
+      >
+        {{ option.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <select
+    *ngSwitchCase="'select'"
+    class="form-select form-select-sm mb-1"
+    aria-label="Small select example"
+    [(ngModel)]="selectedValue"
+    (ngModelChange)="onSelectionChange()"
+  >
+    <option
+      *ngFor="let option of displayedOptions; trackBy: trackByFn"
+      [value]="option.value"
+    >
+      {{ option.viewValue }}
+    </option>
+  </select>
+
+  <div *ngSwitchCase="'button-group'" mat-button-group>
+    <button
+      mat-raised-button
+      *ngFor="let option of displayedOptions; trackBy: trackByFn"
+      [class.active]="selectedValue === option.value"
+      (click)="selectValue(option.value)"
+      [class]="getClasses(option.value)"
+    >
+      {{ option.viewValue }}
+    </button>
+  </div>
+
+  <div *ngSwitchCase="'chips'" appearance="fill">
+    <mat-label>{{ label }}</mat-label>
+    <mat-chip-set #chipList aria-label="Selection">
+      <mat-chip
+        *ngFor="
+          let option of displayedOptions;
+          let i = index;
+          trackBy: trackByFn
+        "
+        (click)="onChipClick(option, i)"
+        [class]="getClasses(option.value)"
+      >
+        {{ option.viewValue }}
+      </mat-chip>
+    </mat-chip-set>
+  </div>
+</ng-container>

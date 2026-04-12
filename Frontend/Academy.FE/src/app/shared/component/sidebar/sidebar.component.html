@@ -1,0 +1,259 @@
+<!-- Sidebar -->
+<div class="sidebar" data-background-color="dark">
+    <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark">
+            <a href="" class="logo">
+                <img src="../../../../assets/img/Globant-White.png" alt="navbar brand" class="navbar-brand"
+                    height="50" />
+            </a>
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar" (click)="loadScriptToggle('true')">
+                    <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler" (click)="loadScriptToggle('false')">
+                    <i class="gg-menu-left"></i>
+                </button>
+            </div>
+            <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+            </button>
+        </div>
+        <!-- End Logo Header -->
+    </div>
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+                <li class="nav-item" [class.active]="url == '/list'">
+                    <a [routerLink]="['/list']" routerLinkActive="router-link-active" (click)="getMenuClick()">
+                        <i class="fas fa-desktop"></i>
+                        <p>Tracker List</p>
+                    </a>
+                </li>
+
+                <li appPrivilegedUser class="nav-item" [class.active]="url == '/training-impact'">
+                    <a [routerLink]="['/training-impact']" routerLinkActive="router-link-active"
+                        (click)="getMenuClick()">
+                        <i class="fas fa-briefcase"></i>
+                        <p>Training Impact</p>
+                    </a>
+                </li>
+
+                <li appPrivilegedUser class="nav-item" [class.active]="url.startsWith('/mock')"
+                    [class.submenu]="url.startsWith('/mock')">
+                    <a href="javascript:void(0)" (click)="toggleMockInterview(); getMenuClick()"
+                        [attr.aria-expanded]="isMockInterviewCollapsed ? 'true' : 'false'">
+                        <i class="fas fa-chalkboard"></i>
+                        <p>Evaluation</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse mock-interview-collapse" [class.show]="isMockInterviewCollapsed"
+                        id="mockInterview">
+                        <app-mock-interview-menu [getMenuClick]="getMenuClick"></app-mock-interview-menu>
+                    </div>
+                </li>
+
+                <!-- Trainings menu with Angular toggle instead of data-bs-toggle -->
+                <li appPrivilegedUser class="nav-item" [class.active]="
+            url == '/trainings/manage' || url == '/trainings/spin'
+          " [class.submenu]="
+            url == '/trainings/manage' || url == '/trainings/spin'
+          ">
+                    <!-- Modified: removed data-bs-toggle, added (click) to toggleTrainings -->
+                    <a href="javascript:void(0)" (click)="toggleTrainings(); getMenuClick()"
+                        [attr.aria-expanded]="isTrainingsCollapsed ? 'true' : 'false'">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Trainings</p>
+                        <span class="caret"></span>
+                    </a>
+                    <!-- Modified: used [class.show] Angular binding instead of Bootstrap collapse -->
+                    <div class="collapse" [class.show]="isTrainingsCollapsed" id="trainings">
+                        <ul class="nav nav-collapse">
+                            <li [class.active]="url == '/trainings/manage'">
+                                <a [routerLink]="['/trainings/manage']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fas fa-gear menu-icon"></i>
+                                    <span>Manage</span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/trainings/spin'">
+                                <a [routerLink]="['/trainings/spin']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fas fa-rotate menu-icon"></i>
+                                    <span>Spin</span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/trainings/bulk-activities'">
+                                <a [routerLink]="['/trainings/bulk-activities']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fas fa-list-check menu-icon"></i>
+                                    <span>Bulk Activities</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li appPrivilegedUser class="nav-item" [class.active]="url.startsWith('/staffing')"
+                    [class.submenu]="url.startsWith('/staffing')">
+                    <a href="javascript:void(0)" (click)="toggleCountryStaffing(); getMenuClick()"
+                        [attr.aria-expanded]="isCountryStaffingCollapsed ? 'true' : 'false'">
+                        <i class="fas fa-briefcase"></i>
+                        <p>Tickets</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse mock-interview-collapse" [class.show]="isCountryStaffingCollapsed"
+                        id="countryStaffing">
+                        <app-country-staffing [getMenuClick]="getMenuClick"></app-country-staffing>
+                    </div>
+                </li>
+
+                <!-- Export Report menu with Angular toggle -->
+                <li appPrivilegedUser class="nav-item" [class.active]="
+            url == '/reports/dojo-engagement' || url == '/reports/fullreport'
+          " [class.submenu]="
+            url == '/reports/dojo-engagement' || url == '/reports/fullreport'
+          ">
+                    <!-- Modified: removed data-bs-toggle, added (click) to toggleReports -->
+                    <a href="javascript:void(0)" (click)="toggleReports(); getMenuClick()"
+                        [attr.aria-expanded]="isExportReportCollapse ? 'true' : 'false'">
+                        <i class="fas fa-file"></i>
+                        <p>Reports</p>
+                        <span class="caret"></span>
+                    </a>
+                    <!-- Modified: used [class.show] Angular binding instead of Bootstrap collapse -->
+                    <div class="collapse" [class.show]="isExportReportCollapse" id="reports">
+                        <ul class="nav nav-collapse">
+                            <li [class.active]="url == '/reports/dojo-engagement'">
+                                <a [routerLink]="['/reports/dojo-engagement']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fa-regular fa-file-lines menu-icon"></i>
+                                    <span>Dojo Engagement Report</span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/reports/assigndojotrainingreport'">
+                                <a [routerLink]="['/reports/assigndojotrainingreport']"
+                                    routerLinkActive="router-link-active" (click)="getMenuClick()">
+                                    <i class="fa-regular fa-file menu-icon"></i>
+                                    <span>Assigned Report</span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/trainingreportbookmarks'">
+                                <a [routerLink]="['/trainingreportbookmarks']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fas fa-graduation-cap menu-icon"></i>
+                                    <span>Training Report</span>
+                                </a>
+                            </li>
+                               <li [class.active]="url == '/evaluationreportbookmarks'">
+                                <a [routerLink]="['/evaluationreportbookmarks']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fas fa-chart-bar menu-icon"></i>
+                                    <span>Evaluation Report</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Admin menu with Angular toggle -->
+                <li appPrivilegedUser class="nav-item" [class.active]="
+            url == '/adm/manage/role' || url == '/adm/manage/seniority'
+          " [class.submenu]="
+            url == '/adm/manage/role'
+          ">
+                    <!-- Modified: removed data-bs-toggle, added (click) to toggleAdmin -->
+                    <a href="javascript:void(0)" (click)="toggleAdmin(); getMenuClick()"
+                        [attr.aria-expanded]="isAdminCollapsed ? 'true' : 'false'">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Admin</p>
+                        <span class="caret"></span>
+                    </a>
+                    <!-- Modified: use [class.show] for collapsing -->
+                    <div class="collapse" [class.show]="isAdminCollapsed" id="admin">
+                        <ul class="nav nav-collapse">
+                            <li [class.active]="url == '/adm/manage/role'">
+                                <a [routerLink]="['/adm/manage/role']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fas fa-user-tag menu-icon"></i>
+                                    <span>Manage Role</span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/adm/manage/seniority'">
+                                <a [routerLink]="['/adm/manage/seniority']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fa-regular fas fa-chart-line menu-icon"></i>
+                                    <span>Manage Seniority </span>
+
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/adm/manage/training'">
+                                <a [routerLink]="['/adm/manage/training']" routerLinkActive="router-link-active"
+                                    (click)="getMenuClick()">
+                                    <i class="fa-regular fas fa-book menu-icon"></i>
+                                    <span>Manage Training </span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Panel Availability -->
+            <ng-container *ngIf="isAdminOrRecruiterRole">
+                <li appPrivilegedUser class="nav-item" [class.active]="url.startsWith('/agk')">
+                    <!-- Modified: removed data-bs-toggle, added (click) to togglePanelAvailability -->
+                    <a href="javascript:void(0)" (click)="togglePanelAvailability(); getMenuClick()"
+                        [attr.aria-expanded]="isPanelAvailabilityCollapsed ? 'true' : 'false'">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Panel Availability</p>
+                        <span class="caret"></span>
+                    </a>
+                    <!-- Modified: use [class.show] for collapsing -->
+                    <div class="collapse" [class.show]="isPanelAvailabilityCollapsed" id="admin">
+                        <ul class="nav nav-collapse">
+                            <li [class.active]="url == '/agk/panel-availability/dashboard'">
+                                <a [routerLink]="['/agk/panel-availability/dashboard']" routerLinkActive="router-link-active" 
+                                (click)="getMenuClick()">
+                                <i class="fas fa-user-tag menu-icon"></i>
+                                <span>Panel Dashboard</span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/agk/panel-availability/panels'">
+                                <a [routerLink]="['/agk/panel-availability/panels']" routerLinkActive="router-link-active"
+                                (click)="getMenuClick()">
+                                <i class="fa-regular fas fa-chart-line menu-icon"></i>
+                                <span>Panel List </span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/agk/panel-availability/slot-management'">
+                                <a [routerLink]="['/agk/panel-availability/slot-management']" routerLinkActive="router-link-active"
+                                (click)="getMenuClick()">
+                                <i class="fa-regular fas fa-book menu-icon"></i>
+                                <span>Slot Management </span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/agk/panel-availability/panel-efficiency-report'">
+                                <a [routerLink]="['/agk/panel-availability/panel-efficiency-report']" routerLinkActive="router-link-active"
+                                (click)="getMenuClick()">
+                                <i class="fa-regular fas fa-book menu-icon"></i>
+                                <span>Panel Efficiency Report </span>
+                                </a>
+                            </li>
+                            <li [class.active]="url == '/agk/panel-availability/interview-schedule'">
+                                <a [routerLink]="['/agk/panel-availability/interview-schedule']" routerLinkActive="router-link-active"
+                                (click)="getMenuClick()">
+                                <i class="fa-regular fas fa-book menu-icon"></i>
+                                <span>Interview Schedule </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ng-container>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Sidebar -->

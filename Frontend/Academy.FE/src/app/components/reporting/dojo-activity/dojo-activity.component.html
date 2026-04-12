@@ -1,0 +1,237 @@
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title" style="display: inline-block; margin-right: 700px;">{{ pageHeader }}</h3>
+    
+<div class="flex-container searchFilterButton" appPrivilegedUser>
+  <div class="left-group">
+    <div class="filter-row">
+      <mat-form-field appearance="outline" style="margin-right: 5px;">
+          <!-- <mat-label>Community</mat-label> -->
+          <mat-select #communitySelect
+                      placeholder="Community"
+                      multiple
+                      [(value)]="selectedCommunity">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option *ngFor="let item of communities" [value]="item">{{ item.toUpperCase() }}</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="margin-right: 5px">
+          <!-- <mat-label>Country</mat-label> -->
+          <mat-select #countrySelect
+                      placeholder="Country"
+                      multiple
+                      [(value)]="selectedTdc">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option *ngFor="let item of tdc" [value]="item">{{ item.toUpperCase() }}</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="margin-right: 5px;">
+          <!-- <mat-label>Community</mat-label> -->
+          <mat-select #aiStudioSelect 
+                      placeholder="AI Studio"
+                      multiple
+                      [(value)]="selectedAiStudio">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option *ngFor="let item of aiStudios" [value]="item">{{ item.toUpperCase() }}</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="margin-right: 5px;">
+          <!-- <mat-label>Community</mat-label> -->
+          <mat-select #accountSelect
+                      placeholder="Account"
+                      multiple
+                      [(value)]="selectedAccount">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option *ngFor="let item of accounts" [value]="item">{{ item.toUpperCase() }}</mat-option>
+          </mat-select>
+      </mat-form-field>      
+
+        <mat-form-field appearance="outline" style="margin-right: 5px">
+            <!-- <mat-label>Report</mat-label> -->
+            <mat-select 
+                        placeholder="Report"
+                        (selectionChange)="onReportTypeChanged($event)"
+                        [(value)]="selectedReportType"
+                        >
+                @for (topping of reportType; track topping) {
+                <mat-option [value]="topping">{{ topping.toUpperCase() }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput
+          placeholder="Search here"
+          [(ngModel)]="searchText"
+          (keyup.enter)="applyFilter()" />
+      </mat-form-field> -->
+    <!-- </div> -->
+
+    <div class="filter-row">
+        <mat-form-field appearance="outline" style="margin-right: 5px">
+            <!-- <mat-label>Dojo Start date</mat-label> -->
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker1" [(ngModel)] = "startDate" (dateChange)="onDojoStartDateChange($event)">
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <!-- <mat-label>Dojo End date</mat-label> -->
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker2" [(ngModel)] = "endDate"  (dateChange)="onDojoEndDateChange($event)" [disabled]="!(isStartDateSelected)">
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <!--<button type="submit" class="btn btn-primary">Export</button>-->
+    </div>
+  </div>
+  <div class="right-group">
+    <button type="button" class="btn btn-outline-secondary btn-sm tooltip-btn" (click)="search()" style="margin-right: 5px;" >
+      <i class="fas fa-search"></i>
+      <span class="tooltip-text">Search</span>
+    </button>
+    <button type="button" class="btn btn-outline-secondary btn-sm tooltip-btn" (click)="reset()" style="margin-right: 5px;" >
+      <i class="fas fa-redo-alt"></i>
+      <span class="tooltip-text">Reset Filters</span>
+    </button>
+    <button type="button" class="btn btn-outline-secondary btn-sm tooltip-btn" (click)="export()">
+      <i class="fas fa-file-export"></i>
+      <span class="tooltip-text">Export Report</span>
+    </button>
+  </div>
+</div>
+    <div class="filter-container searchFilterButton" appPrivilegedUser>      
+      <div class="count-summary-box">
+        <div class="count-summary-title">
+          <ng-container *ngIf="appliedStartDate && appliedEndDate; else noDate">
+            DOJO {{ appliedStartDate | date:'dd MMM yyyy' }} - {{ appliedEndDate | date:'dd MMM yyyy' }}
+          </ng-container>
+          <ng-template #noDate>
+            DOJO Current: {{ currentDojoCount }}
+          </ng-template>
+        </div>
+        <div class="count-summary-content">
+          <span class="count-item">
+            <span class="count-label">Non Assignable:</span>
+            <span class="count-value">{{ nonAssignableCount }}</span>
+          </span>
+          <span class="count-item">
+            <span class="count-label">Dojo Engaged:</span>
+            <span class="count-value">{{ dojoEngagedCount }}</span>
+          </span>
+          <span class="count-item">
+            <span class="count-label">Dojo Not Engaged:</span>
+            <span class="count-value">{{ dojoNotEngagedCount }}</span>
+          </span>
+          <span class="count-item">
+            <span class="count-label">Total Dojo:</span>
+            <span class="count-value">{{ currentDojoCount }}</span>
+          </span>
+        </div>
+      </div>
+      <div class="right-flex-container">
+            <p class="left-toggle">Report</p>
+        <mat-slide-toggle
+          class="custom-toggle"
+          (change)="onToggleChange($event)"
+        ></mat-slide-toggle>
+        <p class="right-toggle">Summary</p>
+        <p *ngIf="isExport" style="margin-left: 20px; padding-top: 18px;"><a [href]="exportUrl" target="_blank">View Report</a></p>
+      </div>
+    </div>
+    <div class="activity-action"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" *ngIf="isVissible">
+          <div class="scrollable-table-wrapper">
+            <table mat-table matSort multiTemplateDataRows [dataSource]="data" class="mat-elevation-z8 parent">
+              <!-- Define Columns -->
+              <ng-container
+                *ngFor="let column of displayedColumns"
+                [matColumnDef]="column"
+              >
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  [style.background-color]="color"
+                  style="white-space: nowrap;"
+                  class="header-bold"
+                >
+                  {{ columnTitles[column] }}
+                </th>
+                <td mat-cell *matCellDef="let element" style="white-space: nowrap;">
+                  <span *ngIf="shouldNotShowColumn(column)">
+                    {{ element[column] }}
+                  </span>
+                  <span *ngIf="column === 'priority'">
+                    {{ element[column] === 2.0 ? '': element[column]}}
+                  </span>
+                  <span *ngIf="column === 'isActive'">
+                    {{ element[column] ? 'Active': ''}}
+                  </span>
+                  <!-- <span *ngIf="column === 'isEmployeeActive'">
+                    {{ element[column] ? 'Active': 'Resigned'}}
+                  </span> -->
+                  <span *ngIf=" column === 'dojoStartDate' || 
+                                column === 'dojoEndDate' || 
+                                column === 'startDate' || 
+                                column === 'endDate'">
+                    {{ element[column] ? (element[column] | date:'MM-dd-yyyy') : ''}}
+                  </span>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+              <tr
+                mat-row
+                *matRowDef="let element; columns: displayedColumns"
+                class="example-detail-row"
+              ></tr>
+            </table>
+          </div>
+          <!-- Paginator -->
+          <mat-paginator
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[20, 40, 60, 70]"
+            showFirstLastButtons
+            [length]="totalItems"
+            (page)="onPageChanged($event)"
+          ></mat-paginator>
+        </div>
+        <div class="card" *ngIf="!isVissible">
+          <div class="scrollable-table-wrapper">
+            <table mat-table [dataSource]="activityCountdata" class="mat-elevation-z8 parent">
+              <!-- Define Columns -->
+              <ng-container
+                *ngFor="let column of displayedActivityCount"
+                [matColumnDef]="column"
+              >
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  [style.background-color]="color"
+                  style="height: 30px;"
+                  class="header-bold"
+                >
+                  {{ activityCountTitles[column] }}
+                </th>
+                <td mat-cell *matCellDef="let element" style="height: 30px;">
+                  {{ element[column] }}
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedActivityCount"></tr>
+              <tr
+                mat-row
+                *matRowDef="let element; columns: displayedActivityCount"
+              ></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

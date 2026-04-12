@@ -1,0 +1,173 @@
+::ng-deep .mat-sort-header-container{
+    font-style: normal;
+    font-weight: 600;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    line-height: 16px;
+}
+
+::ng-deep .mat-row:nth-child(even){
+    background:  linear-gradient(0deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), #007FAD;;
+}
+        
+::ng-deep .mat-row:nth-child(odd){
+    background-color:#FFFFFF;;
+}
+
+::ng-deep .mat-paginator-page-size-label{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+::ng-deep  .mat-select-min-line{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+::ng-deep .mat-paginator-range-label{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.full-width-table {
+    width: 100%;
+}
+
+
+.mat-column-select {
+    flex: 0 0 2%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-emailId {
+    flex: 0 0 10%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-panelName {
+    flex: 0 0 10%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-panelType {
+    flex: 0 0 10%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-seniorityName {
+    flex: 0 0 10%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-communityName {
+    flex: 0 0 10%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-slotCount {
+    flex: 0 0 5%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-nonUtilizedSlot {
+    flex: 0 0 5%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-deficit {
+    flex: 0 0 5%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-quater {
+    flex: 0 0 8%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #222222;
+}
+
+.mat-column-panelAction {
+    flex: 0 0 25%;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    align-items: center;
+    /* color: rgba(0, 0, 0, 0.5) */
+}
+
+::ng-deep .mat-column-select .mat-checkbox-inner-container{
+    margin-right: 0px !important;
+}
+
+.full-width-table th {
+  background-color: rgb(191, 215, 50);
+  font-weight: bold;
+  font-size: 13px;
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: #f2f4e7;
+}
+
+tr.mat-mdc-row:nth-child(odd) {
+  background-color: #FFFFFF;
+}

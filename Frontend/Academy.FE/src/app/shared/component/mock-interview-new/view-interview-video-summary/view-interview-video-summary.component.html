@@ -1,0 +1,208 @@
+<div class="page-bg">
+  <div class="session-card">
+    <div class="session-header">
+      <div class="header-left">
+        <h1 class="session-title">
+             <button mat-stroked-button (click)="goBack()" class="back-btn me-2">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+          {{ !showSummary ? "Evaluation Session" : "Evaluation Summary" }}
+        </h1>
+      </div>
+      <div class="header-right">
+        <img src="assets/img/globantDark.png" alt="Globant Logo" class="company-logo" />
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <div class="left-col">
+        <mat-card class="details-card mat-elevation-z0">
+          <mat-card-header class="details-header">
+            <mat-icon>description</mat-icon>
+            <mat-card-title>Evaluation Details</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="detail-row">
+              <mat-icon class="detail-icon">confirmation_number</mat-icon>
+              <div class="detail-label">Code:</div>
+              <div class="detail-value font-mono">{{ code }}</div>
+            </div>
+
+            <div class="detail-row">
+              <mat-icon class="detail-icon">account_circle</mat-icon>
+              <div class="detail-label">Profile:</div>
+              <div class="detail-value">{{profileName(profile)}}</div>
+            </div>
+
+            <div class="detail-row">
+              <mat-icon class="detail-icon">person</mat-icon>
+              <div class="detail-label">Candidate:</div>
+              <div class="detail-value">
+                {{ interview?.candidate?.name || "N/A" }}
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <mat-icon class="detail-icon">workspace_premium</mat-icon>
+              <div class="detail-label">Seniority:</div>
+              <div class="detail-value">
+                {{ profile?.seniorityName || "N/A" }}
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <mat-icon class="detail-icon">category</mat-icon>
+              <div class="detail-label">Type:</div>
+              <div class="detail-value">{{ evaluationType(profile)}}
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <mat-icon class="detail-icon">info</mat-icon>
+              <div class="detail-label">Status:</div>
+              <div class="detail-value">
+                <span class="status-pill">
+                  {{
+                  !showSummary
+                  ? getDisplayStatus(interview?.status)
+                  : "Completed"
+                  }}
+                </span>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <mat-icon class="detail-icon">psychology</mat-icon>
+              <div class="detail-label">Skills Assessment:</div>
+              <div class="detail-value" *ngIf="skills.length > 0; else noSkillsList" aria-label="Skills">
+                <span class="status-pill" *ngFor="let skill of skills" selected style="margin-right: 8px;">{{ skill.name
+                  }}</span>
+              </div>
+              <ng-template #noSkillsList>
+                <span class="no-skills">No skills listed.</span>
+              </ng-template>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="right-col">
+        <div class="proceed_interview" *ngIf="!loading && !showSummary">
+          <p style="font-size: 22px;">You are already invited for an Evaluation</p>
+          <button mat-flat-button class="start-btn" (click)="proceedInterview()">
+            <mat-icon class="mat-icon-left">play_arrow</mat-icon>
+            Click here to Proceed
+          </button>
+        </div>
+        <div *ngIf="loading" class="loading-text">
+          {{
+          !showSummary
+          ? "Loading Evaluation..."
+          : "Loading Evaluation Summary..."
+          }}
+        </div>
+        <div *ngIf="error" class="error-text">{{ error }}</div>
+
+        <div class="video-section" *ngIf="showSummary">
+          <div *ngIf="isDisabled" class="processing-card">
+            <div class="icon">⏱️</div>
+            <div class="content">
+              <h3>Status : Video Under Process</h3>
+              <p>
+                Your video is currently being processed and is expected to be available in approximately 24 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!loading && !isDisabled">
+          <app-video-player *ngIf="safeUrl" [videoUrl]="safeUrl" (refreshRequested)="fetchSignedVideoUrl()">
+          </app-video-player>
+        </div>
+      </div>
+
+      <div *ngIf="!pollingFinished && showSummary">
+        Loading evaluation details...
+      </div>
+
+
+    </div>
+    <div *ngIf="interviewDetails && (interviewDetails | keyvalue).length > 0 && pollingFinished">
+      <div class="qa-wrapper" *ngIf="summaryData && (summaryData | keyvalue).length>0">
+        <!-- LEFT: Summary Card -->
+        <mat-card class="summary-card">
+          <mat-card-content class="feedback-summary">
+            <h4 class="question-title mb-3">Candidate's Feedback Summary</h4>
+            <mat-card class="summary mb-3">
+              <mat-card-header>
+                <mat-card-title>Summary</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p [innerHTML]="getSanitizedComment(summary)"></p>
+              </mat-card-content>
+            </mat-card>
+            <mat-card class="strengths mb-3">
+              <mat-card-header>
+                <mat-card-title>Strengths</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p [innerHTML]="getSanitizedComment(strengths)"></p>
+              </mat-card-content>
+            </mat-card>
+            <mat-card class="improvements">
+              <mat-card-header>
+                <mat-card-title>Improvement Areas</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p [innerHTML]="getSanitizedComment(improvements)"></p>
+              </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- RIGHT: Speedometer (outside card) -->
+        <div class="speedometer-wrapper" *ngIf="showSummary">
+          <speedo-meter-app [speedScore]="animatedScore"></speedo-meter-app>
+          <div *ngIf="isLoading" class="loader"></div>
+          <app-skills-rating *ngIf="!isLoading" [skillData]="skillRatingData" />
+        </div>
+      </div>
+
+      <div class="transcript-bar">
+        <button mat-raised-button class="transcript-btn" (click)="toggleTranscript()">
+          {{ showTranscript ? "Hide Transcript" : "View Transcript" }}
+        </button>
+      </div>
+
+      <!-- Questions -->
+      <div class="qa-wrapper" *ngIf="showTranscript">
+        <mat-card class="qa-card full-transcript-card">
+          <mat-card-content>
+            <section *ngFor="let q of interviewDetails?.questions; let i = index" class="question-block">
+              <!-- Question Header -->
+              <div class="question-header">
+                <h4 class="question-title">Q{{ i + 1 }}. {{ q.question }}</h4>
+
+                <!-- Score -->
+                <span class="score-badge">
+                  {{ q?.analysis?.score }}/{{ q?.analysis?.totalScore }}
+                </span>
+              </div>
+
+              <!-- Candidate Answer -->
+              <div class="answer-section">
+                <strong>Candidate Answer</strong>
+                <p>{{ q?.userAnswer || "No answer provided." }}</p>
+              </div>
+
+              <!-- Evaluator Feedback -->
+              <div class="evaluation-section">
+                <strong>Evaluator Feedback</strong>
+                <p>{{ q?.analysis?.comments || "No feedback provided." }}</p>
+              </div>
+            </section>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>

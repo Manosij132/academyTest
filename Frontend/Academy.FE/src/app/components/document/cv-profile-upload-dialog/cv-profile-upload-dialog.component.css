@@ -1,0 +1,366 @@
+:host {
+  display: block;
+}
+
+/* --- Header Styling --- 
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  flex-wrap: wrap;
+}
+
+.dialog-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}*/
+
+/* --- Dialog Body Scroll Fix --- 
+.dialog-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}*/
+
+/* --- Table Styling --- 
+table.mat-table {
+  table-layout: auto !important;
+  width: 100%;
+  display: block;
+}
+
+.mat-cell, .mat-header-cell {
+  padding: 12px;
+  white-space: normal !important;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
+  vertical-align: middle;
+}
+th.mat-header-cell, td.mat-cell {
+  max-width: 200px;
+}
+mat-dialog-actions[align="end"] {
+  justify-content: flex-end;
+}
+
+th.mat-header-cell {
+  font-weight: bold;
+  font-size: 14px;
+}*/
+
+/* --- Form Field Styling --- 
+mat-form-field {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #f5f5f5;
+}*/
+
+/* --- Status & Date Field Size ---
+.mat-select, input[matInput] {
+  font-size: 14px;
+  height: 40px;
+}
+
+.full-width {
+  width: 100%;
+} */
+
+/* --- Dialog Container Customization ---
+::ng-deep .cdk-overlay-pane {
+  overflow: visible !important;
+}
+
+::ng-deep .mat-select-panel {
+  max-height: 300px !important;
+} */
+
+.upload-box {
+  border: 2px dashed #BFD732;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: -14px; 
+  margin-bottom: 16px;              
+}
+
+.upload-box:hover {
+  background-color: #f4f6ff;
+}
+
+.upload-icon {
+  font-size: 4px;
+  width: 4px;
+  height: 4px;
+  color: #BFD732;
+}
+
+.upload-text {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.upload-text span {
+  font-weight: 600;
+  color: #BFD732;
+}
+
+.upload-subtext {
+  font-size: 13px;
+  color: gray;
+}
+
+.file-name {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.remove-icon {
+  cursor: pointer;
+  color: red;
+  font-size: 18px;
+}
+
+.custom-dialog {
+  width: 50vw !important;
+}
+
+/* --- Buttons --- */
+.closeBtn {
+  margin: -0px 0px 0px 0px;
+  background-color: #ffc107;
+  color: #000;
+  font-weight: 400;
+  font-size: 1em;
+  border-radius: 0.375em;
+  border-color: #ffc107;
+}
+
+.closeBtn:hover {
+  background-color: #ffca2c;
+  border-color: #ffc720;
+}
+
+.addBtn {
+  background-color: #1976d2;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  min-width: 80px;
+}
+
+button.save-btn-icon {
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+}
+
+.fa-floppy-disk {
+  font-size: 18px;
+  color: #1976d2;
+}
+
+button[disabled] .fa-floppy-disk {
+  color: #ccc;
+}
+
+/* --- Modal Styling for Responsiveness ---
+::ng-deep .mat-dialog-container .custom-dialog {
+  max-width: 100vw !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  padding: 24px;
+  box-sizing: border-box;
+}
+ */
+/* Optional: Prevent wrapping/cut-off of table */
+.mat-table {
+  word-wrap: break-word;
+}
+
+/* === MAT DIALOG STYLING === */
+::ng-deep .mat-dialog-container {
+  max-width: 100vw !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* === DIALOG BODY WITH SCROLL ONLY VERTICALLY === */
+.dialog-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* === TABLE FIX: REMOVE DISPLAY BLOCK & SET FIXED LAYOUT === */
+table.mat-table {
+  table-layout: fixed !important;
+  width: 100%;
+}
+
+/* === CELL WRAPPING & OVERFLOW HANDLING === */
+.mat-cell,
+.mat-header-cell {
+  padding: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+/* === SET WIDTHS FOR SPECIFIC COLUMNS === */
+.mat-column-activityName {
+  width: 20%;
+}
+
+.mat-column-activityDetail {
+  width: 25%;
+}
+
+.mat-column-startDate,
+.mat-column-endDate {
+  width: 10%;
+}
+
+.mat-column-status {
+  width: 15%;
+}
+
+.mat-column-actions {
+  width: 10%;
+}
+
+/* === FORM FIELD STYLING === */
+mat-form-field {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  margin-top: 2px;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #f5f5f5;
+}
+
+/* === INPUT/DROPDOWN HEIGHT & FONT === */
+.mat-select,
+input[matInput] {
+  font-size: 14px;
+  height: 40px;
+}
+
+/* === HEADER STYLING === */
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  flex-wrap: wrap;
+}
+
+.dialog-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+th.mat-header-cell {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* === SELECT DROPDOWN PANEL HEIGHT === */
+::ng-deep .mat-select-panel {
+  max-height: 300px !important;
+}
+
+/* === ACTION BUTTON ALIGNMENT === */
+mat-dialog-actions[align="end"] {
+  justify-content: flex-end;
+}
+
+::ng-deep .mat-datepicker-content {
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+::ng-deep .mat-calendar {
+  width: 100%;
+  max-width: 320px;
+}
+
+.datepicker-wrapper {
+  position: relative;
+  overflow: visible;
+}
+
+.dialog-section {
+  justify-content: flex-start !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.mat-dialog-content {
+  padding-top: 0 !important;
+  margin-top: -[layer spacing]
+}
+
+.action-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-file {
+  display: flex;
+  gap: 8px;
+}
+
+.mat-container {
+  padding-top: 0;
+  padding-bottom: 8px;
+}
+
+.file-action:focus {
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+
+.btn-primary {
+  margin: 0 5px 0 5px;
+  background-color: #ccd324 !important;
+  border-color: #ccd324 !important;
+  background: #ccd324 !important;
+}
+
+&.btn-primary:hover {
+  background-color: #ccd324 !important;
+  border-color: #ccd324 !important;
+  background: #ccd324 !important;
+}
+
+.link {
+  color: #000;
+}
+
+.download-links {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  margin: 10px 20px 25px 20px;
+  gap: 15px;
+  flex-wrap: nowrap !important;
+}

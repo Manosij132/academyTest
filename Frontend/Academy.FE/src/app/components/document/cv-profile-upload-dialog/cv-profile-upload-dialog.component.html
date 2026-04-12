@@ -1,0 +1,75 @@
+<div class="modal-header">
+  <h1 mat-dialog-title class="modal-heading">Upload Documents</h1>
+  <button type="button" class="btn" mat-dialog-close>
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+
+<hr />
+
+<mat-dialog-actions class="dialog-section">
+  <div style="display:flex; align-items:center; gap:5px;">
+    <mat-form-field appearance="outline" style="min-width:180px;">
+      <mat-label>Select Document Type</mat-label>
+      <mat-select [(ngModel)]="docTypeId">
+        <mat-option *ngFor="let type of documentTypes" 
+                    [value]="type.documentTypeId">
+          {{ type.documentType }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="download-links">      
+      <a *ngIf="employee?.cvLink" color="primary" class="btn btn-primary link" [href]="employee.cvLink"
+         matTooltip="Download CV" matTooltipPosition="above">
+          <i class="fas fa-file-arrow-down"></i>
+      </a>
+      <a *ngIf="employee?.profileLink" color="primary" class="btn btn-primary link" [href]="employee.profileLink"
+         matTooltip="Download Profile" matTooltipPosition="above">
+          <i class="fas fa-id-card"></i>
+      </a>
+    </div>
+  </div> 
+</mat-dialog-actions>
+<div class="dialog-body">
+  <mat-dialog-content class="mat-typography">
+    <div
+      class="upload-box"
+      (click)="fileInput.click()"
+      (dragover)="onDragOver($event)"
+      (drop)="onFileDrop($event)">
+      <input
+        #fileInput
+        type="file"
+        hidden
+        [accept]="allowedTypes"
+        (change)="onFileSelected($event)" />
+      <mat-icon class="upload-icon">cloud_upload</mat-icon>
+      <p class="upload-text">
+        Click to upload or <span>drag & drop</span>
+      </p>
+    </div>
+    <div *ngIf="selectedFile" class="file-name">
+      <mat-icon color="primary">description</mat-icon>
+      {{ selectedFile.name }}
+      <mat-icon class="remove-icon"
+                (click)="clearFile(fileInput)">close</mat-icon>
+    </div>
+  </mat-dialog-content>
+</div>
+<hr />
+<mat-dialog-actions align="end">
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="onUpload()"
+    [disabled]="!selectedFile">
+    Upload
+  </button>
+
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="cancelFileUpload()">
+    Reset
+  </button>
+</mat-dialog-actions>

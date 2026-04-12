@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title" style="display: inline-block; margin-right: 700px;">{{ pageHeader }}</h3>
+  
+    <mf-app-panel-search-bar [isPanelSearchTermVisible]="isPanelSearchTermVisible" (search)="onSearch($event)"></mf-app-panel-search-bar>
+
+    <div class="row">
+      <div class="col-md-12">
+        
+        <!-- Total Counts -->
+        <div style="margin-top: 10px;" class="card headercolor mat-elevation-z8" [class.sideNavInActive]="!isSideNavActive" [ngClass]="{'sideNavActive' : isSideNavActive}">
+          <div style="justify-content: center;display: flex;">
+            <table class="">
+              <tr style="width: 100%;">
+                <td rowspan="2">
+                  <mat-card appMaterialElevation class="mat-elevation-z8 totalSlotCard padding-1rem">
+                    <mat-card-subtitle style="text-align: center;font-size: large;font-weight: bold;">Total Slots</mat-card-subtitle>
+                    <mat-card-content style="text-align: center;font-size: x-large;">{{dashboardTileList.totalSlots}}</mat-card-content>
+                  </mat-card>
+                </td>
+                <td>
+                  <tr>
+                    <td>
+                      <mat-card class="mat-elevation-z8 availableL1GKSlots padding-1rem">
+                        <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">L1 Slots</mat-card-subtitle>
+                        <mat-card-content style="text-align: center;font-size: large;">{{dashboardTileList.l1Slots}}</mat-card-content>
+                      </mat-card>
+                    </td>
+                    <td>
+                      <mat-card class="mat-elevation-z8 utilizedL1GKSlots padding-1rem">
+                        <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">L1 Utilized Slots</mat-card-subtitle>
+                        <mat-card-content style="text-align: center;font-size: large;">{{dashboardTileList.l1Slots - dashboardTileList.l1UntilizedSlots}}</mat-card-content>
+                      </mat-card>
+                    </td>
+                    <td>
+                      <mat-card class="mat-elevation-z8 unutilizedL1GKSlots padding-1rem">
+                        <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">L1 Unutilized Slots</mat-card-subtitle>
+                        <mat-card-content style="text-align: center;font-size: large;">{{dashboardTileList.l1UntilizedSlots}}</mat-card-content>
+                      </mat-card>
+                    </td>
+                    <td>
+                      <mat-card class="mat-elevation-z8 deficitL1GK padding-1rem">
+                        <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">L1 Deficit</mat-card-subtitle>
+                        <mat-card-content style="text-align: center;font-size: large;">{{dashboardTileList.l1Deficit}}</mat-card-content>
+                      </mat-card>
+                    </td>
+      
+                  </tr>
+                  <tr>
+                    <td>
+                      <mat-card class="mat-elevation-z8 availableL1GKSlots padding-1rem">
+                        <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">GK Slots</mat-card-subtitle>
+                        <mat-card-content style="text-align: center;font-size: large;">{{dashboardTileList.gkSlots}}</mat-card-content>
+                      </mat-card>
+                    </td>
+                    <td >
+                      <mat-card class="mat-elevation-z8 utilizedL1GKSlots padding-1rem">
+                        <mat-card-subtitle style="text-align: center;font-size:small;font-weight: bold;">GK Utilized Slots</mat-card-subtitle>
+                        <mat-card-content style="text-align: center;font-size: large;">{{dashboardTileList.gkSlots - dashboardTileList.gkUnutilizedSlots}}</mat-card-content>
+                      </mat-card>
+                    </td>
+                    <td >
+                      <mat-card class="mat-elevation-z8 unutilizedL1GKSlots padding-1rem">
+                        <mat-card-subtitle style="text-align: center;font-size:small;font-weight: bold;">GK Unutilized Slots</mat-card-subtitle>
+                        <mat-card-content style="text-align: center;font-size: large;">{{dashboardTileList.gkUnutilizedSlots}}</mat-card-content>
+                      </mat-card>
+                    </td>
+                    <td>
+                      <mat-card class="mat-elevation-z8 deficitL1GK padding-1rem">
+                        <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">GK Deficit</mat-card-subtitle>
+                        <mat-card-content style="text-align: center;font-size: large;">{{dashboardTileList.gkDeficit}}</mat-card-content>
+                      </mat-card>
+                    </td>
+                  </tr>
+      
+                </td>
+      
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div style="margin-top: 10px; padding: 1rem;" class=" card headercolor mat-elevation-z8" [class.sideNavInActive]="!isSideNavActive" [ngClass]="{'sideNavActive' : isSideNavActive}">
+            <div class="chart-container">
+              <div class="chart">
+                <div style="text-align: center;font-weight: bold;">{{communityChartTitle}}</div>
+                <ngx-charts-pie-chart  
+                  [results]="communityChartData" 
+                  (select)=onCommunityTypeSelect($event)
+                  [view]="[450, 450]"
+                  [legendPosition]="legendPosition"
+                  [legend]="true"
+                  [legendTitle]="legendTitleCommunity"
+                  [scheme]="'natural'"
+                  [customColors]="customColors"
+                  [labelFormatting]="pieChartLabel.bind(this, communityChartData)"
+                  [animations]="false"
+                  [labels]="true">          
+              </ngx-charts-pie-chart>
+              </div>
+            
+              <div class="chart">
+                <div style="text-align: center;font-weight: bold;">{{panelTypeChartTitle}}</div>
+                <ngx-charts-pie-chart  
+                  [results]="panelTypeChartData"
+                  (select)=onPanelTypeSelect($event)
+                  [view]="[450, 450]"
+                  [legendPosition]="legendPosition"
+                  [legend]="true"
+                  [legendTitle]="legendTitlePanel"
+                  [customColors]="customColors"
+                  [labelFormatting]="pieChartLabel.bind(this, panelTypeChartData)"
+                  [animations]="false"
+                  [labels]="true">
+              </ngx-charts-pie-chart>
+              </div>
+          </div>
+        </div>
+
+        <!-- Panel Grid -->
+        <div class="card headercolor mat-elevation-z8" 
+          style="position: relative;top: 10px;"
+          *ngIf="showChildComponent">
+          <div style="padding-left: 0px;padding-right: 0px;" >
+            <mf-app-panel-grid 
+              *ngIf="showChildComponent" 
+              [panels]="panelGridList" 
+              [pageNumber]="pageNumber" 
+              [pageSize]="pageSize"
+              [totalRecords]="totalRecords" 
+              (onPaginationChanged)="onPaginationChanged($event)">
+            </mf-app-panel-grid>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

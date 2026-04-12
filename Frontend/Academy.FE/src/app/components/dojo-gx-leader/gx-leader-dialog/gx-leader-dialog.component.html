@@ -1,0 +1,244 @@
+<mat-dialog-content style="padding: 0px; max-height: 100vh">
+
+  <!-- <div class="modal-header">
+    <h2>GX Leader Assignment</h2>
+  </div> -->
+  <div class="modal-header">
+    <h1 mat-dialog-title class="modal-heading">Assign DOJO GX Leader</h1>
+    <button type="button" class="btn" mat-dialog-close>
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <hr />
+
+  <div class="modal-body">
+
+    <div class="row first-row">
+
+      <!-- Left Section: DOJO Glober -->
+      <!-- <div class="col">
+        <!-- <mat-label class="section-title">DOJO Glober</mat-label> -->
+      <!-- <div class="checkbox-row">
+          <input type="checkbox" id="autoSuggestLeader" class="autosuggest-checkbox" name="autoSuggestLeader" value="autoSuggestLeader"
+      (change)="AutoSuggestLeader($event)">
+          <label for="autoSuggestLeader" class="autosuggest-checkbox-label">Auto Suggest GX Leader</label>
+        </div> 
+      </div> -->
+
+      <!-- <div class="col">
+        <mat-form-field appearance="outline" class="proposed-leader-field">
+        <mat-label class="section-title">Location</mat-label>
+        <input type="text" class="input-box" matInput required #searchLocationInput id="searchLocationInput" formControlName="searchLocationGroup"
+          value='{{data.employee.tdc}}' (keyup)="searchLocation(searchLocationInput.value)"
+          (search)="clearLocationSearch($event)"
+          (focus)='disabaleValidation()' 
+          aria-expanded="false" [matAutocomplete]="autoLocationGroup"
+          [ngClass]="{ 'borderColour': isvalidate }" required>
+        <mat-autocomplete aria-expanded="false" #autoLocationGroup="matAutocomplete" autoActiveFirstOption
+          (optionSelected)="onOptionsLocationSelected($event)"
+          dropdown-arrow="true">
+          <mat-option value="">---Select---</mat-option>
+          <mat-option *ngFor="let summary of data.locations" value={{summary}}>
+            {{summary}}
+          </mat-option>
+        </mat-autocomplete>
+        </mat-form-field>
+      </div>  -->
+
+      <div class="col">
+        <mat-form-field appearance="outline" class="proposed-leader-field">
+          <mat-label *ngIf="!isAutoSuggestLeader" class="section-title">Community</mat-label>
+          <mat-select #communitySelect placeholder="Community" multiple [(value)]="selectedCommunity">
+            <mat-option value="ALL">ALL</mat-option>
+            <mat-option *ngFor="let item of communities" [value]="item">
+              {{ item.toUpperCase() }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col">
+        <mat-form-field appearance="outline" class="proposed-leader-field">
+          <mat-label *ngIf="!isAutoSuggestLeader" class="section-title">Country</mat-label>
+          <mat-select #countrySelect placeholder="Country" multiple [(value)]="selectedTdc">
+            <mat-option value="ALL">ALL</mat-option>
+            <mat-option *ngFor="let item of locations" [value]="item">
+              {{ item.toUpperCase() }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col">
+        <mat-form-field appearance="outline" class="proposed-leader-field">
+          <mat-label *ngIf="!isAutoSuggestLeader" class="section-title">Proposed Leader</mat-label>
+          <input type="text" class="input-box" matInput required #searchInput id="searchInput"
+            formControlName="searchGroup" value='{{data.employee.proposedDojoGxLeader}}'
+            (keyup)="search(searchInput.value)" (search)="clearSearch($event)" aria-expanded="false"
+            [matAutocomplete]="autoGroup" (focus)='disabaleValidation()' [ngClass]="{ 'borderColour': isvalidate }"
+            required>
+          <mat-autocomplete aria-expanded="false" #autoGroup="matAutocomplete" autoActiveFirstOption
+            (optionSelected)="onOptionsSelected($event)" dropdown-arrow="true">
+            <mat-option value="">---Select---</mat-option>
+            <mat-option *ngFor="let summary of data.leaders" value={{summary.globantEmailAddress}}>
+              {{summary.employeeName}}-{{summary.seniorityName}}-{{summary.communityName}}-({{summary.menteesCount}})
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <!-- === SECOND ROW : CARDS === -->
+    <div class="row second-row">
+
+      <!-- Left Card -->
+      <div class="col">
+        <div class="glober-card">
+
+          <div class="card-container">
+
+            <!-- LEFT SIDE -->
+            <div class="card-left">
+              <div class="field">
+                <span class="value">{{data.employee.employeeName}}</span>
+                <span class="label">Name</span>
+              </div>
+
+              <!-- <div class="field">
+                <span class="value">{{data.employee.employeeEmail}}</span>
+                <span class="label">Email</span>
+              </div> -->
+
+              <div class="field">
+                <span class="value">{{data.employee.seniority}}</span>
+                <span class="label">Seniority</span>
+              </div>
+
+              <div class="field">
+                <span class="value">DOJO</span>
+                <span class="label">Project</span>
+              </div>
+              <div class="field">
+                <span class="value">{{data.employee.tdc}}</span>
+                <span class="label">TDC</span>
+              </div>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="card-right">
+
+              <div class="field">
+                <span class="value">{{data.employee.employeeEmail}}</span>
+                <span class="label">Email</span>
+              </div>
+
+              <div class="field">
+                <span class="value">Globant</span>
+                <span class="label">Client</span>
+              </div>
+              <div class="field">
+                <span class="value">{{data.employee.community}}</span>
+                <span class="label">Community</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right Card -->
+      <div class="col">
+        <span>
+          <p *ngIf="matchingLeaderNotFound" class="warningMessage" style="margin-top: 20px;">{{matchingLeaderNotFound}}
+          </p>
+        </span>
+        <div class="glober-card" aria-label="Selected Leader Details" *ngIf="hasSelectedLeader()">
+          <div class="card-container">
+
+            <!-- LEFT SIDE -->
+            <div class="card-left">
+              <div class="field">
+                <span class="value">{{this.data.selectedLeader?.employeeName}}</span>
+                <span class="label">Name</span>
+              </div>              
+
+              <div class="field">
+                <span class="value">{{this.data.selectedLeader?.seniorityName}}</span>
+                <span class="label">Seniority</span>
+              </div>
+
+              <div class="field">
+                <div>
+                  <span class="value highlight-value">{{this.data.selectedLeader?.client
+                    == null || this.data.selectedLeader?.client ==''?
+                    'NA':this.data.selectedLeader?.client}}</span>
+                </div>
+                <span class="label">Client</span>
+              </div>
+              <div class="field">
+                <span class="value">{{this.data.selectedLeader?.tdc}}</span>
+                <span class="label">TDC</span>
+              </div>
+            </div>
+          <!-- </div> -->
+          <!-- RIGHT SIDE -->
+          <div class="card-right">
+            <div class="field">
+                <span class="value">{{this.data.selectedLeader?.globantEmailAddress}}</span>
+                <span class="label">Email</span>
+              </div>
+            <div class="field">
+              <div>
+                <span class="value highlight-value">{{this.data.selectedLeader?.project
+                  == null || this.data.selectedLeader?.project ==''?
+                  'NA':this.data.selectedLeader?.project}}</span>
+              </div>
+
+              <span class="label">Project</span>
+            </div>
+            <div class="field">
+                <span class="value">{{this.data.selectedLeader?.communityName}}</span>
+                <span class="label">Community</span>
+              </div>
+
+            <div class="field">
+              <div>
+                <span class="value highlight-value"
+                  [ngClass]="{'maxCountReached': (data.selectedLeader?.menteesCount > data.selectedLeader?.maxMentee) ,'minCountReached': (data.selectedLeader?.menteesCount < minMenteeCount)}">{{this.data.selectedLeader?.menteesCount}}</span>
+              </div>
+              <span class="label">Mentees Count</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- </div> -->
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="modal-footer">
+    <div class="modal-footer-start">
+      <div class="checkbox-row">
+        <input type="checkbox" id="autoSuggestLeader" class="autosuggest-checkbox" name="autoSuggestLeader"
+          value="autoSuggestLeader" (change)="AutoSuggestLeader($event)">
+        <label for="autoSuggestLeader" class="autosuggest-checkbox-label">Auto Suggest GX Leader</label>
+      </div>
+    </div>
+    <div class="modal-footer-end">
+      <button class="cancel-btn" (click)="close()">Cancel</button>
+      <button class="update-btn" id="update" (click)="onSelect(data.employee)">Update</button>
+      <button [disabled]="!hasSelectedLeader()" class="delete-btn" id="delete"
+        (click)="onDelete(data.employee)">Delete</button>
+    </div>
+  </div>
+</mat-dialog-content>

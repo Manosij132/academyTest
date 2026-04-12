@@ -1,0 +1,275 @@
+@if (error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Questions</h3>
+
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Search questions..." azsnj
+          dsewwn />
+      </mat-form-field>
+      <!-- <div class="right-flex-container">
+        <button class="header-btn" (click)="onCreateQuestion()">Add Question</button>
+      </div> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      @if(!(loaderService.loaderState | async)) {
+      <div class="card">
+        @if (dataSource.data.length === 0) {
+        <div class="p-8 text-center text-gray-500">
+          <i class="fa fa-question-circle fa-3x mb-3"></i>
+          <h5>No questions found</h5>
+          <p>Add your first question to get started.</p>
+        </div>
+        } @else {
+
+        <div class="scrollable-table-wrapper table-view">
+          <table mat-table [dataSource]="dataSource" matSort class="table" style="margin: 0px">
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+              <td mat-cell *matCellDef="let question" class="font-medium">
+                {{ question.id || "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Skill -->
+            <ng-container matColumnDef="skill">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Skill</th>
+              <td mat-cell *matCellDef="let question">
+                {{ question.skill?.name || "N/A" }}
+              </td>
+            </ng-container>
+
+            <!-- Section -->
+            <ng-container matColumnDef="section">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Section</th>
+              <td mat-cell *matCellDef="let question">
+                {{ question.section?.name || "N/A" }}
+              </td>
+            </ng-container>
+
+            <!-- Question -->
+            <ng-container matColumnDef="question">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Question
+              </th>
+              <td mat-cell *matCellDef="let question">
+                <span class="block w-72" title="{{ question.question }}">{{
+                  question.question
+                  }}</span>
+              </td>
+            </ng-container>
+
+            <!-- Options -->
+            <!-- <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let question">
+                <div class="buttons">
+                  <mat-icon
+                    (click)="onEditQuestion(question)"
+                    style="cursor: pointer"
+                    >edit</mat-icon
+                  >
+                   <mat-icon (click)="onDeleteQuestion(question)" style="cursor: pointer"
+              >delete</mat-icon
+            >
+                </div>
+              </td>
+            </ng-container> -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+          aria-label="Select page of evaluation questions">
+        </mat-paginator>
+        }
+      </div>
+      }
+      @else {
+      <div class="p-8 text-center text-gray-500">
+        <h5>Loading questions...</h5>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}
+
+<!-- Edit Question Dialog Template -->
+<ng-template #editQuestionTemplate>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmitEditDialog()" class="form-container">
+    <!-- Question Text -->
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Question</mat-label>
+      <input matInput formControlName="questionText" placeholder="Enter question" />
+    </mat-form-field>
+
+    <div class="flex gap-4 mb-4">
+      <!-- Section -->
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Section</mat-label>
+        <input matInput formControlName="section" placeholder="Enter section" />
+      </mat-form-field>
+
+      <!-- Skill -->
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Skill</mat-label>
+        <input type="text" matInput [formControl]="skillControl" [matAutocomplete]="auto" required />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySkill"
+          (optionSelected)="onSkillSelectionChange($event.option.value)">
+          <mat-option *ngFor="let c of filteredSkills | async" [value]="c">
+            {{ c.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <!-- Status -->
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="active">Active</mat-option>
+        <mat-option value="inactive">Inactive</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Coach Guideline -->
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Coach Guideline</mat-label>
+      <textarea matInput formControlName="coachGuideline" placeholder="Enter coach guideline"></textarea>
+    </mat-form-field>
+
+    <!-- Score Guideline -->
+    <div class="mb-4">
+      <button *ngIf="!showScoreGuideline" class="action-btn" type="button" (click)="enableScoreGuideline()">
+        Edit Score Guideline
+      </button>
+    </div>
+
+    <div *ngIf="showScoreGuideline" class="mb-4">
+      <label class="block font-semibold mb-2">Score Guideline Sections</label>
+
+      <div *ngFor="let sectionName of getSectionNames()" class="border rounded bg-gray-50 p-3 mb-4">
+        <div class="mb-2 text-sm font-semibold text-blue-700">
+          {{
+          sectionName === "must"
+          ? "Must Have Sections"
+          : sectionName === "optional"
+          ? "Optional Sections"
+          : sectionName === "mustNot"
+          ? "Must NOT Include Sections"
+          : sectionName
+          }}
+        </div>
+
+        <!-- Section Name Editor -->
+
+        <!-- Topics -->
+        <div *ngFor="let topic of scoreGuideline[sectionName]; let tIdx = index" class="flex gap-2 mb-1">
+          <input class="border p-1 flex-1" placeholder="Topic" [(ngModel)]="topic.topic"
+            [ngModelOptions]="{ standalone: true }" />
+          <input class="border p-1 w-20" type="number" step="0.1" [(ngModel)]="topic.score"
+            [ngModelOptions]="{ standalone: true }" />
+
+          <button mat-icon-button type="button" (click)="removeTopic(sectionName, tIdx)" aria-label="Delete topic">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <button class="action-btn" type="button" (click)="addTopic(sectionName)">
+          Add Topic
+        </button>
+      </div>
+    </div>
+
+    <!-- Errors and Actions -->
+    <div *ngIf="dialogError" class="text-red-600 mb-2">{{ dialogError }}</div>
+  </form>
+</ng-template>
+
+<!-- Add Question Dialog Template -->
+<ng-template #addQuestionTemplate>
+  <form [formGroup]="form" (ngSubmit)="onSubmitDialog()" class="form-container">
+    <mat-label class="w-full mb-4">Status: <span> Active </span></mat-label>
+    <!-- Question Text -->
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Question</mat-label>
+      <input matInput formControlName="questionText" placeholder="Enter question" />
+    </mat-form-field>
+
+    <div class="flex gap-4 mb-4">
+
+      <!-- Skill -->
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Skill</mat-label>
+        <input type="text" matInput [formControl]="skillControl" [matAutocomplete]="auto" required />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySkill"
+          (optionSelected)="onSkillSelectionChange($event.option.value)">
+          <mat-option *ngFor="let c of filteredSkills | async" [value]="c">
+            {{ c.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Section -->
+      <mat-form-field appearance="outline" class="flex-1">
+        <mat-label>Section</mat-label>
+        <!-- <mat-select [(value)]="selectedTopics">
+              @for (topic of skillTopicMap[selectedSkillId]; track topic) {
+              <mat-option [value]="topic">
+                {{ topic }}
+              </mat-option>
+              }
+            </mat-select> -->
+        <input matInput formControlName="section" placeholder="Enter section" />
+      </mat-form-field>
+    </div>
+
+    <!-- Coach Guideline -->
+    <mat-form-field appearance="outline" class="w-full mb-4">
+      <mat-label>Coach Guideline</mat-label>
+      <textarea matInput formControlName="coachGuideline" placeholder="Enter coach guideline"></textarea>
+    </mat-form-field>
+
+    <!-- Score Guideline -->
+    <div class="mb-4">
+      <button *ngIf="!showScoreGuideline" class="action-btn" type="button" (click)="enableScoreGuideline()">
+        Add Score Guideline
+      </button>
+    </div>
+    <div *ngIf="showScoreGuideline" class="mb-4">
+      <label class="block font-semibold mb-2">Score Guideline Sections</label>
+
+      <div *ngFor="let sectionName of getSectionNames()" class="border rounded bg-gray-50 p-3 mb-4">
+        <div class="mb-2 text-sm font-semibold text-blue-700">
+          {{ getSectionLabel(sectionName) }}
+        </div>
+
+        <div *ngFor="let topic of scoreGuideline[sectionName]; let tIdx = index" class="flex gap-2 mb-1">
+          <input class="border p-1 flex-1" placeholder="Topic" [(ngModel)]="topic.topic"
+            [ngModelOptions]="{ standalone: true }" />
+          <input class="border p-1 w-20" type="number" step="0.1" [(ngModel)]="topic.score"
+            [ngModelOptions]="{ standalone: true }" />
+          <button mat-icon-button type="button" (click)="removeTopic(sectionName, tIdx)" aria-label="Delete topic">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <button class="action-btn" type="button" (click)="addTopic(sectionName)">
+          Add Topic
+        </button>
+      </div>
+    </div>
+
+    <!-- Errors and Actions -->
+    <div *ngIf="dialogError" class="text-red-600 mb-2">{{ dialogError }}</div>
+  </form>
+</ng-template>

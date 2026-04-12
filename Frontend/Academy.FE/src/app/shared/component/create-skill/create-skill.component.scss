@@ -1,0 +1,60 @@
+/* Ensure full width for form fields */
+.full-width {
+    width: 100%;
+  }
+  
+  /* Space out form fields for better readability */
+  .mat-form-field {
+    margin-bottom: 20px;
+  }
+  
+  /* Card content styling */
+  mat-card-content {
+    padding-bottom: 0;
+  }
+  
+  /* Button alignment */
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  .category_dd {
+    z-index: 2051 !important; /* Bootstrap modals use z-index 1050 */
+  }
+  .category_dd_optgroup {
+    z-index: 2052 !important; /* Bootstrap modals use z-index 1050 */
+  }
+  .category_dd_opt {
+    z-index: 2052 !important; /* Bootstrap modals use z-index 1050 */
+  }
+
+  .mat-mdc-form-field{
+    margin-bottom: 5px;
+  }
+
+  ::ng-deep .mat-mdc-dialog-content {
+    max-height: 70vh;
+  }
+
+//   .color-button {
+//     background-color: #28a745; 
+//     color: white;
+//     font-weight: bold;
+//     font-size: 14px;
+//   }
+
+  .mat-mdc-raised-button[disabled], .mat-mdc-raised-button.mat-mdc-button-disabled {
+    opacity: 0.5;
+  }
+
+  .color-back-button {
+    background-color: #6c757d; 
+    color: white;
+    // font-weight: bold;
+    // font-size: 14px;
+  }
+
+  .last-child{
+    margin-bottom: -5px !important;
+  }

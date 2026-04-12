@@ -1,0 +1,64 @@
+{
+    "timeStamp": "28102024054120342",
+    "status": 200,
+    "data": [
+        {
+            "employeeId": 278,
+            "employeeName": "Amey Kamat",
+            "globantEmailAddress": "amey.kamat@globant.com",
+            "seniority": "SOFTWARE DESIGNER",
+            "roles": [
+                {
+                    "roleId": 4,
+                    "roleName": "EcosystemAdmin",
+                    "roleAssignment": ".NET Developer"
+                },
+                {
+                    "roleId": 4,
+                    "roleName": "EcosystemAdmin",
+                    "roleAssignment": "Java Developer"
+                }
+            ]
+        },
+        {
+            "employeeId": 279,
+            "employeeName": "Shubhamt",
+            "globantEmailAddress": "amey.kamat@globant.com",
+            "seniority": "SOFTWARE DESIGNER",
+            "roles": [
+                {
+                    "roleId": 4,
+                    "roleName": "EcosystemAdmin",
+                    "roleAssignment": "Angular Developer"
+                },
+                {
+                    "roleId": 4,
+                    "roleName": "EcosystemAdmin",
+                    "roleAssignment": "Java Developer"
+                }
+            ]
+        },
+        {
+            "employeeId": 280,
+            "employeeName": "Raj",
+            "globantEmailAddress": "amey.kamat@globant.com",
+            "seniority": "SOFTWARE DESIGNER",
+            "roles": [
+                {
+                    "roleId": 4,
+                    "roleName": "EcosystemAdmin",
+                    "roleAssignment": ".NET Developer"
+                },
+                {
+                    "roleId": 4,
+                    "roleName": "EcosystemAdmin",
+                    "roleAssignment": "Java Developer"
+                }
+            ]
+        }
+    ],
+    "errorResponseId": null,
+    "errorMessage": null,
+    "exception": null,
+    "success": true
+}

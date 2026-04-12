@@ -1,0 +1,248 @@
+<div class="chat-float-btn" *ngIf="!isOpen || isMinimized" (click)="openChat()">
+  <i class="fa-solid fa-robot fa-3x"></i>
+</div>
+
+<div class="chat-popup" [ngClass]="{ 'fullscreen': isFullScreen, 'minimized': isMinimized }" *ngIf="isOpen">
+  <div class="chat-header" (mousedown)="startDrag($event)">
+    <span style="color:black">Chat Assistant</span>
+    <div class="chat-header-actions">  
+      <button class="icon-btn" (click)="toggleMinimize()">
+        <i class="fas" [ngClass]="isMinimized ? 'fa-window-maximize' : 'fa-window-minimize'"></i>
+      </button>
+      <button class="icon-btn" (click)="toggleFullScreen()">
+        <i class="fas" [ngClass]="isFullScreen ? 'fa-compress' : 'fa-expand'"></i>
+      </button>
+      <button class="icon-btn" (click)="close()">
+        <i class="fas fa-times"></i>
+      </button> 
+    </div>
+  </div>
+
+  <div *ngIf="!isMinimized" style="display: flex; flex-direction: column; flex: 1; min-height: 0;">
+    
+    <!-- ✅ Toggle Button Section -->
+    <!--<div class="toggle-section">
+      <button 
+        class="toggle-btn" 
+        [class.active]="activeMode === 'staffing'" 
+        (click)="setActiveMode('staffing')">
+        Staffing
+      </button>
+      <button 
+        class="toggle-btn" 
+        [class.active]="activeMode === 'academy'" 
+        (click)="setActiveMode('academy')">
+        Academy
+      </button>
+    </div>-->
+
+    <div class="chat-body">
+      <div class="chat-messages">
+        <div *ngFor="let msg of messages" class="message-container" [ngClass]="msg.sender">
+          <img *ngIf="msg.sender === 'bot'" src="../../../../assets/img/chatbot.png" alt="Bot Avatar" class="avatar">
+          <img *ngIf="msg.sender === 'user'" src="../../../../assets/img/profile.jpg" alt="User Avatar" class="avatar">
+          <div class="message-content">
+            <p class="message">{{ msg.text }}</p>
+              <!-- Check if message type is 'table' and has data -->
+          <!--<div *ngIf="msg.type === 'table' && msg.data?.length > 0">
+              <ng-container *ngIf="isLargeTable(msg.data); else showTable">
+                  <a href="javascript:void(0)" (click)="openFullTable(msg)"><p class="message">View full result <i class="fas fa-external-link-alt"></i></p></a>
+              </ng-container>
+              
+              <ng-template #showTable>
+              <div class="table-scroll-container">
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th *ngFor="let col of getColumns(msg.data)">{{ col }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let training of msg.data">
+                      <td *ngFor="let col of getColumns(msg.data)">
+                        {{ training[col] }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              </ng-template>
+            </div>-->
+              <!-- If message is table -->
+<div *ngIf="msg?.type === 'table' && msg?.data">
+  <!-- Debug -->
+  <!-- <div style="background: yellow; padding: 10px; margin: 10px 0; font-size: 12px;">
+    Data: {{ msg.data.substring(0, 50) }}... ({{ msg.data.length }} chars)
+  </div> -->
+
+  <!-- SAFE: Show table ALWAYS when data exists -->
+   <!-- <div class="table-header">
+  
+  <div class="table-search">
+    <input
+      type="text"
+      placeholder="Search in table..."
+      [(ngModel)]="tableSearch"
+    />
+  </div>
+
+  
+  <div class="table-meta">
+    {{ filteredRows(msg.data) }} rows × {{ getColumns(msg.data).length }} columns
+  </div>
+</div> -->
+
+  <div class="inline-table-wrapper">
+      <div class="table-header">
+  <!-- Search box -->
+  <div class="table-search">
+    <input
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="tableSearch"
+    />
+  </div>
+
+  <!-- Rows × Columns badge -->
+  <div class="table-meta">
+    {{ filteredRows(msg.data) }} rows × {{ getColumns(msg.data).length }} columns
+  </div>
+</div>
+    <div class="inline-table-title" style="color: black;">Results
+
+      
+    </div>
+     
+    <div class="inline-table-scroll">
+      <table class="inline-table">
+        <thead>
+          <tr>
+            <!-- Safe column rendering -->
+            <th *ngFor="let col of getColumns(msg.data); trackBy: trackByFn">
+              {{ col }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Safe row rendering -->
+          
+          <tr *ngFor="let row of getPagedData(filteredData(msg.data)); trackBy: trackByFn">
+            <td *ngFor="let col of getColumns(msg.data); trackBy: trackByFn">
+              {{ row[col] || '-' }}
+            </td>
+          
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ <div class="pagination-footer">
+   <span class="rows-label" style="color:black">Rows per page:</span>
+
+  <!-- Page size select -->
+  <select [(ngModel)]="pageSize">
+    <option [value]="5">5</option>
+    <option [value]="10">10</option>
+    <option [value]="25">25</option>
+    <option [value]="50">50</option>
+  </select>
+
+  <!-- Range text, e.g. 1–10 of 80 -->
+  <span class="range-text" style="color:black">
+    {{ (page - 1) * pageSize + 1 }}
+    –
+    {{ page * pageSize > filteredRows(msg.data) ? filteredRows(msg.data) : page * pageSize }}
+    of {{filteredRows(msg.data) }}
+  </span>
+
+  <!-- Navigation arrows -->
+  <button (click)="prevPage()" [disabled]="page === 1" [style.transform]="'scale(1.5)'">
+    ‹
+   </button>
+    <button (click)="nextPage(filteredRows(msg.data))"
+          [disabled]="page * pageSize >= filteredRows(msg.data)" [style.transform]="'scale(1.5)'">
+     ›
+    </button>
+   </div>
+    <!--<div class="pagination">
+      <button (click)="prevPage()" [disabled]="page===1">Previous</button>
+      <span style="color:black">Page {{ page }}</span>
+      <button (click)="nextPage(msg.data.length)"
+        [disabled]="page * pageSize >= msg.data.length">Next
+      </button>
+    </div>-->
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+          <!-- ✅ Suggested Prompt Buttons -->
+          <div *ngIf="msg.suggestedPromtMessage?.length > 0" class="suggestion-container">
+            <p class="suggestion-title">Suggested Prompts:</p>
+            
+            <button *ngFor="let prompt of msg.suggestedPromtMessage"
+                    class="suggestion-btn"
+                    (click)="selectSuggestedPrompt(prompt.Prompt)">
+              {{prompt.Question}}
+            </button>
+          </div>
+          </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div *ngIf="isBotTyping" class="message-container bot">
+          <img src="../../../../assets/img/chatbot.png" alt="Bot Avatar" class="avatar">
+          <div class="message-content">
+            <div class="typing-dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+      </div>  
+    </div>
+    <div *ngIf="showFullTable" class="full-table-wrapper">
+
+  <div class="full-table-header">
+    <h3>Full Table View</h3>
+    <button (click)="closeFullTable()">✖</button>
+  </div>
+
+  <div class="table-scroll-container">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th *ngFor="let col of getColumns(fullTableData)">
+            {{ col }}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let row of fullTableData">
+          <td *ngFor="let col of getColumns(fullTableData)">
+            {{ row[col] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+    <!-- Chat Input -->
+    <div class="chat-input">
+      <input type="text" [(ngModel)]="userInput" placeholder="What's in your mind?"
+        (keydown.enter)="sendMessage(userInput)" />
+      <button style ="color:black"(click)="sendMessage(userInput)">➤</button>
+    </div>
+  </div>
+</div>
+

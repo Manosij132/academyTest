@@ -1,0 +1,323 @@
+<form [formGroup]="myTrainingReportForm">
+  <div class="row">
+    <!-- New row for three columns -->
+    <div class="col-md-3 mb-3">
+      <!-- First column -->
+      <mat-form-field appearance="outline" class="w-100">
+        <!-- Full width -->
+        <mat-label>Report Type</mat-label>
+        <mat-select formControlName="reportTypeSelect" (selectionChange)="onChangeReportType($event)">
+          <mat-option
+            *ngFor="let reportType of reportTypes"
+            [value]="reportType.reportId"
+            >{{ reportType.reportName }}</mat-option
+          >
+        </mat-select>
+        <mat-error
+          *ngIf="
+            myTrainingReportForm.get('reportTypeSelect')?.hasError('required')
+          "
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <app-mat-multi-select
+        placeholder="Country"
+        [options]="tdcOptions"
+        formControlName="tdcMultiSelect"
+        name="tdcMultiSelect"
+        class="w-full"
+      ></app-mat-multi-select>
+    </div>
+  
+    <div class="col-md-3 mb-3">
+      <app-mat-multi-select
+        placeholder="Community"
+        [options]="communityOptions"
+        formControlName="communityMultiSelect"
+        name="communityMultiSelect"
+        class="w-full"
+      ></app-mat-multi-select>
+    </div>
+    <div class="col-md-3 mb-3">
+      <app-mat-multi-select
+        placeholder="Clients"
+        [options]="clients"
+        formControlName="clientMultiSelect"
+        name="clientMultiSelect"
+        class="w-full"
+      ></app-mat-multi-select>
+    </div>
+
+  </div>
+
+  <div class="row">
+      <div class="col-md-4 mb-3">
+          <app-mat-multi-select placeholder="Project"
+                                [options]="projectOptions"
+                                formControlName="projectMultiSelect"
+                                name="projectMultiSelect"
+                                class="w-full"></app-mat-multi-select>
+      </div>
+
+      <div class="col-md-4 mb-3">
+          <app-mat-multi-select placeholder="Seniority"
+                                [options]="seniorityOptions"
+                                displayKey="name"
+                                valueKey="id"
+                                formControlName="seniorityMultiSelect"
+                                name="seniorityMultiSelect"
+                                class="w-full"></app-mat-multi-select>
+      </div>
+
+
+
+     
+          <div class="col-md-4 mb-3">
+              <!-- Area Path -->
+              <app-mat-multi-select placeholder="AreaPath"
+                                    [options]="areaPathOptions"
+                                    displayKey="learningPathDescription"
+                                    valueKey="learningPathId"
+                                    formControlName="areaPathMultiSelect"
+                                    name="areaPathMultiSelect"
+                                    class="w-full"></app-mat-multi-select>
+          </div>
+
+
+
+      </div>
+
+  <div class="row">
+      <div class="col-md-4 mb-3">
+          
+          <mat-form-field appearance="outline" class="w-100">
+              <!-- Full width -->
+              <mat-label>Activity Type</mat-label>
+                  <mat-select formControlName="activityTypeSelect" name="activityTypeSelect" [disabled]="disbaleAcitivtyTypedropdown" (selectionChange)="onActivityTypeChange($event.source.triggerValue)">
+                      <mat-option *ngFor="let option of priActivityOptions" [value]="option.primaryActivityId">
+                          {{ option.primaryActivityName }}
+                      </mat-option>
+                  </mat-select>
+
+</mat-form-field>
+
+      </div>
+      <div class="col-md-4 mb-3">
+          <!-- Employee Autocomplete -->
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Select User</mat-label>
+              <input type="text"
+                     matInput
+                     [formControl]="employeeControl"
+                     [matAutocomplete]="auto"
+                     [value]="selectedUser ? selectedUser.employeeName : ''"
+                     (keyup)="getUserName()" />
+              <mat-autocomplete #auto="matAutocomplete"
+                                (optionSelected)="onSelectUser($event.option.value)"
+                                [displayWith]="displayFn">
+                  <mat-option *ngFor="let user of filteredUsers$ | async"
+                              [value]="user">
+                      {{ user.employeeName }}
+                  </mat-option>
+              </mat-autocomplete>
+          </mat-form-field>
+
+      </div>
+      <div class="col-md-4 mb-3">
+          <!-- Bookmark Textbox -->
+          <input type="hidden" formControlName="bookmarkIdControl" />
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Bookmark Name</mat-label>
+              <input matInput
+                     formControlName="bookmarkControl"
+                     placeholder="Enter bookmark Name" />
+
+              <mat-error *ngIf="myTrainingReportForm.get('bookmarkControl')?.hasError('required')">This field is required</mat-error>
+          </mat-form-field>
+          <!-- <mat-label class="cust-lbl-field-error" *ngIf="myTrainingReportForm.get('bookmarkControl')?.value.trim() === '' && submitted">Bookmark name cannot be empty.</mat-label> -->
+      </div>
+   
+
+
+
+  </div>
+
+  <div class="row">
+      <div class="col-md-4 mb-3" *ngIf="showTrainingdropdown">
+          <app-mat-multi-select placeholder="Trainings"
+                                [options]="trainingOptions"
+                                displayKey="trainingName"
+                                valueKey="trainingId"
+                                formControlName="trainingsMultiSelect"
+                                name="trainingsMultiSelect"
+                                class="w-full"></app-mat-multi-select>
+      </div>
+
+      <!-- Filter Criteria -->
+       
+
+      <div class="col-md-4 mb-3" *ngIf="!showTrainingdropdown">
+          <app-mat-multi-select placeholder="Primary Activity"
+                                [options]="activityOptions"
+                                displayKey="activityName"
+                                valueKey="activityId"
+                                formControlName="primaryactivityMultiSelect"
+                                name="primaryactivityMultiSelect"
+                                class="w-full"></app-mat-multi-select>
+      </div>
+
+      <div class="col-md-4 mb-3">
+          <!-- Status -->
+          <app-mat-multi-select placeholder="Status"
+                                [options]="statusOptions"
+                                displayKey="trainingStatusName"
+                                valueKey="trainingStatusId"
+                                formControlName="statusMultiSelect"
+                                name="statusMultiSelect"
+                                class="w-full"></app-mat-multi-select>
+      </div>
+      <div class="col-md-4 mb-3">
+          <!-- Select Columns -->
+          <app-mat-multi-select placeholder="Select Columns*"
+                                [options]="selectColumnsOptions"
+                                displayKey="reportColumnDisplayName"
+                                valueKey="reportColumnConfigId"
+                                formControlName="selectColumnsMultiSelect"
+                                name="selectColumnsMultiSelect"
+                                class="w-full"
+                                [class.mat-multi-select-error]="isValidSelectColumnsMultiSelectField"></app-mat-multi-select>
+          <mat-error class="mat-multi-select-error-msg"
+                     *ngIf="isValidSelectColumnsMultiSelectField">This field is required</mat-error>
+      </div>
+
+     
+
+     
+      <div class="col-md-4 mb-3 hide">
+          <!-- Group By Columns -->
+          <app-mat-multi-select [placeholder]="groupByColumnLabel"
+                                [options]="groupByColumnsOptions"
+                                displayKey="reportColumnDisplayName"
+                                valueKey="reportColumnConfigId"
+                                formControlName="groupByColumnsMultiSelect"
+                                name="groupByColumnsMultiSelect"
+                                class="w-full "></app-mat-multi-select>
+                             
+                                <!-- [class.mat-multi-select-error]="isValidGroupByColumnsMultiSelectField"></app-mat-multi-select>
+          <mat-error class="mat-multi-select-error-msg"
+                     *ngIf="isValidGroupByColumnsMultiSelectField">This field is required</mat-error> -->
+      </div>
+
+       <div class="col-md-4 mb-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Date Type</mat-label>
+            <mat-select formControlName="dateTypeFilterSelect" (selectionChange) ="onDateTypeFilterChange($event.source.triggerValue)">
+              <mat-option>Please Select</mat-option>
+              <mat-option
+                *ngFor="let dateTypeFilter of dateTypeFilters"
+                [value]="dateTypeFilter"
+                >{{ dateTypeFilter }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- Range From Date -->
+        <div class="col-md-4 mb-3">
+          <mat-form-field appearance="outline" *ngIf="showDatePickers" class="w-100">
+            <!-- <mat-label>Start Date</mat-label> -->
+            <input
+              matInput
+              [matDatepicker]="fromDatePicker"
+              name=""
+              formControlName="fromDate"
+              placeholder="From Date*"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="fromDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+            <!-- <mat-error
+              *ngIf="
+                formControls['fromDate'].invalid &&
+                formControls['fromDate'].touched
+              "
+              class="text-danger"
+            >
+              from date is required.
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+        <!-- Range To Date -->
+        <div class="col-md-4 mb-3">
+          <mat-form-field appearance="outline" *ngIf="showDatePickers" class="w-100">
+            <!-- <mat-label>To Date</mat-label> -->
+            <input
+              matInput
+              [matDatepicker]="toDatePicker"
+              name=""
+              formControlName="toDate"
+              placeholder="To Date*"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="toDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+            <!-- <mat-error
+              *ngIf="
+                formControls['toDate'].invalid &&
+                formControls['toDate'].touched
+              "
+              class="text-danger"
+            >
+              from date is required.
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+  </div>
+
+      <div class="d-flex justify-content-between mt-3">
+          <!-- Flexbox for button alignment -->
+          <button mat-stroked-button
+                  color="primary"
+                  type="submit"
+                  class="report-button"
+                  (click)="onSaveBookmark()">
+              Save Bookmark
+          </button>
+          <button *ngIf="!exportUrl" mat-stroked-button
+                  color="primary"
+                  type="submit"
+                  class="report-button"
+                  (click)="exportReport()"
+                  [disabled]="!isSavedBookMark">
+                  Export Report
+          </button>
+          <button *ngIf="exportUrl" mat-stroked-button
+                  color="primary"
+                  type="submit"
+                  class="report-button"
+                  (click)="exportUrl && $window.open(exportUrl, '_blank', 'noopener,noreferrer')"
+                  [disabled]="!isSavedBookMark">
+                  View Report
+          </button>
+          <button mat-flat-button
+                  color="primary"
+                  type="submit"
+                  class="report-button"
+                  (click)="onGenrateReport()"
+                  [disabled]="!isSavedBookMark">
+              Generate Report
+          </button>
+          <button mat-stroked-button
+                  type="button"
+                  class="report-button"
+                  color="primary"
+                  (click)="resetForm()">
+              Clear All Filters
+          </button>
+      </div>
+</form>

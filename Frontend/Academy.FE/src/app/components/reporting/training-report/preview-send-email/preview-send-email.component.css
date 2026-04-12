@@ -1,0 +1,110 @@
+.preview-panel {
+    /* Basic box model properties */
+    border: 1px solid #ccc;
+    /* Adds a 1px solid gray border */
+    padding: 20px;
+    /* Adds 20 pixels of space inside the border */
+    margin-top: 20px;
+    /* Adds space above the panel to separate it from other content */
+
+    /* Visual styling */
+    background-color: #f9f9f9;
+    /* A very light gray background color */
+    border-radius: 8px;
+    /* Slightly rounded corners for a softer look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* A subtle shadow for depth */
+
+    /* Sizing (optional, but often useful) */
+    width: 100%;
+    /* Sets the width to 80% of its container */
+    max-width: 100%;
+    /* Ensures it doesn't get too wide on large screens */
+
+    /* Font and text styling */
+    font-family: Arial, sans-serif;
+    /* Specifies a clean, readable font */
+    line-height: 1.6;
+    /* Improves readability by adding space between lines */
+}
+
+/* Define the animation */
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.email-body-error {
+  color: #ba1a1a;
+  margin-left: 21px;
+  font-size: 0.75rem;
+  position: relative;
+  top: -4px;
+  animation: fadeInFromTop 0.4s ease-out forwards;
+}
+
+.email-body-label {
+  font-size: 0.75rem !important;
+  position: absolute;
+  background: #faf9fd;
+  padding: 2px 4px 0px 4px;
+  left: 16px;
+  top: -12px;
+}
+
+
+/* Set the label for the "Normal" size (when no data-value is present) */
+::ng-deep .ql-snow .ql-picker.ql-size .ql-picker-label::before {
+  content: 'Normal';
+}
+
+/* Set the labels for each of your custom pixel sizes */
+::ng-deep .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="12px"]::before {
+  content: 'Small';
+}
+::ng-deep .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="14px"]::before {
+  content: 'Medium';
+}
+::ng-deep .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="16px"]::before {
+  content: 'Large';
+}
+
+::ng-deep .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before {
+  content: 'Small';
+  font-size: 12px;
+}
+::ng-deep .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
+  content: 'Medium';
+  font-size: 14px;
+}
+::ng-deep .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
+  content: 'Large';
+  font-size: 16px;
+}
+
+::ng-deep #email-quill-editor:has(.ql-disabled) {
+  pointer-events: none; /* Prevents all mouse events, like clicks and hover */
+  opacity: 0.6;         /* Gives it a faded, disabled look */
+  background-color: #f5f5f5; /* Optional: A light grey background */
+}
+
+::ng-deep #email-quill-editor .ql-disabled .ql-blank {
+   font-weight: 600;
+   text-align: center;
+  font-style: italic;
+  font-size: 14px;
+}
+
+::ng-deep #email-quill-editor .ql-picker-options {
+  z-index: 2;
+}
+
+.report-button {
+  border-radius: 5px;
+}

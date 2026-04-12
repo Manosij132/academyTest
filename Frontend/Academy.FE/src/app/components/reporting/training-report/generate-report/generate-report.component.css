@@ -1,0 +1,35 @@
+/* Vertically center all headers and content */
+th.mat-mdc-header-cell,
+td.mat-mdc-cell {
+  vertical-align: middle;
+}
+
+.numeric-column {
+  text-align: center;
+}
+
+th.mat-mdc-header-cell {
+  font-weight: bold !important;
+  font-size: 15px;
+}
+
+.table-container {
+  height: 400px;  
+  max-width: 100%;
+  overflow: auto;
+}
+.text-center {
+  text-align: center;
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: #f2f4e7;
+}
+
+tr.mat-mdc-row:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+
+.mat-mdc-cell {
+  border: none;
+}

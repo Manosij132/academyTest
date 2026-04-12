@@ -1,0 +1,30 @@
+/* Define the animation */
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.email-body-error {
+  color: #ba1a1a;
+  margin-left: 21px;
+  font-size: 0.75rem;
+  position: relative;
+  top: -4px;
+  animation: fadeInFromTop 0.4s ease-out forwards;
+}
+
+.email-body-label {
+  font-size: 0.75rem !important;
+  position: absolute;
+  background: #faf9fd;
+  padding: 2px 4px 0px 4px;
+  left: 16px;
+  top: -12px;
+}

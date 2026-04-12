@@ -1,0 +1,296 @@
+﻿using System.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Staffing.Core.Abstraction.Infrastructure;
+using Staffing.Core.Abstraction.Models;
+using Staffing.API.Models;
+namespace Staffing.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class StaffRequestsController(IAISettingsProvider settingsProvider) : ControllerBase
+    {
+        private readonly IAISettingsProvider _settingsProvider = settingsProvider;
+        /// <summary>
+        /// GET /api/StaffRequests
+        /// Query params: dateField (SubmitDate|StartDate|EstimatedStaffingDate), startDate, endDate
+        /// Returns plain list (no paging).
+        /// </summary>
+        [HttpGet]
+        public async Task<IActionResult> Get(
+    [FromQuery] string dateField = "SubmitDate",
+    [FromQuery] string? startDate = null,
+    [FromQuery] string? endDate = null,
+    [FromQuery] string? searchText = null,
+    [FromQuery] int pageNumber = 1,
+    [FromQuery] int pageSize = 50)
+        {
+            var aiConnection = _settingsProvider.GetAIConnection();
+            var dbConnection = aiConnection.ClientDbConnection ?? aiConnection.StaffingDbConnection;
+
+            var result = await QueryStaffRequestsByDateAsync(
+                dbConnection,
+                dateField,
+                startDate,
+                endDate,
+                searchText,
+                pageNumber,
+                pageSize);
+
+            return Ok(result);
+        }
+
+
+        /// <summary>
+        /// GET single record for popup
+        /// </summary>
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var aiConnection = _settingsProvider.GetAIConnection();
+            var dbConnection = aiConnection.ClientDbConnection ?? aiConnection.StaffingDbConnection;
+            var item = await GetStaffRequestByIdAsync(dbConnection, id);
+            if (item == null) return NotFound();
+            return Ok(item);
+        }
+        /// <summary>
+        /// PUT update only the editable fields from popup:
+        /// DetailedStatus (string), MonthClosure (date), TicketStatus (string), Comments (string)
+        /// Body: StaffRequestUpdateDto
+        /// </summary>
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateEditableFields(int id, [FromBody] StaffRequestUpdateDto dto)
+        {
+            if (dto == null) return BadRequest("Empty request body.");
+            var aiConnection = _settingsProvider.GetAIConnection();
+            var dbConnection = aiConnection.ClientDbConnection ?? aiConnection.StaffingDbConnection;
+            var rows = await UpdateStaffRequestEditableFieldsAsync(dbConnection, id, dto);
+            if (rows == 0) return NotFound();
+            var updated = await GetStaffRequestByIdAsync(dbConnection, id);
+            return Ok(updated);
+        }
+        #region DB helpers
+        private async Task<PagedResult<StaffRequestDto>> QueryStaffRequestsByDateAsync(
+    DataConnection dbConn,
+    string dateField,
+    string? startDate,
+    string? endDate,
+    string? searchText,
+    int pageNumber,
+    int pageSize)
+        {
+            var result = new PagedResult<StaffRequestDto>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            int offset = (pageNumber - 1) * pageSize;
+
+            var allowedDateFields = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    {
+        "SubmitDate", "StartDate", "EstimatedStaffingDate"
+    };
+
+            if (!allowedDateFields.Contains(dateField))
+                dateField = "SubmitDate";
+
+            var whereClauses = new List<string>();
+            var parameters = new List<SqlParameter>();
+
+            DateTime parsed;
+            if (!string.IsNullOrWhiteSpace(startDate) && DateTime.TryParse(startDate, out parsed))
+            {
+                whereClauses.Add($"sr.[{dateField}] >= @startDate");
+                parameters.Add(new SqlParameter("@startDate", SqlDbType.DateTime)
+                {
+                    Value = parsed.Date
+                });
+            }
+
+            if (!string.IsNullOrWhiteSpace(endDate) && DateTime.TryParse(endDate, out parsed))
+            {
+                whereClauses.Add($"sr.[{dateField}] <= @endDate");
+                parameters.Add(new SqlParameter("@endDate", SqlDbType.DateTime)
+                {
+                    Value = parsed.Date.AddDays(1).AddTicks(-1)
+                });
+            }
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                whereClauses.Add(@"
+                (
+                    sr.RequestID LIKE @search
+                    OR sr.Client LIKE @search
+                    OR sr.Project LIKE @search
+                    OR sr.Name LIKE @search
+                    OR sr.PositionID LIKE @search
+                    OR sr.Handler LIKE @search
+                    OR sr.Stage LIKE @search
+                    OR sr.TicketStatus LIKE @search
+                    OR sr.DetailedStatus LIKE @search
+                    OR sr.Comments LIKE @search
+                )");
+
+                parameters.Add(new SqlParameter("@search", SqlDbType.NVarChar, 200)
+                {
+                    Value = $"%{searchText.Trim()}%"
+                });
+            }
+
+            var whereSql = whereClauses.Count > 0
+                ? "WHERE " + string.Join(" AND ", whereClauses)
+                : string.Empty;
+
+            var sql = $@"
+;WITH Filtered AS
+(
+    SELECT
+        sr.RequestID
+    FROM V_PositionDetails sr
+    {whereSql}
+)
+SELECT COUNT(*) FROM Filtered;
+
+;WITH Filtered AS
+(
+    SELECT
+        sr.RequestID,
+        sr.Client,
+        sr.Project,
+        sr.Name,
+        sr.PositionID,
+        sr.Seniority,
+        sr.Stage,
+        sr.StartDate,
+        sr.SubmitDate,
+        sr.Handler,
+        --sr.PositionNotes,
+        sr.DetailedStatus,
+        sr.MonthClosure,
+        sr.TicketStatus,
+        sr.Comments
+    FROM V_PositionDetails sr
+    {whereSql}
+)
+SELECT *
+FROM Filtered
+ORDER BY [{dateField}] DESC
+OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
+";
+
+            using var conn = new SqlConnection(dbConn.ConnectionString);
+            await conn.OpenAsync();
+
+            using var cmd = new SqlCommand(sql, conn);
+            foreach (var p in parameters) cmd.Parameters.Add(p);
+
+            cmd.Parameters.AddWithValue("@Offset", offset);
+            cmd.Parameters.AddWithValue("@PageSize", pageSize);
+            cmd.CommandTimeout = 120;
+            using var reader = await cmd.ExecuteReaderAsync();
+
+            // Total count
+            if (await reader.ReadAsync())
+                result.TotalRecords = reader.GetInt32(0);
+
+            // Page data
+            await reader.NextResultAsync();
+            while (await reader.ReadAsync())
+            {
+                result.Data.Add(MapReaderToDto(reader));
+            }
+
+            return result;
+        }
+
+        private async Task<StaffRequestDto?> GetStaffRequestByIdAsync(DataConnection dbConn, int id)
+        {
+            var sql = @"
+SELECT TOP(1)
+    sr.RequestID,
+    sr.Client,
+    sr.Project,
+    sr.Name,
+    sr.PositionID,
+    sr.Seniority,
+    sr.Stage,
+    sr.StartDate,
+    sr.SubmitDate,
+    sr.Handler,
+    --sr.PositionNotes,
+    sr.DetailedStatus,
+    sr.MonthClosure,
+    sr.TicketStatus,
+    sr.Comments
+FROM V_PositionDetails sr
+WHERE sr.RequestID = @id;";
+            using var conn = new SqlConnection(dbConn.ConnectionString);
+            await conn.OpenAsync();
+            using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = id });
+            using var reader = await cmd.ExecuteReaderAsync();
+            if (!await reader.ReadAsync()) return null;
+            return MapReaderToDto(reader);
+        }
+        private static StaffRequestDto MapReaderToDto(SqlDataReader reader)
+        {
+            return new StaffRequestDto
+            {
+                RequestID = reader["RequestID"] == DBNull.Value ? 0 : Convert.ToInt32(reader["RequestID"]),
+                Client = reader["Client"]?.ToString() ?? string.Empty,
+                Project = reader["Project"]?.ToString() ?? string.Empty,
+                Name = reader["Name"]?.ToString() ?? string.Empty,
+                PositionID = reader["PositionID"]?.ToString() ?? string.Empty,
+                Seniority = reader["Seniority"]?.ToString() ?? string.Empty,
+                Stage = reader["Stage"]?.ToString() ?? string.Empty,
+                StartDate = reader["StartDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["StartDate"]),
+                SubmitDate = reader["SubmitDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["SubmitDate"]),
+                Handler = reader["Handler"]?.ToString() ?? string.Empty,
+                //PositionNotes = reader["PositionNotes"]?.ToString() ?? string.Empty,
+                DetailedStatus = reader["DetailedStatus"]?.ToString() ?? string.Empty,
+                MonthClosure = reader["MonthClosure"]?.ToString() ?? string.Empty,//== DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["MonthClosure"]),
+                TicketStatus = reader["TicketStatus"]?.ToString() ?? string.Empty,
+                Comments = reader["Comments"]?.ToString() ?? string.Empty
+            };
+        }
+        private async Task<int> UpdateStaffRequestEditableFieldsAsync(DataConnection dbConn, int id, StaffRequestUpdateDto dto)
+        {
+            var setClauses = new List<string>();
+            var parameters = new List<SqlParameter>();
+            if (dto.DetailedStatus != null)
+            {
+                setClauses.Add("DetailedStatus = @detailedStatus");
+                parameters.Add(new SqlParameter("@detailedStatus", SqlDbType.NVarChar) { Value = dto.DetailedStatus });
+            }
+            if (dto.MonthClosure != null)
+            {
+                setClauses.Add("MonthClosure = @monthClosure");
+                parameters.Add(new SqlParameter("@monthClosure", SqlDbType.NVarChar) { Value = dto.MonthClosure });
+            }
+            if (dto.TicketStatus != null)
+            {
+                setClauses.Add("TicketStatus = @ticketStatus");
+                parameters.Add(new SqlParameter("@ticketstatus", SqlDbType.NVarChar) { Value = dto.TicketStatus });
+            }
+            if (dto.Comments != null)
+            {
+                setClauses.Add("Comments = @comments");
+                parameters.Add(new SqlParameter("@comments", SqlDbType.NVarChar) { Value = dto.Comments });
+            }
+            if (setClauses.Count == 0) return 0;
+            var sql = $@"
+            UPDATE V_PositionDetails
+            SET {string.Join(", ", setClauses)}
+            WHERE RequestID = @id;";
+            using var conn = new SqlConnection(dbConn.ConnectionString);
+            await conn.OpenAsync();
+            using var cmd = new SqlCommand(sql, conn);
+            foreach (var p in parameters) cmd.Parameters.Add(p);
+            cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = id });
+            var rows = await cmd.ExecuteNonQueryAsync();
+            return rows;
+        }
+        #endregion
+    }
+}

@@ -1,0 +1,17 @@
+.activity-form {
+  padding: 0 24px;
+}
+
+.form-center {
+  display: flex;
+  justify-content: center;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.activity-action {
+  text-align: center;
+  padding-bottom: 16px;
+}

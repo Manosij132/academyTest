@@ -1,0 +1,76 @@
+{
+    "timeStamp": "28102024054303217",
+    "status": 200,
+    "data": [
+        {
+            "id": 1,
+            "name": "Architect",
+            "level": 3,
+            "isActive": true
+        },
+        {
+            "id": 2,
+            "name": "Sr Level 3",
+            "level": 3,
+            "isActive": true
+        },
+        {
+            "id": 3,
+            "name": "Software Designer",
+            "level": 4,
+            "isActive": true
+        },
+        {
+            "id": 4,
+            "name": "Sr Level 2",
+            "level": 4,
+            "isActive": true
+        },
+        {
+            "id": 5,
+            "name": "Sr",
+            "level": 5,
+            "isActive": true
+        },
+        {
+            "id": 6,
+            "name": "Sr Level 1",
+            "level": 5,
+            "isActive": true
+        },
+        {
+            "id": 7,
+            "name": "SSr Adv",
+            "level": 6,
+            "isActive": true
+        },
+        {
+            "id": 8,
+            "name": "SSr",
+            "level": 7,
+            "isActive": true
+        },
+        {
+            "id": 9,
+            "name": "Jr Adv",
+            "level": 8,
+            "isActive": true
+        },
+        {
+            "id": 10,
+            "name": "Jr",
+            "level": 9,
+            "isActive": false
+        },
+        {
+            "id": 11,
+            "name": "Trainee",
+            "level": 10,
+            "isActive": true
+        }
+    ],
+    "errorResponseId": null,
+    "errorMessage": null,
+    "exception": null,
+    "success": true
+}

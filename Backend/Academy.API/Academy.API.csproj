@@ -1,0 +1,100 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>d42303cd-bb67-466b-9cc9-c817c24bb237</UserSecretsId>
+		<Configurations>Debug;Release;Development;QA;Production</Configurations>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="EmailTemplates\DAILY_REMINDER.HTM" />
+		<None Remove="EmailTemplates\template2.html" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="EmailTemplates\DAILY_REMINDER.HTM">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="EmailTemplates\template2.html">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+
+	</ItemGroup>
+	<!-- <ItemGroup>
+		<Content Update="appsettings.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+		<Content Update="appsettings.Development.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+		<Content Update="appsettings.Production.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+		<Content Update="appsettings.QA.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup> -->
+	<ItemGroup Condition="'$(Configuration)' == 'Development'">
+		<Content Update="appsettings.Development.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<Link>appsettings.json</Link>
+		</Content>
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'QA'">
+		<Content Update="appsettings.QA.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<Link>appsettings.json</Link>
+		</Content>
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'Production'">
+		<Content Update="appsettings.Production.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<Link>appsettings.json</Link>
+		</Content>
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)' != 'Development' and '$(Configuration)' != 'QA' and '$(Configuration)' != 'Production'">
+		<Content Update="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Google.Apis.Auth" Version="1.68.0" />
+		<PackageReference Include="LangChain.Providers.OpenAI" Version="0.17.0" />
+		<PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.7" />
+		<PackageReference Include="Microsoft.SemanticKernel" Version="1.67.0" />
+		<PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.2" />
+		<PackageReference Include="Ulid" Version="1.3.3" />
+		<ProjectReference Include="..\..\Workers\ReminderWorker\ReminderWorker.csproj" />
+		<ProjectReference Include="..\..\Workers\ReportWorker\ReportWorker.csproj" />
+		<ProjectReference Include="..\..\Workers\SyncEmployeeWorker\SyncEmployeeWorker.csproj" />
+		<ProjectReference Include="..\..\Workers\SendEmailWorker\SendEmailWorker.csproj" />
+		<ProjectReference Include="..\Academy.Core\Academy.Core.csproj" />
+		<ProjectReference Include="..\Academy.Infrastructure\Academy.Infrastructure.csproj" />
+		<ProjectReference Include="..\Academy.Shared\Academy.Shared.csproj" />
+		<ProjectReference Include="..\Staffing\Staffing.Shared\Staffing.Shared.csproj" />
+		<PackageReference Include="LangChain.Providers.OpenAi" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Prompts\RouterPrompt.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>

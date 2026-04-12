@@ -1,0 +1,31 @@
+.comment-box {
+    margin-top: 10px;
+    padding: 0 20px;
+  }
+  
+  .comment-generic {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+  }
+  .comment-author {
+    // font-style: italic;
+    font-size: 13px;
+  }
+  .comment-input-wrapper {
+    position: relative
+  }
+  .comment-input {
+    width: 100%;
+  }
+  .comment-action {
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+  }
+
+  .btn-success {
+    background: #bfd732 !important;
+    border-color: #bfd732 !important;
+}
+  

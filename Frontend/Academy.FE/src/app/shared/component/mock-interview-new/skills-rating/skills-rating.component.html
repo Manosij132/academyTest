@@ -1,0 +1,23 @@
+<section class="skills-section">
+  <h4 class="question-title mb-3 fw-bold">Candidate Assessment</h4>
+  <div class="skills-flex">
+    @for (skill of skillData; track $index) {
+    <div class="skill-card">
+      <div class="skill-header">
+        <span class="icon skill-color{{ $index }}">{{
+          skill.skillName.charAt(0).toUpperCase()
+        }}</span>
+        <span class="skill-name truncate">{{ skill.skillName | titleCaseCustom}}</span>
+      </div>
+      <div class="ratings"><span>{{ skill.userRatingOutOfFive }} / 5</span><span class="ratingLabel">Self Assessment</span></div>
+      <div class="progress">
+        <div class="progress-bar" [style.width.%]="skill.userRatingPercentage"></div>
+      </div>
+     <div class="ratings"><span>{{ skill.skillRatingOutOfFive }} / 5</span><span class="ratingLabel">AI Assessment</span></div>
+      <div class="progress">
+        <div class="progress-bar" [style.width.%]="skill.percentage"></div>
+      </div>
+    </div>
+    }
+  </div>
+</section>

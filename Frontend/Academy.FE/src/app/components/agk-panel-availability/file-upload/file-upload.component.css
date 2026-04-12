@@ -1,0 +1,54 @@
+.file-upload-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-upload-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 10px 16px 10px 16px;
+  border: 3px dotted #5D5D5D;
+}
+
+.file-clear-button-disabled {
+  opacity: 0.4;
+}
+
+.file-upload-button .mat-icon {
+  transform: rotateZ(-45deg);
+}
+
+.file-upload-input {
+  display: none;
+}
+
+.file-info {
+  padding: 10px 12px;
+  border-radius: 24px;
+  background-color: #F0F0F0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-name {
+  color: #979797;
+  cursor: pointer;
+}
+
+.file-name:hover {
+  text-decoration: underline;
+}
+
+.file-clear-button {
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+}

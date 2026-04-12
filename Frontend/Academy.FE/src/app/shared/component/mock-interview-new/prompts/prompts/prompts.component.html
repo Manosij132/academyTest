@@ -1,0 +1,226 @@
+@if (error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Prompts</h3>
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput class="search" [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Search here" />
+      </mat-form-field>
+      <div>
+        <button class="header-btn" (click)="onCreateAction()">Create</button>
+      </div>
+    </div>
+  </div>
+
+  @if(!(loaderService.loaderState | async)) {
+  <div class="card-body">
+    @if (!dataSource.data.length) {
+    <div class="p-8 text-center text-gray-500">
+      <i class="fa fa-comment-dots fa-3x mb-3"></i>
+      <h5>No prompts found</h5>
+      <p>You haven't added any prompts yet.</p>
+    </div>
+    } @else {
+    <div class="scrollable-table-wrapper table-view">
+      <table mat-table [dataSource]="dataSource" matSort class="table">
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let prompt">{{ prompt.id || "-" }}</td>
+        </ng-container>
+
+        <!-- Prompt -->
+        <ng-container matColumnDef="prompt">
+          <th mat-header-cell *matHeaderCellDef>Prompt</th>
+          <td mat-cell *matCellDef="let prompt">
+            <div style="
+                max-width: 220px;
+                min-width: 160px;
+                white-space: pre-line;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                line-clamp: 3;
+                -webkit-line-clamp: 3; /* This sets the maximum number of lines to 3 */
+                white-space: normal;
+                max-height: 70px;
+              ">
+              {{ prompt.prompt || "-" }}
+            </div>
+            <div>
+              <button class="showMoreButton" (click)="onToggle(prompt)">
+                {{ activePromptID == prompt.id ? "Read Less" : "Read More" }}
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Version -->
+        <ng-container matColumnDef="version">
+          <th mat-header-cell *matHeaderCellDef>Version</th>
+          <td mat-cell *matCellDef="let prompt">{{ prompt.version || "-" }}</td>
+        </ng-container>
+
+        <!-- Usage -->
+        <ng-container matColumnDef="usage">
+          <th mat-header-cell *matHeaderCellDef>Usage</th>
+          <td mat-cell *matCellDef="let prompt">{{ prompt.usage || "-" }}</td>
+        </ng-container>
+
+        <!-- Preferred Model -->
+        <ng-container matColumnDef="preferredModel">
+          <th mat-header-cell *matHeaderCellDef>Preferred Model</th>
+          <td mat-cell *matCellDef="let prompt">
+            {{ prompt.preferredModel || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Created -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+          <td mat-cell *matCellDef="let prompt">
+            {{ prompt.createdAt | date : "short" }}
+          </td>
+        </ng-container>
+
+        <!-- Updated -->
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated</th>
+          <td mat-cell *matCellDef="let prompt">
+            {{ prompt.updatedAt | date : "short" }}
+          </td>
+        </ng-container>
+
+        <!-- Options -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let prompt">
+            <div class="buttons">
+              <mat-icon (click)="onEditAction(prompt)" style="cursor: pointer">edit</mat-icon>
+              <mat-icon (click)="onDeleteAction(prompt)" style="cursor: pointer">delete</mat-icon>
+              <!-- <button mat-flat-button
+					color="primary"  (click)="onEditAction(prompt)">Edit</button> -->
+              <!-- <button mat-flat-button
+					color="warn" (click)="onDeleteAction(prompt)">Delete</button> -->
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="totalItems"
+      (page)="onPageChanged($event)" showFirstLastButtons>
+    </mat-paginator>
+    }
+  </div>
+  }
+  @else {
+  <div class="p-8 text-center text-gray-500">
+    <h5>Loading prompts…</h5>
+  </div>
+  }
+</div>
+}
+
+<!-- Add Prompt Dialog Template -->
+<ng-template #addPromptTemplate>
+  <form [formGroup]="form" (ngSubmit)="onSubmitDialog()">
+    <div style="display: flex; flex-direction: column; gap: 16px; max-width: 500px">
+      <mat-form-field appearance="outline">
+        <mat-label>Prompt</mat-label>
+        <textarea matInput formControlName="prompt" placeholder="Enter prompt text" rows="4" required></textarea>
+        <mat-error *ngIf="form.get('prompt')?.hasError('required')">Prompt is required</mat-error>
+      </mat-form-field>
+      <div class="d-flex mb-4">
+        <mat-form-field appearance="outline" class="me-3 flex-fill">
+          <mat-label>Version</mat-label>
+          <input matInput formControlName="version" type="number" placeholder="Enter version number" required />
+          <mat-error *ngIf="form.get('version')?.hasError('required')">Version is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="flex-fill">
+          <mat-label>Usage</mat-label>
+          <input type="text" matInput [formControl]="usageControl" [matAutocomplete]="usageAuto"
+            placeholder="Select usage" required />
+          <mat-autocomplete #usageAuto="matAutocomplete">
+            <mat-option *ngFor="let usage of filteredUsages$ | async" [value]="usage">
+              {{ usage }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex mb-4">
+        <mat-form-field appearance="outline" class="me-3 flex-fill">
+          <mat-label>Preferred Model</mat-label>
+          <input matInput formControlName="preferredModel" placeholder="Enter preferred model" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="flex-fill">
+          <mat-label>Reason For Change</mat-label>
+          <input matInput formControlName="reasonForChange" placeholder="Enter reason for change" />
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="dialogError" style="color: #e53935; font-size: 13px">
+        {{ dialogError }}
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<!-- Edit Prompt Dialog Template -->
+<ng-template #editPromptTemplate>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmitEditDialog()">
+    <div style="display: flex; flex-direction: column; gap: 16px; max-width: 500px">
+      <mat-form-field appearance="outline">
+        <mat-label>Prompt</mat-label>
+        <textarea matInput formControlName="prompt" placeholder="Enter prompt text" rows="4" required></textarea>
+        <mat-error *ngIf="editForm.get('prompt')?.hasError('required')">Prompt is required</mat-error>
+      </mat-form-field>
+
+      <div class="d-flex mb-4">
+        <mat-form-field appearance="outline" class="me-3 flex-fill">
+          <mat-label>Version</mat-label>
+          <input matInput formControlName="version" type="number" placeholder="Enter version number" required />
+          <mat-error *ngIf="editForm.get('version')?.hasError('required')">Version is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="flex-fill">
+          <mat-label>Usage</mat-label>
+          <input type="text" matInput [formControl]="editUsageControl" [matAutocomplete]="editUsageAuto"
+            placeholder="Select usage" required />
+          <mat-autocomplete #editUsageAuto="matAutocomplete">
+            <mat-option *ngFor="let usage of filteredEditUsages$ | async" [value]="usage">
+              {{ usage }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex mb-4">
+        <mat-form-field appearance="outline" class="me-3 flex-fill">
+          <mat-label>Preferred Model</mat-label>
+          <input matInput formControlName="preferredModel" placeholder="Enter preferred model" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="flex-fill">
+          <mat-label>Reason For Change</mat-label>
+          <input matInput formControlName="reasonForChange" placeholder="Enter reason for change" />
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="dialogError" style="color: #e53935; font-size: 13px">
+        {{ dialogError }}
+      </div>
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,57 @@
+# ==============================================================================
+# File: loki-config.yml
+# Description: Configuration for Grafana Loki.
+#              Defines log ingestion endpoints, storage backend interfaces,
+#              schema definitions, and compactor settings for the log stack.
+# ==============================================================================
+
+# Disable authentication for local development/internal network
+auth_enabled: false
+
+# Configure the HTTP server for Loki to listen on port 3100
+server:
+  http_listen_port: 3100
+
+# Common configuration for Loki components & 
+# Specify where chunks and rules are stored on the filesystem
+common:
+  path_prefix: /loki
+  storage:
+    filesystem:
+      chunks_directory: /loki/chunks
+      rules_directory: /loki/rules
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+
+# Define the schema and storage backend for log indexing
+schema_config:
+  configs:
+    - from: "2024-01-01"
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+# Configure limits for the log ingestion
+limits_config:
+  allow_structured_metadata: false
+  volume_enabled: true
+
+# Configure caching for queries to improve performance
+query_range:
+  results_cache:
+    cache:
+      embedded_cache:
+        enabled: true
+        max_size_mb: 100
+
+# Configure log compactor
+compactor:
+  working_directory: /loki/compactor
+  
+# Disable analytical reporting to Grafana Labs
+analytics:
+  reporting_enabled: false

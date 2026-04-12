@@ -1,0 +1,28 @@
+/* Checkbox container styling */
+.checkbox-container {
+  margin: 1rem 0;
+  padding: 12px;
+  width: 100%;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.checkbox-container mat-checkbox {
+  display: block;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 0.875rem;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  margin-left: 28px; /* Align with checkbox label */
+}
+
+/* Existing full-width class from other components */
+.full-width {
+  width: 100%;
+}

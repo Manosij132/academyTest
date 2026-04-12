@@ -1,0 +1,22 @@
+.mat-mdc-form-field{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+// .color-button {
+//     background-color: #28a745; 
+//     color: white;
+//     font-weight: bold;
+//     font-size: 14px;
+// }
+
+.mat-mdc-raised-button[disabled], .mat-mdc-raised-button.mat-mdc-button-disabled {
+    opacity: 0.5;
+}
+
+/* This will apply styles to the last mat-form-field */
+.last-child{
+    margin-bottom: -5px !important;
+  }
+  
+  

@@ -1,0 +1,142 @@
+/* General Styles */
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: #ececec;
+  border-bottom: 1px solid #8d9498;
+}
+.tittle {
+  /* font-family: Montserrat; */
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 130%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #2a2a2a;
+  /* padding: 20px; */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 60px;
+  background-color: #003b46;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 20px;
+  margin-top: 80px;
+
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: white; */
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile span {
+  margin-right: 10px;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Table */
+.interview-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background: #ffffff;
+  color: #444444;
+  /* border-radius: 10px; */
+  overflow: hidden;
+  border: 1px solid #d5d5d5;
+  font-family: Heebo;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0%;
+}
+
+.interview-table th,
+.interview-table td {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.interview-table th {
+  background: #ececec;
+  color: #000000;
+  border-bottom: #8d9498;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.score {
+  border-radius: 20px;
+  padding: 5px 10px;
+
+  background-color: #bfd732;
+  color: #00292e;
+}
+.no-data-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin: 60px auto;
+  width: 60%;
+}
+.no-data-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 100%;
+}
+

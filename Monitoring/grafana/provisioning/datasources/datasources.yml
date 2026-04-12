@@ -1,0 +1,25 @@
+# ==============================================================================
+# File: datasources.yml
+# Description: Grafana provisioning configuration for data sources.
+#              Automatically configures Prometheus (metrics) and Loki (logs) 
+#              as default data sources upon Grafana container startup.
+# ==============================================================================
+
+apiVersion: 1
+
+# Configure predefined data sources for Grafana
+datasources:
+  # Prometheus data source for metrics 
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+    
+  # Loki data source for logs
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    editable: true

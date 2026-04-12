@@ -1,0 +1,112 @@
+.tickets-container {
+    padding: 26px;
+    margin-top: 50px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #000 !important;
+    margin: 0 0 15px 0 !important;
+    padding: 0 !important;
+    z-index: 10;
+    position: relative;
+}
+
+.date-filter {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+    .date-filter mat-form-field {
+        width: 250px;
+    }
+
+.table-wrapper {
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    max-height: 500px;
+}
+
+.tickets-table {
+    width: 100%;
+    color: #fff;
+    border-spacing: 0;
+}
+
+.mat-mdc-header-row {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+    background: #BFD732 !important;
+}
+
+.mat-mdc-row.mdc-data-table__row:nth-child(odd) {
+    background-color: #F2F4E7;
+}
+
+.mat-mdc-row.mdc-data-table__row:nth-child(even) {
+    background-color: #FFFFFF;
+}
+
+.mat-mdc-header-cell {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.no-data {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #777;
+}
+
+.mat-row {
+    background: white;
+}
+
+.mat-cell {
+    padding: 12px;
+    font-size: 13px;
+}
+
+.mat-paginator {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+    margin-top: 10px;
+    border-radius: 6px;
+}
+
+.mat-paginator-range-label,
+.mat-paginator-page-size-label {
+    color: #fff !important;
+}
+
+.table-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #bfbfbf;
+    border-radius: 4px;
+}
+
+.clickable-row {
+    cursor: pointer;
+}
+
+.filters-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.filter-field {
+    width: 320px;
+}

@@ -1,0 +1,41 @@
+# ==============================================================================
+# File: prometheus.yml
+# Description: Configuration for Prometheus metric scraper.
+#              Defines global scraping intervals and static targets for APIs,
+#              hardware (Node Exporter), and container metrics (cAdvisor).
+# ==============================================================================
+
+# Global configuration for Prometheus scrape and evaluation intervals
+global:
+  scrape_interval: 4s
+  evaluation_interval: 4s
+
+# Define the targets from which Prometheus should scrape metrics
+scrape_configs:
+  # Scrape Prometheus's own internal metrics
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+  # Scrape Docker container metrics from cAdvisor
+  - job_name: cadvisor
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["academy-cadvisor:8080"]
+
+  # Scrape custom metrics from the academy FE
+  - job_name: academy-fe
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["academy-fe:4000"]
+ 
+  # Scrape custom metrics from the academy core api
+  - job_name: academy-api
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["academy-api:8082"]
+
+   # Scrape custom metrics from the academy taffing-api
+  - job_name: academy-staffing-api
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["staffing-api:8081"]

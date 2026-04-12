@@ -1,0 +1,93 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="activity-form">
+
+  <div class="form-center">
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Activity Name</mat-label>
+      <mat-select formControlName="activityId">
+        <mat-option *ngFor="let option of activityOptions" [value]="option.id">
+          {{ option.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-center">
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Activity Source</mat-label>
+      <mat-select formControlName="activitySource">
+        <mat-option *ngFor="let option of activitySourceOptions" [value]="option.name">
+          {{ option.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-center">
+    <mat-form-field appearance="outline" class="half-width">
+      <input matInput placeholder="Activity Detail" formControlName="activityDetail" />
+    </mat-form-field>
+  </div>
+
+  <div class="form-center" >
+    <mat-form-field appearance="outline" class="half-width">
+      <input matInput placeholder="Comments" formControlName="comments" />
+    </mat-form-field>
+  </div>
+
+  <div class="form-center">
+    <mat-form-field appearance="outline" class="half-width">
+      <input matInput [matDatepicker]="startPicker" formControlName="startDate" placeholder="Start Date" />
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="form-center">
+    <mat-form-field appearance="outline" class="half-width">
+      <input matInput [matDatepicker]="endPicker" formControlName="endDate" placeholder="End Date" />
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="form-center">
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-select formControlName="status">
+        <mat-option value="Pending">Pending</mat-option>
+        <mat-option value="On going">On going</mat-option>
+        <mat-option value="Completed">Completed</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-center">
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Account Detail</mat-label>
+      <mat-select formControlName="account" multiple>
+        <mat-option *ngFor="let client of accountDetailsOptions" [value]="client.name">
+          {{ client.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Show only in EDIT mode -->
+<div class="activity-action">
+  <mat-checkbox formControlName="confirmDelete" *ngIf="initialData">
+    Are you sure you want to delete?
+  </mat-checkbox>
+</div>
+
+<div class="activity-action">
+  <button class="btn btn-danger" type="button" [disabled]="!form.get('confirmDelete')?.value"
+    (click)="onDelete()" *ngIf="initialData">
+    Delete
+  </button>
+</div>
+
+  <div class="activity-action">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn" type="button" (click)="onCancel()">Cancel</button>
+  </div>
+
+</form>

@@ -1,0 +1,11 @@
+.video-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 700px;
+    height: 360px;  /* Fixed height instead of max */
+    position: relative;
+}
+
+.video-js {
+    width: 100%;
+}

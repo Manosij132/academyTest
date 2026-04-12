@@ -1,0 +1,235 @@
+<div class="container">
+    <div class="header-row">
+        <h3 class="title">Summary By Status</h3>
+        <mat-form-field appearance="outline" class="filter-item">
+            <mat-label>Select date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" [(ngModel)]="startDate">
+                <input matEndDate placeholder="End date" [(ngModel)]="endDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker (closed)="onDateRangeSelected()"></mat-date-range-picker>
+        </mat-form-field>
+    </div>
+
+    <div class="filters">
+        <mat-form-field appearance="outline" class="filter-item">
+            <mat-label>AI Studio Group</mat-label>
+            <mat-select #studioGroupSelect multiple [(ngModel)]="selectedStudioGroups" (selectionChange)="onStudioGroupChange()">
+                <div class="search-container" mat-select-header>
+                    <mat-icon class="search-icon">search</mat-icon>
+                    <input class="search-input" type="text" placeholder="Search..." (keydown)="$event.stopPropagation()"
+                           (input)="filterStudioGroups($any($event.target).value)" />
+                </div>
+                <mat-option class="select-all-option" [disabled]="false" [value]="null"
+                            (click)="toggleStudioGroups(); $event.stopPropagation()">
+                    All
+                </mat-option>
+                <mat-option *ngFor="let group of filteredStudioGroups" [value]="group.groupName">
+                    <div class="option-row">
+                        <span class="option-name">{{ group.groupName }}</span>
+                        <span class="option-count">{{ group.groupNameCount }}</span>
+                    </div>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="filter-item">
+            <mat-label>Client</mat-label>
+            <mat-select #clientSelect multiple [(ngModel)]="selectedClients" [disabled]="isDependentDisabled"
+                        (selectionChange)="onClientChange()">
+                <div *ngIf="filteredClients.length" class="search-container" mat-select-header>
+                    <mat-icon class="search-icon">search</mat-icon>
+                    <input class="search-input" type="text" placeholder="Search..." (keydown)="$event.stopPropagation()"
+                           (input)="filterClients($any($event.target).value)" />
+                </div>
+                <mat-option *ngIf="filteredClients.length" class="select-all-option" (click)="toggleClients()">
+                    All
+                </mat-option>
+                <mat-option *ngFor="let c of filteredClients" [value]="c.client">
+                    <div class="option-row">
+                        <span class="option-name">{{ c.client }}</span>
+                        <span class="option-count">{{ c.clientCountValue }}</span>
+                    </div>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="filter-item">
+            <mat-label>Detailed Status</mat-label>
+            <mat-select #statusSelect multiple [(ngModel)]="selectedStatuses" [disabled]="isDependentDisabled"
+                        (selectionChange)="onStatusChange()">
+                <div *ngIf="filteredStatuses.length" class="search-container" mat-select-header>
+                    <mat-icon class="search-icon">search</mat-icon>
+                    <input class="search-input" type="text" placeholder="Search..." (keydown)="$event.stopPropagation()"
+                           (input)="filterStatuses($any($event.target).value)" style="width: 100%; padding: 4px;" />
+                </div>
+                <mat-option *ngIf="filteredStatuses.length" class="select-all-option" (click)="toggleDetailedStatuses()">
+                    All
+                </mat-option>
+                <mat-option *ngFor="let s of filteredStatuses" [value]="s.statusName">
+                    <div class="option-row">
+                        <span class="option-name">{{ s.statusName }}</span>
+                        <span class="option-count">{{ s.statusNameCount }}</span>
+                    </div>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="pivot-header">
+        <h3 class="section-title">Month Wise Summary</h3>
+        <div class="pivot-search">
+            <input matInput type="text" placeholder="Search Ticket Status" [(ngModel)]="statusSearch"
+                   (input)="onStatusSearch($event)" />
+            <button *ngIf="statusSearch" class="clear-btn" (click)="clearSearch()">✕</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="pivot-table">
+            <thead>
+                <tr>
+                    <th class="sticky-left status-cell">
+                        <div class="status-header">
+                            <button class="expand-btn" (click)="toggleAll(); $event.stopPropagation()">
+                                {{ expandAll ? '−' : '+' }}
+                            </button>
+                            <span class="status-text">Ticket Status</span>
+                        </div>
+                    </th>
+                    <!-- Client column -->
+                    <th *ngIf="expandedAny" class="sticky-left second">
+                        Client
+                    </th>
+                    <!-- Dynamic columns -->
+                    <th *ngFor="let col of columns">
+                        {{ col }}
+                    </th>
+                    <th class="grand">Grand total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!filteredRows || filteredRows.length === 0">
+                    <td [attr.colspan]="(expandedAny ? 2 : 1) + columns.length + 1" class="no-data">
+                        No data available
+                    </td>
+                </tr>
+                <ng-container *ngFor="let row of filteredRows; let i = index">
+                    <tr class="parent-row clickable" [class.row-even]="i % 2 === 0" [class.row-odd]="i % 2 !== 0">
+                        <td class="sticky-left clickable-cell" (click)="onStatusClick(row, $event)"
+                            [class.status-selected]="selectedTicketStatus === row.ticketStatus">
+                            {{ row.ticketStatus }}
+                        </td>
+                        <td *ngIf="expandedAny" class="sticky-left second"></td>
+                        <td *ngFor="let col of columns" class="clickable-cell"
+                            [class.cell-selected]="selectedCell?.ticketStatus === row.ticketStatus && selectedCell?.column === col"
+                            (click)="onCellClick(row, col, $event)">
+                            {{ row.totals[col] || '-' }}
+                        </td>
+                        <td class="grand">{{ rowTotal(row) }}</td>
+                    </tr>
+                    <tr *ngFor="let c of row.children; let i = index" class="child-row clickable" [hidden]="!expandAll"
+                        [class.row-even]="i % 2 === 0" [class.row-odd]="i % 2 !== 0">
+                        <td class="sticky-left"></td>
+                        <td class="sticky-left second clickable-cell"
+                            (click)="onChildCellClick(row, c.client, null, $event)">
+                            {{ c.client }}
+                        </td>
+                        <td *ngFor="let col of columns" class="clickable-cell" [class.cell-selected]="
+    selectedCell?.ticketStatus === row.ticketStatus &&
+    selectedCell?.column === col &&
+    selectedCell?.client === c.client
+  " (click)="onChildCellClick(row, c.client, col, $event)">
+                            {{ c.totals[col] || '-' }}
+                        </td>
+                        <td class="grand">{{ c.totals['Grand total'] }}</td>
+                    </tr>
+                </ng-container>
+                <tr class="grand-row">
+                    <td class="sticky-left">Grand total</td>
+                    <td *ngIf="expandedAny" class="sticky-left second"></td>
+                    <td *ngFor="let col of columns">
+                        {{ grandTotal[col] }}
+                    </td>
+                    <td class="grand">{{ overallTotal }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h3 class="table-title">Ticket Details</h3>
+    <div class="table-wrapper mat-elevation-z2">
+        <div class="table-scroll">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-table">
+                <ng-container matColumnDef="index">
+                    <th mat-header-cell *matHeaderCellDef sticky>#</th>
+                    <td mat-cell *matCellDef="let row; let i = index">
+                        {{ i + 1 }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="detailedStatus">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>
+                        Detailed Status
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        {{ row.detailedStatus || '-' }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="requestID">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Number</th>
+                    <td mat-cell *matCellDef="let row">
+                        {{ row.requestID || '-' }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="monthClosure">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>
+                        Month Closure
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        {{ row.monthClosure || '-' }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="client">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Client</th>
+                    <td mat-cell *matCellDef="let row">
+                        {{ row.client || '-' }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ticketStatus">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>
+                        Ticket Status
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        {{ row.ticketStatus || '-' }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="comments">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>Comments</th>
+                    <td mat-cell *matCellDef="let row">
+                        {{ row.comments || '-' }}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns" class="clickable-row"
+                    (click)="openEditDialog(row)"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="no-data" [attr.colspan]="displayedColumns.length">
+                        No data available
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <mat-paginator [length]="totalCount" [pageSize]="pageSize" [pageSizeOptions]="[25, 50, 100, 200, 300, 500]"
+                       showFirstLastButtons [pageIndex]="currentPage - 1" (page)="onPageChange($event)">
+        </mat-paginator>
+
+    </div>
+
+</div>

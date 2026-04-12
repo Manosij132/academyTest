@@ -1,0 +1,12 @@
+.container-flex {
+  display: flex;
+  justify-content: space-between; /* Distributes items evenly with space between them */
+  align-items: center;           /* Vertically aligns items in the middle */
+  width: 100%;                   /* Or a specific width for your container */
+  gap: 20px;                     /* Adds a gap between items (optional, but good for spacing) */
+}
+
+/* Optional: Adjust width of form field if needed */
+.container-flex mat-form-field {
+  flex-grow: 1; /* Allows the form field to grow and take up available space */
+}

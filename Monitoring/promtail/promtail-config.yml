@@ -1,0 +1,38 @@
+# ==============================================================================
+# File: config.yml
+# Description: Configuration for Grafana Promtail.
+#              Responsible for scraping Docker container logs via the Docker
+#              socket, relabeling them, and shipping log streams to Loki.
+# ==============================================================================
+
+# Configure Promtail's internal server
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+# Specify file to store positions of read logs to resume properly on restart
+positions:
+  filename: /tmp/positions.yaml
+
+# Define where Promtail should push the scraped logs (to Loki)
+clients:
+  - url: http://academy-loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # Job to scrape all docker container logs on the host
+  - job_name: docker-logs
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+        
+    # Relabeling rules to extract Docker metadata as Loki labels
+    relabel_configs:
+      - source_labels: [__meta_docker_container_name]
+        regex: '/(.*)'
+        target_label: container
+      - source_labels: [__meta_docker_container_log_stream]
+        target_label: stream
+      - source_labels: [__meta_docker_container_label_com_docker_compose_service]
+        target_label: compose_service
+      - source_labels: [__meta_docker_container_label_com_docker_compose_project]
+        target_label: compose_project

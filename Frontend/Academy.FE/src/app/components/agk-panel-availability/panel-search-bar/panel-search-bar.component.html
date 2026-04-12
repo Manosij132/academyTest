@@ -1,0 +1,74 @@
+<div class="flex-container searchFilterButton">
+  <form [formGroup]="panelFilterForm" (submit)="onSubmit()">
+    <div class="left-group">
+      <mat-form-field appearance="outline">
+        <mat-label>TDC</mat-label>
+        <mat-select multiple formControlName="tdc">
+          <mat-option *ngFor="let tdc of tdcs" [value]="tdc.tdcId">
+            {{ tdc.tdcName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Community</mat-label>
+        <mat-select multiple formControlName="communities">
+          <mat-option
+            *ngFor="let community of communities"
+            [value]="community.communityId">
+            {{ community.communityName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Up To Seniority</mat-label>
+        <mat-select multiple formControlName="seniorities">
+          <mat-option
+            *ngFor="let senority of seniorities"
+            [value]="senority.id">
+            {{ senority.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Panel Type</mat-label>
+        <mat-select multiple formControlName="panelTypes">
+          <mat-option *ngFor="let panel of panels" [value]="panel.name">
+            {{ panel.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Start date - End date</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" placeholder="MM/DD/YYYY"/>
+          <input matEndDate formControlName="endDate" placeholder="MM/DD/YYYY" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>  
+
+      <mat-form-field appearance="outline" *ngIf="isPanelSearchTermVisible">
+        <mat-label>Search...</mat-label>
+        <input matInput placeholder="Enter name or email" formControlName="searchTerm"/>
+      </mat-form-field>
+    </div>
+
+    <div class="right-group">
+      <button class="btn btn-outline-secondary btn-sm tooltip-btn" 
+        type="submit" style="margin-right: 5px;" >
+        <i class="fas fa-search"></i>
+        <span class="tooltip-text">Search</span>
+      </button>
+      <button type="button" 
+        class="btn btn-outline-secondary btn-sm tooltip-btn" 
+        (click)="onReset($event)" style="margin-right: 5px;" >
+        <i class="fas fa-redo-alt"></i>
+        <span class="tooltip-text">Reset Filters</span>
+      </button>
+    </div>
+  </form>
+</div>

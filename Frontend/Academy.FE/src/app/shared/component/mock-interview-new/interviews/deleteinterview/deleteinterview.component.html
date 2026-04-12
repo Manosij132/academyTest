@@ -1,0 +1,13 @@
+<div class="max-w-md p-4 border rounded bg-white">
+	<h2 class="text-lg font-semibold mb-4">Delete evaluation</h2>
+	<p>Are you sure you want to delete evaluation <b>#{{ interview.id }}</b> ({{ interview.interviewCode }})?</p>
+	<div *ngIf="error" class="text-red-600 text-sm my-2">{{ error }}</div>
+	<div class="flex gap-2 mt-4">
+		<button hlmBtn class="py-2 px-4 text-sm bg-red-600 text-white" (click)="deleteInterview()" [disabled]="loading">
+			{{ loading ? 'Deleting...' : 'Delete' }}
+		</button>
+		<button hlmBtn class="py-2 px-4 text-sm bg-gray-200 text-gray-800" (click)="cancel()"
+			[disabled]="loading">Cancel</button>
+	</div>
+
+</div>

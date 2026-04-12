@@ -1,0 +1,42 @@
+<div class="table-responsive proficiency-table">
+  <table class="table ">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Skill Name</th>
+        <th scope="col" style="width:8em;">Ability</th>
+        <th scope="col">Knowledge</th>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of proficiencies; index as i">
+        <td>
+          <span *ngIf="item.isMVP">
+            <span class="mvpBadge">M V P</span>
+          </span>
+        </td>
+        <td>
+          {{item.skillName}}
+        </td>
+        <td class="text-center">
+          <span class="star-icon-color" *ngFor="let x of ability; let j = index" [ngClass]="item.currentProficiency < item.expectedProficiency ? 'text-warning' : 'text-success'">
+            <i *ngIf="item.currentProficiency > j" class="fa fa-solid fa-star star-icon-color-green" [title]="x.Value"></i>
+            <i *ngIf="item.currentProficiency <= j" class="far fa-solid fa-star star-icon-color-green" style="cursor:pointer;" [title]="5" (click)="setProficiency(item,j, i, 'Ability');"></i>
+          </span>
+        </td>
+        <td class="text-center">
+          <span *ngFor="let x of knowledge; let j = index" [ngClass]="item.currentKnowledge < item.expectedKnowledge ? 'text-warning' : 'text-success'">
+            <i *ngIf="item.currentKnowledge > j" class="fa fa-solid fa-star star-icon-color-green" [title]="x.Value"></i>
+            <i *ngIf="item.currentKnowledge <= j" class="far fa-solid fa-star star-icon-color-green" style="cursor:pointer;" [title]="5" (click)="setProficiency(item,j, i, 'Knowledge');"></i>
+          </span>
+        </td>
+        <td class="text-center">
+          <button class="save-btn-icon" (click)="saveProficiency();">
+            <i class='fas fa-save'></i>
+          </button>          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

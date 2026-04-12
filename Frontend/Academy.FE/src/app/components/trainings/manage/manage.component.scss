@@ -1,0 +1,141 @@
+.page-header {
+  margin-top: 63px;
+}
+
+.page-inner {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.page-header h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.main-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 17px;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.form-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-check .form-check-input {
+  margin-left: -10px;
+  /* margin-right: 0.75em; */
+}
+
+.user-access-grid {
+  // background-color: $white;
+  width: 70%;
+  margin: auto;
+  padding: 1.5rem;
+  min-height: calc(100vh - 280px);
+  display: grid;
+  grid-template-columns: [full-start] repeat(2, [col-start] 1fr [col-end]) [full-end];
+  grid-template-rows: [row-1-start] 3rem [row-1-end row-2-start] 3rem [row-2-end row-3-start] 3rem [row-3-end row-4-start] 3rem [row-4-end row-5-start] 3rem [row-5-end row-6-start] 3rem [row-6-end row-7-start] 3rem [row-7-end row-8-start] 3rem [row-8-end];
+  grid-template-areas:
+    "label label label"
+    "ecosystem-area ecosystem-area ecosystem-area"
+    "skills-area skills-area skills-area"
+    "trainingId-area trainingId-area trainingId-area"
+    "trainingName-area trainingName-area trainingName-area"
+    "trainingURL-area trainingURL-area trainingURL-area"
+    "completionHrs-area completionHrs-area completionHrs-area"
+    "trainingDescription-area trainingDescription-area trainingDescription-area"
+    ". . ."
+    ". . ."
+    "action action action";
+  grid-gap: 2.75rem 1.75rem;
+}
+
+.label-area {
+  grid-area: label;
+}
+
+.ecosystem-area {
+  grid-area: ecosystem-area;
+}
+
+.skills-area {
+  grid-area: skills-area;
+}
+
+.trainingId-area {
+  grid-area: trainingId-area;
+}
+
+.trainingName-area {
+  grid-area: trainingName-area;
+}
+
+.trainingURL-area {
+  grid-area: trainingURL-area;
+}
+
+.trainingDescription-area {
+  grid-area: trainingDescription-area;
+}
+
+.completionHrs-area {
+  grid-area: completionHrs-area;
+}
+
+.action-area {
+  grid-area: action;
+}
+
+.btnStyle {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.proficiency-group {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between dropdowns and delete button */
+  margin-bottom: 10px;
+  justify-content: end;
+}
+
+.custom-icon {
+  font-size: 20px; /* Controls both width and height */
+}
+.custom-button {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.expectedProf {
+  margin-top: 0px;
+}
+
+.mat-mdc-form-field {
+  display: inline;
+}
+
+.expectedProf .mat-mdc-form-field {
+  width: 40%;
+}
+
+.action-form-group {
+  margin-bottom: 0;
+  padding: 10px;
+  float: inline-end;
+}

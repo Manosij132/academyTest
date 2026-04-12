@@ -1,0 +1,187 @@
+  <div class="container">
+    <div class="page-inner">
+      <h3 class="fw-bold mb-3 title" style="display: inline-block">{{ pageHeader }}</h3>
+  
+      <!-- Search Filters -->
+      <div class="flex-container searchFilterButton">
+        <div class="left-group">
+          
+            <mat-form-field appearance="outline">
+              <mat-label>TDC</mat-label>
+              <mat-select [(ngModel)]="selectedTDC" multiple (selectionChange)="applyFilters()">
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="tdcControl" placeholderLabel="Search" noEntriesFoundLabel="'No TDC found'" [showToggleAllCheckbox]="true" (toggleAll)="toggleAllTDCSelection($event)">
+                    <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let tdc of filteredTDCs | async" [value]="tdc.tdcId">{{tdc.tdcName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline">
+              <mat-label>Community</mat-label>
+              <mat-select [(ngModel)]="selectedCommunity" multiple (selectionChange)="onCommunitySelectionChange($event)">
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="communityControl" placeholderLabel="Search" noEntriesFoundLabel="'No Community found'" [showToggleAllCheckbox]="true" (toggleAll)="toggleAllCommunitySelection($event)">
+                    <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let community of filteredCommunities | async" [value]="community.communityName">{{community.communityName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Panel Names</mat-label>
+              <mat-select [(ngModel)]="selectedPanelNames" multiple (selectionChange)="onSelectionChange($event)">
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="panelNameControl" placeholderLabel="Search" noEntriesFoundLabel="'No panel names found'" [showToggleAllCheckbox]="true" (toggleAll)="toggleAllSelection($event)">
+                    <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let name of filteredPanelNames | async" [value]="name">{{name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Panel Type</mat-label>
+              <mat-select [(ngModel)]="selectedPanelType" (selectionChange)="applyFilters()">
+                <mat-option value="">All</mat-option>
+                <mat-option *ngFor="let type of uniquePanelTypes" [value]="type">{{type}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
+                <input matStartDate formControlName="startDate" (dateChange)="onStartDateChange($event)"
+                  placeholder="Start date">
+                <input matEndDate formControlName="endDate" (dateChange)="onEndDateChange($event)" placeholder="End date">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matIconSuffix [for]="picker" class="panelDatePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+            
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Counts -->
+          <div style="margin-top: 10px;" class="card headercolor mat-elevation-z8" [class.sideNavInActive]="!isSideNavActive"
+            [ngClass]="{'sideNavActive' : isSideNavActive}">
+            <div style="justify-content: center;display: flex;">
+              <table>
+                <tr style="width: 100%;">
+                  <td>
+                <tr>
+                  <td>
+                    <mat-card class="mat-elevation-z8 stat-box">
+                      <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">L1 Conducted
+                      </mat-card-subtitle>
+                      <mat-card-content style="text-align: center;font-size: large;">{{ totalL1Conducted }}</mat-card-content>
+                    </mat-card>
+                  </td>
+                  <td>
+                    <mat-card class="mat-elevation-z8 stat-box">
+                      <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">L1 Selected
+                      </mat-card-subtitle>
+                      <mat-card-content style="text-align: center;font-size: large;">{{ totalL1Selected }}</mat-card-content>
+                    </mat-card>
+                  </td>
+                  <td>
+                    <mat-card class="mat-elevation-z8 stat-box">
+                      <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">GK Conducted
+                      </mat-card-subtitle>
+                      <mat-card-content style="text-align: center;font-size: large;">{{ totalGKConducted }}</mat-card-content>
+                    </mat-card>
+                  </td>
+                  <td>
+                    <mat-card class="mat-elevation-z8 stat-box">
+                      <mat-card-subtitle style="text-align: center;font-size: small;font-weight: bold;">GK Selected
+                      </mat-card-subtitle>
+                      <mat-card-content style="text-align: center;font-size: large;">{{ totalGKSelected }}</mat-card-content>
+                    </mat-card>
+                  </td>
+                </tr>
+                </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- TODO: matSort (matSortChange)="sortData($event)"  -->
+          <div style="margin-top: 10px;" class="card headercolor-grid mat-elevation-z8" [class.sideNavInActive]="!isSideNavActive"
+            [ngClass]="{'sideNavActive' : isSideNavActive}">
+            <table class="full-width-table custom-table">
+              <thead>
+                <tr>
+                  <th class="right-align-header">Sr. No.</th>
+                  <th mat-sort-header="panelName">Panel Name</th>
+                  <th mat-sort-header="panelType">Panel Type</th>
+                  <th mat-sort-header="panelSeniority">Panel Seniority</th>
+                  <th mat-sort-header="tdc">TDC</th>
+                  <th mat-sort-header="community">Community</th>
+                  <th mat-sort-header="l1Conducted" class="right-align-header">L1 Conducted</th>
+                  <th mat-sort-header="l1Selected" class="right-align-header">L1 Selected</th>
+                  <th mat-sort-header="gkConducted" class="right-align-header">GK Conducted</th>
+                  <th mat-sort-header="gkSelected" class="right-align-header">GK Selected</th>
+                  <th mat-sort-header="efficiency" class="right-align-header">Efficiency</th>
+                  <th mat-sort-header="countwiseEfficiency" class="right-align-header">Countwise Efficiency</th>
+                  <th>Graph</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of paginatedPanelData; let i = index">
+                  <td class="number-cell">{{ getSerialNumber(i) }}</td>
+                  <td>{{ row.panelName }}</td>
+                  <td>{{ row.panelType }}</td>
+                  <td>{{ row.seniority }}</td>
+                  <td>{{ row.tdc }}</td>
+                  <td>{{ row.community }}</td>
+                  <td class="number-cell">{{ row.l1Conducted }}</td>
+                  <td class="number-cell">{{ row.l1Selected }}</td>
+                  <td class="number-cell">{{ row.gkConducted }}</td>
+                  <td class="number-cell">{{ row.gkSelected }}</td>
+                  <td class="efficiency-cell">
+                    <span class="efficiency-text">{{ row.efficiency.toFixed(2) }}%</span>
+                    <span class="efficiency-symbol" 
+                      [ngClass]="{
+                        'low': row.efficiency < 50,
+                        'medium': row.efficiency >= 50 && row.efficiency < 70,
+                        'high': row.efficiency >= 70
+                      }"></span>
+                  </td>
+                  <td class="number-cell">{{ row.countwiseEfficiency.toFixed(2) }}%</td>
+                  <td>
+                    <button mat-icon-button (click)="openGraphDialog(row)">
+                      <mat-icon>bar_chart</mat-icon>
+                    </button>
+                      <button mat-icon-button (click)="openAnalyticsDialog(row)">
+                      <mat-icon>analytics</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="paginator-container">
+              <button mat-button [matMenuTriggerFor]="menu" class="export-button">
+                Export
+                <mat-icon>arrow_drop_down</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="exportToExcel()">Export to Excel</button>
+                <button mat-menu-item (click)="exportToPDF()">Export to PDF</button>
+              </mat-menu>
+
+              <mat-paginator [length]="totalItems" 
+              [pageIndex]="pageNumber - 1" 
+              [pageSize]="pageSize"
+              (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>

@@ -1,0 +1,69 @@
+
+  .edit-dialog-container {
+    display: flex; /* Use flexbox to align items in a row */
+    flex-wrap: wrap; /* Allow wrapping to multiple rows if needed */
+  }
+
+  .input-container {
+    flex: 1; /* Equal width for all input containers */
+    margin-right: 20px; /* Add some spacing between input containers */
+  }
+
+  .input-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .input-container input {
+    width: calc(100% - 20px); /* Adjust width to account for margin */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    margin-top: 20px; /* Add margin at the top of the button */
+  }
+
+  .button-container {
+    margin-top: 20px;
+    text-align: right; /* Align buttons to the right */
+  }
+
+  .button-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px; /* Add spacing between buttons */
+  }
+
+  .save-button {
+    background: rgba(191, 215, 50, 1);
+    opacity: 1;
+    top: 0px;
+    left: 0px;
+    border: 0px solid rgba(150, 150, 150, 1);
+    border-radius: 1vw !important;
+    overflow: hidden;
+    color: #ffffff;
+    cursor: pointer;
+    float: center;
+  }
+
+  .cancel-button {
+    background: grey;
+    opacity: 1;
+    top: 0px;
+    left: 0px;
+    border: 0px solid rgba(150, 150, 150, 1);
+    border-radius: 1vw !important;
+    overflow: hidden;
+    color: #ffffff;
+    cursor: pointer;
+    float: center;
+  }
+
+
+  

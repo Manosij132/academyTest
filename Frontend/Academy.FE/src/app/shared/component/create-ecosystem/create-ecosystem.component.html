@@ -1,0 +1,34 @@
+<form autocomplete="off" >
+    <!-- Ecosystem Select -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Primary Ecosystem:</mat-label>
+      <mat-select id="secEcosystemSelect" (selectionChange)="setPrimaryEcosystem($event)">
+        <mat-option value="0" disabled>---- SELECT ECOSYSTEM -----</mat-option>
+        <mat-option *ngFor="let e of ecosystems" [value]="e.id" [disabled]="request.PrimaryEcosystemId == e.id">
+          {{ e.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- Secondary Ecosystem Name Input -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Secondary Ecosystem Name:</mat-label>
+      <input matInput type="text" id="sec-ecosystem-desc" placeholder="Secondary Ecosystem Name" #secondaryEcosystemName />
+    </mat-form-field>
+  
+    <!-- Active and Primary Ecosystem Switches -->
+    <div class="mat-checkbox-container">
+      <mat-checkbox id="isActive" checked disabled>Is Active</mat-checkbox>
+      <mat-checkbox id="isPrimary" disabled>Is Primary</mat-checkbox>
+    </div>
+  
+    <hr />
+  
+    <!-- Submit Button -->
+    <div class="text-end">
+        <button mat-flat-button color="primary" (click)="insertEcosystemDetails($event);" class="btn btn-sm color-button">
+            Submit
+          </button>
+    </div>
+  </form>
+  

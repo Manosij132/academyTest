@@ -1,0 +1,21 @@
+@import url("../../../../../shared/styles/training-reports.css");
+
+.preview-panel {
+  /* Basic box model properties */
+  border: 1px solid #ccc;
+  /* Adds a 1px solid gray border */
+  padding: 20px;
+  /* Adds 20 pixels of space inside the border */
+  margin-top: 20px;
+  /* A very light gray background color */
+  border-radius: 8px;
+  /* Slightly rounded corners for a softer look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* A subtle shadow for depth */
+
+  /* Sizing (optional, but often useful) */
+  width: 100%;
+  /* Sets the width to 80% of its container */
+  max-width: 100%;
+  /* Ensures it doesn't get too wide on large screens */
+}

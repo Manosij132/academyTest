@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>Academy.Workers.ReportWorker</AssemblyName>
+    <RootNamespace>Academy.Workers.ReportWorker</RootNamespace>
+    <Configurations>Debug;Release;Development;QA;Production</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Backend\Academy.Core\Academy.Core.csproj" />
+    <ProjectReference Include="..\..\Backend\Academy.Shared\Academy.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

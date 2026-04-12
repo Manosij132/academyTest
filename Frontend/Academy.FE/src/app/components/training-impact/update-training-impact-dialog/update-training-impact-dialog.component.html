@@ -1,0 +1,91 @@
+<div class="modal-header">
+    <h1 mat-dialog-title class="modal-heading">Update Training Impact</h1>
+    <button type="button" class="btn" mat-dialog-close>
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+</div>
+
+<mat-dialog-content class="mat-typography dialog-body">
+    <div class="full-width">
+        <table mat-table [dataSource]="activities">
+            <ng-container matColumnDef="employeeName">
+                <th mat-header-cell *matHeaderCellDef> Glober </th>
+                <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="activityDetail">
+                <th mat-header-cell *matHeaderCellDef> Business Oriented Academy </th>
+                <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.activityDetail.length > 0; else noActivity">
+                        <span *ngFor="let detail of element.activityDetail; let i = index">
+                            <a [href]="detail" target="_blank">{{ detail }}</a><br>
+                            <span *ngIf="i < element.activityDetail.length - 1"></span>
+                        </span>
+                    </ng-container>
+                    <ng-template #noActivity>
+                        <span class="clr-gray">Not Assigned</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="assignedThroughTraining">
+                <th mat-header-cell *matHeaderCellDef> Assigned Through Training </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox 
+                        [(ngModel)]="element.assignedThroughTraining" 
+                        color="primary" 
+                        [disabled]="element.activityDetail.length === 0">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="comments">
+                <th mat-header-cell *matHeaderCellDef> Comment </th>
+                <td mat-cell *matCellDef="let element">
+                    <textarea 
+                        rows="3"
+                        class="frm-custom-input full-width" 
+                        [(ngModel)]="element.comments" 
+                        placeholder="Enter comment" 
+                        required 
+                        #commentInput="ngModel" 
+                        (focus)="onFocus(element)" 
+                        (blur)="onBlur(element)"
+                        [ngClass]="{
+                            'error-border': showError && (!element.comments || element.comments.trim() === ''),
+                            'focus-border': element.isFocused
+                        }">
+                    </textarea>
+                    <div *ngIf="showError && (!element.comments || element.comments.trim() === '')" class="error-message" style="margin-left:0px">
+                        Comment is required.
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Ticket Number Column -->
+            <ng-container matColumnDef="ticketNumber">
+                <th mat-header-cell *matHeaderCellDef> Ticket Detail </th>
+                <td mat-cell *matCellDef="let element">
+                    <ul style="padding:5px;margin:0;">
+                        <li> Ticket Number -  {{element.ticketNumber}}</li>
+                        <li> Client -  {{element.client}}</li>
+                        <li> Project -  {{element.projectName}}</li>
+                        <li> Position -  {{element.positionTitle}}</li>
+                        <li> Skill -  {{element.skills}}</li>
+                    </ul>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <hr />
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="btn btn-primary" (click)="saveChanges()">
+        Save
+    </button>
+    <button class="btn" mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,554 @@
+.pt-2 {
+  padding-top: 5.5rem !important;
+}
+
+.title {
+  margin: 0;
+}
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+/* tracker-list.component.scss */
+
+/* Style for the table rows */
+.mat-row {
+  background-color: #333333;
+  /* Set the background color of the table rows */
+  color: white;
+  /* Set the text color of the table rows */
+}
+
+/* Optional: Change the background color on hover for better UX */
+.mat-row:hover {
+  background-color: #444444;
+  /* Slightly lighter background on hover */
+}
+
+/* Style for the cells to ensure text is white */
+.mat-cell,
+.mat-header-cell {
+  color: white;
+  /* Ensure the text color in cells is white */
+}
+
+.example-element-detail table {
+  border-collapse: collapse;
+  width: 100%;
+  /* Optional: makes the table take full width */
+}
+
+.example-element-detail th,
+.example-element-detail td {
+  border: 1px solid #ddd;
+  /* Change color as needed */
+  padding: 8px;
+  /* Adds padding for better appearance */
+  text-align: left;
+  /* Align text to the left */
+}
+
+.example-element-detail th {
+  background-color: #f2f2f2;
+  /* Light gray background for header */
+  font-weight: bold;
+  /* Make header text bold */
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+mat-progress-bar {
+  width: 25px;
+  height: 25px;
+}
+
+.header-bold {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+::ng-deep .mdc-switch__track {
+  height: 25px !important;
+  width: 50px !important;
+}
+
+::ng-deep .mdc-switch__handle {
+  height: 24px !important;
+  width: 24px !important;
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch--unselected .mdc-switch__handle:has(.mdc-switch__icons) {
+  left: -5px;
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch--selected .mdc-switch__handle:has(.mdc-switch__icons) {
+  left: 5px;
+}
+
+::ng-deep .custom-menu {
+  width: 250px;
+  /* Set your desired width */
+
+  ::ng-deep .mat-mdc-form-field {
+    margin-left: 20px;
+  }
+}
+
+/* Optional: If you want to ensure items stretch to full width */
+::ng-deep .custom-menu .mat-menu-item {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background-color: white !important;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-flex-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.left-toggle {
+  margin: 0 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.right-toggle {
+  margin: 0px 0px;
+}
+
+.ml-20 {
+  margin-left: 20px;
+}
+
+.ml-10 {
+  margin: 10px 10px;
+}
+
+::ng-deep .searchFilterButton .mat-mdc-text-field-wrapper {
+  height: 44px !important;
+}
+
+::ng-deep .searchFilterButton .mdc-floating-label {
+  padding-bottom: 14px;
+}
+
+::ng-deep .searchFilterButton .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+}
+
+/* Apply a green border to odd rows */
+.mat-mdc-row:nth-child(odd) .mat-mdc-cell {
+  border-bottom: 0px;
+  /* Green border for odd rows */
+}
+
+/* Apply a blue border to even rows */
+.mat-mdc-row:nth-child(even) .mat-mdc-cell {
+  border: none;
+}
+
+tr.mat-mdc-row:nth-child(4n + 1),
+tr.mat-mdc-row:nth-child(4n + 2) {
+  background-color: #f2f4e7;
+}
+
+tr.mat-mdc-row:nth-child(4n + 3),
+tr.mat-mdc-row:nth-child(4n + 4) {
+  background-color: #FFFFFF;
+}
+
+.scrollable-table-wrapper {
+  // max-height: 470px; /* You can change this value */
+  overflow-y: auto;
+  /* This enables the scrollbar */
+}
+
+/* icon css */
+.chevron-right-subtable {
+  background-color: unset;
+  border: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-mock-interview {
+  background-color: #ccd324;
+  color: #fff;
+  border: 1px solid #ccd324;
+}
+
+.btn-view-mock-interview-details {
+  background-color: #ccd324;
+  color: #fff;
+  border: 1px solid #ccd324;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  background-color: #b7bd20;
+  color: white;
+  border: 1px solid white;
+}
+
+.page-inner {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+@media (min-width: 1445px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1445px !important;
+    background: #f7f8f8;
+  }
+}
+
+button.save-btn-icon {
+  background-color: unset;
+  color: #ccd324;
+  border: none;
+  cursor: pointer;
+}
+
+.dojo-apps {
+  display: flex;
+  justify-content: start;
+  padding-right: 4px;
+  color: #818D00;
+  font-size: 16px;
+  width: auto;
+}
+
+.avatar-img img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.avatar-img img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+::ng-deep .mdc-linear-progress__bar-inner {
+  --mdc-linear-progress-active-indicator-color: #7a9103 !important;
+  border-color: #7a9103 !important;
+}
+
+.page-inner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 65px;
+}
+
+.apply-button {
+  color: #818D00 !important;
+  --mat-protected-button-state-layer-color: #6f7000;
+}
+
+.mat-accent.mat-mdc-slide-toggle {
+  --mdc-switch-selected-track-color: #818D00;
+  --mdc-switch-selected-focus-track-color: #818D00;
+  --mdc-switch-selected-hover-track-color: #818D00;
+  --mdc-switch-selected-pressed-track-color: #818D00;
+  --mdc-switch-selected-hover-state-layer-color: #818D00;
+  --mdc-switch-selected-pressed-state-layer-color: #818D00;
+  --mdc-switch-selected-focus-state-layer-color: #818D00;
+}
+
+.selected-filters mat-chip button[matChipRemove] {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.selected-filters mat-chip i {
+  color: #000000; 
+  font-size: 16px;
+}
+
+.dojo-appsheet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.small-btn {
+  padding: 2px 10px;
+  font-size: 12px;
+  line-height: 24px;
+  height: 28px;
+  margin-top: 4px;
+}
+
+.dojo-appsheet:hover {
+  text-decoration: underline;
+  text-decoration-color: #818D00;
+}
+
+.square-arrow {
+  padding: 0;
+  color: #818D00;
+  width: auto;
+}
+
+.filter-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: linear-gradient(145deg, #ffffff, #f1f1f1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn i {
+  color: #818d00;
+  font-size: 14px;
+}
+
+.filter-btn:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.filter-btn:active {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+}
+
+.mat-mdc-cell {
+  padding: 4px 8px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mat-mdc-row {
+  height: 40px; /* smaller height, adjust as needed */
+}
+
+::ng-deep .mat-mdc-row {
+  min-height: 30px !important;
+}
+
+::ng-deep .mat-mdc-header-row {
+  height: 32px !important;
+  min-height: 32px !important;
+}
+
+::ng-deep .mat-mdc-cell {
+  padding: 1px 6px !important;  
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  padding: 2px 6px !important;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+::ng-deep .mat-mdc-cell > *,
+::ng-deep .mat-mdc-header-cell > * {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+th.mat-header-cell {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  height: 25px;
+}
+
+td.ellipsis-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+::ng-deep table.mat-mdc-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-cell,
+::ng-deep .mat-mdc-header-cell {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+::ng-deep .mat-column-action {
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  text-align: center;
+}
+
+::ng-deep .mat-column-trainingScore {
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+}
+
+::ng-deep .mat-column-joiningDate {
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  text-align: center;
+}
+::ng-deep .mat-column-arrow {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  text-align: center;
+}
+
+::ng-deep .mat-column-proposedDojoGxLeader {
+  width: 120px;
+  min-width: 120px;
+}
+
+.status-dot-active {
+  height: 10px;
+  width: 10px;
+  background-color: green; /* Default color for active */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center;     /* Vertical center */
+}
+
+.status-dot-inactive {
+  height: 10px;
+  width: 10px;
+  background-color: red; /* red color for inactive */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center;     /* Vertical center */
+}
+
+.mat-header-cell {
+  white-space: nowrap;
+}
+
+.scrollable-table-wrapper {
+  overflow-x: auto;
+}
+::ng-deep .mat-column-uploadCvProfile {
+  min-width: 170px;
+  width: 100px;
+  max-width: 170px;
+  white-space: nowrap;
+  text-align: center;
+  align-items: center;
+}
+
+.status-dot-nonassignable {
+  height: 10px;
+  width: 10px;
+  background-color: yellow; /* red color for inactive */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center;     /* Vertical center */
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-tooltip {
+  white-space: pre-line;
+}

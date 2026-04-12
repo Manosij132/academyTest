@@ -1,0 +1,78 @@
+<div class="container" style="max-width: 100%;">
+  <div class="page-inner-report">
+    <h3 class="fw-bold mb-3 title">Training Report</h3>
+    <div class="card main-card">
+      <div class="row justify-content-center align-items-center mb-1">
+        <div class="col-md-12">
+          <!-- Adjusted column size for better alignment -->
+          <div class="p-3">
+            <!-- Added padding for better spacing -->
+            <div class="d-flex justify-content-end mb-3">
+              <button mat-stroked-button class="report-button" (click)="goBackToBookmarks()">
+                Back to List
+              </button>
+            </div>
+            <mat-accordion>
+              <mat-expansion-panel [expanded]="!autoGenerate">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <strong>Bookmark filter</strong>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                  <app-bookmark-filter
+                    (updateEmailFields)="onUpdateEmailFields($event)"
+                    (updateBookmarkId)="onUpdateBookmarkId($event)"
+                    (generateDataEvent)="onGenerateReport($event)"
+                  ></app-bookmark-filter>
+                </ng-template>
+              </mat-expansion-panel>
+              <mat-expansion-panel
+                [expanded]="generateReportExpand"
+                [disabled]="!generateReportExpand"
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <strong>Generate Report{{ bookmarkName ? ' - ' + bookmarkName : '' }}</strong>
+                  </mat-panel-title>
+                  <mat-panel-description class="d-flex justify-content-end align-items-center">
+                  <button
+                    *ngIf="generateReportExpand"
+                    mat-icon-button
+                    [matTooltip]="exportUrl ? 'View Report' : 'Export Report'"
+                    (click)="$event.stopPropagation(); onExportReport()"
+                  >
+                    <mat-icon>{{ exportUrl ? 'open_in_new' : 'download' }}</mat-icon>
+                  </button>
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                  <app-generate-report
+                    [reportDataForm]="reportDataForm"
+                    (updateDataSize)="updateDataSize($event)"
+                    (exportUrlGenerated)="onExportUrlGenerated($event)"
+                  ></app-generate-report>
+                </ng-template>
+              </mat-expansion-panel>
+              <mat-expansion-panel
+                (opened)="onOpened($event)"
+                [disabled]="!(reportDataForm && reportDataForm.BookMarkId && generateReportExpand)"
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title><strong>Preview</strong> </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                  <app-preview-send-email
+                    [bookmarkId]="reportDataForm.BookMarkId"
+                    [sendEmailFields]="sendEmailFields"
+                    [isDisableEmailBody]="isDisableEmailBody"
+                  ></app-preview-send-email>
+                </ng-template>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

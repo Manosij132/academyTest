@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title" style="display: inline-block; margin-right: 700px;">{{ pageHeader }}</h3>
+    
+    <div class="flex-container searchFilterButton" appPrivilegedUser>
+      <div class="left-group">
+      <div class="filter-row">
+          <mat-form-field appearance="outline" style="margin-right: 5px;">
+              <!-- <mat-label>Community</mat-label> -->
+              <mat-select #communitySelect
+                          placeholder="Community"
+                          multiple
+                          [(value)]="selectedCommunity">
+                  <mat-option value="ALL">ALL</mat-option>
+                  <mat-option *ngFor="let item of communities" [value]="item">{{ item.toUpperCase() }}</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" style="margin-right: 5px">
+              <!-- <mat-label>Country</mat-label> -->
+              <mat-select #countrySelect
+                          placeholder="Country"
+                          multiple
+                          [(value)]="selectedTdc">
+                  <mat-option value="ALL">ALL</mat-option>
+                  <mat-option *ngFor="let item of tdc" [value]="item">{{ item.toUpperCase() }}</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+      <mat-form-field appearance="outline" style="margin-right: 5px;">
+          <!-- <mat-label>AI Studio</mat-label> -->
+          <mat-select #aiStudioSelect 
+                      placeholder="AI Studio"
+                      multiple
+                      [(value)]="selectedAiStudio">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option *ngFor="let item of aiStudios" [value]="item">{{ item.toUpperCase() }}</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="margin-right: 5px;">
+          <!-- <mat-label>Account</mat-label> -->
+          <mat-select #accountSelect
+                      placeholder="Account"
+                      multiple
+                      [(value)]="selectedAccount">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option *ngFor="let item of accounts" [value]="item">{{ item.toUpperCase() }}</mat-option>
+          </mat-select>
+      </mat-form-field>      
+     </div>
+     <div class="filter-row"> 
+       <mat-form-field appearance="outline">
+          <!-- <mat-label>Dojo Start date</mat-label> -->
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="picker1" [(ngModel)] = "startDate" (dateChange)="onDojoStartDateChange($event)">
+          <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <!-- <mat-label>Dojo End date</mat-label> -->
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="picker2" [(ngModel)] = "endDate"  (dateChange)="onDojoEndDateChange($event)" [disabled]="!(isStartDateSelected)">
+          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field> 
+        <!--<button type="submit" class="btn btn-primary">Export</button>-->
+      </div>
+      </div>
+      <div class="right-group">
+        <button type="reset" class="btn btn-outline-secondary btn-sm" (click)="search()" style="margin-right: 5px; ">
+            <i class="fas fa-search"></i>
+          </button>
+          <button type="reset" class="btn btn-outline-secondary btn-sm" (click)="reset()" style="margin-right: 5px">
+            <i class="fas fa-redo-alt"></i>
+          </button>
+          <button type="reset" class="btn btn-outline-secondary btn-sm" (click)="export()">
+            <i class="fas fa-file-export"></i>
+          </button>
+      </div>
+    </div>
+    <div class="filter-container searchFilterButton" appPrivilegedUser>
+      <div class="filters" style="margin-bottom: 15px;">
+        <span class="bold-text">
+        <label>Assigned through training count:</label> {{ assignedThroughTrainingCount }}
+        <label style="margin-left: 15px;">Not assigned through training count:</label> {{ notAssignedThroughTrainingCount }}
+        <label style="margin-left: 15px;">Total :</label> {{ totalItems }}
+        </span>
+      </div>
+      <div class="right-flex-container">
+        <p *ngIf="isExport" style="margin-left: 20px; padding-top: 18px;"><a [href]="exportUrl" target="_blank">View Report</a></p>
+      </div>
+    </div>
+    <div class="activity-action"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" *ngIf="isVissible">
+          <div class="scrollable-table-wrapper">
+            <table mat-table matSort multiTemplateDataRows [dataSource]="data" class="mat-elevation-z8 parent">
+              <!-- Define Columns -->
+              <ng-container
+                *ngFor="let column of displayedColumns"
+                [matColumnDef]="column"
+              >
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  [style.background-color]="color"
+                  style="white-space: wrap;"
+                  class="header-bold"
+                >
+                  {{ columnTitles[column] }}
+                </th>
+                <td mat-cell *matCellDef="let element" style="white-space: nowrap;">
+                  <span *ngIf="shouldNotShowColumn(column)">
+                    {{ element[column] }}
+                  </span>
+                  <span *ngIf="column === 'isActive'">
+                    {{ element[column] ? 'Active': ''}}
+                  </span>
+                  <span *ngIf="column === 'assignedThroughTraining'">
+                    {{ element[column] ? 'YES': 'NO'}}
+                  </span>
+                  <span *ngIf=" column === 'dojoStartDate' || 
+                                column === 'dojoEndDate' || 
+                                column === 'startDate' || 
+                                column === 'endDate'">
+                    {{ element[column] ? (element[column] | date:'MM-dd-yyyy') : ''}}
+                  </span>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+              <tr
+                mat-row
+                *matRowDef="let element; columns: displayedColumns"
+                class="example-detail-row"
+              ></tr>
+            </table>
+          </div>
+          <!-- Paginator -->
+          <mat-paginator
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[20, 40, 60, 70]"
+            showFirstLastButtons
+            [length]="totalItems"
+            (page)="onPageChanged($event)"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

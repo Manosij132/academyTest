@@ -1,0 +1,23 @@
+/* Full-width form fields */
+.full-width {
+    width: 100%;
+  }
+  
+  /* Optional: Adjust the checkbox container layout */
+  .mat-checkbox-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Button alignment */
+  .text-end {
+    text-align: right;
+  }
+  
+//   .color-button {
+//     background-color: #28a745; 
+//     color: white;
+//     font-weight: bold;
+//     font-size: 14px;
+//   }

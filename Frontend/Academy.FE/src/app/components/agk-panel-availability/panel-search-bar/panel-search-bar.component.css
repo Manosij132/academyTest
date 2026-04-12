@@ -1,0 +1,73 @@
+:host {
+  display: block;
+}
+
+.left-group {
+  display: flex;                  /* make filter + search in a row */
+  align-items: center;
+  gap: 10px;                      /* space between button and input */
+}
+
+.right-group {
+  /* no extra styling needed, space-between handles positioning */
+  align-items: center;
+  padding-bottom: 14px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.tooltip-btn {
+  position: relative;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  background-color: #b7bd20;
+  color: white;
+  border: 1px solid white;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: #F5F7FD;
+  color: #495057 ;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+  border: 1px solid #495057;
+}
+
+.flex-container {
+  display: flex;                  /* enable flex layout */
+  align-items: center;            /* vertically center items */
+  justify-content: space-between; /* left group left, right button right */
+  gap: 10px;                      /* optional spacing between items */
+  width: 100%;                    /* full width container */
+}
+
+::ng-deep .searchFilterButton .mat-mdc-text-field-wrapper {
+  height: 44px !important;
+  width: 170px !important; 
+}
+
+::ng-deep .searchFilterButton .mdc-floating-label {
+  padding-bottom: 14px;
+}
+
+::ng-deep .searchFilterButton .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+}

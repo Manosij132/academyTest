@@ -1,0 +1,287 @@
+<section class="page-inner">
+  <div class="page-header">
+    <h3 class="fw-bold mb-3">{{ pageHeader }}</h3>
+  </div>
+  <div class="container-fluid">
+    <form [formGroup]="trainingForm" (ngSubmit)="onSubmit()">
+      <mat-card>
+        <mat-card-content>
+          <div class="form-group">
+            <p class="card-title label-area">
+              Please fill the required information below to proceed
+            </p>
+            <mat-form-field appearance="outline">
+              <mat-label>Eco System</mat-label>
+              <mat-select
+                formControlName="ecosystemId"
+                (selectionChange)="onEcosystemSkillChange()"
+              >
+                <mat-option *ngFor="let e of ecosystems" [value]="e.id">{{
+                  e.name
+                }}</mat-option>
+                <mat-option [value]="null" (click)="openEcosystemPopup()"
+                  >+ Add New Secondary Ecosystem</mat-option
+                >
+              </mat-select>
+              <mat-error
+                *ngIf="
+                  trainingForm.get('ecosystemId')?.hasError('required') &&
+                  trainingForm.get('ecosystemId')?.touched
+                "
+              >
+                Ecosystem is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Skill -->
+            <mat-form-field appearance="outline" class="skills-area">
+              <mat-label>Skills</mat-label>
+              <mat-select
+                formControlName="skillId"
+                (selectionChange)="onEcosystemSkillChange()"
+              >
+                <mat-option *ngFor="let s of skills" [value]="s.skillId">{{
+                  s.skillName
+                }}</mat-option>
+                <mat-option [value]="null" (click)="openSkillPopup()"
+                  >+ Add New Skill</mat-option
+                >
+              </mat-select>
+              <mat-error
+                *ngIf="
+                  trainingForm.get('skillId')?.hasError('required') &&
+                  trainingForm.get('skillId')?.touched
+                "
+              >
+                Skill is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Training ID -->
+            <mat-form-field appearance="outline" class="trainingId-area">
+              <mat-label>Training Id</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="Enter Training Id..."
+                formControlName="trainingId"
+              />
+              <mat-hint
+                >Please enter training Id present in training url.</mat-hint
+              >
+              <mat-error
+                *ngIf="
+                  trainingForm.get('trainingId')?.hasError('required') &&
+                  trainingForm.get('trainingId')?.touched
+                "
+              >
+                Training Id is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Trainer Name -->
+            <mat-form-field appearance="outline" class="trainingName-area">
+              <mat-label>Training Name</mat-label>
+              <input
+                matInput
+                placeholder="Enter Training Name..."
+                formControlName="trainingName"
+              />
+              <mat-error
+                *ngIf="
+                  trainingForm.get('trainingName')?.hasError('required') &&
+                  trainingForm.get('trainingName')?.touched
+                "
+              >
+                Training Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Training URL -->
+            <mat-form-field appearance="outline" class="trainingURL-area">
+              <mat-label>Training URL</mat-label>
+              <input
+                matInput
+                placeholder="Enter Training URL..."
+                formControlName="trainingUrl"
+              />
+              <mat-error
+                *ngIf="
+                  trainingForm.get('trainingUrl')?.hasError('required') &&
+                  trainingForm.get('trainingUrl')?.touched
+                "
+              >
+                Please provide a valid Training URL
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Description -->
+            <mat-form-field
+              appearance="outline"
+              class="trainingDescription-area"
+            >
+              <mat-label>Description</mat-label>
+              <textarea
+                matInput
+                rows="4"
+                placeholder="Enter Training Description..."
+                formControlName="trainingDescription"
+              ></textarea>
+              <mat-error
+                *ngIf="
+                  trainingForm
+                    .get('trainingDescription')
+                    ?.hasError('required') &&
+                  trainingForm.get('trainingDescription')?.touched
+                "
+              >
+                Training Description is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Completion Hours -->
+            <mat-form-field appearance="outline" class="completionHrs-area">
+              <mat-label>Completion Hours</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="Enter completion hours"
+                formControlName="trainingCompletionHours"
+              />
+              <mat-error
+                *ngIf="
+                  trainingForm
+                    .get('trainingCompletionHours')
+                    ?.hasError('required') &&
+                  trainingForm.get('trainingCompletionHours')?.touched
+                "
+              >
+                Please provide valid completion hours
+              </mat-error>
+            </mat-form-field>
+
+            <mat-checkbox formControlName="isPriortize" value="" color="primary"
+              >Priortize</mat-checkbox
+            >
+          </div>
+
+          <div
+            formArrayName="expectedProficiency"
+            class="expectedProf form-group"
+            *ngIf="addProficiencyMapping"
+          >
+            <div class="proficiency-group">
+              <label>
+                <input
+                  type="checkbox"
+                  (change)="onMvpChanged($event)"
+                  class="form-check-input"
+                  role="switch"
+                />&#160; Is MVP?
+              </label>
+
+              <!-- Add Button -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                color="primary"
+                (click)="addProficiency()"
+              >
+                Add Proficiency
+              </button>
+            </div>
+            <div
+              *ngFor="
+                let proficiency of expectedProficiency.controls;
+                let i = index
+              "
+              [formGroupName]="i"
+            >
+              <div fxLayout="row" fxLayoutGap="10px" class="proficiency-group">
+                <!-- Seniority ID Dropdown -->
+                <mat-form-field appearance="outline" class="half-width pe-2">
+                  <mat-label>Seniority ID</mat-label>
+                  <mat-select formControlName="seniorityId">
+                    <mat-option
+                      *ngFor="let seniority of seniorities"
+                      [value]="seniority.id"
+                      >{{ seniority.name }}</mat-option
+                    >
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      proficiency.get('seniorityId')?.hasError('required') &&
+                      proficiency.get('seniorityId')?.touched &&
+                      proficiency.get('seniorityId')?.errors?.['zeroError']
+                    "
+                  >
+                    Seniority ID is required
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Proficiency Value Dropdown -->
+                <mat-form-field appearance="outline" class="half-width">
+                  <mat-label>Proficiency Value</mat-label>
+                  <mat-select formControlName="proficiencyValue">
+                    <mat-option
+                      *ngFor="let proficiency of proficiencyMaster"
+                      [value]="proficiency.proficiencyLevel"
+                      >{{ proficiency.proficiencyName }}</mat-option
+                    >
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      proficiency
+                        .get('proficiencyValue')
+                        ?.hasError('required') &&
+                      proficiency.get('proficiencyValue')?.touched &&
+                      proficiency.get('proficiencyValue')?.errors?.['zeroError']
+                    "
+                  >
+                    Proficiency Value is required
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Remove Button -->
+                <button
+                  mat-icon-button
+                  disableRipple="true"
+                  color="warn"
+                  (click)="removeProficiency(i)"
+                  *ngIf="expectedProficiency.length > 1"
+                  style="margin-bottom: 30px"
+                >
+                  <i class="fa fa-trash custom-icon"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="action-form-group">
+            
+          </div> -->
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button
+            class="btn btn-primary"
+            type="submit"
+            color="primary"
+            [disabled]="trainingForm.invalid"
+          >
+            Create
+          </button>
+          &nbsp;
+          <button
+            class="btn"
+            type="button"
+            color="warn"
+            (click)="router.navigate(['list'])"
+          >
+            Cancel
+          </button>
+        </mat-card-actions>
+        <!-- <mat-card-footer> Footer </mat-card-footer>s -->
+      </mat-card>
+    </form>
+  </div>
+</section>

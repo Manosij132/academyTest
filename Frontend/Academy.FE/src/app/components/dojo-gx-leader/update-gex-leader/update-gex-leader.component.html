@@ -1,0 +1,50 @@
+<div class="form-container">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <ng-container>
+      <mat-form-field
+        class="example-full-width select-user-field"
+        appearance="outline"
+      >
+        <input
+          type="text"
+          placeholder="Select Dojo GX Leader"
+          aria-label="Select Dojo GX Leader"
+          matInput
+          [matAutocomplete]="auto3"
+          formControlName="autocompleteInput"
+        />
+        <!-- (selectionChange)="onUserSelected()" -->
+        <mat-hint class="instruction-enter-user"
+          >Enter text to find users by name</mat-hint
+        >
+      </mat-form-field>
+
+      <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
+        <mat-option
+          *ngFor="let user of filteredUsers | async; index as i"
+          [value]="user"
+          id="user"
+        >
+          {{ user.employeeName }}
+        </mat-option>
+      </mat-autocomplete>
+    </ng-container>
+
+    <!-- <mat-form-field appearance="outline">
+      <mat-label>Choose a start date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="startDatePicker"
+        formControlName="startDate"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="startDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field> -->
+
+    <button mat-raised-button color="primary" style="margin-left: 20px;" type="submit">Submit</button>
+  </form>
+</div>

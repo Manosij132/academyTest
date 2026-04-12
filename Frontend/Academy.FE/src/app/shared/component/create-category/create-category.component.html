@@ -1,0 +1,32 @@
+<form [formGroup]="categoryForm" (ngSubmit)="onCategoryFormSubmit()" autocomplete="off" class="container mt-2">
+  
+    <!-- Category Name Input -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Category Name</mat-label>
+      <input matInput id="categoryName" formControlName="categoryName" placeholder="Enter category name" />
+      <mat-error *ngIf="categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched">
+        Category Name is required.
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Parent Category Select -->
+    <mat-form-field appearance="outline" class="last-child">
+      <mat-label>Select Parent Category</mat-label>
+      <mat-select id="parentCategoryId" formControlName="parentCategoryId">
+        <mat-option value="0">Select Parent Category (leave blank to create as Parent Category)</mat-option>
+        <mat-option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <hr />
+  
+    <!-- Submit Button -->
+    <div class="row">
+      <div class="col-12 text-end">
+        <button mat-flat-button color="primary" type="submit" [disabled]="!categoryForm.valid">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+  

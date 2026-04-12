@@ -1,0 +1,91 @@
+<form [formGroup]="emailForm">
+  <div class="row">
+    <div class="col-6 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>To</mat-label>
+        <input matInput formControlName="to" placeholder="Enter To Email" />
+        @if(emailForm.get('to')?.hasError('required')) {
+          <mat-error>
+            To is required.
+          </mat-error>
+        }
+        @if(emailForm.get('to')?.hasError('invalidEmails')) {
+          <mat-error>
+            Please enter a valid email address format.
+          </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="col-6 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>CC</mat-label>
+        <input matInput formControlName="cc" placeholder="Enter CC Email" />
+        @if(emailForm.get('cc')?.hasError('invalidEmails')) {
+          <mat-error>
+            Please enter a valid email address format.
+          </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="col-6 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Email Subject</mat-label>
+        <input
+          matInput
+          formControlName="subject"
+          placeholder="Enter email subject"
+        />
+        @if(emailForm.get('subject')?.hasError('required')) {
+          <mat-error>
+            Email Subject is required.
+          </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="col-12 mb-3">
+      <div id="email-quill-editor">
+        <label class="email-body-label"> Email Body*</label>
+        @if(isQuillReady) {
+        <quill-editor
+          [readOnly]="isDisableEmailBody"
+          [sanitize]="false"
+          formControlName="body"
+          [placeholder]="emailBodyPlaceholder"
+          class="w-100 quill-editor-component"
+          [modules]="quillEditorConfig"
+          [class.invalid-field]="isInvalidEmailBody"
+        >
+        </quill-editor>
+        }
+      </div>
+      @if(isInvalidEmailBody) {
+        <div class="email-body-error">
+          Email Body is required.
+        </div>
+      }
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <button
+        class="btnStyle report-button"
+        mat-stroked-button
+        type="submit"
+        color="primary"
+        [disabled]="emailForm.invalid"
+        (click)="onSendEmail()"
+      >
+        Send Email
+      </button>
+      <button
+        class="btnStyle report-button"
+        mat-stroked-button
+        type="button"
+        color="primary"
+        [disabled]="isDisableEmailBody || emailForm.invalid"
+        (click)="onPreviewEmailButtonClick()"
+      >
+        Preview Email
+      </button>
+    </div>
+  </div>
+</form>

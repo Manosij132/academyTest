@@ -1,0 +1,56 @@
+# ============================================================
+# Stage 1 — Restore & Build (SDK image)
+# Build context must be the REPO ROOT (Academy/)
+# e.g.: docker build -f Backend/Staffing/Staffing.API/dockerfile -t staffing-api .
+# ============================================================
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# ── Copy project files for restore (layer caching) ──
+COPY Academy.sln ./
+
+#backend projects
+COPY Backend/Staffing/Staffing.API/Staffing.API.csproj     Backend/Staffing/Staffing.API/
+COPY Backend/Staffing/Staffing.Core/Staffing.Core.csproj   Backend/Staffing/Staffing.Core/
+COPY Backend/Staffing/Staffing.Shared/Staffing.Shared.csproj Backend/Staffing/Staffing.Shared/
+COPY Backend/Academy.Core/Academy.Core.csproj           Backend/Academy.Core/
+COPY Backend/Academy.Shared/Academy.Shared.csproj       Backend/Academy.Shared/
+COPY Backend/Academy.Domain/Academy.Domain.csproj       Backend/Academy.Domain/
+COPY Backend/Academy.Infrastructure/Academy.Infrastructure.csproj Backend/Academy.Infrastructure/
+
+# ── Restore dependencies ──
+# Run restore with no-cache to ensure fresh packages are pulled, which can help avoid issues with corrupted local caches. 
+# This is especially useful in CI environments or when dependencies have recently changed.
+RUN dotnet restore Backend/Staffing/Staffing.API/Staffing.API.csproj --no-cache
+
+# ── Copy remaining source ──
+# ── Copy remaining source ──
+COPY Backend/Staffing/                Backend/Staffing/
+COPY Backend/Academy.Core/            Backend/Academy.Core/
+COPY Backend/Academy.Domain/          Backend/Academy.Domain/
+COPY Backend/Academy.Infrastructure/  Backend/Academy.Infrastructure/
+COPY Backend/Academy.Shared/          Backend/Academy.Shared/
+
+# ── Publish ──
+RUN dotnet publish Backend/Staffing/Staffing.API/Staffing.API.csproj \
+    -c Release \
+    -o /app/publish  /p:UseAppHost=false
+
+# ============================================================
+# Stage 2 — Runtime (lean ASP.NET image)
+# ============================================================
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+RUN adduser --disabled-password --gecos "" appuser \
+ && mkdir -p /app/logs \
+ && chown -R appuser:appuser /app
+
+COPY --from=build --chown=appuser:appuser /app/publish ./
+
+USER appuser
+
+ENV ASPNETCORE_URLS=http://+:8081
+EXPOSE 8081
+
+ENTRYPOINT ["dotnet", "Staffing.API.dll"]

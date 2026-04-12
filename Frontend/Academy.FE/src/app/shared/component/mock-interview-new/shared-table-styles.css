@@ -1,0 +1,178 @@
+/* Shared Table Styles for Schedule Interview Components */
+/* This file contains common styles for sticky headers, paginators, and table functionality */
+
+/* Table Container */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Sticky Header Styles */
+
+/* Table Styles */
+
+.mat-mdc-row:hover {
+  background-color: #f9f9f9 !important;
+}
+
+/* Filter Field Styles */
+.filter-field {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 16px;
+}
+
+/* Card Styles */
+
+.table-card .mat-mdc-card-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-card .mat-mdc-card-content {
+  padding: 1.5rem;
+}
+
+/* No Data Styles */
+.no-data {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.no-data mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.no-data p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Loading Styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #666;
+}
+
+.loading-spinner {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.mat-mdc-icon-button.mat-primary {
+  color: #1976d2;
+}
+
+.mat-mdc-icon-button.mat-warn {
+  color: #f44336;
+}
+
+.mat-mdc-icon-button:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-container {
+    max-height: 600px;
+  }
+  
+  .filter-field {
+    max-width: 100%;
+  }
+  
+  .mat-mdc-header-cell,
+  .mat-mdc-cell {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mat-mdc-header-cell,
+  .mat-mdc-cell {
+    padding: 6px 2px;
+    font-size: 11px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* Material Design Overrides */
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+/* Table elevation */
+.mat-elevation-8 {
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2),
+              0 8px 10px 1px rgba(0,0,0,0.14),
+              0 3px 14px 2px rgba(0,0,0,0.12);
+}
+
+/* Pagination specific styles */
+.mat-mdc-paginator .mat-mdc-paginator-page-size-select {
+  margin: 0 8px;
+}
+
+.mat-mdc-paginator .mat-mdc-paginator-range-label {
+  margin: 0 32px 0 24px;
+}
+
+/* Ensure paginator items per page works correctly */
+.mat-mdc-paginator .mat-mdc-select-value {
+  font-size: 14px;
+}
+
+.mat-mdc-paginator .mat-mdc-select-arrow {
+  color: #666;
+}
+
+/* .header-bold {
+  font-weight: bold;
+  font-size:13px
+  }
+  .sticky-header .mat-header-cell {
+    font-weight: bold;
+    font-size: 13px;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+    padding: 12px 16px;
+  } */
+  .mat-sort-header-container {
+    font-weight: bold;
+    font-size:13px
+  }

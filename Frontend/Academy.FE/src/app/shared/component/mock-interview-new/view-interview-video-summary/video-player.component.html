@@ -1,0 +1,16 @@
+<div class="video-wrapper">
+  <video
+    *ngIf="videoUrl"
+    [src]="videoUrl"
+    controls
+    preload="metadata"
+    controlsList="nodownload"
+    disablePictureInPicture
+    oncontextmenu="return false;"
+    width="640"
+    height="360"
+    id="my-video"
+    class="video-js"
+  >
+  </video>
+</div>

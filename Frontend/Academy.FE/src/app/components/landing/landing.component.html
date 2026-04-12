@@ -1,0 +1,10 @@
+<div id="app" ngxUiLoaderBlurred>
+    <div class="wrapper" [class.sidebar_minimize]="toggleEventValue == 'true'">
+        <app-sidebar (navToggleEvent)="getToggleEvent($event)"></app-sidebar>
+        <div class="main-panel">    
+            <app-header></app-header>
+            <router-outlet></router-outlet>
+        </div>   
+        <!-- <app-footer></app-footer> -->
+    </div>
+</div>

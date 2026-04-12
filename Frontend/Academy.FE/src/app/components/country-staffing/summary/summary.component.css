@@ -1,0 +1,452 @@
+.container {
+    width: 100%;
+    padding: 20px;
+    margin-top: 60px;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.date-range-field {
+    width: 260px;
+}
+
+.filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.filter-item {
+    width: 250px;
+}
+
+.table-container {
+    max-height: 70vh;
+    overflow: auto;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.custom-table {
+    width: 100%;
+}
+
+.section-title {
+    margin: 20px 0 10px;
+    font-weight: 600;
+}
+
+/* .filter-field {
+  width: 260px;
+  margin-right: 20px;
+} */
+
+mat-option input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.option-row {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    width: 100%;
+    align-items: center;
+}
+
+.option-name {
+    white-space: normal;
+    word-break: break-word;
+    padding-right: 8px;
+    font-size: 11px;
+}
+
+.option-count {
+    text-align: right;
+    font-weight: 300;
+}
+
+
+.pivot-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #2a2f38;
+    color: #fff;
+    table-layout: fixed;
+}
+
+    .pivot-table thead th {
+        position: sticky;
+        top: 0;
+        background: #BFD732;
+        color: #111111;
+        font-weight: 600;
+        z-index: 10;
+    }
+
+    .pivot-table .grand-row td {
+        position: sticky;
+        bottom: 0;
+        background: #BFD732;
+        color: #111111;
+        font-weight: 600;
+        z-index: 6;
+    }
+
+    .pivot-table .grand-row .sticky-left {
+        left: 0;
+        z-index: 7; /* higher than body */
+    }
+
+        .pivot-table .grand-row .sticky-left.second {
+            left: 220px; /* same width as first column */
+            z-index: 7;
+        }
+
+    .pivot-table th {
+        text-align: left;
+    }
+
+th, td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #3b404a;
+    text-align: center;
+}
+
+th {
+    background: #242a33;
+    font-weight: 600;
+}
+
+.sticky-left {
+    position: sticky;
+    left: 0;
+    background: #2a2f38;
+    text-align: left;
+    z-index: 4;
+}
+
+    .sticky-left.second {
+        left: 220px;
+        background: #2a2f38;
+        z-index: 4;
+    }
+
+.pivot-table thead th.sticky-left {
+    z-index: 8; /* highest */
+}
+
+/* First column width */
+.pivot-table th.sticky-left,
+.pivot-table td.sticky-left {
+    width: 220px;
+    min-width: 220px;
+}
+
+    /* Client column */
+    .pivot-table th.sticky-left.second,
+    .pivot-table td.sticky-left.second {
+        width: 260px;
+        min-width: 260px;
+    }
+
+/* .parent-row {
+  font-weight: 600;
+} */
+
+.child-row {
+    background: #2f3440;
+}
+
+    .child-row.clickable {
+        cursor: pointer;
+    }
+
+.grand {
+    font-weight: 700;
+}
+
+.grand-row {
+    background: #242a33;
+    font-weight: bold;
+}
+
+.expand-btn {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #999;
+    background: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pivot-table tbody tr.parent-row,
+.pivot-table tbody tr.child-row {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.pivot-table tbody td.sticky-left,
+.pivot-table tbody td.second {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.pivot-table .grand-row td.sticky-left,
+.pivot-table .grand-row td.second {
+    background-color: #111827; /* dark footer */
+    color: #ffffff;
+}
+
+.pivot-table thead th.sticky-left,
+.pivot-table .grand-row td.sticky-left,
+.pivot-table thead th.second,
+.pivot-table .grand-row td.second {
+    background: #BFD732 !important;
+    color: #111111;
+    font-weight: 600;
+}
+
+.pivot-table thead th {
+    border-bottom: 2px solid #d1d5db;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.pivot-table .grand-row td {
+    border-top: 2px solid #d1d5db;
+}
+
+    /* BODY + FOOTER → First column */
+    .pivot-table tbody td:first-child,
+    .pivot-table tfoot td:first-child,
+    .pivot-table .grand-row td:first-child {
+        border-right: 1px solid #d1d5db;
+    }
+
+    /* BODY + FOOTER → Last column */
+    .pivot-table tbody td:last-child,
+    .pivot-table tfoot td:last-child,
+    .pivot-table .grand-row td:last-child {
+        border-left: 1px solid #d1d5db;
+    }
+
+.parent-row.clickable {
+    cursor: pointer;
+}
+
+    .parent-row.clickable:hover {
+        background-color: #f5f5f5;
+    }
+
+.parent-row.selected td {
+    background-color: #9fcdee !important;
+}
+
+.parent-row.clickable td {
+    cursor: pointer;
+}
+
+.pivot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.pivot-search {
+    position: relative;
+}
+
+    .pivot-search input {
+        padding: 6px 10px;
+        width: 220px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+.clear-btn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.row-even td {
+    background-color: #F2F4E7 !important;
+    color: #000;
+}
+
+.row-odd td {
+    background-color: #FFFFFF !important;
+    color: #000;
+}
+
+.row-even td.sticky-left,
+.row-even td.second {
+    background-color: #F2F4E7 !important;
+}
+
+.row-odd td.sticky-left,
+.row-odd td.second {
+    background-color: #FFFFFF !important;
+}
+
+.clickable-cell {
+    cursor: pointer;
+}
+
+.cell-selected {
+    background-color: #e3f2fd !important;
+    color: #0d47a1;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+/* Clear icon inside mat-select */
+.mat-form-field .mat-mdc-icon-button.clear-btn {
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    margin-right: 4px;
+    border-radius: 50%;
+}
+
+    /* Icon size & color */
+    .mat-form-field .mat-mdc-icon-button.clear-btn mat-icon {
+        font-size: 14x;
+        line-height: 14px;
+        color: #666; /* subtle */
+    }
+
+    /* Hover effect */
+    .mat-form-field .mat-mdc-icon-button.clear-btn:hover {
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    /* Remove focus outline box */
+    .mat-form-field .mat-mdc-icon-button.clear-btn:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+
+.table-wrapper {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.table-scroll {
+    max-height: 60vh; /* adjust as needed */
+    overflow-y: auto;
+}
+
+.mat-mdc-header-row {
+    background-color: #BFD732;
+}
+
+/* Sticky header styling */
+.mat-mdc-header-cell {
+    position: sticky;
+    top: 0;
+    background: #BFD732; /* Material default */
+    z-index: 10;
+    font-weight: 600;
+}
+
+.mat-mdc-row.mdc-data-table__row:nth-child(odd) {
+    background-color: #F2F4E7;
+}
+
+.mat-mdc-row.mdc-data-table__row:nth-child(even) {
+    background-color: #FFFFFF;
+}
+
+.mat-cell {
+    white-space: nowrap;
+}
+
+/* Optional row hover */
+.mat-row:hover {
+    background: #f5f5f5;
+}
+
+.table-title {
+    margin: 20px 0 10px;
+    font-weight: 600;
+}
+
+.clickable-row {
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+}
+
+.search-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    color: #3f51b5; /* force visible color */
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+/* Fix mat-select header clipping */
+.mat-select-panel .search-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    position: relative;
+    overflow: visible;
+}
+
+
+.search-input {
+    flex: 1;
+    height: 36px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+}
+
+.status-selected {
+    font-weight: bold;
+    color: #000;
+    background-color: #e8f0a2 !important; /* optional highlight */
+}
+
+.mat-select-disabled .mat-select-value-text {
+    color: transparent !important;
+}

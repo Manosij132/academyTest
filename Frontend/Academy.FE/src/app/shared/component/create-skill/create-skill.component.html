@@ -1,0 +1,141 @@
+<div *ngIf="showSkillForm">
+  <form
+    [formGroup]="skillForm"
+    (ngSubmit)="onSkillFormSubmit()"
+    autocomplete="off"
+    class="container mt-2"
+  >
+    <!-- Skill Name -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Skill Name</mat-label>
+      <input
+        matInput
+        id="skillName"
+        formControlName="skillName"
+        placeholder="Enter skill name"
+      />
+      <mat-error
+        *ngIf="
+          skillForm.get('skillName')?.invalid &&
+          skillForm.get('skillName')?.touched
+        "
+      >
+        Skill Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Skill Description -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Skill Description</mat-label>
+      <input
+        matInput
+        id="skillDescription"
+        formControlName="skillDescription"
+        placeholder="Enter skill description"
+      />
+      <!-- <mat-error *ngIf="skillForm.get('skillDescription')?.invalid && skillForm.get('skillDescription')?.touched">
+            Skill Description is required.
+          </mat-error> -->
+    </mat-form-field>
+
+    <!-- Category -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Category</mat-label>
+      <mat-select
+        id="category"
+        formControlName="category"
+        (selectionChange)="onCreateCategoryClicked($event)"
+      >
+        <mat-option value="##">+ Create Category/SubCategory</mat-option>
+        <mat-optgroup
+          *ngFor="let c of categories"
+          [label]="c.name"
+          [title]="c.name"
+        >
+          <mat-option *ngFor="let s of c.subCategories" [value]="s.id">{{
+            s.name
+          }}</mat-option>
+        </mat-optgroup>
+      </mat-select>
+      <!-- <mat-error *ngIf="skillForm.get('category')?.invalid && skillForm.get('category')?.touched">
+          Category is required.
+        </mat-error> -->
+    </mat-form-field>
+
+    <!-- Rule -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Rule</mat-label>
+      <mat-select
+        id="rule"
+        formControlName="rule"
+        (selectionChange)="onMandatoryChange($event)"
+      >
+        <mat-option value="1">Mandatory</mat-option>
+        <mat-option value="0">Optional</mat-option>
+        <mat-option value="group">Group</mat-option>
+      </mat-select>
+      <!-- <mat-error *ngIf="skillForm.get('rule')?.invalid && skillForm.get('rule')?.touched">
+          Rule selection is required.
+        </mat-error> -->
+    </mat-form-field>
+
+    <!-- Group Name (Conditionally Displayed) -->
+    <div *ngIf="group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Group Name*</mat-label>
+        <input
+          matInput
+          id="groupName"
+          formControlName="groupName"
+          placeholder="Enter group name"
+        />
+        <!-- <mat-error *ngIf="skillForm.get('groupName')?.invalid && skillForm.get('groupName')?.touched">
+            Group Name is required.
+          </mat-error> -->
+      </mat-form-field>
+    </div>
+
+    <!-- Specification -->
+    <mat-form-field appearance="outline" class="full-width last-child">
+      <mat-label>Specification</mat-label>
+      <input
+        matInput
+        id="specification"
+        formControlName="specification"
+        placeholder="Enter specification"
+      />
+    </mat-form-field>
+
+    <hr />
+
+    <!-- Submit Button -->
+    <div class="row">
+      <div class="col-12 text-end">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          class="color-button"
+          [disabled]="!skillForm.valid"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- 'Back to Create Skill' Section -->
+<div *ngIf="!showSkillForm">
+  <button
+    mat-raised-button
+    color="accent"
+    class="color-back-button"
+    (click)="backToCreateSkillScreen()"
+  >
+    <i class="fas fa-angle-left"></i><i class="fas fa-angle-left"></i> Back to
+    'Create Skill' screen
+  </button>
+  <hr />
+  <app-create-category></app-create-category>
+</div>

@@ -1,0 +1,60 @@
+.btn-mock-interview {
+    background-color: #CCD324;
+    color: #fff;
+    border: 1px solid #CCD324;
+  }
+  .btn {
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .thank-you-container {
+  
+    text-align: center;
+    padding: 30px;
+    background-color: #f9fafb;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thank-you-title {
+    /* color:#00292E;*/
+    color:#2e2e2e;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    /* text-transform: uppercase; */
+  }
+  
+  .thank-you-message {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+  
+  .mat-card-content {
+    padding: 20px 15px;
+  }
+  .instructions-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  
+    padding: 20px;
+   
+    background-image: url('/assets/images/profile_background.png');
+  
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    height: 100vh;
+  }

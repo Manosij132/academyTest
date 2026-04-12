@@ -1,0 +1,775 @@
+.max-w-lg {
+  max-width: 32rem;
+}
+.mt-12 {
+  margin-top: 3rem;
+}
+
+/* interview-session.component.css */
+
+/* PAGE BACKGROUND: purple gradient like screenshot */
+.page-bg {
+  min-height: 100vh;
+  padding: 2.5rem 1.5rem 6.5rem; /* leave room for floating toolbar */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: linear-gradient(180deg, #bfd732 0%, #bfd732 100%);
+  font-family: "Roboto", "Helvetica", Arial, sans-serif;
+}
+
+/* White rounded container that holds the entire session */
+.session-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: visible;
+}
+
+/* Header styling */
+.session-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.session-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.company-logo {
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Two column layout */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr; /* left narrower, right wider */
+  gap: 26px;
+  align-items: start;
+}
+
+/* LEFT COLUMN (cards) */
+.left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Permissions Card - orange styled */
+.permission-card {
+  background: #fff6ed;
+  border: 1.5px solid rgba(255, 170, 80, 0.55);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+
+.perm-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.perm-icon {
+  font-size: 24px;
+  color: #e65100;
+}
+.perm-title {
+  margin: 6px 0 0;
+  color: #bf360c;
+  font-weight: 700;
+}
+.perm-text {
+  color: #7a4a28;
+  margin: 6px 8px 0;
+  font-size: 14px;
+}
+.perm-action button {
+  margin-top: 10px;
+}
+
+/* Details card with blue accent like screenshot */
+.details-card {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.details-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5c7c00;
+}
+.details-header mat-icon {
+  color: #5c7c00;
+}
+
+/* Rows inside details */
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 8px 2px;
+}
+
+.detail-row.small {
+  padding: 6px 2px;
+  font-size: 13px;
+}
+
+.detail-icon {
+  color: #5c7c00;
+  min-width: 26px;
+}
+.detail-label {
+  width: 88px;
+  color: #0b2545;
+  font-weight: 600;
+}
+.detail-value {
+  color: #123;
+}
+
+.font-mono {
+  font-family: "Source Code Pro", monospace;
+}
+
+/* status pill */
+.status-pill {
+  display: inline-block;
+  background: #eaf2c2;
+  color: #3f4f00;
+  border: 1px solid #9bb000;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+/* Skills card purple style */
+.skills-card {
+  background: #fbf3ff;
+  border-radius: 10px;
+  padding: 12px;
+  border-left: 6px solid #7b4bd6;
+}
+
+.skill-chip {
+  margin-right: 8px;
+  margin-bottom: 6px;
+  background: rgba(125, 73, 210, 0.12);
+  border-radius: 14px;
+}
+
+/* RIGHT COLUMN (video / start / interview flow) */
+.right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+/* small loading/error notices */
+.loading-text,
+.error-text {
+  color: #666;
+  text-align: center;
+}
+
+/* Start area (before interview starts) */
+.start-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Video placeholder */
+.video-box {
+  width: 100%;
+  height: 320px;
+  border-radius: 10px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.02);
+}
+
+.video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: black;
+}
+
+/* Placeholder text (shows when no stream) */
+.camera-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+/* Start controls */
+.start-controls {
+  text-align: center;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.start-btn {
+  background-color: #bfd732 !important;
+  color: black !important;
+  border: 1px solid #e6edb9;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  cursor: pointer;
+}
+.start-btn[disabled] {
+  opacity: 0.6;
+}
+
+/* small orange note */
+.start-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e65100;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* recording dot */
+.record-dot {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 14px;
+  height: 14px;
+  background: #d32f2f;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(211, 47, 47, 0.9);
+  animation: pulse 1.4s infinite;
+}
+
+.sidebar-details {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  height: 100%;
+}
+
+/* small 'no' texts */
+.no-skills {
+  color: #888;
+}
+
+/* Floating controls (center bottom) */
+/* small animations */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.6);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(211, 47, 47, 0);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+    transform: scale(1);
+  }
+}
+
+/* Material UI Interview Flow Styles */
+
+/* Interview Video Container */
+.interview-video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: #000;
+  display: flex;
+}
+
+/* Main Video Area */
+.video-main-area {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.interview-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+/* Recording Indicator */
+.recording-indicator {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.recording-dot {
+  color: #f44336;
+  animation: pulse 1.5s infinite;
+}
+
+.recording-text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Video Overlay */
+.video-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.video-toolbar {
+  background: transparent !important;
+  color: #fff;
+  width: 100%;
+  justify-content: center;
+}
+
+.question-number {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.question-content {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 12px 20px;
+  border-radius: 8px;
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.current-question {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Interview Controls */
+.interview-controls {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.control-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 200px;
+}
+
+.control-button mat-icon {
+  margin-right: 8px;
+}
+
+/* Pause Status */
+.pause-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f44336;
+  background: rgba(244, 67, 54, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+/* Countdown Overlay */
+.countdown-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.countdown-circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-number {
+  position: absolute;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Interview Sidebar */
+.interview-sidebar {
+  width: 360px;
+  height: 100vh;
+  background: #f5f5f5;
+  padding: 16px;
+  overflow-y: auto;
+  border-left: 1px solid #e0e0e0;
+}
+
+.sidebar-details {
+  height: auto;
+}
+
+.sidebar-details mat-card-header {
+  margin-bottom: 16px;
+}
+
+.sidebar-details .detail-row {
+  margin: 8px 0;
+}
+
+.sidebar-details mat-divider {
+  margin: 12px 0;
+}
+
+/* Skills Section in Sidebar */
+.skills-section {
+  margin-top: 16px;
+}
+
+.skills-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.skills-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skills-chips mat-chip {
+  background: rgba(63, 81, 181, 0.1);
+  color: #3f51b5;
+}
+
+.no-skills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-style: italic;
+}
+
+.showMoreButton {
+  background: transparent;
+  padding: 0;
+  color: #1565c0;
+  text-decoration: none;
+  border: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .interview-sidebar {
+    width: 300px;
+  }
+
+  .control-button {
+    min-width: 160px;
+    font-size: 14px;
+  }
+
+  .current-question {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .interview-video-container {
+    flex-direction: column;
+  }
+
+  .interview-sidebar {
+    width: 100%;
+    height: 200px;
+    order: -1;
+  }
+
+  .video-main-area {
+    flex: 1;
+  }
+
+  .interview-controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .control-button {
+    min-width: 100%;
+  }
+
+  .video-overlay {
+    padding: 16px;
+  }
+
+  .current-question {
+    font-size: 18px;
+  }
+}
+
+/* responsive */
+@media (max-width: 980px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .flow-sidebar {
+    width: auto;
+  }
+  .floating-controls {
+    gap: 10px;
+  }
+}
+
+/* Buttons */
+.action-btn {
+  background-color: #bfd732;
+  color: black;
+  border: 1px solid #bfd732;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.action-btn[disabled] {
+  color: #64748b;
+  background-color: #d4e47a;
+  cursor: wait;
+}
+
+.cancel-btn {
+  background-color: #f8fafc;
+  color: black;
+  border: 1px solid #64748b;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.cancel-btn:hover:not(.mat-mdc-button-disabled) {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #64748b;
+}
+
+/* Video instruction page */
+.instruction-page-bg {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #bfd732 0%, #bfd732 100%);
+}
+
+/* Session card */
+.instruction-page-bg .session-card {
+  width: 800px;
+}
+
+/* Header */
+.instruction-page-bg .session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.instruction-page-bg .session-header .session-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.instruction-page-bg .session-header .company-logo {
+  height: 40px;
+}
+
+/* Instructions card */
+.instruction-page-bg .instructions-card {
+  padding: 16px;
+}
+
+.instruction-page-bg .instruction-section {
+  margin-bottom: 0px;
+}
+
+.instruction-page-bg .instruction-subtitle {
+  font-weight: 600;
+}
+
+.instruction-page-bg .instruction-list {
+  margin-left: 16px;
+  margin-bottom: 8px;
+}
+
+.instruction-page-bg .instruction-list ul {
+  margin-left: 16px;
+  margin-top: 4px;
+}
+
+/* Buttons inside instructions card */
+.instruction-page-bg .instructions-card .cancel-btn {
+  margin-right: 8px;
+}
+
+.instruction-page-bg .instructions-card .action-btn {
+  font-weight: 600;
+}
+
+.video-main-area {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.interview-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures the 3000x1200 doesn't distort */
+  display: block;
+}
+
+/* Container to handle uniform spacing */
+.sidebar-avatar-preview {
+  padding: 5px; /* This creates the equal space on Top, Left, and Right */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* The 3D "Popped Out" Card */
+.avatar-video-card {
+  width: 100%;
+  background: #000;
+  border-radius: 12px;
+  border: 2px solid #bfd732;
+  overflow: hidden;
+
+  /* Multi-layered shadow for 3D depth */
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.3),
+    0 6px 6px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(191, 215, 50, 0.1); /* subtle lime glow */
+
+  transition: transform 0.3s ease;
+}
+
+/* Subtle lift on hover */
+.avatar-video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.avatar-video-card video {
+  width: 100%;
+  display: block;
+}
+
+.avatar-caption {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5c7c00;
+  text-align: center;
+}
+
+.info-note {
+  color: #ba1a1a;
+  font-size: 12px;
+}
+
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-checkmark-color: white;   
+  --mdc-checkbox-selected-icon-color: #818D00;      
+  --mdc-checkbox-selected-focus-icon-color: #818D00;
+  --mdc-checkbox-selected-hover-icon-color: #818D00;
+  --mdc-checkbox-selected-pressed-icon-color: #818D00;
+}
+
+.disabled-overlay {
+  pointer-events: none;
+  opacity: 0.2;
+}

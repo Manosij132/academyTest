@@ -1,0 +1,37 @@
+  
+<div class="padding-1rem">
+  <div class="modal-header">
+    <h2 mat-dialog-title class="modal-heading">Edit Requirement</h2>
+  </div>
+  <div>
+    <div class="input-container">
+      <label for="input1">Position to be filled</label>
+      <input style="width: -webkit-fill-available;" id="input1" type="number" [(ngModel)]="positionToBeFilled">
+    </div>
+
+    <div class="input-container">
+      <label for="input2">Drop Ratio (%)</label>
+      <input style="width: -webkit-fill-available;" id="input2" type="number" [(ngModel)]="dropRatio">
+    </div>
+
+    <div class="input-container">
+      <label for="input3">Offer to be rolled</label>
+      <input style="width: -webkit-fill-available;" id="input3" type="number" [(ngModel)]="offersToBeRolledOut">
+    </div>
+
+    <div class="input-container" *ngIf="l1Visible">
+      <label for="input3">L1 selection ratio</label>
+      <input style="width: -webkit-fill-available;" id="input3" type="number" [(ngModel)]="l1SelectionRatio">
+    </div>
+    
+    <div class="input-container" *ngIf="gkVisible">
+      <label for="input3">GK selection ratio</label>
+      <input style="width: -webkit-fill-available;" id="input3" type="number" [(ngModel)]="gkSelectionRatio">
+    </div>
+  </div>
+  <div class="button-container">
+      <button class="save-button" (click)="save()">Draft</button>
+      <button class="cancel-button" (click)="close()">Cancel</button>
+    </div>
+</div>
+  

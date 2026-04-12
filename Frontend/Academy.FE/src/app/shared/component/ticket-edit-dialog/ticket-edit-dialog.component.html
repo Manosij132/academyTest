@@ -1,0 +1,53 @@
+<div class="dialog-wrapper">
+  <h2 class="dialog-title">Edit Ticket</h2>
+
+  <div mat-dialog-content>
+    <form [formGroup]="form">
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Detailed Status</mat-label>
+        <mat-select formControlName="detailedStatus">
+          <mat-option value="Blocked">Blocked</mat-option>
+          <mat-option value="Business as usual">Business as usual</mat-option>
+          <mat-option value="Delayed by capacity">Delayed by capacity</mat-option>
+          <mat-option value="Delayed by client">Delayed by client</mat-option>
+          <mat-option value="New Demand">New Demand</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Month Closure</mat-label>
+        <mat-select formControlName="monthClosure">
+          <mat-option value="2025-01-01">2025-01-01</mat-option>
+          <mat-option value="2025-12-01">2025-12-01</mat-option>
+          <mat-option value="Dec-25-With Risk">Dec-25-With Risk</mat-option>
+          <mat-option value="2025-11-01">2025-11-01</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Ticket Status</mat-label>
+        <mat-select formControlName="ticketStatus">
+          <mat-option value="Work in Progress">Work in Progress</mat-option>
+          <mat-option value="To be closed">To be closed</mat-option>
+          <mat-option value="To be cancelled">To be cancelled</mat-option>
+          <mat-option value="On hold">On hold</mat-option>
+          <!-- <mat-option value="Fully Actionable">Fully Actionable</mat-option>
+          <mat-option value="Actionable with some risk">Actionable with some risk</mat-option> -->
+          <mat-option [value]="null">None</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Comments</mat-label>
+        <textarea matInput formControlName="comments" rows="3"></textarea>
+      </mat-form-field>
+
+    </form>
+  </div>
+</div>
+
+<div class="actions" align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="save()">Save</button>
+</div>

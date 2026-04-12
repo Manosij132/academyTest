@@ -1,0 +1,15 @@
+{
+    "timeStamp": "28102024053025868",
+    "status": 200,
+    "data": {
+        "commentText": "Completed assigned trainings.",
+        "commentDate": "2023-10-25T10:10:40",
+        "commentBy": "anmol.meghadambar@globant.com",
+        "commentByImage": "https://api.starmeup.com/starmeup-api/v2/image/uzfkjdooidgymtswdava_png/250/250/1",
+        "commentByEmpId": 63
+    },
+    "errorResponseId": null,
+    "errorMessage": null,
+    "exception": null,
+    "success": true
+}

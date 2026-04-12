@@ -1,0 +1,50 @@
+.full-width {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.dialog-wrapper {
+  padding: 24px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.dialog-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-label {
+  font-weight: 500;
+  color: #444;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px 24px;
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+}
+
+button[mat-button] {
+  font-weight: 500;
+}
+
+button[mat-flat-button] {
+  padding: 6px 24px;
+  border-radius: 8px;
+}

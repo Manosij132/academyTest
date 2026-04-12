@@ -1,0 +1,237 @@
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">{{ pageHeader }}</h3>
+    <div class="card main-card">
+      <form autocomplete="off" [formGroup]="emproleForm">
+        <div class="card-body">
+          <!-- <p class="card-title">Please fill the required information below to proceed</p> -->
+
+          <!-- Autocomplete Form Field -->
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Select User</mat-label>
+            <input
+              type="text"
+              matInput
+              [formControl]="userControl"
+              [matAutocomplete]="auto"
+              [value]="selectedUser ? selectedUser.employeeName : ''"
+              (keyup)="getUserName()"
+            />
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              (optionSelected)="onSelectUser($event.option.value)"
+              [displayWith]="displayFn"
+            >
+              <mat-option
+                *ngFor="let user of filteredUsers$ | async"
+                [value]="user"
+              >
+                {{ user.employeeName }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <!-- Selected User Details -->
+          <div *ngIf="selectedUser" class="user-card">
+            <!-- <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ selectedUser.employeeName }}</mat-card-title>
+                    <mat-card-subtitle>{{ selectedUser.seniority }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>GlobantEmailAddress: {{ selectedUser.globantEmailAddress }}</p>
+                </mat-card-content>
+                </mat-card> -->
+            <div class="col-md-12 ps-md-0">
+              <div class="card card-pricing">
+                <!-- <p>{{ selectedUser | json }}</p> -->
+                <!-- <div class="card-header">
+                        <h4 class="card-title">Employee Details</h4>
+                        
+                    </div> -->
+                <div class="card-body">
+                  <div class="card-head-row card-tools-still-right">
+                    <div class="card-title">Employee Details</div>
+                  </div>
+                  <ul class="specification-list">
+                    <li>
+                      <span class="name-specification">Employee Name</span>
+                      <span class="status-specification">{{
+                        selectedUser.employeeName
+                      }}</span>
+                    </li>
+                    <li>
+                      <span class="name-specification">Employee seniority</span>
+                      <span class="status-specification">{{
+                        selectedUser.seniority
+                      }}</span>
+                    </li>
+                    <li>
+                      <span class="name-specification"
+                        >GlobantEmailAddress</span
+                      >
+                      <span class="status-specification">{{
+                        selectedUser.globantEmailAddress
+                      }}</span>
+                    </li>
+                    <!-- <li>
+                            <span class="name-specification">Support</span>
+                            <span class="status-specification">Yes</span>
+                        </li>
+                        <li>
+                            <span class="name-specification">Live Support</span>
+                            <span class="status-specification">No</span>
+                        </li> -->
+                  </ul>
+
+                  <mat-expansion-panel
+                    (opened)="panelOpenState.set(true)"
+                    (closed)="panelOpenState.set(false)"
+                  >
+                    <mat-expansion-panel-header>
+                      <mat-panel-title
+                        ><div class="card-head-row card-tools-still-right">
+                          <div class="card-title">Roles History</div>
+                        </div>
+                      </mat-panel-title>
+                      <!-- <mat-panel-description>
+                                Currently I am {{panelOpenState() ? 'open' : 'closed'}}
+                            </mat-panel-description> -->
+                    </mat-expansion-panel-header>
+                    <!-- <p>I'm visible because I am open</p> -->
+                    <div class="card-list py-4">
+                      <div
+                        class="item-list"
+                        *ngFor="let role of selectedUser.roles"
+                      >
+                        <div class="avatar">
+                          <button
+                            class="btn btn-icon btn-round btn-success btn-sm me-2"
+                          >
+                            <i class="fa fa-check"></i>
+                          </button>
+                        </div>
+                        <div class="info-user ms-3">
+                          <div class="username">
+                            {{ role.roleName }} |
+                            {{
+                              role.roleAssignment === ""
+                                ? "-"
+                                : role.roleAssignment
+                            }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+              </div>
+
+              <div class="card-head-row card-tools-still-right">
+                <div class="card-title">
+                  Please select the fields below to assign a new role to
+                  <span>{{ selectedUser.globantEmailAddress }}</span>
+                </div>
+              </div>
+              <mat-form-field class="rolesDropdown" appearance="outline">
+                <mat-label>Select New Role</mat-label>
+                <mat-select
+                  [(ngModel)]="selectedValue"
+                  name="role"
+                  (selectionChange)="onRoleChanged($event)"
+                  formControlName="selectedRole"
+                >
+                  @for (role of SystemRoles; track role) {
+                    <mat-option [value]="role.Key">{{ role.Value }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Select New Role Assignments</mat-label>
+                <mat-select formControlName="roleAssignments" multiple>
+                  <!-- <mat-select-trigger>
+                        {{roleAssignmentList?.[0] || ''}}
+                        @if ((roleAssignmentList?.length || 0) > 1) {
+                        <span class="example-additional-selection">
+                            (+{{(roleAssignmentList?.length || 0) - 1}} {{roleAssignmentList?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                        }
+                    </mat-select-trigger> -->
+                  @for (record of roleAssignmentList; track record) {
+                    <mat-option [value]="record">{{ record }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <div role="alert" class="alert alert-info">
+                If you select "User" or "System Admin" as the role, kindly
+                ensure that the role assignment field remains empty.
+              </div>
+              <div
+                class="d-flex justify-content-end align-items-center action-area"
+              >
+                <button
+                  class="btnStyle"
+                  mat-flat-button
+                  type="submit"
+                  (click)="onSaveChanges()"
+                  color="primary"
+                >
+                  Save
+                </button>
+
+                &nbsp;
+                <button
+                  class="btnStyle"
+                  mat-raised-button
+                  type="button"
+                  color="warn"
+                  (click)="resetForm()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+
+            <!-- <div class="card card-round">
+                    <div class="card-body">
+                        
+                    <div class="card-head-row card-tools-still-right">
+                        <div class="card-title">Roles History</div>
+                    
+                    </div>
+                    <div class="card-list py-4">
+                        <div class="item-list">
+                        <div class="avatar">
+            
+                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                <i class="fa fa-check"></i>
+                            </button>
+                        </div>
+                        <div class="info-user ms-3">
+                            <div class="username">EcosystemAdmin | .NET Developer</div>
+                        
+                        </div>
+                        
+                        </div>
+                        <div class="item-list">
+                        <div class="avatar">
+                            <button class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                <i class="fa fa-check"></i>
+                            </button>
+                        </div>
+                        <div class="info-user ms-3">
+                            <div class="username">EcosystemAdmin | Java Developer</div>
+                        </div>
+                    
+                        </div>
+                    
+                    </div>
+                    </div>
+                </div> -->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+@if(error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else if(selectedInterview) {
+<app-candidate-interview-details [selectedInterview]="selectedInterview"
+  (goBack)="goBack()"></app-candidate-interview-details>
+} @else if(!loading && !error) {
+
+@if(!(loaderService.loaderState | async)) {
+<div>
+  @if (dataSource.data.length === 0) {
+  <div class="p-8 text-center text-gray-500">
+    <i class="fa fa-users fa-3x mb-3"></i>
+    <h5>No evaluations are available for this candidate.</h5>
+    <!-- <p>No candidate interviews available.</p> -->
+  </div>
+  } @else {
+  <div>
+    <div class="scrollable-table-wrapper table-view">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 parent">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Sr No</th>
+          <td mat-cell *matCellDef="let row; let i = index" class="font-medium">
+            {{ i + 1 }}
+          </td>
+        </ng-container>
+
+        <!-- Profile -->
+        <ng-container matColumnDef="profile">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Profile
+          </th>
+          <td mat-mdc-row mat-cell *matCellDef="let row" class="py-2 w-auto">
+            <span class="profile-link cursor-pointer text-blue-600 hover:text-blue-800 hover:underline"
+              (click)="viewSummary(row)" [title]="'View ' + (row?.profileName || 'profile')">
+              {{ row?.profile?.position}}_{{ row?.profile?.primarySkillName}}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="assignedBy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned By</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row?.assignedBy || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Status -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <td mat-mdc-row mat-cell *matCellDef="let row" class="py-2 w-auto">
+            {{ capitalizeFirst(row.status) || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-mdc-row mat-cell *matCellDef="let row" class="py-2 w-auto">
+            <div class="flex gap-2">
+              <button *ngIf="row.status === 'ended'" type="button" class="icon-pill-btn" title="View Summary"
+                (click)="viewSummary(row)">
+                <mat-icon fontIcon="description"></mat-icon>
+              </button>
+              <button *ngIf="row.status !== 'ended'" type="button" class="icon-pill-btn" title="Resend Invite"
+                (click)="emailToCandidate(row)">
+                <mat-icon>event</mat-icon>
+              </button>
+              <button *ngIf="row.status === 'ended'" type="button" class="icon-pill-btn" (click)="emailSummary(row)"
+                title="Send Summary">
+                <mat-icon>outgoing_mail</mat-icon>
+              </button>
+
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+  }
+</div>
+}
+@else {
+<div class="p-8 text-center text-gray-500">
+  <h5>Loading evaluations…</h5>
+</div>
+}
+}
+
+<ng-template #addEmailTemplate>
+  <form [formGroup]="form" class="space-y-4">
+    <div formArrayName="email" class="gap-3">
+      <div *ngFor="let control of Emails.controls; let i = index" class="flex items-center gap-2"
+        style="padding-bottom: 10px">
+        <input type="email" class="form-input flex-1 px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring"
+          [formControlName]="i" placeholder="Enter email" />
+
+        <button *ngIf="Emails.length > 1" mat-icon-button color="warn" (click)="removeEmail(i)" type="button"
+          aria-label="Remove email">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <button mat-stroked-button color="primary" type="button" (click)="addEmail()" class="mt-2">
+      <mat-icon class="mr-1">add</mat-icon> Add Email
+    </button>
+  </form>
+</ng-template>

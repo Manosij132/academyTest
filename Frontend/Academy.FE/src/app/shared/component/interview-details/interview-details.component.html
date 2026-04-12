@@ -1,0 +1,39 @@
+<div *ngIf="!isLoading && interviewDetail && !errorMessage">
+  <div class="content">
+    <!-- Header -->
+    <div>
+      <h2 class="tittle">Evaluation Details</h2>
+    </div>
+
+    <!-- Check if questions are present -->
+    <div *ngIf="interviewDetail.questions && interviewDetail.questions.length > 0; else noData">
+      <table class="interview-table">
+        <thead>
+          <tr>
+            <th>Questions</th>
+            <th>Answer</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of interviewDetail.questions">
+            <td>{{ item.question }}</td>
+            <td>{{ item.answer }}</td>
+            <td><span class="score">{{ item.score }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noData>
+      <div class="no-data-wrapper">
+        <div class="no-data-message">
+          No evaluation responses available at the moment.<br />
+           Please verify if the evaluation has been completed or check back shortly.
+        </div>
+      </div>
+    </ng-template>
+    
+    
+  </div>
+</div>

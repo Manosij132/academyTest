@@ -1,0 +1,221 @@
+/* Rows */
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.col {
+  flex: 1;
+}
+
+/* Header */
+/* .modal-header {
+  background: #242424;
+  color: #c5ff47;
+  padding: 18px 25px;
+  position: relative;
+  border-radius: 8px 8px 0 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+} */
+
+.modal-body {
+  padding: 10px 25px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+/* Checkbox Row */
+.checkbox-row {
+  display: flex;
+  align-items: left;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.autosuggest-checkbox {
+  height: 18px;
+  width: 18px;
+}
+
+.autosuggest-checkbox-label {
+  font-size: 12px !important;
+  line-height: 16px;
+  letter-spacing: 0px;
+}
+
+/* Section Titles */
+.section-title {
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  /*background: var(--Color-Text-Body-700, rgba(19, 25, 33, 1));*/
+}
+
+/* Input Box */
+.input-box {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  border-radius: 1px;
+  border: 1px solid #d4d4d4;
+  box-sizing: border-box;   
+}
+#searchInput {
+    width: 100%;
+    height: 12px;
+}
+#communitySelect {
+    width: 100%;
+    height: 12px;
+}
+#countrySelect {
+    width: 100%;
+    height: 12px;
+}
+/* Card Styles */
+.glober-card {
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.field {
+  margin-bottom: 4px;
+}
+
+.field .value {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.field .label {
+  font-size: 10px;
+  color: gray;
+}
+
+/* Footer */
+.modal-footer {
+  padding: 10px 25px;
+  display: flex;
+  justify-content: space-between; /* important */
+  align-items: center;
+  border-top: 1px solid #eee;
+}
+
+.modal-footer-start {
+  display: flex;
+  align-items: center;
+}
+
+.modal-footer-end {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.cancel-btn {
+  background: var(--Fills---Vibrant-Secondary, rgba(224, 224, 224, 1));
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 8px 18px;
+  color: #444;
+  border-radius: 20px;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+.update-btn {
+  background: rgba(191, 215, 50, 1);
+  border: none;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+.delete-btn {
+  background: red;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+.delete-btn:disabled {
+  background: #bfbfbf;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+
+/* Existing CSS */
+.matched {
+  background: green !important;
+  color: white;
+  padding: 2px;
+}
+
+.notmatched {
+  background: #e0e0e0 !important;
+  color: white;
+  padding: 2px;
+}
+
+.maxCountReached {
+  background: red !important;
+  padding: 2px;
+}
+
+.minCountReached {
+  background: orange !important;
+  padding: 2px;
+}
+
+.inline-datepicker {
+  display: inline-flex;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.proposed-leader-field{
+  width:100%;
+}
+.proposed-leader-field .mat-mdc-text-field-wrapper {
+  background-color: red 
+}
+.highlight-value{
+  display: inline-block !important;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.card-left,
+.card-right {
+  flex: 1;
+}
+
+.card-right {
+  border-left: 1px solid #e0e0e0;
+  padding-left: 20px;
+}

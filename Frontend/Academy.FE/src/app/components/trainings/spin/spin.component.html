@@ -1,0 +1,493 @@
+<section class="page-inner">
+  <div class="page-header">
+    <h3 class="fw-bold mb-3">{{ pageHeader }}</h3>
+  </div>
+
+  <div class="card main-card">
+    <div class="card-body">
+      <mat-stepper
+        [linear]="isLinear"
+        #stepper
+        style="background-color: #f5f7fd"
+      >
+        <!-- Ecosystem selection -->
+        <mat-step [stepControl]="firstFormGroup" [editable]="true">
+          <form [formGroup]="firstFormGroup" style="margin-top: 10px">
+            <ng-template matStepLabel>Select Ecosysteam</ng-template>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Ecosystem</mat-label>
+              <mat-select
+                placeholder="Pick one"
+                [formControl]="ecoSystemControl"
+                aria-label="Ecosystem"
+                (selectionChange)="setEcosystem($event)"
+              >
+                <mat-option *ngFor="let e of ecosystems" [value]="e.id">
+                  {{ e.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div>
+              <button mat-button matStepperPrevious style="visibility: hidden">
+                Back
+              </button>
+              <button
+                mat-button
+                matStepperNext
+                class="btn"
+                [disabled]="!ecoSystemControl.value"
+              >
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Select Glober -->
+        <mat-step
+          [stepControl]="secondFormGroup"
+          label="Select Globers"
+          style="margin: 15px"
+          [editable]="true"
+        >
+          <form [formGroup]="secondFormGroup" class="main-form-container">
+            <ng-template matStepLabel>Select Glober</ng-template>
+            <mat-form-field
+              class="example-full-width select-user-field"
+              appearance="outline"
+            >
+              <input
+                type="text"
+                placeholder="Select Account"
+                aria-label="Select Account"
+                matInput
+                [matAutocomplete]="auto4"
+                [formControl]="accountControl"
+                #nameInput
+              />
+              <mat-hint class="instruction-enter-user"
+                >Enter text to find account (Optional)</mat-hint
+              >
+            </mat-form-field>
+
+            <mat-autocomplete #auto4="matAutocomplete">
+              <mat-option
+                *ngFor="let account of filteredAccount | async"
+                [value]="account"
+                (click)="checkAccountSelection(account)"
+              >
+                {{ account }}
+              </mat-option>
+            </mat-autocomplete>
+
+            <mat-select-trigger>
+              <mat-chip-set>
+                @for (account of selectedaccount; track account) {
+                  <mat-chip [removable]="true">
+                    {{ account }}
+                    <button
+                      matChipRemove
+                      [attr.aria-label]="'remove ' + account"
+                      (click)="onRemoveAccount($event, account)"
+                    >
+                      <i class="fas fa-times-circle"></i>
+                    </button>
+                  </mat-chip>
+                }
+              </mat-chip-set>
+            </mat-select-trigger>
+
+            <!-- Employee Dropdown -->
+            <div style="display: flex; margin-top: 20px">
+              <p class="left-toggle">ALL</p>
+              <mat-slide-toggle
+                style="padding-left: 10px; padding-right: 10px"
+                class="custom-toggle"
+                [(ngModel)]="selectAll"
+                [ngModelOptions]="{ standalone: true }"
+                (toggleChange)="changeToggle()"
+              ></mat-slide-toggle>
+
+              <p class="right-toggle">Select Globers</p>
+            </div>
+            <ng-container *ngIf="selectAll">
+              <mat-form-field
+                class="example-full-width select-user-field"
+                appearance="outline"
+              >
+                <input
+                  type="text"
+                  placeholder="Select Globers"
+                  aria-label="Select Globers"
+                  matInput
+                  [matAutocomplete]="auto3"
+                  [formControl]="userControl"
+                  (selectionChange)="onUserSelected(userControl)"
+                />
+                <mat-hint class="instruction-enter-user"
+                  >Enter text to find users by name</mat-hint
+                >
+              </mat-form-field>
+
+              <mat-autocomplete #auto3="matAutocomplete">
+                <mat-option
+                  *ngFor="let user of filteredUsers$ | async; index as i"
+                  [value]="selectedUsers"
+                  id="user"
+                >
+                  <div (click)="optionClicked($event)">
+                    <mat-checkbox
+                      (change)="toggleSelectionUser($event, user)"
+                      [checked]="isUserSelected(user)"
+                    >
+                      {{ user }}
+                    </mat-checkbox>
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-select-trigger
+                *ngIf="
+                  selectedUsers &&
+                  selectedUsers != null &&
+                  selectedUsers.length > 0
+                "
+              >
+                <mat-chip-set>
+                  @for (topping of selectedUsers; track topping) {
+                    <mat-chip [removable]="true">
+                      {{ topping }}
+                      <button
+                        matChipRemove
+                        [attr.aria-label]="'remove ' + topping"
+                        (click)="onRemoveUser($event, topping)"
+                      >
+                        <i class="fas fa-times-circle"></i>
+                      </button>
+                    </mat-chip>
+                  }
+                </mat-chip-set>
+              </mat-select-trigger>
+            </ng-container>
+
+            <div>
+              <button
+                mat-button
+                matStepperPrevious
+                (click)="gotoEcosystemSelection()"
+              >
+                Back
+              </button>
+              <button
+                mat-button
+                matStepperNext
+                (click)="loadSkillTrainingData()"
+                class="btn"
+                [disabled]="selectAll && selectedUsers.length == 0"
+              >
+                Next
+              </button>
+            </div>
+          </form>
+
+          <br /><br />
+        </mat-step>
+
+        <!-- Assign training -->
+        <mat-step [stepControl]="thirdFormGroup" [editable]="true">
+          <form [formGroup]="thirdFormGroup" multiple>
+            <ng-template matStepLabel>Assign training</ng-template>
+
+            <mat-radio-group
+              [(ngModel)]="radioOptions"
+              name="radioButtons"
+              (change)="onRadioButtonChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <mat-radio-button id="radio_1" value="1">Group</mat-radio-button>
+              <mat-radio-button
+                id="radio_2"
+                value="2"
+                [disabled]="selected.mapping.length == 0"
+                >Individual Glober</mat-radio-button
+              >
+            </mat-radio-group>
+
+            <div>
+              @if (showIndivisual) {
+                <mat-accordion>
+                  @for (el of selected.mapping; let index = $index; track el) {
+                    <mat-expansion-panel
+                      (opened)="panelOpenState.set(true)"
+                      (closed)="panelOpenState.set(false)"
+                    >
+                      <mat-expansion-panel-header>
+                        <mat-panel-title> {{ el.userEmail }} </mat-panel-title>
+                        <mat-panel-description>
+                          {{ el.seniority }}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                        style="width: 30%"
+                      >
+                        <input
+                          type="text"
+                          placeholder="Select training"
+                          aria-label="Select Users"
+                          matInput
+                          [matAutocomplete]="auto4"
+                          [formControl]="selectedTrainingControl"
+                        />
+                        <mat-hint>Enter text to find training by name</mat-hint>
+                      </mat-form-field>
+
+                      <mat-autocomplete #auto4="matAutocomplete">
+                        <mat-option [value]="'All'">
+                          <div (click)="optionClicked($event)">
+                            <mat-checkbox
+                              (change)="toggleSelection($event, 'All', el)"
+                              [checked]="
+                                el?.selectedTraning?.length ===
+                                el?.trainings?.length
+                              "
+                            >
+                              {{
+                                el?.selectedTraning?.length ===
+                                el?.trainings?.length
+                                  ? "Deselect All"
+                                  : "All"
+                              }}
+                            </mat-checkbox>
+                          </div>
+                        </mat-option>
+                        <mat-option
+                          *ngFor="let training of filteredTraining | async"
+                          [value]="el.selectedTraning"
+                        >
+                          <div (click)="optionClicked($event)">
+                            <mat-checkbox
+                              (change)="toggleSelection($event, training, el)"
+                              [checked]="isSelected(training, el)"
+                            >
+                              {{ training }}
+                            </mat-checkbox>
+                          </div>
+                        </mat-option>
+                      </mat-autocomplete>
+
+                      <mat-select-trigger>
+                        <mat-chip-set>
+                          @for (
+                            topping of el.selectedTraning;
+                            track topping;
+                            let i = $index
+                          ) {
+                            <mat-chip-row
+                              [removable]="true"
+                              (removed)="chipRemoved(topping, el, i)"
+                            >
+                              {{ topping }}
+                              <button
+                                matChipRemove
+                                [attr.aria-label]="'remove ' + topping"
+                              >
+                                <i class="fas fa-times-circle"></i>
+                              </button>
+                            </mat-chip-row>
+                          }
+                        </mat-chip-set>
+                      </mat-select-trigger>
+                    </mat-expansion-panel>
+                  }
+                </mat-accordion>
+              }
+            </div>
+            <div>
+              @if (showAccount) {
+                <ng-template matStepLabel
+                  >Select account to Assign training
+                </ng-template>
+
+                <mat-form-field
+                  class="example-full-width"
+                  appearance="outline"
+                  style="width: 30%"
+                >
+                  <input
+                    type="text"
+                    placeholder="Select training"
+                    aria-label="Select Users"
+                    matInput
+                    [matAutocomplete]="auto5"
+                    [formControl]="selectedTrainingControlGroup"
+                  />
+                  <mat-hint>Enter text to find users by name</mat-hint>
+                </mat-form-field>
+
+                <mat-autocomplete #auto5="matAutocomplete">
+                  <mat-option [value]="'All'">
+                    <div (click)="optionClicked($event)">
+                      <mat-checkbox
+                        (change)="toggleGroupSelection($event, 'All')"
+                        [checked]="selectedTraining.length === trainings.length"
+                      >
+                        {{
+                          selectedTraining.length === trainings.length
+                            ? "Deselect All"
+                            : "All"
+                        }}
+                      </mat-checkbox>
+                    </div>
+                  </mat-option>
+                  <mat-option
+                    *ngFor="let training of filterTrainingGroupControl | async"
+                    [value]="training"
+                  >
+                    <div (click)="optionClicked($event)">
+                      <mat-checkbox
+                        (change)="toggleGroupSelection($event, training)"
+                        [checked]="isGroupSelected(training)"
+                      >
+                        {{ training }}
+                      </mat-checkbox>
+                    </div>
+                  </mat-option>
+                </mat-autocomplete>
+
+                <mat-select-trigger>
+                  <mat-chip-set>
+                    @for (topping of selectedTraining; track topping) {
+                      <mat-chip-row
+                        [removable]="true"
+                        (removed)="onChipRemoved(topping)"
+                      >
+                        {{ topping }}
+                        <button
+                          matChipRemove
+                          [attr.aria-label]="'remove ' + topping"
+                        >
+                          <!-- <mat-icon class="removeChip">cancel</mat-icon> -->
+                          <i class="fas fa-times-circle"></i>
+                        </button>
+                      </mat-chip-row>
+                    }
+                  </mat-chip-set>
+                </mat-select-trigger>
+              }
+            </div>
+
+            <div>
+              <button
+                mat-button
+                matStepperPrevious
+                (click)="gotoGlobarSelection()"
+              >
+                Back
+              </button>
+              <button
+                mat-button
+                matStepperNext
+                class="btn"
+                [disabled]="activeNext()"
+              >
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Final Submission -->
+        <mat-step [editable]="false">
+          <ng-template matStepLabel>Done</ng-template>
+          <p
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              border-radius: 10px;
+              margin-top: 15px;
+              display: block;
+            "
+          >
+            Once you submit the request, we will process the trainings and
+            assess if they are suitable for the user, considering their
+            seniority level and proficiency gap. Any trainings that have already
+            been assigned to the user or for which the user is sufficiently
+            proficient will not be assigned. However, if you wish to proceed
+            with the trainings regardless of prior assignment or proficiency,
+            please check the "Force Assign" checkbox below before submitting.
+          </p>
+          <section class="example-section">
+            <mat-checkbox
+              class="example-margin"
+              (change)="checkForceAssign($event)"
+              [(ngModel)]="selected.force"
+              [ngModelOptions]="{ standalone: true }"
+              >Force Assign</mat-checkbox
+            >
+            <div class="form-group">
+              <label for="trainingSrcSelect"
+                >Select Training Source: &nbsp;&nbsp;&nbsp;</label
+              >
+
+              <mat-form-field appearance="outline">
+                <mat-label>Training Source</mat-label>
+                <mat-select
+                  [(value)]="selected.trainingAssignmentSrc"
+                  (selectionChange)="onTrainingSourceChange()"
+                >
+                  <mat-option value="Globant Studios">{{
+                    defaultTrainingSrc
+                  }}</mat-option>
+                  <mat-option
+                    *ngFor="let src of trainingSources"
+                    [value]="src"
+                    >{{ src }}</mat-option
+                  >
+                  <mat-option value="Others">{{
+                    othersTrainingSrc
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div
+              *ngIf="selected.trainingAssignmentSrc === 'Others'"
+              class="form-group"
+            >
+              <label for="trainingSourceText"
+                >Other Training Source &nbsp;&nbsp;&nbsp;</label
+              >
+              <input
+                matInput
+                type="text"
+                [(ngModel)]="trainingSourceText"
+                placeholder="Please specify training source"
+              />
+            </div>
+          </section>
+          <div>
+            <button
+              mat-button
+              matStepperPrevious
+              (click)="gotoTrainingsAssignment()"
+            >
+              Back
+            </button>
+            <button
+              mat-button
+              (click)="spinTrainings()"
+              class="btn"
+              [disabled]="!isSubmitEnabled()"
+            >
+              Submit
+            </button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,165 @@
+<header class="app-header">
+  <nav class="navbar">
+    <div class="logo">
+      <a href="" class="logo">
+        <img
+        src="../../../../assets/img/Globant-White.png"
+        alt="navbar brand"
+        class="navbar-brand"
+        height="50"
+      />
+      </a>
+    </div>
+   
+    
+  </nav>
+</header>
+
+<main class="mock-interview-wrapper">
+<div *ngIf="isInterviewInterrupted && isInterviewComplete" class="instructions-page">
+  <mat-card class="thank-you-container">
+    <mat-card-header>
+      <mat-card-title class="thank-you-title">Evaluation Interrupted!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="thank-you-message">
+        Your evaluation has been interrupted. Please contact the admin to reschedule.
+      </p>
+      <!-- <button  
+      type="button"
+      class="btn btn-mock-interview" (click)="redirectToContactAdmin()" >
+        Contact Admin
+      </button> -->
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+<div *ngIf="isInstructionsPageVisible && !isInterviewInterrupted && !isInterviewComplete && !isErrorOccurred" class="instructions-page">
+  <div class="content-wrapper">
+    <h2 class="page-title">Welcome to the Schedule Evaluation</h2>
+
+
+    <p class="instruction-text">
+      Please allow access to your <strong>camera and microphone</strong> to begin the evaluation.
+    </p>
+
+    <p class="instruction-text warning">
+    <strong>Do not refresh or close</strong> the page during the evaluation. Doing so will interrupt the session and you'll have to retake it.
+    </p>
+
+    <button
+   
+    type="button"
+    class="btn btn-mock-interview"
+      (click)="requestMediaPermissions()"
+      [ngClass]="!isErrorOccurred ? 'next-question' : ''"
+     
+    >
+      Start Evaluation
+    </button>
+
+    <p class="footer-text">
+      By clicking 'Start Evaluation', you allow us to access your camera and microphone.
+    </p>
+  </div>
+</div>
+<div *ngIf=" !isInterviewInterrupted && !isInterviewComplete && isErrorOccurred" class="instructions-page">
+  <div class="content-wrapper">
+    <h2 class="page-title">Welcome to the Schedule Evaluation</h2>
+
+    <p *ngIf="isErrorOccurred" class="error-text">
+      Something went wrong while fetching the Evaluation questions for this User. Please contact the admin for assistance.
+    </p>
+
+
+    <button
+   
+    type="button"
+    class="btn btn-mock-interview"
+      (click)="requestMediaPermissions()"
+      [disabled]="isErrorOccurred"
+    >
+      Start Evaluation
+    </button>
+
+  </div>
+</div>
+
+
+
+<div *ngIf="!isInterviewComplete && !isInstructionsPageVisible && !isInterviewInterrupted &&  !isErrorOccurred" class="container">
+  <h1 class="title">Schedule Evaluation</h1>
+  
+  <div class="Question-Container">
+    <div *ngIf="currentQuestion">
+      <div class="questions">
+        <p class="text" style="color: #8d8d8d">
+          Question {{ currentIndex + 1 }} of {{ questions.length }}
+        </p>
+      
+        
+        <h3>{{ currentQuestion.questionText }}</h3>
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="controls">
+    <div class="timer-section">
+      <div class="record-timer">🔴 {{ timer }}</div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button
+      *ngIf="currentIndex < questions.length - 1"
+      type="button"
+      matTooltip="Please save the current answer before proceeding"
+     
+      class="btn btn-mock-interview"
+      (click)="onNext()"
+    >
+      Next Question
+    </button>
+    <!-- <button type="button" class="btn btn-mock-interview" 
+    (click)="openMockInterviewDialog(element.employeeId);"> Schedule Interview </button> -->
+
+    <button
+      *ngIf="currentIndex === questions.length - 1"
+      
+      type="button"
+      class="btn btn-mock-interview"
+      matTooltip="Submit the interview"
+      (click)="submitInterview()"
+      [disabled]="isSubmitDisabled"
+    >
+      Submit Evaluation
+    </button>
+  </div>
+</div>
+
+
+<div class="video-preview" [ngClass]="{ hidden: isInterviewComplete || isInstructionsPageVisible || isInterviewInterrupted ||  isErrorOccurred  }">
+  <video #videoElement autoplay></video>
+</div>
+
+
+<div *ngIf="isInterviewComplete && !isInterviewInterrupted" class="success_screen">
+  <mat-card class="thank-you-container">
+    <mat-card-header>
+      <mat-card-title class="thank-you-title">Thank You!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="thank-you-message">
+        Your evaluation has been successfully completed. You will receive the mail with your score shortly.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+</main>
+
+<footer class="app-footer">
+  <p>© All rights reserved Globant 2025</p>
+</footer>

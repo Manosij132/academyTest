@@ -1,0 +1,150 @@
+body {
+  background-color: #f4f4f4; 
+}
+
+.container {
+  max-width: 500px; 
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: auto; 
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333; 
+}
+
+.group-btn {
+  /* margin-bottom: 10px; */
+  display: flex;
+}
+
+.mat-form-field {
+  width: 100%; 
+}
+
+
+
+.date-field{
+  margin: 14px; 
+}
+
+.time-field {
+  margin-right: 0;
+  margin-top: 15px;
+  margin-bottom: 15px; 
+}
+
+/* Optional: Adjust the time input */
+input[type="time"] {
+  width: 80%; /* Make sure time input stretches fully */
+}
+
+/* Optional: Adjust the date input to match time input style */
+input[matInput] {
+  width: 100%;
+}
+
+.resume-upload {
+  border: 2px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777; 
+}
+
+.resume {
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.schedule-btn {
+  background-color: #bfd732;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  transition: background-color 0.3s;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  bottom: 8px;
+  padding: 10px;
+}
+
+.schedule-btn:hover {
+  background-color: #45a049;
+}
+
+.dialog-content {
+  max-height: 650px
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: start; 
+}
+
+/* .close-button {
+  margin-left: auto;
+  color: #333; 
+} */
+
+.button-algin{
+  display: flex;
+  margin: 10px;
+}
+
+.close-button {
+  margin-left: auto; 
+  color: #333; 
+  background-color: transparent; 
+  border: none;
+  cursor: pointer; 
+  font-size: 16px; 
+  outline: none;
+}
+
+.close-button mat-icon {
+  font-size: 24px; 
+}
+
+.time-picker {
+  position: relative;
+}
+
+.disabled {
+  pointer-events: none; /* Prevent interaction with the form */
+  position: relative; /* For positioning the loader */
+}
+
+.loader-container {
+  display: flex;                /* Use flexbox */
+  justify-content: center;      /* Center horizontally */
+  align-items: center;          /* Center vertically */
+  height: 100px;               /* Adjust as needed for the height of your dialog */
+  margin: 20px 0;              /* Optional: Add some margin to separate from the form */
+  position: absolute;           /* Position it absolutely */
+  top: 0;                       /* Align to the top */
+  left: 0;                      /* Align to the left */
+  right: 0;                     /* Align to the right */
+  bottom: 0;                    /* Align to the bottom */
+  background-color: rgba(255, 255, 255, 0.8); /* Optional: semi-transparent background */
+  z-index: 10;                  /* Ensure it appears above the form */
+}
+
+::ng-deep .mat-snack-bar-container {
+  background-color: rgba(191, 215, 50, 1); 
+  color: white;            
+}
+
+::ng-deep .mat-dialog-container{
+  margin-left: 15em;
+}

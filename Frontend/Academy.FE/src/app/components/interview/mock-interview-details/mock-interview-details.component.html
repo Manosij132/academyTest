@@ -1,0 +1,84 @@
+<div class="container-fluid">
+
+  <div class="row" style="margin-top: 71px;">
+    <div class="col-12">
+
+      <!-- Toggle Button (Right-Aligned) -->
+      <div class="d-flex justify-content-end mb-2">
+        <button mat-flat-button class="action-btn" (click)="toggleProfile()">
+          <span class="me-2">Candidate Profile</span>
+          <mat-icon>{{ isProfileOpen ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </button>
+      </div>
+      
+    
+
+      <!-- Collapsible Profile Card -->
+      <div [ngClass]="{'collapse': true, 'show': isProfileOpen}" id="profileCollapse">
+
+        <div class="card shadow-sm border-0 rounded-3 p-4">
+
+          <!-- Profile Picture -->
+          <div class="text-center mb-4">
+            <img
+              [src]="safeProfileImageUrl || 'assets/img/user-icon.png'"
+              (error)="onImageError($event)"
+              alt="Profile"
+              class="avatar-img rounded-circle"
+              style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #f1f1f1;"
+            />
+          </div>
+          
+
+          <!-- Profile Details -->
+          <div class="user-profile">
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-user fa-fw me-3 text-primary fs-5"></i>
+              <h5 class="mb-0 fw-semibold">{{ employee?.employeeName }}</h5>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-envelope fa-fw me-3 text-secondary fs-5"></i>
+              <span class="text-muted">{{ employee?.employeeEmail }}</span>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-briefcase fa-fw me-3 text-info fs-5"></i>
+              <span>{{ employee?.position }} | {{ employee?.seniority }}</span>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-map-marker-alt fa-fw me-3 text-danger fs-5"></i>
+              <span>{{ employee?.baseLocation }} | {{ employee?.tdc }}</span>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-user-tie fa-fw me-3 text-warning fs-5"></i>
+              <span>Career Mentor: {{ employee?.careerMentorEmail }}</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Schedule Interview Details -->
+      <div class="container mt-4">
+        <h3 class="fw-bold mb-3 title d-flex align-items-center">
+            <button *ngIf="showBackButton" mat-icon-button (click)="goBack()" class="me-2">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            {{ employee?.employeeName }}
+        </h3>
+        <app-candidate-interviews
+                (hideBackButton)="showBackButton = false"
+                (showBackButton)="showBackButton = true"
+                [candidate]="employee">
+        </app-candidate-interviews>
+      </div>
+
+    </div>
+  </div>
+
+</div>

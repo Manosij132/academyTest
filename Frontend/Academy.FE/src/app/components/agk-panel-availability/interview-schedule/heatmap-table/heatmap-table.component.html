@@ -1,0 +1,108 @@
+<div class="scrollable-table-wrapper">
+  <div class="heatmap-bar">
+    <div>&nbsp;</div>
+    <ul class="heatmap-lagend">
+      <li>
+        <span class="slot slot-red"></span>
+        <span class="slot-label">Utilised</span>
+      </li>
+      <li>
+        <span class="slot slot-green"></span>
+        <span class="slot-label">Unutilised</span>
+      </li>
+      <li>
+        <span class="slot slot-grey"></span>
+        <span class="slot-label">Unavailable</span>
+      </li>
+    </ul>
+  </div>
+
+  <table mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-table heatmap-table">
+    <ng-container matColumnDef="panel">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="cell-padding text-center thead bold"
+      >
+        Panel
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        class="cell-padding text-center bold"
+      >
+        {{ element.panel }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="primaryPanel">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="cell-padding text-center thead bold"
+      >
+        Primary Panel
+      </th>
+      <td mat-cell *matCellDef="let element" class="cell-padding bold">
+        <span [matTooltip]="element.emailId">
+          {{ element.primaryPanel }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="upToSeniority">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="cell-padding text-center thead bold"
+      >
+        Up To Seniority
+      </th>
+      <td mat-cell *matCellDef="let element" class="cell-padding bold">
+        {{ element.upToSeniority }}
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let column of columns">
+      <ng-container [matColumnDef]="column.key">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="cell-padding text-center thead bold"
+        >
+          <div>
+            <small>{{ column.day }}</small>
+            <br />
+            <span>{{ column.date }}</span>
+          </div>
+        </th>
+        <!--  -->
+        <td mat-cell *matCellDef="let element" (click)="sceduleInterviewDialog(element,element[column.key].type ,element[column.key].id, column.key)">
+          <ng-container *ngIf="element[column.key] as slot" >
+            <div [class]="slotClasses.get(slot.type)">
+              <span
+                [style]="{visibility: slot.type == unavailableSlotType ? 'hidden' : '' }"
+                >{{ slot.timeDisplay }}</span
+              >
+            </div>
+          </ng-container>
+          <div
+            [class]="slotClasses.get('Unavailable')"
+            *ngIf="!element[column.key]"
+          >
+            <span [style]="{ visibility: 'hidden' }">00 XX</span>
+          </div>
+        </td>
+      </ng-container>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+  </table>
+</div>

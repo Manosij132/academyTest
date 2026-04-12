@@ -1,0 +1,3992 @@
+{
+    "timeStamp": "28102024053818030",
+    "status": 200,
+    "data": [
+        {
+            "ecosystemId": 101,
+            "skillId": 10,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "OOP",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (Jr & Jr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6036,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (Jr & Jr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6036,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (Sr & Sr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6050,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (Sr & Sr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6050,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (Sr )",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6052,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (SD and Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6053,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (SD and Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6053,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (SD and Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6053,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (SD and Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6053,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (SD and Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6053,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (SD and Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6053,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (SD and Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6053,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :OOPS (SD and Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6053,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : OOPS (Jr & Jr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6063,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : OOPS (Jr & Jr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6063,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (Sr & Sr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6064,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (Sr & Sr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6064,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (Sr )",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6065,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6066,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6066,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6066,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6066,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6066,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6066,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6066,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :OOPS (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6066,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 1,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": ".NET Framework (Core)",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6042,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6042,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6042,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6042,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training : .Net Core Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6206,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6268,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6268,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6268,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6268,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : .Net Framework - Architect",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6270,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 8,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "Design Patterns & SOLID",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (Jr& Jr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6055,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (Jr& Jr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6055,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (Sr & Sr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6057,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (Sr & Sr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6057,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (Sr )",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6061,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (SD & Architect )",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6062,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (SD & Architect )",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6062,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (SD & Architect )",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6062,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (SD & Architect )",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6062,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (SD & Architect )",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6062,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (SD & Architect )",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6062,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (SD & Architect )",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6062,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training :Design Patterns & SOLID (SD & Architect )",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6062,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (Jr & Jr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6067,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (Jr & Jr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6067,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (Sr & Sr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6068,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (Sr & Sr Adv.)",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6068,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (Sr)",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6069,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6070,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6070,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6070,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6070,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6070,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6070,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6070,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment :Design Patterns & SOLID (SD & Architect)",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6070,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 7,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "API Rest",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Basics",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6169,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Basics",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6169,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Basics",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6169,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Basics",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6169,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Basics",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6169,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Advanced",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6239,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Advanced",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6239,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Advanced",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6239,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Advanced",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6239,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Advanced",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6239,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Advanced",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6239,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Advanced",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6239,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Web API Advanced",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6239,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6436,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6436,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6436,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6436,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6436,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Advanced Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6478,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Advanced Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6478,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Advanced Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6478,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Advanced Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6478,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Advanced Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6478,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Advanced Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6478,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Advanced Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6478,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Web API Advanced Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6478,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 9,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "Git",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Intermediate Level)",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6221,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Intermediate Level)",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6221,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Intermediate Level)",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6221,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Intermediate Level)",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6221,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Git (Advanced Level)",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6222,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : Git Lab",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6260,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 12,
+            "expectedProficiency": 4,
+            "expectedKnowledge": 1,
+            "skillName": "Agile",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6223,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Intermediate LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6224,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Intermediate LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6224,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Beginner LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6225,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: AGILE (Beginner LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6225,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6499,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6499,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6499,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6499,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 13,
+            "expectedProficiency": 4,
+            "expectedKnowledge": 1,
+            "skillName": "CI/CD Workflow Foundation",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6226,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6226,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6226,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6226,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6226,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6226,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6226,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Advanced LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6226,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Beginner/Intermediate LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6227,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Beginner/Intermediate LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6227,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 TRAINING: CI/CD (Beginner/Intermediate LEVEL)",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6227,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: CI/CD AUTOMATION Lab",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6229,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 2,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "C#",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6228,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6228,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6233,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6233,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6233,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: C# Training",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6245,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : C# .Net Framework - Hello World Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6262,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : C# .Net Framework - Hello World Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6262,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : C# Object Class",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6264,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : C# Object Class",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6264,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : C# Object Class",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6264,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 5,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "Cloud",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Basics",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6250,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Basics",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6250,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Basics",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6250,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Advanced Concepts",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6276,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Advanced Concepts",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6276,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Advanced Concepts",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6276,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Advanced Concepts",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6276,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Advanced Concepts",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6276,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Advanced Concepts",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6276,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Advanced Concepts",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6276,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Azure Advanced Concepts",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6276,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6499,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6499,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Basics Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6499,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Azure Advanced Concepts Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6647,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 3,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "SQL",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: SQL Training",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6255,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment : SQL Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6258,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 4,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "Unit Testing",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Unit Testing best practices",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6293,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Unit Testing Assignment",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6727,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 11,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "Microservice",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6643,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Microservices and Patterns Lab",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6793,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 6,
+            "expectedProficiency": 3,
+            "expectedKnowledge": 1,
+            "skillName": "Containers",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6720,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6722,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Container",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6722,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment II",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6723,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment II",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6723,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: Container - Assignment I",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6724,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 14,
+            "expectedProficiency": 2,
+            "expectedKnowledge": 1,
+            "skillName": "NoSQL",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: NoSQL",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6762,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                },
+                {
+                    "trainingName": "MVP 2.0 Assignment: NoSql",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6763,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": true
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 73,
+            "expectedProficiency": 3,
+            "expectedKnowledge": 1,
+            "skillName": "Angular 2+",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 14,
+                    "seniority": null,
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 15,
+                    "seniority": null,
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 16,
+                    "seniority": null,
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 1,
+                    "seniority": null,
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 2,
+                    "seniority": null,
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: Angular",
+                    "trainingLink": null,
+                    "seniorityId": 11,
+                    "seniority": null,
+                    "trainingId": 6891,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 74,
+            "expectedProficiency": 5,
+            "expectedKnowledge": 1,
+            "skillName": "React",
+            "trainings": [
+                {
+                    "trainingName": "MVP 2.0 Training: React",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 6892,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: React",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 6892,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: React",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 6892,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: React",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 6892,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: React",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 6892,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: React",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 6892,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "MVP 2.0 Training: React",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 6892,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 80,
+            "expectedProficiency": 3,
+            "expectedKnowledge": 1,
+            "skillName": "ML.Net",
+            "trainings": [
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : ML",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 8636,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : ML",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 8636,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : ML",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 8636,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : ML",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 8636,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : ML",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 8636,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : ML",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 8636,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : ML",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 8636,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                }
+            ]
+        },
+        {
+            "ecosystemId": 101,
+            "skillId": 79,
+            "expectedProficiency": 3,
+            "expectedKnowledge": 1,
+            "skillName": "Blazor",
+            "trainings": [
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : Blazor",
+                    "trainingLink": null,
+                    "seniorityId": 3,
+                    "seniority": "Architect (Sr Level 3)",
+                    "trainingId": 8639,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : Blazor",
+                    "trainingLink": null,
+                    "seniorityId": 4,
+                    "seniority": "Software Designer (Sr Level 2)",
+                    "trainingId": 8639,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : Blazor",
+                    "trainingLink": null,
+                    "seniorityId": 5,
+                    "seniority": "Sr (Sr Level 1)",
+                    "trainingId": 8639,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : Blazor",
+                    "trainingLink": null,
+                    "seniorityId": 6,
+                    "seniority": "SSr Adv",
+                    "trainingId": 8639,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : Blazor",
+                    "trainingLink": null,
+                    "seniorityId": 7,
+                    "seniority": "SSr",
+                    "trainingId": 8639,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : Blazor",
+                    "trainingLink": null,
+                    "seniorityId": 8,
+                    "seniority": "Jr Adv",
+                    "trainingId": 8639,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                },
+                {
+                    "trainingName": "Deloitte : .Net NON MVP : Blazor",
+                    "trainingLink": null,
+                    "seniorityId": 9,
+                    "seniority": "Jr",
+                    "trainingId": 8639,
+                    "trainingDescription": null,
+                    "trainingCompletionHours": 0,
+                    "isMvP": false
+                }
+            ]
+        }
+    ],
+    "errorResponseId": null,
+    "errorMessage": null,
+    "exception": null,
+    "success": true
+}

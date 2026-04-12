@@ -1,0 +1,50 @@
+<div *ngIf="isCommentsVissible == true">
+  <div class="bg-funky">
+    <div class="container">
+      <div *ngIf="comments.length == 0">
+        <div class="alert alert-info" role="alert">No records found.</div>
+      </div>
+      <div class="messaging" *ngIf="comments.length > 0">
+        <div class="inbox_msg">
+          <div class="mesgs">
+            <div class="msg_history">
+              <div *ngFor="let comment of comments">
+                <div
+                  class="incoming_msg"
+                  *ngIf="comment.commentByEmpId != employeeId"
+                >
+                  <div class="incoming_msg_img">
+                    <img [src]="comment.commentByImage" />
+                  </div>
+                  <div class="received_msg">
+                    <div class="received_withd_msg">
+                      <p>
+                        {{ comment.commentText }}
+                      </p>
+                      <span class="time_date">
+                        {{ comment.commentBy }} ~
+                        {{ comment.commentDate | date : "dd-MMM-yyyy" }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="outgoing_msg"
+                  *ngIf="comment.commentByEmpId == employeeId"
+                >
+                  <div class="sent_msg">
+                    <p>You: {{ comment.commentText }}</p>
+                    <span class="time_date">
+                      {{ comment.commentDate | date : "dd-MMM-yyyy" }}
+                    </span>
+                  </div>
+                </div>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+
+
+.background {
+    width: 100%;
+    height: -webkit-fill-available;
+    position: absolute;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    //background-size: 100% 100%;
+    background-size: cover;
+    background-image: url(../../../../public/assets/img/bg.sept.png);
+    transition: background-image 0.2s linear;
+
+  }
+  
+  .loginBtn {
+    background-color: #dc2828;
+    border-color: #dc2828;
+    box-shadow: 0 2px 6px #f6acac63;
+    margin-top: 65px;
+  }
+  
+  .loginBtnHover:hover {
+    background-color: #dc2828b0 !important;
+    color: white;
+  }
+  
+  .loginBrand {
+    margin-top: 22vh;
+    width: 350px;
+    height: 360px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    padding: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+  }
+  
+  .login-brand{
+    text-align: center;
+    margin: 40px;
+  }
+  
+  .loginTitle {
+    text-align: center;
+    font-size: 28px;
+    color: rgb(242, 242, 242);
+    margin-top: 25px;
+  }
+  
+  .loginPara {
+    text-align: center;
+    font-size: 15px;
+    color: rgb(242, 242, 242);
+  }
+  
+  #wrapper{
+    text-align: center;
+  }
+  

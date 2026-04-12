@@ -1,0 +1,32 @@
+﻿CREATE TABLE [dbo].[BookMarkTemplates] (
+    [BookMarkId] INT IDENTITY (1, 1) NOT NULL,
+    [BookMarkName] NVARCHAR (255) NOT NULL,
+    [TDC] NVARCHAR (MAX) NULL,
+    [Communities] NVARCHAR (MAX) NULL,
+    [Trainings] NVARCHAR (MAX) NULL,
+    [Seniorities] NVARCHAR (MAX) NULL,
+    [Projects] NVARCHAR (MAX) NULL,
+    [Statuses] NVARCHAR (MAX) NULL,
+    [ReportType] INT NOT NULL,
+    [ConfigureColumns] NVARCHAR (MAX) NULL,
+    [GroupByColumns] NVARCHAR (MAX) NULL,
+    [To] NVARCHAR (MAX) NULL,
+    [CC] NVARCHAR (MAX) NULL,
+    [Subject] NVARCHAR (MAX) NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedBy] INT NOT NULL,
+    [CreatedOn] DATETIME2 (0) NOT NULL,
+    [UpdatedBy] INT NULL,
+    [UpdatedOn] DATETIME2 (0) NULL,
+	[Body] NVARCHAR (MAX) NULL,
+    [AreaPaths] NVARCHAR(MAX) NULL, 
+    [PrimaryActivities] NVARCHAR(MAX) NULL, 
+    [ActivitieOptions] NVARCHAR(MAX) NULL, 
+    [EmployeeId] NVARCHAR(MAX) NULL, 
+    [DateTypeFilter] NVARCHAR(MAX) NULL, 
+    [FromDate] DATE NULL,
+    [ToDate] DATE NULL,
+    [Client] NVARCHAR(MAX) NULL
+    CONSTRAINT [PK_BookMarkTemplates] PRIMARY KEY CLUSTERED ([BookMarkId] ASC)
+);
+GO

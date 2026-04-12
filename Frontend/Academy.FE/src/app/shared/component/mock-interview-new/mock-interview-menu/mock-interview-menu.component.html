@@ -1,0 +1,11 @@
+<ul class="nav nav-collapse">
+  <li *ngFor="let item of menuItems" [class.active]="isActive(item.path)">
+    <a
+      [routerLink]="['/mockInterview', item.path]"
+      (click)="getMenuClick && getMenuClick()"
+    >
+      <i class="menu-icon" [ngClass]="item.icon"></i>
+      <span class="sub-item">{{ item.name }}</span>
+    </a>
+  </li>
+</ul>

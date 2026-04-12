@@ -1,0 +1,101 @@
+export const ApiConstants = {
+  CTRL_ACCOUNT: 'account',
+  CTRL_DASHBOARD: 'dashboard',
+  CTRL_MASTER: 'master',
+  CTRL_SKILLTRAINING: 'SkillTraining',
+  CTRL_REPORT: 'Report',
+  CTRL_ACTIVITY: 'Activity',
+  CTRL_TrainingReport: 'TrainingReport',
+  CTRL_CHATBOT: 'ChatBot',
+  CTRL_Training: 'Training',
+
+  PATH_AUTHENTICATE: 'authenticate',
+  PATH_TRACKERLIST: '',
+  PATH_CHANGE_STATUS: 'ChangeStatus',
+  PATH_UPLOADCV: 'UploadCV',
+  PATH_POST_COMMENTS: 'Post/Comments',
+  PATH_FETCH_COMMENTS: 'Fetch/Comments',
+  PATH_FETCH_LATEST_COMMENT: 'Fetch/LatestComments',
+  PATH_FETCH_PROFICIENCY: 'Fetch/Proficiencies',
+  PATH_UPDATE_PROFICIENCY: 'InsertOrUpdate/Proficiency',
+  PATH_UPDATE_TRAINING_PRIORITY: 'UpdateTraining',
+  PATH_SEARCH_USER: "employee/search",
+
+  PATH_LOAD_SLILLTRAININGS_METADATA: "Fetch/SkillTrainingsMetaData",
+  PATH_LOAD_SKILL_ENDORSEMENT: "Fetch/FetchSkillEndorsement",
+  PATH_SPIN_TRAININGS: "spin/trainings",
+  PATH_INSERT_SKILL: "Insert/skills",
+  PATH_LOAD_SKILLS: "Fetch/Skills",
+
+  PATH_LOAD_ALL_ECOSYSTEMS: "Ecosystems/Fetch/all",
+  PATH_INSERT_SECONDARY_ECOSYSTEM: "Ecosystems/Insert/secondary",
+  PATH_LOAD_SECONDARY_ECOSYSTEMS: "Ecosystems/Fetch/secondary",
+  PATH_LOAD_EMPLOYEES_STARTS_WITH: 'Employees/StartsWith',
+
+  PATH_FETCH_SENIORITY: 'Seniority/Fetch',
+  PATH_INSERT_SENIORITY: 'Seniority/Insert',
+  PATH_MODIFY_SENIORITY: 'Seniority/Modify',
+  PATH_DEACTIVATE_SENIORITY: 'Seniority/Deactivate',
+
+  PATH_FETCH_ROLE: 'Role/Fetch',
+  PATH_INSERT_ROLE: 'Role/Insert',
+  PATH_MODIFY_ROLE: 'Role/Modify',
+  PATH_INSERT_OR_UPDATE_EMPLOYEE_ROLE: 'EmployeeRole/InsertOrUpdate',
+
+  PATH_FETCH_PROFICIENCY_MASTER: 'ProficiencyMaster/Fetch',
+  PATH_FETCH_PROFICIENCY_BY_ECOSYSTEM_SKILL: 'Fetch/ProficiencyByEcosystemSkill',
+
+  PATH_INSERT_TRAINING: 'Insert/Trainings',
+
+  FETCH_REQUEST_TRACKER: 'Fetch/RequestTrackerStatus',
+
+  FETCH_ALL_COMMUNITIES: 'Community/FetchAll',
+  FETCH_ALL_CLIENTS: 'Client/FetchAll',
+  FETCH_ALL_ACCOUNTS: 'Account/FetchAll',
+  FETCH_ALL_AISTUDIO_ACCOUNTS:'AiStudioAccount/FetchAll',
+  FETCH_ALL_TDCS: 'Tdc/FetchAll',
+  FETCH_ALL_TDCS_COMMUNITY_DOJO: 'TdcCommunityForDojo/FetchAll',
+  PATH_REPORT_EXPORT: 'Execute/ReportJob',
+  PATH_DETAILED_REPORT_EXPORT: 'Execute/DetailedReportJob',
+  FETCH_ALL_AISTUDIOS: 'AiStudio/FetchAll',
+  
+
+  PATH_FETCH_ALL_CATEGORIES: 'Fetch/Categories',
+  PATH_INSERT_CATEGORY_OR_SUBCATEGORY: 'Insert/CategoryOrSubCategory',
+  PATH_FETCH_INTERVIEW_ANSWER_AND_DETAILS: 'mock-interviews/interview',
+  PATH_MOCK_INTERVIEW :'mock-interviews',
+
+  PATH_INSERT_UPDATE_ACTIVITY: 'InsertOrUpdate/EmployeeActivities',
+  FETCH_ALL_ACTIVITIES: 'Activities/FetchAll',
+
+  PATH_FETCH_BOOKMARK_BYID : 'BookMark/GetBookMarkById' ,
+  PATH_INSERT_BOOKMARK: 'BookMark/AddBookMark',
+  PATH_DELETE_BOOKMARK: 'BookMark/DeleteBookMark',
+  PATH_BOOKMARK_LIST : 'BookMark/GetBookMark',
+  PATH_BOOKMARK_VIEW_REPORT : 'BookMark/ViewReport',
+  PATH_BOOKMARK_EXPORT_REPORT : 'BookMark/ExportReport',
+  PATH_BOOKMARK_PREVIEW_REPORT : 'BookMark/PreviewReport',
+  PATH_BOOKMARK_SEND_REPORT : 'BookMark/SendReportOnEmail',
+  
+
+  FETCH_ALL_TRAINING : 'Training/FetchAll',
+  FETCH_ALL_PROJECT : 'Project/FetchAll',
+  FETCH_ALL_TRAINING_STATUS : 'Training/FetchTrainingStatus',
+  FETCH_ALL_REPORT_TYPES: 'ReportType/FetchAll',
+  FETCH_ALL_SELECT_COLUMNS : 'Training/FetchReportSelectColumns',
+  FETCH_ALL_GROUP_BY_COLUMNS : 'Training/FetchReportGroupByColumns',
+    FETCH_ALL_AREAPATHS: 'AreaPath/FetchAll',
+    FETCH_TRAINING_BY_COMMUNITY: 'Training/FetchByCommunity',
+    FETCH_PRIMARY_ACTIVITES_BY_COMMUNITY: 'PrimaryActivity/FetchPrimaryActivityByCommunity',
+    FETCH_ALL_PRIMARYACTIVITY: 'PrimaryActivity/FetchAll',
+    FETCH_TRAING_BY_AREAPATH_AND_COMMUNITY: 'Training/FetchByAreaPathAndCommunity',
+    PATH_GET_REPLY: 'GetReply',
+    PATH_ASSIGN_TRAINING: 'AssignTrainings',
+
+    PATH_STAFFING: 'semanticSearch/staffing',
+    FETCH_JOBS: 'Jobs',
+    PATH_FETCH_JOB_LIST: "Fetch/jobs",
+    FETCH_ALL_DOCUMENTTYPE: 'FetchAll/DocumentType',
+    PATH_ACADEMY_GETACADEMYDATA: 'GetAcademyData',
+    FETCH_DOJO_ACTIVITY_DETAIL: 'FetchActivityDetail'
+}

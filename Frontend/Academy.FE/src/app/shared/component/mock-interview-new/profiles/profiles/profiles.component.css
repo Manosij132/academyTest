@@ -1,0 +1,121 @@
+.buttons{
+    display: flex;
+
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    /* gap: 24px; */
+    padding-top: 8px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .form-error {
+    color: #d32f2f;
+    font-size: 13px;
+    margin-top: -8px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .skill-topic-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  
+  .section-title, .section-subtitle {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .topic-header {
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  
+  .topic-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .topic-actions {
+    margin-top: 12px;
+  }
+  
+  .selected-skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .selected-skill-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #f5f5f5;
+    padding: 12px;
+    border-radius: 6px;
+  }
+  
+  .selected-skill-name {
+    font-weight: 500;
+  }
+  
+  .selected-skill-topics {
+    font-size: 13px;
+    color: #555;
+    margin-top: 4px;
+  }
+  .header-btn {
+    background-color: #bfd732!important;
+    color: black !important;
+    border: 1px solid #e6edb9;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .checkbox-layout {
+    display: flex;
+    gap: 8px;
+  }
+
+  .mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-checkmark-color: #6861CE;   
+  --mdc-checkbox-selected-icon-color: #fff;      
+  --mdc-checkbox-selected-focus-icon-color: #fff;
+  --mdc-checkbox-selected-hover-icon-color: #fff;
+  --mdc-checkbox-selected-pressed-icon-color: #fff;
+  /* --mdc-checkbox-selected-focus-icon-color: #6861ce; */
+}
+
+::ng-deep .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+  border: 1px solid #6861CE !important;
+}
+
+::ng-deep .mdc-checkbox {
+  padding: 0px !important;
+}
+
+::ng-deep .mdc-checkbox__background {
+  top: auto !important;
+  left: auto !important;
+}

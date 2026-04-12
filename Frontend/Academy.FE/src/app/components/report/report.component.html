@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">{{ pageHeader }}</h3>
+    <div class="row justify-content-center align-items-center mb-1">
+      <div class="col-md-12 ps-md-0">
+        <div class="card card-pricing">
+          <div class="card-header">
+            <h4 class="card-title">Export Full Report Extract</h4>
+          </div>
+          <div class="card-body">
+            <p>
+              A comprehensive and detailed report that encapsulates all relevant
+              academy data extracted from the system and will be exported to
+              Google Sheets.
+            </p>
+          </div>
+          <div class="card-footer">
+            <button
+              (click)="exportFullReport()"
+              class="btn btn-primary w-20 btnStyle"
+            >
+              <b>Export Now</b>&nbsp;<i class="fas fa-file-export"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,179 @@
+@if (error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">AI Models Configuration</h3>
+
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Filter</mat-label>
+        <input matInput [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Search AI models..." />
+      </mat-form-field>
+
+      <div class="right-flex-container">
+        <button class="header-btn" (click)="onCreateAIModel()">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      @if(!(loaderService.loaderState | async)) {
+      <div class="card">
+        @if (dataSource.data.length === 0) {
+        <div class="p-8 text-center text-gray-500">
+          <i class="fa fa-robot fa-3x mb-3"></i>
+          <h5>No AI models found</h5>
+          <p>Add your first AI model to get started.</p>
+        </div>
+        } @else {
+
+        <div class="scrollable-table-wrapper table-view">
+          <table mat-table [dataSource]="dataSource" matSort class="table">
+            <!-- ID -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+              <td mat-cell *matCellDef="let model">{{ model.id }}</td>
+            </ng-container>
+
+            <!-- Model Name -->
+            <ng-container matColumnDef="modelName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Model Name
+              </th>
+              <td mat-cell *matCellDef="let model">{{ model.modelName }}</td>
+            </ng-container>
+
+            <!-- Version -->
+            <ng-container matColumnDef="version">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Version</th>
+              <td mat-cell *matCellDef="let model">{{ model.version }}</td>
+            </ng-container>
+
+            <!-- Usage -->
+            <ng-container matColumnDef="usage">
+              <th mat-header-cell *matHeaderCellDef>Usage</th>
+              <td mat-cell *matCellDef="let model">
+                <span *ngIf="
+                      isArray(model.usage) && model.usage.length > 0;
+                      else showSingleUsage
+                    ">
+                  {{ model.usage.join(", ") }}
+                </span>
+                <ng-template #showSingleUsage>
+                  {{ model.usage || "-" }}
+                </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Created -->
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+              <td mat-cell *matCellDef="let model">
+                {{ model.createdAt | date : "short" }}
+              </td>
+            </ng-container>
+
+            <!-- Updated -->
+            <ng-container matColumnDef="updatedAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated</th>
+              <td mat-cell *matCellDef="let model">
+                {{ model.updatedAt | date : "short" }}
+              </td>
+            </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let model">
+                <div class="buttons">
+                  <mat-icon (click)="onEditAIModel(model)" style="cursor: pointer">edit</mat-icon>
+                  <mat-icon (click)="openDeletePopup(model)" style="cursor: pointer">delete</mat-icon>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="totalItems"
+          (page)="onPageChanged($event)" showFirstLastButtons>
+        </mat-paginator>
+        }
+      </div>
+      }
+      @else {
+      <div class="p-8 text-center text-gray-500">
+        <h5>Loading AIModels…</h5>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}
+
+<!-- Template for Edit AI Model Dialog -->
+<ng-template #editAIModelTemplate>
+  <form [formGroup]="editForm" class="space-y-4 max-w-md p-1" (ngSubmit)="onSubmitEditDialog()">
+    <div class="flex gap-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Model Name</mat-label>
+        <input matInput formControlName="modelName" placeholder="Enter model name" />
+        <mat-error *ngIf="editForm.get('modelName')?.hasError('required')">Model name is required</mat-error>
+        <mat-error *ngIf="editForm.get('modelName')?.hasError('maxlength')">Max 100 characters allowed</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Version</mat-label>
+        <input matInput formControlName="version" placeholder="Enter version" />
+        <mat-error *ngIf="editForm.get('version')?.hasError('required')">Version is required</mat-error>
+        <mat-error *ngIf="editForm.get('version')?.hasError('maxlength')">Max 50 characters allowed</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="w-full" style="width: 87%">
+      <mat-label>Usage</mat-label>
+      <textarea matInput formControlName="usage" placeholder="e.g. analyzingInterview, analyzingAnswer"
+        rows="3"></textarea>
+      <mat-hint>Comma-separated values</mat-hint>
+    </mat-form-field>
+
+    <div *ngIf="dialogError" class="text-red-600 text-sm mt-1">
+      {{ dialogError }}
+    </div>
+  </form>
+</ng-template>
+
+<!-- Template for Add AI Model Dialog -->
+<ng-template #addAIModelTemplate>
+  <form [formGroup]="form" class="space-y-4 max-w-md p-1" (ngSubmit)="onSubmitDialog()">
+    <div class="flex gap-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Model Name</mat-label>
+        <input matInput formControlName="modelName" placeholder="Enter model name" />
+        <mat-error *ngIf="form.get('modelName')?.hasError('required')">Model name is required</mat-error>
+        <mat-error *ngIf="form.get('modelName')?.hasError('maxlength')">Max 100 characters allowed</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Version</mat-label>
+        <input matInput formControlName="version" placeholder="Enter version" />
+        <mat-error *ngIf="form.get('version')?.hasError('required')">Version is required</mat-error>
+        <mat-error *ngIf="form.get('version')?.hasError('maxlength')">Max 50 characters allowed</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="w-full" style="width: 87%">
+      <mat-label>Usage</mat-label>
+      <textarea matInput formControlName="usage" placeholder="e.g. analyzingInterview, analyzingAnswer"
+        rows="3"></textarea>
+      <mat-hint>Comma-separated values</mat-hint>
+    </mat-form-field>
+
+    <div *ngIf="dialogError" class="text-red-600 text-sm mt-1">
+      {{ dialogError }}
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,438 @@
+
+.pt-2 {
+  padding-top: 5.5rem !important;
+}
+
+.title {
+  margin-top: 77px;
+}
+
+table {
+  width: 100%;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: block;
+  width: 95%;
+  margin: auto;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+/* tracker-list.component.scss */
+
+/* Style for the table rows */
+.mat-row {
+  background-color: #333333;
+  /* Set the background color of the table rows */
+  color: white;
+  /* Set the text color of the table rows */
+}
+
+/* Optional: Change the background color on hover for better UX */
+.mat-row:hover {
+  background-color: #444444;
+  /* Slightly lighter background on hover */
+}
+
+/* Style for the cells to ensure text is white */
+.mat-cell,
+.mat-header-cell {
+  color: white;
+  /* Ensure the text color in cells is white */
+}
+
+.example-element-detail table {
+  border-collapse: collapse;
+  width: 100%;
+  /* Optional: makes the table take full width */
+}
+
+.example-element-detail th,
+.example-element-detail td {
+  border: 1px solid #ddd;
+  /* Change color as needed */
+  padding: 8px;
+  /* Adds padding for better appearance */
+  text-align: left;
+  /* Align text to the left */
+}
+
+.example-element-detail th {
+  background-color: #f2f2f2;
+  /* Light gray background for header */
+  font-weight: bold;
+  /* Make header text bold */
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+mat-progress-bar {
+  width: 25px;
+  height: 25px;
+}
+
+.header-bold {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+::ng-deep .mdc-switch__track {
+  height: 25px !important;
+  width: 50px !important;
+}
+
+::ng-deep .mdc-switch__handle {
+  height: 24px !important;
+  width: 24px !important;
+}
+
+::ng-deep
+  .mat-mdc-slide-toggle
+  .mdc-switch--unselected
+  .mdc-switch__handle:has(.mdc-switch__icons) {
+  left: -5px;
+}
+
+::ng-deep
+  .mat-mdc-slide-toggle
+  .mdc-switch--selected
+  .mdc-switch__handle:has(.mdc-switch__icons) {
+  left: 5px;
+}
+
+::ng-deep .custom-menu {
+  width: 250px;
+  /* Set your desired width */
+
+  ::ng-deep .mat-mdc-form-field {
+    margin-left: 20px;
+  }
+}
+
+/* Optional: If you want to ensure items stretch to full width */
+::ng-deep .custom-menu .mat-menu-item {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background-color: white !important;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; 
+}
+
+.right-flex-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.flex-container {
+  display: flex;                  /* enable flex layout */
+  align-items: flex-start;            /* vertically center items */
+  justify-content: space-between; /* left group left, right button right */
+  gap: 10px;                      /* optional spacing between items */
+  width: 100%;                    /* full width container */
+ // margin-bottom: 25px;
+}
+
+.left-group {
+  display: flex;
+  flex-direction: column;   /* stack rows vertically */
+  align-items: flex-start;  /* prevent right shifting */
+  gap: 8px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.filter-row:first-child {
+  flex-wrap: nowrap;
+}
+.right-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.left-toggle {
+  margin: 0 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.right-toggle {
+  margin: 0px 0px;
+}
+
+.ml-20 {
+  margin-left: 20px;
+}
+
+.ml-10 {
+  margin: 10px 10px;
+}
+
+::ng-deep .searchFilterButton .mat-mdc-text-field-wrapper {
+  height: 44px !important;
+  width: 170px !important; 
+}
+
+::ng-deep .searchFilterButton .mdc-floating-label {
+  padding-bottom: 14px;
+}
+
+::ng-deep .searchFilterButton .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+}
+
+/* Apply a green border to odd rows */
+.mat-mdc-row:nth-child(odd) .mat-mdc-cell {
+  border-bottom: 0px;
+  /* Green border for odd rows */
+}
+
+/* Apply a blue border to even rows */
+.mat-mdc-row:nth-child(even) .mat-mdc-cell {
+  border-bottom: 1px solid #74777f;
+  /* Blue border for even rows */
+}
+
+.expanded-row {
+  border-bottom: 1px solid #74777f;
+}
+
+.scrollable-table-wrapper {
+  // max-height: 470px; /* You can change this value */
+  overflow-y: auto;
+  /* This enables the scrollbar */
+}
+
+/* icon css */
+.chevron-right-subtable {
+  background-color: unset;
+  border: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.btn {
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.btn-mock-interview {
+  background-color: #ccd324;
+  color: #fff;
+  border: 1px solid #ccd324;
+}
+.btn-view-mock-interview-details {
+  background-color: #ccd324;
+  color: #fff;
+  border: 1px solid #ccd324;
+}
+.btn:hover {
+  opacity: 0.9;
+  background-color: #b7bd20;
+  color: white;
+  border: 1px solid white;
+}
+.page-inner {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+@media (min-width: 1445px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1445px !important;
+  }
+}
+button.save-btn-icon {
+  background-color: unset;
+  color: #ccd324;
+  border: none;
+  cursor: pointer;
+}
+
+.dojo-apps {
+  display: flex;
+  justify-content: end;
+}
+
+.mat-accent.mat-mdc-slide-toggle {
+  --mdc-switch-selected-track-color: #818D00;
+  --mdc-switch-selected-focus-track-color: #818D00;
+  --mdc-switch-selected-hover-track-color: #818D00;
+  --mdc-switch-selected-pressed-track-color: #818D00;
+  --mdc-switch-selected-hover-state-layer-color: #818D00;
+  --mdc-switch-selected-pressed-state-layer-color: #818D00;
+  --mdc-switch-selected-focus-state-layer-color: #818D00;
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: #f2f4e7;
+}
+
+tr.mat-mdc-row:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+
+.mat-mdc-cell {
+  border: none;
+}
+
+::ng-deep .mat-mdc-row {
+  height: 30px !important;
+  min-height: 30px !important;
+}
+
+::ng-deep .mat-mdc-header-row {
+  height: 32px !important;
+  min-height: 32px !important;
+}
+
+::ng-deep .mat-mdc-cell {
+  padding: 1px 6px !important;  
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  padding: 2px 6px !important;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+::ng-deep .mat-mdc-cell > *,
+::ng-deep .mat-mdc-header-cell > * {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.count-item {
+  display: inline-flex;
+  align-items: center; 
+}
+
+.count-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: #44474e;
+}
+
+.count-value {
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 6px;
+  margin-right: 15px;
+}
+
+.count-summary-box {
+  position: relative;
+  border: 1px solid #bfd732;
+  padding: 10px 12px 8px;
+  margin-bottom: 12px;
+}
+
+.count-summary-title {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  padding: 2px 8px;
+  background-color: #F5F7FD; 
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.count-summary-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.tooltip-btn {
+  position: relative;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: #F5F7FD;
+  color: #495057 ;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+  border: 1px solid #495057;
+}
+
+.tooltip-btn:hover .tooltip-text {
+  visibility: visible;
+}

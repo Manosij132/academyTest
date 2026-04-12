@@ -1,0 +1,418 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-inner-header">
+      <h3 class="fw-bold mb-3 title">{{ pageHeader }}</h3>
+    <!-- Search Input -->
+    <div class="filter-container searchFilterButton" appPrivilegedUser>
+    <div class="dojo-appsheet" *ngIf="isDojoFilterSelected">
+      <a
+        [href]="dojoAppSheetUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dojo-apps"
+        >DOJO Dashboard</a
+      >
+       <i class="fa-regular fas fa-external-link-alt square-arrow"></i>
+    </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          class="search"
+          (keyup.enter)="applyFilter($event)"
+          placeholder="Search here"
+        />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        style="background-color: rgb(191, 215, 50); color: black;"
+        class="ml-20 small-btn"
+        [routerLink]="['/training-impact']"
+        routerLinkActive="router-link-active">
+        Training Impact
+      </button>
+
+      <div class="right-flex-container">
+        <p class="left-toggle">ALL</p>
+        <mat-slide-toggle
+          class="custom-toggle"
+          [(ngModel)]="isDojoFilterSelected"
+          (change)="onToggleChange($event)"
+        ></mat-slide-toggle>
+        <p class="right-toggle">DOJO</p>
+
+        <div [matMenuTriggerFor]="menu">
+           <button class="filter-btn ml-20">
+            <i class="fa-solid fa-sliders"></i>
+           </button>
+        </div>
+        <mat-menu
+          #menu="matMenu"
+          class="custom-menu"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="mt-20" (click)="$event.stopPropagation()">
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Sort By:</mat-label>
+                <mat-select [(ngModel)]="selectedSortColumn"
+                  (selectionChange)="onSortColumnChanged($event)">
+                  <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+                    {{option.label}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Sort Direction:</mat-label>
+                <mat-select
+                  [(value)]="selectedSortDirection"
+                  (selectionChange)="onSortDirectionChanged($event)">
+                  <mat-option [value]="null">Select Direction</mat-option>
+                  <mat-option value="asc">Ascending</mat-option>
+                  <mat-option value="desc">Descending</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Filter By:</mat-label>
+                <mat-select
+                  [(value)]="selectedFilterColumn"
+                  (selectionChange)="onFilterOptionChanged($event)"
+                >
+                  <mat-option disabled> Select Filter By: </mat-option>
+                  <ng-container *ngFor="let s of columns">
+                    <mat-option
+                      *ngIf="s.filterAllowed &&
+                        (s.colName !== 'Dojo Gx Leader' || (s.colName === 'Dojo Gx Leader' && isDojoFilterSelected)) &&
+                        (s.colName !== 'Engaged?' || (s.colName === 'Engaged?' && isDojoFilterSelected))"
+                      [value]="s.value">
+                      {{ s.colName }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Filter Values:</mat-label>
+                <mat-select [(value)]="selectedFilterValue"
+                [disabled]="!selectedFilterColumn"
+                (selectionChange)="onFilterValueChanged($event)">
+                  <mat-option selected disabled>
+                    Select Filter Value:
+                  </mat-option>
+                  <ng-container *ngFor="let f of filterValues">
+                    <mat-option [value]="f.value">
+                      {{ f.value }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <hr class="mt-8" />
+            <div class="row ml-10">
+              <div class="col-6">
+                <button mat-raised-button color="warn" (click)="reset()">
+                  Reset
+                </button>
+              </div>
+              <div class="col-6 text-end">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="filterTracker()"
+                  class="apply-button"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+
+  <div class="selected-filters" *ngIf="selectedFilters.length > 0">
+      <mat-chip-set>
+        <mat-chip *ngFor="let f of selectedFilters" [removable]="true">
+          {{ f.FilterBy }} : {{ f.FilterValue }}
+          <button
+            matChipRemove
+            [attr.aria-label]="'remove ' + f.FilterBy + ' ' + f.FilterValue"
+            (click)="removeFilter(f); $event.stopPropagation()">
+            <i class="fas fa-times-circle"></i>
+          </button>
+        </mat-chip>
+      </mat-chip-set>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="scrollable-table-wrapper">
+            <table
+              mat-table
+              [dataSource]="data"
+              matSort
+              multiTemplateDataRows
+              class="mat-elevation-z8 parent"
+            >
+              <!-- Define Columns -->
+              <ng-container
+                *ngFor="let column of displayedColumns"
+                [matColumnDef]="column"
+              >
+               <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  [style.background-color]="color"
+                  class="header-bold"
+                  [matTooltip]="column === 'engaged' && isDojoFilterSelected 
+                    ? '🟢 Engaged&#10;🔴 Not Engaged&#10;🟡 Non Assignable' 
+                    : ''"
+                  matTooltipPosition="above"
+                  matTooltipClass="legend-tooltip"
+                >
+                  <span *ngIf="column !== 'proposedDojoGxLeader'">
+                    {{ columnTitles[column] }}
+                  </span>
+                  <span *ngIf="column === 'proposedDojoGxLeader' && isDojoFilterSelected">
+                    {{ columnTitles[column] }}
+                  </span>
+                </th>
+                <td mat-cell *matCellDef="let element" class="ellipsis-cell"
+                #cell
+                [matTooltip]="isTextTruncated(cell) ? element[column] : ''"
+                [matTooltipDisabled]="!isTextTruncated(cell)">
+                  <span *ngIf="column == 'arrow'">
+                    <button
+                      class="chevron-right-subtable"
+                      (click)="toggleEmployee(element)"
+                      [hidden]="expandedElement == element"
+                    >
+                      <i class="fas fa-chevron-down"></i>
+                    </button>
+
+                    <button
+                      class="chevron-right-subtable"
+                      (click)="
+                        expandedElement =
+                          expandedElement === element ? null : element
+                      "
+                      [hidden]="expandedElement !== element"
+                    >
+                      <i class="fas fa-chevron-up"></i>
+                    </button>
+                  </span>
+                  <span *ngIf="column === 'action'">
+                    <!--<button
+                      class="save-btn-icon"
+                      (click)="openActivityDetails(element.employeeId)"
+                      matTooltip="View Details"
+                    >
+                      <i class="fas fa-eye"></i>
+                    </button>-->
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
+                      <mat-icon>more_vert</mat-icon> <!-- The 3-dot icon -->
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="openActivityDetails(element.employeeId, element.employeeName)">
+                        <mat-icon>local_activity</mat-icon>
+                        <span>Activity</span>
+                      </button>
+                      <button mat-menu-item (click)="openMockInterviewDialog(element.employeeId, element.employeeName, element.employeeEmail)">
+                        <mat-icon>forum</mat-icon>
+                        <span >Schedule Evaluation</span>
+                      </button>
+                      <button mat-menu-item (click)="view(element.employeeId)">
+                        <mat-icon>visibility</mat-icon>
+                        <span >View Evaluation</span>
+                      </button>
+                      <!-- <button mat-menu-item (click)="openUploadCVOrProfilePopup(element)">
+                        <mat-icon>local_activity</mat-icon>
+                        <span>CV & Profile</span>
+                      </button> -->
+                      <button mat-menu-item *ngIf="isUserSysAdmin==true && (element.project=='DOJO' || element.project == 'Exusia - Dojo')" (click)="openGxLeaderDetails(element)">
+                        <mat-icon>assignment_ind</mat-icon>
+                        <span >Assign DOJO GX Leader</span>
+                      </button>
+                      <button mat-menu-item *ngIf="canShowAssignDojoMentees(element)" (click)="openGxMenteesDetails(element)">
+                        <mat-icon>assignment_ind</mat-icon>
+                        <span >Assign DOJO Mentees</span>
+                      </button>
+                    </mat-menu>
+                  </span>
+                  <span
+                    *ngIf="column === 'employeeName'"
+                    (click)="navigateToProfile(element.employeeId)"
+                    class="clickable"
+                  >
+                    {{ element[column] }}
+                  </span>
+                  <span
+                    *ngIf="
+                      column !== 'employeeName' &&
+                      column !== 'trainingScore' &&
+                      column !== 'proposedDojoGxLeader' &&
+                      column !== 'joiningDate' &&
+                      column !== 'engaged'
+                    "
+                  >
+                    {{ element[column] }}
+                  </span>
+                  <span *ngIf="column === 'proposedDojoGxLeader' && isDojoFilterSelected" [ngStyle]="{'color': element.isProposedGxLeaderOnDojo ? 'green' : 'red'}">
+                    {{ element[column] }}
+                  </span>    
+
+                 <span *ngIf="column === 'trainingScore'">
+  <div class="progress-container">
+    <mat-progress-bar
+      class="progress-bar"
+      [value]="element[column]"
+      mode="determinate">
+    </mat-progress-bar>
+    <span class="progress-text">{{ element[column] }}%</span>
+  </div>
+</span>
+                  
+                  <span
+                    *ngIf="column === 'engaged' && isDojoFilterSelected"
+                    class="status-dot"
+                    [ngClass]="{
+                      'status-dot-active': element[column] == 'Engaged',
+                      'status-dot-inactive': element[column] == 'Not Engaged',
+                      'status-dot-nonassignable': element[column] == 'Non Assignable'
+                    }"
+                    [matTooltip]="
+                      element[column] == 'Engaged'
+                        ? '🟢 Engaged'
+                        : element[column] == 'Not Engaged'
+                        ? '🔴 Not Engaged'
+                        : '🟡 Non Assignable'
+                    "
+                    matTooltipPosition="above"
+                  >
+                  </span>
+                  <span *ngIf="column === 'uploadCvProfile'">
+                    <button mat-icon-button (click)="openUploadCVOrProfilePopup(element)"  matTooltip="Upload CV & Profile" matTooltipPosition="above">
+                      <mat-icon>cloud_upload</mat-icon>
+                    </button>
+                  </span>                  
+                  <!-- <span *ngIf="column === 'action'">
+                    <button
+                      type="button"
+                      class="btn btn-mock-interview"
+                      (click)="openMockInterviewDialog(element.employeeId)"
+                    >
+                      Schedule Interview
+                    </button>
+                  </span>
+                  <span *ngIf="column === 'result'">
+                    <button
+                      type="button"
+                      class="btn btn-view-mock-interview-details"
+                      (click)="view(element.employeeId)"
+                    >
+                      View
+                    </button>
+                  </span> -->
+                </td>
+              </ng-container>
+
+              <!-- Expandable Row Column -->
+              <ng-container matColumnDef="expand">
+                <th mat-header-cell *matHeaderCellDef aria-label="expand">
+                  &nbsp;
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <button
+                    mat-icon-button
+                    aria-label="expand row"
+                    (click)="
+                      expandedElement =
+                        expandedElement === element ? null : element
+                    "
+                  >
+                    <i
+                      class="fas"
+                      [ngClass]="{
+                        'fa-chevron-up': expandedElement === element,
+                        'fa-chevron-down': expandedElement !== element,
+                      }"
+                    ></i>
+                  </button>
+                </td>
+              </ng-container>
+
+              <!-- Expanded Content Row -->
+              <ng-container matColumnDef="expandedDetail">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  [attr.colspan]="displayedColumns.length"
+                >
+                  <div
+                    class="example-element-detail"
+                    [@detailExpand]="
+                      element == expandedElement ? 'expanded' : 'collapsed'
+                    "
+                  >
+                    <!-- Nested Table -->
+                    <!-- <table mat-table [dataSource]="element.nestedData" class="mat-elevation-z8" *ngIf="element === expandedElement">
+                      <ng-container matColumnDef="nestedDetail">
+                        <th mat-header-cell *matHeaderCellDef>Detail</th>
+                        <td mat-cell *matCellDef="let nestedElement"> {{ nestedElement.detail }} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="nestedValue">
+                        <th mat-header-cell *matHeaderCellDef>Value</th>
+                        <td mat-cell *matCellDef="let nestedElement"> {{ nestedElement.value }} </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="['nestedDetail', 'nestedValue']"></tr>
+                      <tr mat-row *matRowDef="let row; columns: ['nestedDetail', 'nestedValue']"></tr>
+                    </table> -->
+
+                    <app-sub-table
+                      [show]="expandedElement === element"
+                      [canChangeStatus]="false"
+                      [id]="element['employeeId']"
+                    ></app-sub-table>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr
+                mat-row
+                *matRowDef="let element; columns: displayedColumns"
+                [class.expanded-row]="expandedElement === element"
+              ></tr>
+
+              <tr
+                mat-row
+                *matRowDef="let row; columns: ['expandedDetail']"
+                class="example-detail-row"
+              ></tr>
+            </table>
+          </div>
+          <!-- Paginator -->
+          <mat-paginator
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 20, 50]"
+            showFirstLastButtons
+            [length]="totalItems"
+            (page)="onPageChanged($event)"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-chat-ui></app-chat-ui>

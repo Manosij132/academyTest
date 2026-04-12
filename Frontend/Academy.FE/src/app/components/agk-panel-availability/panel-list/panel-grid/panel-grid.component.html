@@ -1,0 +1,90 @@
+
+<div>
+  <table mat-table [dataSource]="panels" matSort class="full-width-table">
+
+      <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef><mat-checkbox (change)="checkedAll($event.checked)"></mat-checkbox>&nbsp;&nbsp;</th>
+          <td mat-cell *matCellDef="let row"><mat-checkbox [(ngModel)]="row.checked" (change)="rowChecked($event.checked, row)"></mat-checkbox></td>
+      </ng-container>
+      
+      <ng-container matColumnDef="panelName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Panel Name</th>
+        <td mat-cell *matCellDef="let row">{{row.panelName}}</td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="emailId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mail ID</th>
+        <td mat-cell *matCellDef="let row">{{row.emailId}}</td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="panelType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Panel Type</th>
+        <td mat-cell *matCellDef="let row" >{{row.panelType}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="seniorityName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Up To Seniority</th>
+        <td mat-cell *matCellDef="let row">{{row.seniorityName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="communityName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Community</th>
+        <td mat-cell *matCellDef="let row" >{{row.communityName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="requiredSlots">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Required Slots</th>
+        <td mat-cell *matCellDef="let row" style="text-align: center;">{{row.requiredSlots}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="slotCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Available Slots</th>
+        <td mat-cell *matCellDef="let row" style="text-align: center;">{{row.slotCount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nonUtilizedSlot">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Unutilized Slots</th>
+        <td mat-cell *matCellDef="let row" style="text-align: center;">{{row.nonUtilizedSlot}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="deficit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Deficit</th>
+        <td mat-cell *matCellDef="let row" style="text-align: center;">{{row.deficit}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="panelAction" >
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;">Action</th>
+        <td mat-cell *matCellDef="let row" >
+          <div style="width: 100%; text-align: center;">
+            <div style="width: 20px; float: left;">
+              <a matTooltip="View Slot" (click)="openCalendarDialog(row.id,row.panelName)" style="cursor:pointer; top: 5px;">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
+                <rect width="10" height="10" x="5" y="5" fill="#fff"></rect><polygon fill="#1e88e5" 
+                points="25.68,20.92 26.688,22.36 28.272,21.208 28.272,29.56 30,29.56 30,18.616 28.56,18.616"></polygon><path fill="#1e88e5" d="M22.943,23.745c0.625-0.574,1.013-1.37,1.013-2.249c0-1.747-1.533-3.168-3.417-3.168 c-1.602,0-2.972,1.009-3.33,2.453l1.657,0.421c0.165-0.664,0.868-1.146,1.673-1.146c0.942,0,1.709,0.646,1.709,1.44 c0,0.794-0.767,1.44-1.709,1.44h-0.997v1.728h0.997c1.081,0,1.993,0.751,1.993,1.64c0,0.904-0.866,1.64-1.931,1.64 c-0.962,0-1.784-0.61-1.914-1.418L17,26.802c0.262,1.636,1.81,2.87,3.6,2.87c2.007,0,3.64-1.511,3.64-3.368 C24.24,25.281,23.736,24.363,22.943,23.745z"></path><polygon fill="#fbc02d" points="34,42 14,42 13,38 14,34 34,34 35,38"></polygon><polygon fill="#4caf50" points="38,35 42,34 42,14 38,13 34,14 34,34"></polygon><path fill="#1e88e5" d="M34,14l1-4l-1-4H9C7.343,6,6,7.343,6,9v25l4,1l4-1V14H34z"></path><polygon fill="#e53935" points="34,34 34,42 42,34"></polygon><path fill="#1565c0" d="M39,6h-5v8h8V9C42,7.343,40.657,6,39,6z"></path><path fill="#1565c0" d="M9,42h5v-8H6v5C6,40.657,7.343,42,9,42z"></path>
+              </svg>
+              </a> 
+            </div>
+            <div style="margin-left: 20px;">
+              <a (click)="openSendEmailDialog(row)" matTooltip="Send Email" style="cursor:pointer;"><mat-icon>mail</mat-icon></a>
+            </div>
+        </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator 
+      [pageSizeOptions]="[5, 10, 20, 50]"
+      [length]="totalRecords" 
+      [pageIndex]="showPageNumber" 
+      [pageSize]="pageSize"
+      (page)="pageChanged($event)"
+      aria-label="Select page">
+  </mat-paginator>
+  <div *ngIf="isAllSendMail" style="display: block;text-align: right;">
+    <button  mat-button style="background-color: #ff69b4; color: white; margin: 20px;" (click)="openAllSendEmailDialog()">
+      Send Mail
+    </button>
+  </div>
+</div>

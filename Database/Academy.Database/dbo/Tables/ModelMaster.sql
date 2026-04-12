@@ -1,0 +1,6 @@
+﻿CREATE TABLE ModelMaster (
+    ModelId SMALLINT PRIMARY KEY IDENTITY(1,1),
+    Model NVARCHAR(100) NOT NULL,
+    Version NVARCHAR(50),
+    Usage NVARCHAR(100)
+);

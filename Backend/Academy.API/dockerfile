@@ -1,0 +1,76 @@
+#==================================================================
+# Stage 1 - Restore and Build (SDK image)
+# This stage uses the full .NET SDK to restore dependencies and build the application.
+# By copying the project files first and restoring before copying all source code, we can take advantage of Docker's layer caching to speed up subsequent builds when only source code changes.
+# The final output of this stage is the published application in the /app/publish directory, which will be copied to the runtime stage.
+# Note: The SDK image is larger than the runtime image, so we only use it for the build stage to keep the final image lean.
+# e.g.: docker build -f Backend/Academy.API/dockerfile -t academy-api .
+# ==================================================================
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# ── Copy solution & all project files first (layer caching) ──
+COPY Academy.sln ./
+
+# Backend projects
+COPY Backend/Academy.API/Academy.API.csproj             Backend/Academy.API/
+COPY Backend/Academy.Core/Academy.Core.csproj           Backend/Academy.Core/
+COPY Backend/Academy.Domain/Academy.Domain.csproj       Backend/Academy.Domain/
+COPY Backend/Academy.Infrastructure/Academy.Infrastructure.csproj Backend/Academy.Infrastructure/
+COPY Backend/Academy.Shared/Academy.Shared.csproj       Backend/Academy.Shared/
+
+# Staffing shared (referenced by Academy.API)
+COPY Backend/Staffing/Staffing.Shared/Staffing.Shared.csproj Backend/Staffing/Staffing.Shared/
+
+# Background workers (embedded in Academy.API process)
+COPY Workers/ReminderWorker/ReminderWorker.csproj       Workers/ReminderWorker/
+COPY Workers/ReportWorker/ReportWorker.csproj           Workers/ReportWorker/
+COPY Workers/SendEmailWorker/SendEmailWorker.csproj      Workers/SendEmailWorker/
+COPY Workers/SyncEmployeeWorker/SyncEmployeeWorker.csproj Workers/SyncEmployeeWorker/
+
+# ── Restore dependencies ──
+# Run restore with no-cache to ensure fresh packages are pulled, which can help avoid issues with corrupted local caches. 
+# This is especially useful in CI environments or when dependencies have recently changed.
+RUN dotnet restore Backend/Academy.API/Academy.API.csproj --no-cache
+
+# ── Copy all source files ──
+# ── Copy all source files ──
+COPY Backend/Academy.API/             Backend/Academy.API/
+COPY Backend/Academy.Core/            Backend/Academy.Core/
+COPY Backend/Academy.Domain/          Backend/Academy.Domain/
+COPY Backend/Academy.Infrastructure/  Backend/Academy.Infrastructure/
+COPY Backend/Academy.Shared/          Backend/Academy.Shared/
+COPY Backend/Staffing/Staffing.Shared/ Backend/Staffing/Staffing.Shared/
+COPY Workers/ReminderWorker/           Workers/ReminderWorker/
+COPY Workers/ReportWorker/             Workers/ReportWorker/
+COPY Workers/SendEmailWorker/          Workers/SendEmailWorker/
+COPY Workers/SyncEmployeeWorker/       Workers/SyncEmployeeWorker/
+COPY Backend/Academy.API/appsettings*.json, Backend/Academy.API/
+  
+# ── Build and publish the application ──
+RUN dotnet publish Backend/Academy.API/Academy.API.csproj -c Release -o /app/publish /p:UseAppHost=false
+
+# ============================================================
+# Stage 2 — Runtime (lean ASP.NET image)
+# This stage uses the smaller ASP.NET runtime image to run the application. We copy only the published output from the build stage, which keeps the final image size down and reduces attack surface by excluding SDK tools.
+# We also create a non-root user for security and set appropriate permissions on the application directory. The application will run under this non-root user, which is a best practice for containerized applications.
+# 
+# ============================================================
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+# Create non-root user for security
+RUN adduser --disabled-password --gecos "" appuser \
+ && mkdir -p /app/logs \
+ && chown -R appuser:appuser /app
+
+# Copy the built application from the SDK stage
+COPY --from=build --chown=appuser:appuser /app/publish ./
+
+#switch from the root account to the new one before the app starts.
+USER appuser
+
+ENV ASPNETCORE_URLS=http://+:8082
+EXPOSE 8082
+
+ENTRYPOINT ["dotnet", "Academy.API.dll"]

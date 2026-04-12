@@ -1,0 +1,51 @@
+<div class="container">
+  <h3 class="review-heading">Self Evaluation</h3>
+  <p class="message">{{ message }}</p>
+
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>Skill Name</th>
+        <th>Self Rating</th>
+      </tr>
+
+      <tr *ngFor="let skill of skills">
+        <td>{{ skill.name }}</td>
+        <td>
+          <span *ngFor="let star of [1,2,3,4,5]" (click)="setRating(skill, star)" class="star"
+            [class.filled]="star <= skill.rating">
+            ★
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="footer-section">
+    <button (click)="submitRatings()" class="submit-btn" [disabled]="isSubmitDisabled">
+      Submit Rating
+    </button>
+    <div class="rating-legend">
+      <p class="legend-title">Skill Level Guide:</p>
+
+      <div class="legend-item">
+        <span class="legend-dot level-0"></span>
+        0 – Cannot Perform
+      </div>
+
+      <div class="legend-item">
+        <span class="legend-dot level-1"></span>
+        1–2 – Beginner
+      </div>
+
+      <div class="legend-item">
+        <span class="legend-dot level-3"></span>
+        3–4 – Intermediate
+      </div>
+
+      <div class="legend-item">
+        <span class="legend-dot level-5"></span>
+        5 – Advance
+      </div>
+    </div>
+  </div>
+</div>

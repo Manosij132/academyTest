@@ -1,0 +1,306 @@
+{
+    "timeStamp": "28102024053619345",
+    "status": 200,
+    "data": [
+        {
+            "id": 101,
+            "name": ".NET Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 102,
+            "name": "Java Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 103,
+            "name": "NodeJS Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 104,
+            "name": "WebUI Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 105,
+            "name": "Data Engineer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 106,
+            "name": "Business Intelligence",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 107,
+            "name": "Cloud Engineer AWS",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 108,
+            "name": "Cloud Engineer Azure",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 109,
+            "name": "Cloud Engineer GCP",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 110,
+            "name": "DevOps Engineer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 111,
+            "name": "TAE",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 112,
+            "name": "QC",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 113,
+            "name": "SalesForce Functional",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 114,
+            "name": "Salesforce Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 115,
+            "name": "IOS Mobile Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 116,
+            "name": "Android Mobile Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 117,
+            "name": "Python Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 118,
+            "name": "Admin",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 119,
+            "name": "User Experience Design",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 120,
+            "name": "Golang",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 121,
+            "name": "Salesforce Commerce Cloud B2C Back End Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 122,
+            "name": "PHP",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 123,
+            "name": "Performance Test Engineer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 124,
+            "name": "Ruby",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 125,
+            "name": "Data Architecture",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 126,
+            "name": "Operations",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 127,
+            "name": "Salesforce Commerce Cloud B2C Front End Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 128,
+            "name": "Project Manager",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 129,
+            "name": "Salesforce Mulesoft Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 130,
+            "name": "Visual Designer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 131,
+            "name": "SAP Development SAPUI5",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 132,
+            "name": "UI Game Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 133,
+            "name": "Game Developer",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 134,
+            "name": "Delivery Manager",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 135,
+            "name": "Business Analyst",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 136,
+            "name": "Drupal",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        },
+        {
+            "id": 137,
+            "name": "Flutter",
+            "displayName": null,
+            "isPrimary": true,
+            "isActive": true,
+            "primaryEcosystemId": null
+        }
+    ],
+    "errorResponseId": null,
+    "errorMessage": null,
+    "exception": null,
+    "success": true
+}

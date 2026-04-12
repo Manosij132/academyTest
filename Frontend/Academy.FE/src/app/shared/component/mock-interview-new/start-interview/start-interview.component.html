@@ -1,0 +1,517 @@
+<div [hidden]="showInstructions" [class.disabled-overlay]="!selfRatingCompleted">
+  <div class="page-bg">
+    <div class="session-card">
+      <!-- Header -->
+      <div class="session-header">
+        <div class="header-left">
+          <h1 class="session-title">Evaluation Session</h1>
+        </div>
+        <div class="header-right">
+          <img
+            src="assets/img/globantDark.png"
+            alt="Globant Logo"
+            class="company-logo"
+          />
+        </div>
+      </div>
+
+      <!-- Top area: left column (cards) + right column (video/start) -->
+      <div class="main-grid">
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+          <!-- Permissions required (keeps original ngIf) -->
+          <mat-card
+            *ngIf="!permissionsGranted"
+            class="permission-card mat-elevation-z1"
+          >
+            <mat-card-content class="perm-content">
+              <mat-icon class="perm-icon">mic_off</mat-icon>
+              <h3 class="perm-title">Camera &amp; Microphone Required</h3>
+              <p class="perm-text">
+                {{
+                permissionError ||
+                "Please allow access to your camera and
+                microphone to proceed."
+                }}
+              </p>
+              <div class="perm-action">
+                <button
+                  mat-stroked-button
+                  color="warn"
+                  (click)="checkPermissions()"
+                >
+                  <mat-icon>privacy_tip</mat-icon>
+                  Grant Permissions
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Interview details (main page) -->
+          <mat-card class="details-card mat-elevation-z0">
+            <mat-card-header class="details-header">
+              <mat-icon>description</mat-icon>
+              <mat-card-title>Evaluation Details</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+              <div class="detail-row">
+                <mat-icon class="detail-icon">confirmation_number</mat-icon>
+                <div class="detail-label">Code:</div>
+                <div class="detail-value font-mono">{{ code }}</div>
+              </div>
+
+              <div class="detail-row">
+                <mat-icon class="detail-icon">account_circle</mat-icon>
+                <div class="detail-label">Profile:</div>
+                <div class="detail-value">{{ profile?.profileName || "N/A" }}</div>
+              </div>
+
+              <div class="detail-row">
+                <mat-icon class="detail-icon">person</mat-icon>
+                <div class="detail-label">Candidate:</div>
+                <div class="detail-value">
+                  {{ interview?.candidate?.name || "N/A" }}
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <mat-icon class="detail-icon">workspace_premium</mat-icon>
+                <div class="detail-label">Seniority:</div>
+                <div class="detail-value">
+                  {{ profile?.seniorityName || "N/A" }}
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <mat-icon class="detail-icon">category</mat-icon>
+                <div class="detail-label">Type:</div>
+                <div class="detail-value">{{ interview?.interviewType }}</div>
+              </div>
+
+              <div class="detail-row">
+                <mat-icon class="detail-icon">info</mat-icon>
+                <div class="detail-label">Status:</div>
+                <div class="detail-value">
+                  <span class="status-pill">{{
+                    getDisplayStatus(interview?.status)
+                    }}</span>
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <mat-icon class="detail-icon">psychology</mat-icon>
+                <div class="detail-label">Skills Assessment:</div>
+                <div
+                  class="detail-value"
+                  *ngIf="skills.length > 0; else noSkillsList"
+                  aria-label="Skills"
+                >
+                  <span
+                    class="status-pill"
+                    *ngFor="let skill of skills"
+                    selected
+                    style="margin-right: 8px"
+                    >{{ skill.name }}</span
+                  >
+                </div>
+                <ng-template #noSkillsList>
+                  <span class="no-skills">No skills listed.</span>
+                </ng-template>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+          <div *ngIf="loading" class="loading-text">Loading Evaluation</div>
+          <div *ngIf="error" class="error-text">{{ error }}</div>
+
+          <div *ngIf="!started; else interviewFlow" class="start-area">
+            <div class="video-box">
+              <video
+                #videoElement
+                autoplay
+                playsinline
+                muted
+                class="video-element"
+              ></video>
+            </div>
+
+            <div class="start-controls">
+              <button
+                mat-flat-button
+                class="start-btn"
+                [disabled]="!permissionsGranted || !selfRatingCompleted"
+                (click)="startInterview()"
+              >
+                <mat-icon>play_arrow</mat-icon>
+                {{ paused ? "Resume Evaluation" : "Start Evaluation" }}
+              </button>
+
+              <div class="start-note">
+                <mat-icon>error</mat-icon>
+                <span>Camera and microphone access required</span>
+              </div>
+              <div class="info-note">Use headphones for the best experience and do not switch tabs or minimize the window during the evaluation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #interviewFlow>
+    <ng-container>
+      <!-- Interview Video Container -->
+      <div class="interview-video-container">
+        <!-- Main video area -->
+        <div class="video-main-area">
+          <video #videoElement autoplay playsinline muted hidden></video>
+
+          <canvas #mixCanvas class="interview-video"></canvas>
+
+          <!-- Recording indicator -->
+          <div
+            *ngIf="!paused && pauseCountdown === null"
+            class="recording-indicator"
+          >
+            <mat-icon class="recording-dot">fiber_manual_record</mat-icon>
+            <span class="recording-text">REC</span>
+          </div>
+
+          <!-- Video overlay controls -->
+          <div class="video-overlay">
+            <mat-toolbar class="video-toolbar" color="transparent">
+              <span class="question-number"
+                >Question {{ currentQuestionIndex }}</span
+              >
+            </mat-toolbar>
+
+            <div class="question-content">
+              <h2 class="current-question">
+                {{
+                currentQuestion?.text ||
+                currentQuestion?.question ||
+                "No
+                question available."
+                }}
+              </h2>
+            </div>
+
+            <div class="interview-controls">
+              <button
+                mat-raised-button
+                color="primary"
+                class="control-button"
+                (click)="ongoingInterviewAction('next_question')"
+                [disabled]="!currentQuestion"
+              >
+                <mat-icon>skip_next</mat-icon>
+                Next Question
+              </button>
+
+              <button
+                mat-raised-button
+                color="warn"
+                class="control-button"
+                (click)="ongoingInterviewAction('pause_interview')"
+                [disabled]="paused"
+              >
+                <mat-icon>pause</mat-icon>
+                Pause evaluation
+              </button>
+            </div>
+
+            <!-- Pause status -->
+            <div *ngIf="paused && pauseCountdown === null" class="pause-status">
+              <mat-icon>pause_circle</mat-icon>
+              <span>Evaluation paused. Recording stopped.</span>
+            </div>
+
+            <!-- Countdown overlay -->
+            <div *ngIf="pauseCountdown !== null" class="countdown-overlay">
+              <div class="countdown-circle">
+                <mat-progress-spinner
+                  mode="determinate"
+                  [value]="(4 - pauseCountdown) * 25"
+                  diameter="120"
+                  strokeWidth="8"
+                  color="accent"
+                >
+                </mat-progress-spinner>
+                <div class="countdown-number">{{ pauseCountdown }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar with interview details -->
+        <aside class="interview-sidebar">
+          <img
+            src="assets/img/globantDark.png"
+            alt="Globant Logo"
+            class="company-logo"
+          />
+
+          <mat-card class="sidebar-details mat-elevation-z0">
+            <mat-card-header>
+              <mat-icon mat-card-avatar class="detail-icon"
+                >assignment</mat-icon
+              >
+              <mat-card-title>Evaluation Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="detail-row small">
+                <mat-icon class="detail-icon">confirmation_number</mat-icon>
+                <div class="detail-label">Code:</div>
+                <div class="detail-value font-mono">{{ code }}</div>
+              </div>
+
+              <mat-divider></mat-divider>
+
+              <div class="detail-row small">
+                <mat-icon class="detail-icon">person</mat-icon>
+                <div class="detail-label">Profile:</div>
+                <div class="detail-value">{{ profile?.profileName || "N/A" }}</div>
+              </div>
+
+              <mat-divider></mat-divider>
+
+              <div class="detail-row small">
+                <mat-icon class="detail-icon">info</mat-icon>
+                <div class="detail-label">Status:</div>
+                <div class="detail-value">
+                  <span class="status-pill">{{
+                    getDisplayStatus(interview?.status)
+                    }}</span>
+                </div>
+              </div>
+
+              <mat-divider></mat-divider>
+
+              <div class="skills-section">
+                <div class="skills-title">
+                  <mat-icon class="detail-icon">psychology</mat-icon>
+                  Skills to be Assessed:
+                </div>
+                <mat-chip-listbox
+                  *ngIf="skills.length > 0; else noSkillsMini"
+                  class="skills-chips"
+                >
+                  <span class="status-pill" *ngFor="let s of skills" selected>{{
+                    s.name
+                    }}</span>
+                </mat-chip-listbox>
+                <ng-template #noSkillsMini>
+                  <div class="no-skills">
+                    <mat-icon>info</mat-icon>
+                    <span>No skills listed.</span>
+                  </div>
+                </ng-template>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <div class="sidebar-avatar-preview">
+            <div class="avatar-video-card">
+              <video
+                #avatarVideo
+                [src]="avatarVideoUrl"
+                playsinline
+                [muted]="true"
+                [volume]="0"
+                loop
+              ></video>
+            </div>
+            <p class="avatar-caption">Riya Speaking...</p>
+          </div>
+        </aside>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>
+
+<!-- INTERVIEW INSTRUCTIONS PAGE -->
+<div *ngIf="showInstructions" class="instruction-page-bg">
+  <div class="session-card">
+    <!-- Header -->
+    <div class="session-header">
+      <div class="header-left">
+        <h1 class="session-title">Evaluation Instructions</h1>
+      </div>
+      <div class="header-right">
+        <img
+          src="assets/img/globantDark.png"
+          alt="Globant Logo"
+          class="company-logo"
+        />
+      </div>
+    </div>
+
+    <!-- Instruction Card -->
+    <mat-card class="instructions-card mat-elevation-z2">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>videocam</mat-icon>
+        <mat-card-title>Please Read Carefully Before Proceeding</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Video-Based Interview Note -->
+        <p class="instruction-section">
+          This is a <strong>video-based assessment evaluation</strong>. Your
+          responses will be recorded and may be shared with relevant account
+          teams for evaluation against their open positions.
+        </p>
+
+        <!-- Before You Begin Section -->
+        <h3 class="instruction-subtitle">Before You Begin</h3>
+        <ul class="instruction-list">
+          <li>
+            You are in a
+            <strong>quiet, distraction-free environment</strong> with minimal
+            background noise.
+          </li>
+          <li>
+            Your surroundings are <strong>well-lit</strong> and your face is
+            clearly visible on camera.
+          </li>
+          <li>
+            Your <strong>camera and microphone</strong> are functioning
+            properly.
+          </li>
+          <li>
+            You have a <strong>stable internet connection</strong> to avoid
+            interruptions.
+          </li>
+          <li>
+            <strong
+              >Do not refresh, close, or navigate away from the browser </strong
+            >during the evaluation, as this may terminate your session.
+          </li>
+        </ul>
+
+        <!-- During the Interview Section -->
+        <h3 class="instruction-subtitle">During the Evaluation</h3>
+        <ul class="instruction-list">
+          <li>
+            Ensure your
+            <strong>camera remains switched on throughout the evaluation </strong
+            >and is not paused or turned off at any time.
+          </li>
+          <li>
+            Speak <strong>clearly, confidently, and at a steady pace.</strong>
+          </li>
+          <li>
+            Provide
+            <strong>detailed, structured, and well-explained answers</strong>,
+            including:
+            <ul>
+              <li>Your thought process and approach</li>
+              <li>Relevant real-world examples</li>
+              <li>References to past project experience</li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Introduction Expectations -->
+        <h3 class="instruction-subtitle">Introduction Expectations</h3>
+        <p class="instruction-section">
+          At the <strong> beginning of the evaluation</strong>, Globant AI will
+          ask you to <strong> introduce yourself</strong>.
+        </p>
+        <p class="instruction-section">
+          This is <strong>the first question</strong>, and it sets the context
+          for the rest of the evaluation.
+        </p>
+        <ul class="instruction-list">
+          <li>
+            Please ensure your introduction clearly covers the following points:
+            <ul>
+              <li>
+                Your <strong>total years of professional experience</strong>
+              </li>
+              <li>Your <strong>primary technology stacks</strong></li>
+              <li>Your <strong>areas of technical expertise</strong></li>
+              <li>
+                The <strong>domains/industries</strong> you have worked in
+              </li>
+              <li>
+                A brief mention of
+                <strong>notable or impactful projects</strong> you have been
+                involved in
+              </li>
+            </ul>
+          </li>
+          <li>
+            Your introduction should be
+            <strong>concise, well-structured, and informative</strong>, helping
+            the evaluator quickly understand your background, skill set, and
+            professional focus.
+          </li>
+        </ul>
+
+        <!-- Pausing the Interview -->
+        <h3 class="instruction-subtitle">Pausing the Evaluation</h3>
+        <ul class="instruction-list">
+          <li>You may pause the evaluation if required.</li>
+          <li>
+            <strong>Important:</strong> Clicking the
+            <strong>Pause</strong> button will skip the current question.
+          </li>
+          <li>
+            When you resume,
+            <strong>the next question will appear automatically.</strong>
+          </li>
+          <li>
+            If you submit an answer before pausing, it
+            <strong>will be recorded and counted as answered</strong>.
+          </li>
+        </ul>
+
+        <!-- Evaluation -->
+        <h3 class="instruction-subtitle">Evaluation and Next Steps</h3>
+        <ul class="instruction-list">
+          <li>
+            Your evaluation will be assessed based on:
+            <ul>
+              <li>Technical knowledge and problem-solving ability</li>
+              <li>Clarity and effectiveness of communication</li>
+              <li>Depth of explanation and real-world relevance</li>
+              <li>Overall professionalism and presentation</li>
+            </ul>
+          </li>
+          <li>
+            Candidates who receive higher ratings are more likely to be
+            considered <strong>fit for relevant roles </strong>by participating
+            accounts.
+          </li>
+        </ul>
+
+        <!-- Acknowledgement checkbox 1 -->
+        <div class="checkbox-row">
+          <mat-checkbox [(ngModel)]="isHeadphoneConfirmed">
+            I confirm that I am using headphones and not system speakers or external microphones.
+          </mat-checkbox>
+        </div>
+
+        <!-- Acknowledgement checkbox 2 -->
+        <div class="checkbox-row">
+          <mat-checkbox [(ngModel)]="isTabPolicyConfirmed">
+            I understand that I must not switch tabs, minimize the window, or navigate away during the evaluation.
+          </mat-checkbox>
+        </div>
+
+      </mat-card-content>
+
+      <!-- Action Buttons -->
+      <mat-card-actions align="end">
+        <button class="cancel-btn" (click)="onCancelInterview()">Cancel</button>
+        <button class="action-btn" (click)="onContinueInterview()"
+          [disabled]="isInterviewDisabled">
+          Begin Evaluation
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,241 @@
+  <div class="container">
+    <div class="page-inner">
+      <h3 class="fw-bold mb-3 title" style="display: inline-block">{{ pageHeader }}</h3>
+  
+      <!-- Search Filters -->
+      <div class="flex-container searchFilterButton">
+        <div class="left-group">
+          <mat-form-field appearance="outline">
+            <mat-label>TDC</mat-label>
+            <mat-select >
+              <mat-option *ngFor="let tdc of tdcs"
+                [value]="tdc.tdcId" (onSelectionChange)="onTDCChanged($event)">
+                {{ tdc.tdcName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <mat-form-field appearance="outline">
+            <mat-label>Community</mat-label>
+            <mat-select >
+              <mat-option *ngFor="let community of communities"
+                [value]="community.communityId" 
+                (onSelectionChange)="onCommunityChanged($event)">
+                {{ community.communityName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline">
+            <mat-label>Panel Type</mat-label>
+            <mat-select [(ngModel)]="modeselect">
+              <mat-option *ngFor="let panel of panels"
+                [value]="panel.id" 
+                (onSelectionChange)="onPanelChanged($event)">
+                {{ panel.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <mat-form-field appearance="outline">
+            <mat-date-range-input  [rangePicker]="picker" [formGroup]="range">
+              <input matStartDate [(ngModel)]="dateStart" formControlName="startDate"  (dateChange)="onDateChange(range)"  placeholder="Start date">
+              <input matEndDate [(ngModel)]="dateEnd" formControlName="endDate"  (dateChange)="onDateChange(range)"   placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker" class="panelDatePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-md-12">
+
+          <!-- Selection Ratio -->
+          <div class="card headercolor mat-elevation-z8" [class.sideNavInActive]="!isSideNavActive" [ngClass]="{'sideNavActive' : isSideNavActive}">
+            <div style="font-size: small;font-weight: bold;">Community Level Selection Ratio</div>
+            <div class="flex-container">
+              
+              <div class="mat-cell-gap mat-cell-customwidth" *ngIf="l1Visible" >
+                <div>L1 Selection Ratio: 
+                  <span *ngIf="isRatioEdit">{{ communitySelectionRatio.l1SelectionRatio }}</span>
+                  <input *ngIf="!isRatioEdit" type="number" [(ngModel)]="communitySelectionRatio.l1SelectionRatio">
+                </div>
+              </div>
+              
+              <div class="mat-cell-gap mat-cell-customwidth" *ngIf="GKVisible">
+                <div>GK Selection Ratio: 
+                  <span *ngIf="isRatioEdit">{{ communitySelectionRatio.gkSelectionRatio }}</span>
+                  <input *ngIf="!isRatioEdit" type="number" [(ngModel)]="communitySelectionRatio.gkSelectionRatio">
+                </div>
+              </div>
+              
+              <div *ngIf="GKVisible" style="align-items: center !important;">
+                <button 
+                  type="button" 
+                  class="updateButton" 
+                  mat-raised-button 
+                  (click)="updateSelectionRatio()" 
+                  color="primary" [disabled]="isEditDisable">
+                    {{editRatioButtonName}}
+                </button>
+                <button 
+                  type="button" 
+                  class="updateButton" 
+                  mat-raised-button 
+                  (click)="getPredictedSelectionRatio()" 
+                  color="primary" 
+                  [disabled]="isEditDisable">
+                    Predict Selection Ratio
+                </button>
+              </div>
+
+              <div class="mat-cell-customwidth" *ngIf="GKVisible" style="align-items: center !important; flex-direction:row-reverse !important;">
+                <button type="button" mat-raised-button class="save-button" (click)="updateSlotManagement(dataSource)">
+                  Save
+                </button>
+              </div>
+
+            </div>
+          </div>
+      
+          <div class="card mat-elevation-z8" style="margin-top:-10px">
+            <table class="custom-table" mat-table [dataSource]="dataSource">
+              
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                  <b>Select TDC and Community.</b>
+                </td>
+              </tr>
+              
+              <ng-container matColumnDef="seniority">
+                <th mat-header-cell *matHeaderCellDef>Seniority</th>
+                <td mat-cell *matCellDef="let element" [matTooltip]="element.seniority"> {{element.seniority}} </td>
+              </ng-container>
+          
+              <!-- <ng-container matColumnDef="positionToBeFilled">
+                <th mat-header-cell *matHeaderCellDef> Position to be filled </th>
+                <td mat-cell *matCellDef="let element" [matTooltip]="element.positionToBeFilled"> 
+                  <span *ngIf="!element.isEditing">{{ element.positionToBeFilled }}</span>        
+                  <input type="number" style="width:50px" [(ngModel)]="element.positionToBeFilled"  (change)="handleInputChange(element)" *ngIf="element.isEditing"> 
+                </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="dropRatio">
+                <th mat-header-cell *matHeaderCellDef> Drop Ratio %</th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="!element.isEditing">{{ element.dropRatio }}</span>        
+                  <input type="number" style="width:50px" [(ngModel)]="element.dropRatio" (change)="handleInputChange(element)" *ngIf="element.isEditing">
+                </td>          
+              </ng-container>
+        
+              <ng-container matColumnDef="offersToBeRolledOut">
+                <th mat-header-cell *matHeaderCellDef> Offer to be rolled </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="!element.isEditing">{{ element.offersToBeRolledOut }}</span>        
+                  <input type="number" style="width:50px"  [(ngModel)]="element.offersToBeRolledOut" (change)="handleInputChange(element)" *ngIf="element.isEditing">
+                </td>
+              
+              </ng-container>
+        
+              <ng-container matColumnDef="SelectionRatioL1">
+                <th mat-header-cell *matHeaderCellDef> Selection Ratio L1 </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="!element.isEditing" >{{ element.l1SelectionRatio }}</span>        
+                  <input type="number" style="width:50px" [(ngModel)]="element.l1SelectionRatio" (change)="handleInputChange(element)" *ngIf="element.isEditing" [disabled]="l1ApplyChecked" >
+                </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="SelectionRatioGK">
+                <th mat-header-cell *matHeaderCellDef> Selection Ratio GK </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="!element.isEditing">{{ element.gkSelectionRatio }}</span>        
+                  <input type="number" style="width:50px" [(ngModel)]="element.gkSelectionRatio" (change)="handleInputChange(element)" *ngIf="element.isEditing" [disabled]="gkApplyChecked" >
+                </td>
+              
+              </ng-container> -->
+          
+              <ng-container matColumnDef="l1SlotsRequired">
+                <th mat-header-cell *matHeaderCellDef  style="text-align: center;"> L1 Slots Required </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.l1SlotsRequired}}</td>
+              </ng-container>
+        
+              <ng-container matColumnDef="L1SelectionRatio">
+                <th mat-header-cell *matHeaderCellDef> L1 Selection Ratio </th>
+                <td mat-cell *matCellDef="let element">{{element.l1SelectionRatio}}</td>
+              </ng-container>
+        
+              <ng-container matColumnDef="l1Slots">
+                <th mat-header-cell *matHeaderCellDef  style="text-align: center;">L1 Slots</th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.l1SlotsActual}}</td>
+              </ng-container>
+        
+              <ng-container matColumnDef="l1panels">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> L1 Panels</th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.l1Panels}} </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="gkSlotsRequired">
+                <th mat-header-cell *matHeaderCellDef  style="text-align: center;">  GK Slots Required  </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.gkSlotsRequired}}</td>
+              </ng-container>
+        
+              <ng-container matColumnDef="GKSelectionRatio">
+                <th mat-header-cell *matHeaderCellDef> GK Selection Ratio </th>
+                <td mat-cell *matCellDef="let element">{{ element.gkSelectionRatio }}</td>
+              </ng-container>
+        
+                <ng-container matColumnDef="gkSlots">
+                  <th mat-header-cell *matHeaderCellDef  style="text-align: center;"> GK Slots </th>
+                  <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.gkSlotsActual}}</td>
+                </ng-container>
+        
+              <ng-container matColumnDef="GKpanels">
+                <th mat-header-cell *matHeaderCellDef  style="text-align: center;"> GK Panels</th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.gkPanels}} </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="L1shortFall">
+                <th mat-header-cell *matHeaderCellDef  style="text-align: center;"> L1 Short Fall </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.shortFallL1}}</td>
+              </ng-container>
+        
+              <ng-container matColumnDef="GKshortFall">
+                <th mat-header-cell *matHeaderCellDef  style="text-align: center;"> GK Short Fall </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.shortFallGK}}</td>
+              </ng-container>
+        
+              <ng-container matColumnDef="riskIndicator" >
+                <th mat-header-cell *matHeaderCellDef  style="text-align: center;"> Risk Indicator </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <div style="display: inline-block;" *ngIf = "element.riskIndicator != '' && element.riskIndicator != null" class="circle" [style.backgroundColor]="element.riskIndicator" ></div>
+                </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="isEditing">
+                <th mat-header-cell *matHeaderCellDef  style="text-align: center;"> Edit </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                  <button mat-button (click)="openEditDialog(element)" id="edit" color="primary">
+                    <mat-icon class="edit">edit</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+        
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"  ></tr>
+            </table>
+            
+            <!-- <div style="display: block;text-align: right;">
+              <button type="button" mat-raised-button class="save-button" (click)="updateSlotManagement(dataSource)">
+                Save
+              </button>
+            </div> -->
+
+
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+</div>

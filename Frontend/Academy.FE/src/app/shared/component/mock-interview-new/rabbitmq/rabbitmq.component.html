@@ -1,0 +1,147 @@
+<div class="rabbitmq-container">
+  <div class="container">
+    <div class="page-inner">
+      <div class="right-container">
+        <h3 class="fw-bold mb-3 title">Evaluation Questions Data</h3>
+      </div>
+      <div class="filter-container searchFilterButton">
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Filter</mat-label>
+          <input matInput [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Search entries..." />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- Form Section -->
+      <!-- <mat-card *ngIf="showForm" class="form-card">
+    <mat-card-content>
+      <form [formGroup]="rabbitMQForm" (ngSubmit)="onSubmit()" class="form-container">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Interview Code</mat-label>
+            <input matInput formControlName="interviewCode" placeholder="Enter interview code">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Question Number</mat-label>
+            <input matInput type="number" formControlName="questionNumber" placeholder="Enter question number" required>
+            <mat-error *ngIf="rabbitMQForm.get('questionNumber')?.hasError('required')">
+              Question number is required
+            </mat-error>
+            <mat-error *ngIf="rabbitMQForm.get('questionNumber')?.hasError('min')">
+              Question number must be at least 1
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Video File Path</mat-label>
+            <input matInput formControlName="videoFilePath" placeholder="Enter video file path">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Audio File Path</mat-label>
+            <input matInput formControlName="audioFilePath" placeholder="Enter audio file path">
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!rabbitMQForm.valid ">
+            <mat-icon>{{ isEditing ? 'edit' : 'save' }}</mat-icon>
+            {{ isEditing ? 'Update' : 'Create' }}
+          </button>
+          <button mat-flat-button type="button" (click)="resetForm()">
+            <mat-icon>clear</mat-icon>
+            Reset
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card> -->
+
+      <!-- Table Section -->
+      @if(!(loaderService.loaderState | async)) {
+      <mat-card class="table-card">
+        <!-- Data Table -->
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <!-- Interview Code Column -->
+            <ng-container matColumnDef="interviewCode">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Evaluation Code
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.interviewCode || "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Question Number Column -->
+            <ng-container matColumnDef="questionNumber">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Question Number
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.questionNumber || "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Video File Path Column -->
+            <ng-container matColumnDef="videoFilePath">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Video File Path
+              </th>
+              <td mat-cell *matCellDef="let element" class="file-path">
+                {{ element.videoFilePath || "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Audio File Path Column -->
+            <ng-container matColumnDef="audioFilePath">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Audio File Path
+              </th>
+              <td mat-cell *matCellDef="let element" class="file-path">
+                {{ element.audioFilePath || "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Retry</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="retryRabbitMQEntry(element)">
+                  <mat-icon>refresh</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <!-- No Data Row -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                <div class="no-data">
+                  <mat-icon>inbox</mat-icon>
+                  <p>No data matching the filter {{ dataSource.filter }}</p>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Paginator -->
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of evaluation questions">
+          </mat-paginator>
+        </div>
+      </mat-card>
+      }
+      @else {
+      <div class="p-8 text-center text-gray-500">
+        <h5>Loading rabbitMQ...</h5>
+      </div>
+      }
+    </div>
+  </div>
+</div>

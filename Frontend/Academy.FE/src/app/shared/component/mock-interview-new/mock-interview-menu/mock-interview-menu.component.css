@@ -1,0 +1,31 @@
+::ng-deep .mock-interview-collapse .nav-collapse li a .sub-item:before {
+    content: none !important;
+    display: none !important;
+  }
+  ::ng-deep .mock-interview-collapse .nav-collapse li a .sub-item {
+    margin-left: 0 !important; /* Remove left spacing */
+  }
+  .nav-collapse li.active a .menu-icon {
+    color: #fff;
+  }
+/* Default icon style */
+::ng-deep .menu-icon {
+  color: #a0a0a0;
+}
+
+/* Fix: Prevent parent .nav-item.active from overriding submenu icons */
+::ng-deep .sidebar .nav.nav-secondary > .nav-item.active a .menu-icon {
+  color: inherit !important;
+}
+
+/* Active submenu icon */
+::ng-deep .nav-collapse > li.active > a > .menu-icon {
+  color: #6861CE !important;
+}
+
+/* Optional: highlight active submenu text */
+::ng-deep .nav-collapse > li.active > a > .sub-item {
+  color: #6861CE !important;
+}
+
+  

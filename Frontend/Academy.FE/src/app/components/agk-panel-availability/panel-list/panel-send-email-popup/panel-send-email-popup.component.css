@@ -1,0 +1,39 @@
+.send-button {
+  background: rgba(191, 215, 50, 1);
+  opacity: 1;
+  top: 0px;
+  left: 0px;
+  border: 0px solid rgba(150, 150, 150, 1);
+  border-radius: 1vw !important;
+  overflow: hidden;
+  color: #ffffff;
+  cursor: pointer;
+  float: center;
+  padding: 0.65rem 1.4rem;
+    
+  }
+  .cancel-button {
+    background: grey;
+    opacity: 1;
+    top: 0px;
+    left: 0px;
+    border: 0px solid rgba(150, 150, 150, 1);
+    border-radius: 1vw !important;
+    overflow: hidden;
+    color: #ffffff;
+    cursor: pointer;
+    float: center;
+    padding: 0.65rem 1.4rem;
+  }
+
+  .padding_left_right
+  {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60% !important;
+  }
+
+  .padding_top
+  {
+    padding-top: 20px;
+  }

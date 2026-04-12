@@ -1,0 +1,81 @@
+
+    .content {
+      height: 100% !important;
+      }
+      .fc-col-header, .fc-timegrid-body {
+      width: 100% !important;
+      height: 100% !important;
+      }
+      .fc-scrollgrid-sync-table {
+      width: 100% !important;
+      height: 100% !important;
+      }
+      .fc-daygrid-body {
+      width: 100% !important;
+      height: 100% !important;
+      }
+      .fc-daygrid-body-balanced {
+      width: 100% !important;
+      height: 100% !important;
+      }
+  .popup_table {
+      display: table;
+      width: 100%; /*Optional*/
+      table-layout: fixed; /*Optional*/
+      border-spacing: 10px; /*Optional*/
+      height: 100%;
+  }
+  .popup_cal_calender {
+      width: 80%;
+      display: table-cell;
+  }
+  .popup_cal_info {
+    width: 30%;
+    display: table-cell;
+    align-items: center;
+  }
+  .green_dot {
+    height: 10px;
+    width: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .red_dot {
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .grey_dot {
+    height: 10px;
+    width: 10px;
+    background-color: grey;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .button {
+    background-color: pink;
+    color: white; /* Text color  */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size as needed */ 
+  }
+
+  .ok-button {
+    background: rgba(191, 215, 50, 1);
+    opacity: 1;
+    top: 0px;
+    left: 0px;
+    border: 0px solid rgba(150, 150, 150, 1);
+    border-radius: 1vw !important;
+    overflow: hidden;
+    color: #ffffff;
+    cursor: pointer;
+    float: center;
+    margin: 20px;
+  }
+  
+  

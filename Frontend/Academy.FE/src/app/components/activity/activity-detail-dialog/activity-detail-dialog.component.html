@@ -1,0 +1,113 @@
+<!--<h2 class="dialog-header" style="padding-left: 20px;padding-top: 10px;">Activity Details</h2>-->
+<div class="modal-header">
+  <h1 mat-dialog-title class="modal-heading">Activity Details - {{employeeName}}</h1>
+  <!-- <button mat-raised-button mat-dialog-close class="close-btn">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button> -->
+  <button type="button" class="btn" mat-dialog-close>
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+<hr />
+<mat-dialog-actions align="end">
+  <button color="primary" class="btn btn-primary" *ngIf="!editMode" (click)="showAddForm = true">
+    Add
+  </button>
+</mat-dialog-actions>
+
+<div *ngIf="showAddForm" class="add-form activity-form">
+
+  <app-activity-form [activityOptions]="activityOptions" [accountDetailsOptions]="accountDetailsOptions"
+    [initialData]="editMode ? selectedActivity : null" mode="single" (submitForm)="handleFormSubmit($event)"
+    (cancel)="cancelAdd()">
+  </app-activity-form>
+
+</div>
+
+<div class="dialog-body" style="width: 100%">
+  <mat-dialog-content class="mat-typography">
+    <div class="scrollable-table-wrapper">
+      <table mat-table [dataSource]="activityList" matSort class="mat-elevation-z8 parent">
+        <!-- <table mat-table [dataSource]="activityList"> -->
+        <!-- Activity Name Column -->
+
+        <ng-container matColumnDef="activityName">
+          <th mat-header-cell *matHeaderCellDef class="header-bold">
+            Activity Name
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.activityName }}
+          </td>
+        </ng-container>
+
+        <!--Activity Detail-->
+        <ng-container matColumnDef="activityDetail">
+          <th mat-header-cell *matHeaderCellDef class="header-bold">
+            Activity Detail
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.activityDetail }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="comments">
+          <th mat-header-cell *matHeaderCellDef class="header-bold">
+            Comments
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.comments }}
+          </td>
+        </ng-container>
+        <!-- Start Date Column -->
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef class="header-bold">
+            Start Date
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.startDate | date : "dd-MM-yyyy" }}
+          </td>
+        </ng-container>
+
+        <!-- End Date Column -->
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef class="header-bold">End Date</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.endDate | date : "dd-MM-yyyy" }}
+          </td>
+        </ng-container>
+
+        <!--Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="header-bold">Status</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.status }}
+          </td>
+        </ng-container>
+
+        <!--Account Detail Column -->
+        <ng-container matColumnDef="account">
+          <th mat-header-cell *matHeaderCellDef class="header-bold">Account</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.account?.join(', ') }}
+          </td>
+        </ng-container>
+
+        <!--Save Icon-->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="header-bold">Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <button class="save-btn-icon" (click)="editActivity(element)">
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-dialog-content>
+  <hr />
+</div>
+<mat-dialog-actions align="end">
+  <button class="btn" mat-dialog-close>Close</button>
+</mat-dialog-actions>

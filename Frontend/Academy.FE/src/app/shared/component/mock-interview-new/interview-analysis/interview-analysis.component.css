@@ -1,0 +1,170 @@
+/* Import shared table styles */
+@import '../shared-table-styles.css';
+
+/* Component-specific styles - inherits from mock-interview-layout */
+.buttons{
+    display: flex;
+
+}
+
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 8px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.form-error {
+    color: #d32f2f;
+    font-size: 13px;
+    margin-top: -12px;
+}
+
+/* Override for candidates table - force single line rows */
+.mat-mdc-row {
+    min-height: 40px !important;
+    max-height: 40px !important;
+}
+
+.mat-mdc-cell {
+    /* white-space: nowrap !important; */
+    overflow: hidden !important;
+    /* text-overflow: ellipsis !important; */
+    line-height: 1.2 !important;
+    padding: 8px 6px !important;
+    vertical-align: middle !important;
+}
+.mat-mdc-header-row{
+      height: 45px !important;
+}
+
+.mat-mdc-header-cell {
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+    padding: 8px 6px !important;
+}
+
+/* Ensure buttons stay in single line */
+.buttons {
+    display: flex !important;
+    gap: 4px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+}
+
+.mat-mdc-button {
+    min-width: auto !important;
+    padding: 2px 6px !important;
+    font-size: 11px !important;
+    line-height: 1.1 !important;
+    height: 24px !important;
+}
+
+/* Even column distribution for candidates table */
+.mat-column-id {
+    width: 10% !important;
+    max-width: 10% !important;
+}
+
+.mat-column-name {
+    width: 25% !important;
+    max-width: 25% !important;
+}
+
+.mat-column-createdAt {
+    width: 25% !important;
+    max-width: 25% !important;
+}
+
+.mat-column-updatedAt {
+    width: 25% !important;
+    max-width: 25% !important;
+}
+
+.mat-column-actions {
+    width: 15% !important;
+    max-width: 15% !important;
+}
+.mat-mdc-form-field{
+    width:unset!important;
+}
+
+.showMoreButton{
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: blue;
+    text-decoration: underline
+}
+.action-btn {
+    background-color: #bfd732;
+    color: black;
+    border: 1px solid #bfd732;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+ .action-btn[disabled] {
+  color: #64748b;
+  background-color: #d4e47a;
+  cursor: wait;
+}
+
+  .cancel-btn {
+    background-color: #f8fafc;
+    color: black;
+    border: 1px solid #64748b;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .header-btn {
+    background-color: #bfd732!important;
+    color: black !important;
+    border: 1px solid #e6edb9;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .read-more {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 0px;
+  margin-top: 6px;
+  padding: 0;
+}
+
+.prompt-summary {
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 10px;
+
+}
+
+.prompt-detail{
+  color:#4b5563;
+  margin-left: 10px;
+}

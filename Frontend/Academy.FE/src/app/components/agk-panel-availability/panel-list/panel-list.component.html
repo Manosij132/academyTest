@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title" style="display: inline-block; margin-right: 700px;">{{ pageHeader }}</h3>
+  
+    <!-- Search Filters -->
+    <div class="flex-container searchFilterButton">
+      <div class="left-group">
+        <mat-form-field appearance="outline">
+          <mat-label>TDC</mat-label>
+          <mat-select multiple>
+            <mat-option *ngFor="let tdc of tdcs"
+                        [value]="tdc.tdcId" (onSelectionChange)="onTDCChanged($event)">
+              {{ tdc.tdcName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Community</mat-label>
+          <mat-select multiple>
+            <mat-option *ngFor="let community of communities"
+                        [value]="community.communityId" 
+                        (onSelectionChange)="onCommunityChanged($event)">
+              {{ community.communityName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Up To Seniority</mat-label>
+          <mat-select multiple>
+            <mat-option *ngFor="let senority of senorities"
+                        [value]="senority.id" (onSelectionChange)="onSeniorityChanged($event)">
+              {{ senority.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Panel Type</mat-label>
+          <mat-select multiple>
+            <mat-option *ngFor="let panel of panels"
+                        [value]="panel.name" (onSelectionChange)="onPanelChanged($event)">
+              {{ panel.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-date-range-input  [rangePicker]="picker" [formGroup]="range">
+            <input matStartDate [(ngModel)]="dateStart" formControlName="startDate"  (dateChange)="onDateChange(range)"  placeholder="Start date">
+            <input matEndDate [(ngModel)]="dateEnd" formControlName="endDate"  (dateChange)="onDateChange(range)"   placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker" class="panelDatePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="panelSearch">
+          <input matInput placeholder="Search"
+          [(ngModel)]="searchText"
+          (keyup.enter)="applySearchFilter()">
+        </mat-form-field>
+      </div>
+
+      <div class="right-group">
+          <mat-button-toggle-group style="border-radius:30px" (change)="isToggleButtonChange($event)">
+            <mat-button-toggle 
+              [class.fontSizeAvailable]="!isAvailable" 
+              [ngClass]="{'isAvailable':isAvailable }" 
+              [value]="true">
+              <mat-icon style="font-size: 20px;" *ngIf="isAvailable">
+                check_circle_outline
+              </mat-icon>
+              Available
+            </mat-button-toggle>
+            <mat-button-toggle 
+              [class.removeBorderRadius]="isAvailable"  
+              [ngClass]="{'isDeficit':!isAvailable }"  
+              [value]="false">
+              <mat-icon style="font-size: 20px;" *ngIf="!isAvailable">
+                check_circle_outline
+              </mat-icon>
+              Deficit
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card headercolor mat-elevation-z8" 
+            style="position: relative;top: 10px;">
+            <div style="padding-left: 0px;padding-right: 0px;" >
+              <mf-app-panel-grid 
+                *ngIf="showChildComponent" 
+                [panels]="panelGridList" 
+                [pageNumber]="pageNumber" 
+                [pageSize]="pageSize" 
+                [totalRecords]="totalRecords" 
+                [calendarStartDate]="calendarStartDate" 
+                (onPaginationChanged)="onPaginationChanged($event)">
+              </mf-app-panel-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

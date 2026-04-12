@@ -1,0 +1,27 @@
+<div class="comment-box">
+  <div class="comment-generic" *ngIf="showLatestComment">
+    <p class="text-muted mt-2">{{ latestComment?.commentText }}</p>
+  </div>
+  <div style="margin: 10px"></div>
+  <div class="comment-author" *ngIf="showLatestComment">
+    by: {{ latestComment?.commentBy }} on
+    {{ latestComment?.commentDate | date : "dd-MMM-yyyy" }}
+  </div>
+  <div style="margin: 10px"></div>
+  <div class="comment-input-wrapper">
+    <textarea
+      rows="4"
+      class="form-control comment-generic comment-input"
+      #txtNote
+      id="txtNote"
+      placeholder="Leave a Note here..."
+    ></textarea>
+    <button
+      type="button"
+      class="btn btn-success btn-sm comment-action"
+      (click)="onCommentAdded(txtNote.value)"
+    >
+      Save
+    </button>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "http://nce6822dxu06.tat.corp.globant.com:8080",
+    "secure": false
+  }
+}

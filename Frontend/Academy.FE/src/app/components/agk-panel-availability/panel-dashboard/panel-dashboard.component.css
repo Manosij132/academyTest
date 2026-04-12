@@ -1,0 +1,167 @@
+.title {
+  margin-top: 77px;
+}
+
+
+::ng-deep .pie-label {
+  font-size: 15px !important;
+}
+
+.panelRow .mat-form-field{
+  display:unset;
+}
+
+.panelRow div{
+  margin-right:20px;
+}
+
+.mat-cell-gap{
+flex: 1 1 100%;
+    box-sizing: border-box;
+    max-width: 32%!important;
+  }
+
+  ::ng-deep input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 70px;
+}
+
+.chart-container { 
+  display: flex; /* Use flexbox to align items horizontally */
+  margin: 0px 60px 60px 20px;
+}
+
+.chart {
+  flex: 1; /* Each chart takes equal space */
+  /* margin-right: 10px; */
+   /* Add some margin between charts */
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 120px;
+}
+
+.sideNavInActive {
+  /* position: fixed; */
+  width: 100%;
+  z-index: 1;
+}
+
+.sideNavActive {
+  /* position: fixed; */
+  width: 100%;
+  z-index: 1;
+}
+
+.panelRow .mat-form-field{
+    display:unset;
+}
+
+::ng-deep .panelDatePicker .mat-icon-button {
+  width: unset;
+  height: unset;
+  line-height: 20px;
+  margin-top:12px;
+}
+
+.panelRow div{
+    margin-right:20px;
+}
+
+::ng-deep .panelSearch.mat-form-field-appearance-standard .mat-form-field-flex{
+    padding-top:unset;
+}
+
+.headercolor{
+  background: #FFFFFF;
+  /* box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1); */
+}
+
+::ng-deep .panelDateRange.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  padding-bottom: 1.4em !important;
+}
+
+.panelSearch{
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+.totalSlotCard {
+  margin: 10px;
+  width: 130px;
+  background-color:#82E0AA;
+  height: 220px;
+  align-content: center;
+}
+
+.availableL1GKSlots {
+  margin: 10px;
+  width: 170px;
+  background-color:#82E0AA
+}
+
+.unutilizedL1GKSlots {
+  margin: 10px;
+  width: 170px;
+  background-color: #FFEA7C;
+}
+
+.utilizedL1GKSlots {
+  margin: 10px;
+  width: 170px;
+  background-color: #14d220;
+}
+
+.deficitL1GK {
+  margin: 10px;
+  width: 170px;
+  background-color: #FF9270;
+}
+
+::ng-deep .mat-card:hover{
+  box-shadow: 10px 10px 10px -3px rgba(0, 0, 0, 0.2), 
+              10px 10px 10px 1px rgba(0, 0, 0, 0.14), 
+              10px 10px 10px 2px rgba(0, 0, 0, 0.12);
+}
+
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.btnaddrole {
+  float: right;
+  background-color: #c6eb34;
+  border-radius: 20px !important;
+}
+
+
+mat-table {
+  height: 300px;
+  overflow: auto;
+}
+
+.flex-container {
+  display: flex;                  /* enable flex layout */
+  align-items: center;            /* vertically center items */
+  justify-content: space-between; /* left group left, right button right */
+  gap: 10px;                      /* optional spacing between items */
+  width: 100%;                    /* full width container */
+}
+
+.padding-1rem{
+  padding: 1rem;;
+}

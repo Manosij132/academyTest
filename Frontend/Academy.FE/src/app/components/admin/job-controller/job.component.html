@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">{{ pageHeader }}</h3>
+   <div class="card main-card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="card-title">List of Jobs</p>
+            <table mat-table [dataSource]="dataSource" matSort>
+            
+              <!-- Seniority Column -->
+              <ng-container matColumnDef="jobname">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  [style.background-color]="color"
+                  class="header-bold"
+                >
+                  Job Name
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.jobName}}
+                </td>
+              </ng-container>
+
+              <!-- Level Column -->
+              <ng-container matColumnDef="jobdescription">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  [style.background-color]="color"
+                  class="header-bold"
+                >
+                  Desc
+                </th>
+                <td mat-cell *matCellDef="let element"> {{ element.jobDescription || 'NA' }}</td>
+              </ng-container>
+
+              <!-- Status Column -->
+              <ng-container matColumnDef="status">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  [style.background-color]="color"
+                  class="header-bold"
+                >
+                  Status
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'bg-success': element.isActive,
+                      'bg-danger': !element.isActive
+                    }"
+                  >
+                   {{ element.isActive ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+              </ng-container> 
+                <ng-container matColumnDef="action">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  [style.background-color]="color"
+                  class="header-bold">
+                  Action
+                </th>
+                      <!-- Cell -->
+                      <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item>
+                           <mat-icon style="color: green;">check_circle</mat-icon>
+                            <span>Enabled</span>
+                          </button>
+                      <button mat-menu-item disabled>
+                        <mat-icon>block</mat-icon>
+                        <span>Disabled</span>
+                      </button>
+                       <button mat-menu-item>
+                           <mat-icon color="primary">check_circle</mat-icon>
+                            <span>Run</span>
+                          </button>
+                    </mat-menu>
+                      </td>
+                  </ng-container>
+              
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+         
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+       

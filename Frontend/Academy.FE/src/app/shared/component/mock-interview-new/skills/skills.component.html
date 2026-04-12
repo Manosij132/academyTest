@@ -1,0 +1,125 @@
+<!-- Add Skill Dialog -->
+<ng-template #addSkillTemplate>
+  <form [formGroup]="form" (ngSubmit)="onSubmitDialog()" class="dialog-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Skill Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter skill name" cdkFocusInitial />
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
+      <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
+        Name must be at most 100 characters
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="dialogError" class="form-error">{{ dialogError }}</div>
+  </form>
+</ng-template>
+
+<!-- Edit Skill Dialog -->
+<ng-template #editSkillTemplate>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmitEditDialog()" class="dialog-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Skill Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter skill name" />
+      <mat-error *ngIf="editForm.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
+      <mat-error *ngIf="editForm.get('name')?.hasError('maxlength')">
+        Name must be at most 100 characters
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="dialogError" class="form-error">{{ dialogError }}</div>
+  </form>
+</ng-template>
+
+@if (error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Skills List</h3>
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput class="search" [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Search here" />
+      </mat-form-field>
+
+      <div>
+        <!-- <button class="btn btn-secondary btn-sm me-2" (click)="fetchSkills()" [disabled]="loading">
+            <i class="fa fa-refresh" [class.fa-spin]="loading"></i> Refresh
+          </button> -->
+        <button class="header-btn" (click)="onCreateSkill()">Add Skill</button>
+      </div>
+    </div>
+  </div>
+
+  @if(!(loaderService.loaderState | async)) {
+  <div class="card-body">
+    @if(dataSource.data.length === 0) {
+    <div class="p-8 text-center text-gray-500">
+      <i class="fa fa-tools fa-3x mb-3"></i>
+      <h5>No skills found</h5>
+      <p>Add a new skill to get started.</p>
+    </div>
+    } @else {
+    <div class="scrollable-table-wrapper table-view">
+      <table mat-table [dataSource]="dataSource" matSort class="table">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Skill ID</th>
+          <td mat-cell *matCellDef="let skill" class="font-medium">
+            {{ skill.id || "-" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Skill Name</th>
+          <td mat-cell *matCellDef="let skill">{{ skill.name || "-" }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Added On</th>
+          <td mat-cell *matCellDef="let skill">
+            {{ skill.createdAt | date : "medium" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated On</th>
+          <td mat-cell *matCellDef="let skill">
+            {{ skill.updatedAt | date : "medium" }}
+          </td>
+        </ng-container>
+
+        <!-- Options -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let skill">
+            <div class="buttons">
+              <mat-icon (click)="onEditSkill(skill)" style="cursor: pointer">edit</mat-icon>
+              <mat-icon (click)="onDeleteSkill(skill)" style="cursor: pointer">delete</mat-icon>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="totalItems"
+      (page)="onPageChanged($event)" showFirstLastButtons>
+    </mat-paginator>
+    }
+  </div>
+  }
+  @else {
+  <div class="p-8 text-center text-gray-500">
+    <h5>Loading skills...</h5>
+  </div>
+  }
+
+
+</div>
+}

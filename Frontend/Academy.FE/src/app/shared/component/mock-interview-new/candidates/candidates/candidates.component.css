@@ -1,0 +1,104 @@
+/* Component-specific styles - inherits from mock-interview-layout */
+.buttons{
+    display: flex;
+
+}
+
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 8px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .form-error {
+    color: #d32f2f;
+    font-size: 13px;
+    margin-top: -12px;
+  }
+
+/* Override for candidates table - force single line rows */
+.mat-mdc-row {
+  min-height: 40px !important;
+  max-height: 40px !important;
+}
+
+.mat-mdc-cell {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  /* text-overflow: ellipsis !important; */
+  line-height: 1.2 !important;
+  padding: 8px 6px !important;
+  vertical-align: middle !important;
+}
+.mat-mdc-header-row{
+      height: 45px !important;
+}
+
+.mat-mdc-header-cell {
+  white-space: nowrap !important;
+  line-height: 1.2 !important;
+  padding: 8px 6px !important;
+  font-weight: bold;
+  font-size:13px
+}
+
+/* Ensure buttons stay in single line */
+.buttons {
+  display: flex !important;
+  gap: 4px !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+.mat-mdc-button {
+  min-width: auto !important;
+  padding: 2px 6px !important;
+  font-size: 11px !important;
+  line-height: 1.1 !important;
+  height: 24px !important;
+}
+
+/* Even column distribution for candidates table */
+.mat-column-employeeId{
+  width: 10% !important;
+  max-width: 10% !important;
+}
+
+.mat-column-employeeName {
+  width: 30% !important;
+  max-width: 30% !important;
+}
+
+.mat-column-employeeEmail {
+  width: 30% !important;
+  max-width: 30% !important;
+}
+
+.mat-column-mockInterview {
+  width: 15% !important;
+  max-width: 15% !important;
+}
+
+.mat-column-view {
+  width: 10% !important;
+  max-width: 10% !important;
+}
+.buttons{
+background-color: #e6edb9 !important;
+font-weight: 600 !important;
+color:black !important;
+}

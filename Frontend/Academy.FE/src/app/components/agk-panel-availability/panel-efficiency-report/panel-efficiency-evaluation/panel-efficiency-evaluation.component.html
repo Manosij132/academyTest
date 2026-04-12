@@ -1,0 +1,35 @@
+
+<mat-dialog-content class="dialog-content">
+  <div class="modal-header">
+      <h1 mat-dialog-title class="modal-heading">AI Evaluation:<strong>{{data.panelName }}({{ data.panelEmail }})</strong></h1>
+      <button type="button" class="btn" mat-dialog-close>
+          <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+  </div>
+
+  <h4 class="header">
+    <span class="left">
+      Avarage Rating:{{avgRating | number:'1.2-2' }}
+    </span> 
+  </h4>
+  Ratting: [Poor=1 | Below Average=2 | Adequate=3 | Strong=4 | Outstanding=5]
+  <div *ngIf="panelEfficiencyList.length>0" style="height: 400px; overflow: scroll;">
+    <div class="headercolor panel-efficiency-evaluation-border" *ngFor="let row of panelEfficiencyList; let i = index">
+      <span><strong>Interview Date:</strong> {{ row.interviewDate | date: "dd MMM yyyy"}}</span><br/>
+      <span><strong>Interview Name:</strong> {{ row.interviewName }}</span><br/>
+      <span><strong>Main Stream:</strong> {{ row.mainStream }}</span><br/>
+      <span><strong>Candidate Experience Years:</strong> {{ row.candidateExperienceYears }}</span><br/>
+      <span><strong>Seniority:</strong> {{ row.targetExperienceTier }}</span><br/>
+      <span><strong>Streams Covered:</strong> {{ row.streamsCovered }}</span><br/>
+      <span><strong>Total Questions Asked:</strong> {{ row.totalQuestionsAsked }}</span><br/>
+      <span><strong>Questions Asked By Panel:</strong> {{ row.questionsAskedByPanel }}</span><br/>
+      <span><strong>Strengths:</strong> {{ row.strengths }}</span><br/>
+      <span><strong>Areas For Improvement:</strong> {{ row.areasForImprovement }}</span><br/>
+      <span><strong>Rating:</strong> {{ row.finalRatingInText }}</span><br/>
+      <span><strong>Rating Number:</strong> {{ row.finalRatingInNumber }}</span><br/>
+    </div>
+    </div>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

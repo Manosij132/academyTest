@@ -1,0 +1,117 @@
+<mat-table [dataSource]="rows" class="mat-elevation-z8 inner">
+  <!-- Column Definitions for the Body --> 
+
+<ng-container matColumnDef="trainingUrl">
+  <mat-header-cell class="inner-table-lable left-align" *matHeaderCellDef>
+    Training Name
+  </mat-header-cell>
+
+  <mat-cell *matCellDef="let item" class="ellipsis-cell">
+    <a
+      [href]="item.trainingUrl"
+      target="_blank"
+      class="ellipsis-link"
+      [matTooltip]="item.trainingName"
+    >
+      {{ item.trainingName }}
+    </a>
+  </mat-cell>
+
+  <tr *matFooterCellDef></tr>
+</ng-container>
+
+  <ng-container matColumnDef="skillName">
+    <mat-header-cell class="inner-table-lable" *matHeaderCellDef
+      >Skill Name</mat-header-cell
+    >
+    <mat-cell *matCellDef="let item">{{ item.skillName }}</mat-cell>
+    <mat-footer-cell [attr.colspan]="5" *matFooterCellDef>
+      <div class="updateAbilityButton">
+        <a
+          class="btn updateAbilityBtn"
+          mat-flat-button
+          href="https://mygrowth.university.globant.com/me"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Update Ability and Knowledge
+          <i
+            class="fa-regular fas fa-external-link-alt"
+            style="margin-left: 10px"
+          ></i>
+        </a>
+      </div>
+    </mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="startDate">
+    <mat-header-cell class="inner-table-lable" *matHeaderCellDef
+      >Start Date</mat-header-cell
+    >
+    <mat-cell *matCellDef="let item">{{
+      item.startDate | date : "dd-MMM-yyyy"
+    }}</mat-cell>
+    <!-- Empty footer cell for Start Date column -->
+    <tr *matFooterCellDef></tr>
+    <!-- Empty footer cell -->
+  </ng-container>
+
+  <ng-container matColumnDef="expectedEndDate">
+    <mat-header-cell class="inner-table-lable" *matHeaderCellDef
+      >Expected End Date</mat-header-cell
+    >
+    <mat-cell *matCellDef="let item">{{
+      item.expectedEndDate | date : "dd-MMM-yyyy"
+    }}</mat-cell>
+    <tr *matFooterCellDef></tr>
+    <!-- Empty footer cell -->
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell class="inner-table-lable" *matHeaderCellDef
+      >Status</mat-header-cell
+    >
+    <mat-cell *matCellDef="let item">
+      <ng-container
+        *ngIf="item.trainingStatus !== 'Completed'; else elseTemplate"
+      >
+        {{ item.trainingStatus }}
+      </ng-container>
+      <ng-template #elseTemplate>
+        <p class="badge bg-success">Completed</p>
+      </ng-template>
+    </mat-cell>
+    <tr mat-footer-cell *matFooterCellDef></tr>
+    <!-- Empty footer cell -->
+  </ng-container>
+
+  <ng-container matColumnDef="trainingScore">
+  <mat-header-cell class="inner-table-lable" *matHeaderCellDef>
+    Completion %
+  </mat-header-cell>
+
+  <mat-cell *matCellDef="let item">
+    <div class="progress-container">
+      <mat-progress-bar
+        class="progress-bar"
+        mode="determinate"
+        [value]="item.trainingScore">
+      </mat-progress-bar>
+
+      <span class="progress-text">
+        {{ item.trainingScore }}%
+      </span>
+    </div>
+  </mat-cell>
+
+  <tr *matFooterCellDef></tr>
+</ng-container>
+  <!-- Header Row -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <!-- Data Row -->
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  <!-- Default Footer Row -->
+  <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+</mat-table>

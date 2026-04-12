@@ -1,0 +1,266 @@
+@if(error) {
+<div class="p-8 text-center text-red-600">{{ error }}</div>
+} @else {
+<div class="container">
+  <div class="page-inner">
+    <h3 class="fw-bold mb-3 title">Evaluation Analysis</h3>
+    <div class="filter-container searchFilterButton">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          class="search"
+          [(ngModel)]="searchText"
+          (keyup)="applyFilter()"
+          placeholder="Search here"
+        />
+      </mat-form-field>
+      <div>
+        <button class="header-btn" (click)="onCreateInterviewAnalysis()">
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    @if (dataSource.data.length === 0) {
+    <div class="p-8 text-center text-gray-500">
+      <i class="fa fa-chart-line fa-3x mb-3"></i>
+      <h5>No evaluation analysis found</h5>
+      <p>No analysis data available for evaluations.</p>
+    </div>
+    } @else {
+    <div class="scrollable-table-wrapper">
+      <table mat-table [dataSource]="dataSource" matSort class="table">
+        <!-- Interview Detail Id -->
+        <ng-container matColumnDef="interviewDetailId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Evaluation Code
+          </th>
+          <td mat-cell *matCellDef="let row" class="font-medium py-2">
+            {{ row.interviewDetailId || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Model -->
+        <ng-container matColumnDef="modelId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Model</th>
+          <td mat-cell *matCellDef="let row" class="font-medium py-2">
+            {{
+              row?.aiModelName
+                ? row.aiModelName
+                : row.modelId
+                ? row.modelId
+                : "-"
+            }}
+          </td>
+        </ng-container>
+
+        <!-- Prompt -->
+        <ng-container matColumnDef="prompt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Prompt</th>
+          <td mat-cell *matCellDef="let row" class="font-medium py-2">
+            <div *ngIf="getParsedPrompt(row) as parsed; else noPrompt">
+              <div class="prompt-summary">
+                <strong>Question:</strong>
+                <span class="prompt-detail"
+                  >{{ parsed.question | slice : 0 : 120 }}...</span
+                >
+              </div>
+              <div class="prompt-summary">
+                <strong>Answer:</strong>
+                <span class="prompt-detail"
+                  >{{ parsed.candidateAnswer | slice : 0 : 120 }}...</span
+                >
+              </div>
+              <button
+                class="read-more"
+                (click)="onToggle(row, parsed)"
+                style="margin-left: 0; margin-top: 0"
+              >
+                Read More
+              </button>
+            </div>
+          </td>
+          <ng-template #noPrompt>
+            <span>-</span>
+          </ng-template>
+        </ng-container>
+
+        <!-- Score -->
+        <ng-container matColumnDef="score">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Score</th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+            {{ row.score || "-" }}
+          </td>
+        </ng-container>
+        <!--Total  Score -->
+        <ng-container matColumnDef="totalScore">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Score</th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+            {{ row.totalScore || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Comments -->
+        <ng-container matColumnDef="comments">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Comments</th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+            {{ row.comments || "-" }}
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let row" class="py-2 w-auto">
+            <div class="flex gap-2">
+              <mat-icon
+                (click)="editInterviewDetails(row)"
+                style="cursor: pointer"
+                >edit</mat-icon
+              >
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      [pageSize]="10"
+      showFirstLastButtons
+    >
+    </mat-paginator>
+    }
+  </div>
+</div>
+}
+
+<!-- Template for Add Interview Analysis Dialog -->
+<ng-template #addInterviewAnalysisTemplate>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmitDialog()"
+    class="interview-analysis-form"
+  >
+    <!-- Row 1 -->
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Evaluation code</mat-label>
+          <input
+            matInput
+            formControlName="interviewDetailId"
+            placeholder="Enter evaluation code"
+          />
+          <mat-error *ngIf="form.get('interviewDetailId')?.hasError('required')"
+            >Evaluation code is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-full mb-4">
+          <mat-label>Model</mat-label>
+          <mat-select
+            formControlName="modelId"
+            required
+            placeholder="Enter model name"
+          >
+            <mat-option *ngFor="let ai of aimodels" [value]="ai.id">{{
+              ai.modelName
+            }}</mat-option>
+            <mat-option value="null">Any</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row mb-3">
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Score</mat-label>
+          <input
+            matInput
+            formControlName="score"
+            type="number"
+            placeholder="Enter score"
+          />
+          <mat-error *ngIf="form.get('score')?.hasError('required')"
+            >Score is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Total Score</mat-label>
+          <input
+            matInput
+            formControlName="totalScore"
+            type="number"
+            placeholder="Enter total score"
+          />
+          <mat-error *ngIf="form.get('totalScore')?.hasError('required')"
+            >Total score is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Prompt</mat-label>
+          <textarea
+            matInput
+            formControlName="prompt"
+            placeholder="Enter prompt"
+            rows="3"
+          ></textarea>
+          <mat-error *ngIf="form.get('prompt')?.hasError('required')"
+            >Prompt is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <!-- Comments (full width) -->
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Comments</mat-label>
+          <textarea
+            matInput
+            formControlName="comments"
+            placeholder="Enter comments"
+            rows="3"
+          ></textarea>
+          <mat-error *ngIf="form.get('comments')?.hasError('required')"
+            >Comments are required</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div
+      *ngIf="dialogError"
+      class="alert alert-danger d-flex align-items-center mt-3"
+    >
+      <mat-icon class="me-2">error</mat-icon>
+      {{ dialogError }}
+    </div>
+
+    <div class="form-actions">
+      <button class="cancel-btn" type="button" (click)="onCancelDialog()">
+        Cancel
+      </button>
+      <button class="action-btn" type="submit" [disabled]="form.invalid">
+        <span>{{ selectedInterviewAnalysis ? "Update" : "Add" }}</span>
+      </button>
+    </div>
+  </form>
+</ng-template>
