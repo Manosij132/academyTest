@@ -45,7 +45,7 @@ COPY Workers/ReminderWorker/           Workers/ReminderWorker/
 COPY Workers/ReportWorker/             Workers/ReportWorker/
 COPY Workers/SendEmailWorker/          Workers/SendEmailWorker/
 COPY Workers/SyncEmployeeWorker/       Workers/SyncEmployeeWorker/
-COPY Backend/Academy.API/appsettings*.json, Backend/Academy.API/
+COPY Backend/Academy.API/appsettings*.json Backend/Academy.API/
   
 # ── Build and publish the application ──
 RUN dotnet publish Backend/Academy.API/Academy.API.csproj -c Release -o /app/publish /p:UseAppHost=false
