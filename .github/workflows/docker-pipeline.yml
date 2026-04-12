@@ -50,7 +50,7 @@ jobs:
         run: |
           docker build -t academy-api:${{ github.event.inputs.target }}-${{ github.run_number }} -f Backend/Academy.API/dockerfile .
           docker build -t staffing-api:${{ github.event.inputs.target }}-${{ github.run_number }} -f Backend/Staffing/Staffing.API/dockerfile .
-          docker build -t academy-fe:${{ github.event.inputs.target }}-${{ github.run_number }} -f Frontend/Academy.FE/dockerfile .
+          docker build -t academy-fe:${{ github.event.inputs.target }}-${{ github.run_number }} -f Frontend/Academy.FE/dockerfile Frontend/
 
       # 5. Stop old containers
       - name: Stop containers
