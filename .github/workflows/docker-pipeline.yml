@@ -26,6 +26,9 @@ jobs:
       - ${{ github.event.inputs.target || 'qa' }}
 
     steps:
+      - name: Fix workspace permissions
+        run: sudo chown -R $USER:$USER /home/azureuser/actions-runner/_work
+    
       # 1. Checkout
       - name: Checkout code
         uses: actions/checkout@v4
