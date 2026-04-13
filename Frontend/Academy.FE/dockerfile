@@ -22,8 +22,8 @@ ARG APP_ENV=development
 # Build SSR project
 
 # RUN if [ "$APP_ENV" = "prod" ]; then RUN npm run build; else RUN npm run build-${APP_ENV}; fi
-RUN if [ "$APP_ENV" = "prod" ]; then npm run build; else npm run build-${APP_ENV}; fi
-
+# RUN if [ "$APP_ENV" = "prod" ]; then npm run build; else npm run build-${APP_ENV}; fi
+RUN if [ "$APP_ENV" = "prod" ]; then npm run build; else npm run build -- --configuration=$APP_ENV; fi
 
 # RUN npm run build-${APP_ENV}
 
