@@ -71,11 +71,20 @@ jobs:
 
       # 7. Wait
       - name: Wait for services
-        run: sleep 20
+        run: sleep 40
 
       # 8. Health check
       - name: Health check
-        run: curl -f http://localhost:8084 || exit 1
+        run: |
+         for i in {1..6}; do
+           echo "Attempt $i..."
+           curl -f http://localhost:8084 && exit 0
+           sleep 10
+         done
+         docker ps
+         docker logs academy-nginx
+         docker logs academy-fe
+         exit 1
 
       # 9. Done
       - name: Deployment complete
