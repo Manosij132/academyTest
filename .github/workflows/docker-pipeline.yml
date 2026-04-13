@@ -30,18 +30,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Set ENV + IMAGE TAG 
+      # 2. Set ENV + TAG
       - name: Set environment variables
         run: |
           ENV_INPUT=${{ github.event.inputs.target || 'qa' }}
+          TAG=${ENV_INPUT}-${{ github.run_number }}
 
-          echo "IMAGE_TAG=${ENV_INPUT}-${{ github.run_number }}" >> .env
-          
-          # 🔥 IMPORTANT FIX (frontend build issue)
+          echo "IMAGE_TAG=$TAG" >> .env
           echo "APP_ENV=prod" >> .env
-          
-          # backend env same rahega
-          echo "ASPNETCORE_ENVIRONMENT=${ENV_INPUT}" >> .env
+          echo "ASPNETCORE_ENVIRONMENT=$ENV_INPUT" >> .env
 
       # 3. Verify SSL
       - name: Verify SSL certificates
@@ -51,35 +48,32 @@ jobs:
             exit 1
           fi
 
-      # 4. Debug structure (optional but useful)
-      - name: Debug frontend structure
-        run: |
-          echo "Listing Frontend folder"
-          ls -R Frontend/Academy.FE || true
-
-      # 5. Build Images
+      # 4. Build Images (🔥 FIXED)
       - name: Build Images
         run: |
-          docker build -t academy-api:${{ github.run_number }} -f Backend/Academy.API/dockerfile .
-          docker build -t staffing-api:${{ github.run_number }} -f Backend/Staffing/Staffing.API/dockerfile .
-          docker build -t academy-fe:${{ github.run_number }} -f Frontend/Academy.FE/dockerfile Frontend/Academy.FE/
+          ENV_INPUT=${{ github.event.inputs.target || 'qa' }}
+          TAG=${ENV_INPUT}-${{ github.run_number }}
 
-      # 6. Stop old containers
+          docker build -t academy-api:$TAG -f Backend/Academy.API/dockerfile .
+          docker build -t staffing-api:$TAG -f Backend/Staffing/Staffing.API/dockerfile .
+          docker build --build-arg APP_ENV=prod -t academy-fe:$TAG -f Frontend/Academy.FE/dockerfile Frontend/Academy.FE/
+
+      # 5. Stop old containers
       - name: Stop containers
         run: docker compose -f $COMPOSE_FILE down || true
 
-      # 7. Start new containers
+      # 6. Start containers
       - name: Start containers
         run: docker compose -f $COMPOSE_FILE up -d
 
-      # 8. Wait
+      # 7. Wait
       - name: Wait for services
         run: sleep 20
 
-      # 9. Health check
+      # 8. Health check
       - name: Health check
         run: curl -f http://localhost:8084 || exit 1
 
-      # 10. Done
+      # 9. Done
       - name: Deployment complete
         run: echo "Deployment completed"
