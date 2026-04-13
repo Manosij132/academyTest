@@ -72,7 +72,7 @@ jobs:
 
       # 8. Health check
       - name: Health check
-        run: curl -f http://localhost:8084 || exit 1
+        run: curl -f http://localhost || exit 1
 
       # 9. Done
       - name: Deployment complete
