@@ -78,7 +78,7 @@ jobs:
         run: |
          for i in {1..6}; do
            echo "Attempt $i..."
-           curl -f http://localhost:8084 && exit 0
+           curl -k -f https://localhost && exit 0
            sleep 10
          done
          docker ps
