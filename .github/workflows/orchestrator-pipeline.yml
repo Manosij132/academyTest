@@ -19,8 +19,10 @@ jobs:
     with:
       env_name: dev
       runner: dev
-      secret_name: DEV_ENV_FILE
       aspnet: Development
+    secrets:
+      ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
 
   qa:
     if: startsWith(github.ref, 'refs/heads/release/')
@@ -28,8 +30,10 @@ jobs:
     with:
       env_name: qa
       runner: qa
-      secret_name: QA_ENV_FILE
       aspnet: QA
+    secrets:
+      ENV_FILE: ${{ secrets.QA_ENV_FILE }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
 
   prod:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
@@ -37,6 +41,7 @@ jobs:
     with:
       env_name: prod
       runner: prod
-      secret_name: PROD_ENV_FILE
       aspnet: Production
-    secrets: inherit
+    secrets:
+      ENV_FILE: ${{ secrets.PROD_ENV_FILE }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}

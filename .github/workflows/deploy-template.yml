@@ -4,16 +4,33 @@ on:
   workflow_call:
     inputs:
       env_name:
+        description: "Environment name (dev/qa/prod)"
+        required: true
         type: string
+
       runner:
+        description: "Runner label (dev/qa/prod VM)"
+        required: true
         type: string
-      secret_name:
-        type: string
+
       aspnet:
+        description: "ASPNET environment"
+        required: true
         type: string
+
+    secrets:
+      ENV_FILE:
+        description: "Full .env content"
+        required: true
+
+      GOOGLE_CLIENT_ID:
+        description: "Frontend Google client ID"
+        required: true
 
 jobs:
   deploy:
+    name: Deploy to ${{ inputs.env_name }}
+    
     runs-on:
       - self-hosted
       - linux
@@ -22,28 +39,47 @@ jobs:
     environment: ${{ inputs.env_name }}
 
     steps:
-      - uses: actions/checkout@v4
 
-      - name: Load env
+      # 🔹 Checkout
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 🔹 Fix permissions (optional but safe)
+      - name: Fix workspace permissions
+        run: sudo chown -R $(whoami):$(whoami) $GITHUB_WORKSPACE
+
+      # 🔹 Load ENV from secret
+      - name: Load ENV file
         run: |
-          echo "${{ secrets[inputs.secret_name] }}" > .env
+          echo "${{ secrets.ENV_FILE }}" > .env
           echo "IMAGE_TAG=${{ inputs.env_name }}-${{ github.run_number }}" >> .env
           echo "ASPNETCORE_ENVIRONMENT=${{ inputs.aspnet }}" >> .env
 
+      # 🔹 Debug (temporary - remove later)
+      - name: Debug ENV
+        run: |
+          echo "------ .env content ------"
+          cat .env
+
+      # 🔹 Generate service-specific env files
       - name: Generate env files
         run: |
           chmod +x generate-env.sh
           ./generate-env.sh
 
-      - name: Build Images
+      # 🔹 Build Images
+      - name: Build Docker Images
         run: |
           TAG=${{ inputs.env_name }}-${{ github.run_number }}
 
+          # 🔥 Map env (prod → production for Angular)
           if [ "${{ inputs.env_name }}" = "prod" ]; then
             BUILD_ENV=production
           else
             BUILD_ENV=${{ inputs.env_name }}
           fi
+
+          echo "Building for ENV: $BUILD_ENV"
 
           docker build -t academy-api:$TAG -f Backend/Academy.API/dockerfile .
           docker build -t staffing-api:$TAG -f Backend/Staffing/Staffing.API/dockerfile .
@@ -54,12 +90,33 @@ jobs:
             -t academy-fe:$TAG \
             -f Frontend/Academy.FE/dockerfile Frontend/Academy.FE/
 
-      - name: Deploy
-        run: |
-          docker compose down || true
-          docker compose up -d
+      # 🔹 Stop old containers
+      - name: Stop old containers
+        run: docker compose down || true
 
-      - run: sleep 40
+      # 🔹 Start new containers
+      - name: Start containers
+        run: docker compose up -d
 
+      # 🔹 Wait for services
+      - name: Wait for services
+        run: sleep 40
+
+      # 🔹 Health check
       - name: Health Check
-        run: curl -k -f https://localhost
+        run: |
+          for i in {1..6}; do
+            echo "Attempt $i..."
+            curl -k -f https://localhost && exit 0
+            sleep 10
+          done
+
+          echo "❌ Health check failed"
+          docker ps
+          docker logs academy-nginx
+          docker logs academy-fe
+          exit 1
+
+      # 🔹 Done
+      - name: Deployment complete
+        run: echo "✅ Deployment completed for ${{ inputs.env_name }}"
