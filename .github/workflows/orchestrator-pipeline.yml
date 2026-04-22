@@ -1,0 +1,42 @@
+name: Academy Deployment
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+      - release/**
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  dev:
+    if: github.ref == 'refs/heads/develop' || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/deploy-template.yml
+    with:
+      env_name: dev
+      runner: dev
+      secret_name: DEV_ENV_FILE
+      aspnet: Development
+
+  qa:
+    if: startsWith(github.ref, 'refs/heads/release/')
+    uses: ./.github/workflows/deploy-template.yml
+    with:
+      env_name: qa
+      runner: qa
+      secret_name: QA_ENV_FILE
+      aspnet: QA
+
+  prod:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    uses: ./.github/workflows/deploy-template.yml
+    with:
+      env_name: prod
+      runner: prod
+      secret_name: PROD_ENV_FILE
+      aspnet: Production
+    secrets: inherit
