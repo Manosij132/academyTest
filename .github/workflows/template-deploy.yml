@@ -1,0 +1,65 @@
+name: Deploy Template
+
+on:
+  workflow_call:
+    inputs:
+      env_name:
+        type: string
+      runner:
+        type: string
+      secret_name:
+        type: string
+      aspnet:
+        type: string
+
+jobs:
+  deploy:
+    runs-on:
+      - self-hosted
+      - linux
+      - ${{ inputs.runner }}
+
+    environment: ${{ inputs.env_name }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Load env
+        run: |
+          echo "${{ secrets[inputs.secret_name] }}" > .env
+          echo "IMAGE_TAG=${{ inputs.env_name }}-${{ github.run_number }}" >> .env
+          echo "ASPNETCORE_ENVIRONMENT=${{ inputs.aspnet }}" >> .env
+
+      - name: Generate env files
+        run: |
+          chmod +x generate-env.sh
+          ./generate-env.sh
+
+      - name: Build Images
+        run: |
+          TAG=${{ inputs.env_name }}-${{ github.run_number }}
+
+          if [ "${{ inputs.env_name }}" = "prod" ]; then
+            BUILD_ENV=production
+          else
+            BUILD_ENV=${{ inputs.env_name }}
+          fi
+
+          docker build -t academy-api:$TAG -f Backend/Academy.API/dockerfile .
+          docker build -t staffing-api:$TAG -f Backend/Staffing/Staffing.API/dockerfile .
+
+          docker build \
+            --build-arg APP_ENV=$BUILD_ENV \
+            --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
+            -t academy-fe:$TAG \
+            -f Frontend/Academy.FE/dockerfile Frontend/Academy.FE/
+
+      - name: Deploy
+        run: |
+          docker compose down || true
+          docker compose up -d
+
+      - run: sleep 40
+
+      - name: Health Check
+        run: curl -k -f https://localhost

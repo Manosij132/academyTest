@@ -1,47 +1,38 @@
 # =======================================================
-# Dockerfile — Academy.FE (Angular SSR)
-# Multi-stage build for production Server-Side Rendering
+# Academy.FE (Angular SSR)
 # =======================================================
 
-# ───────────────────────────────────────────────────────
-# Stage 1: Build the Angular App
-# ───────────────────────────────────────────────────────
 FROM node:20-alpine AS build
 
 WORKDIR /app
-# Copy dependency files first (cache optimization)
-COPY package*.json ./
 
+COPY package*.json ./
 RUN npm install -f
 
-# Copy source
 COPY . .
 
 ARG APP_ENV=development
+ARG GOOGLE_CLIENT_ID=""
 
-# Build SSR project
+# Inject Google Client ID
+RUN sed -i "s|GoogleProviderClientId: \"\"|GoogleProviderClientId: \"${GOOGLE_CLIENT_ID}\"|g" src/environments/environment*.ts
 
-# RUN if [ "$APP_ENV" = "prod" ]; then RUN npm run build; else RUN npm run build-${APP_ENV}; fi
-# RUN if [ "$APP_ENV" = "prod" ]; then npm run build; else npm run build-${APP_ENV}; fi
-RUN if [ "$APP_ENV" = "prod" ]; then npm run build; else npm run build -- --configuration=$APP_ENV; fi
+# Build
+RUN if [ "$APP_ENV" = "prod" ]; then \
+      npm run build; \
+    else \
+      npm run build -- --configuration=$APP_ENV; \
+    fi
 
-# RUN npm run build-${APP_ENV}
-
-# ───────────────────────────────────────────────────────
-# Stage 2: Serve the App using Node.js (SSR)
-# ───────────────────────────────────────────────────────
+# ─────────────────────────────
 
 FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy built files
 COPY --from=build /app/dist ./dist
-
-# Copy package files
 COPY --from=build /app/package*.json ./
 
-# Install only production deps
 RUN npm install -f --omit=dev
 
 CMD ["node","dist/academy/server/server.mjs"]

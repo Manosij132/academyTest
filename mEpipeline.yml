@@ -1,0 +1,125 @@
+name: Academy Docker Deployment (Multi Env Flow)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Environment"
+        required: true
+        type: choice
+        options:
+          - dev
+
+  push:
+    branches:
+      - release/**
+
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+env:
+  COMPOSE_FILE: docker-compose.yml
+
+##################################
+# 🔹 DEV JOB
+##################################
+jobs:
+  dev-deploy:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/heads/release/')
+    runs-on:
+      - self-hosted
+      - linux
+      - dev   # 🔥 DEV VM
+
+    steps:
+      - name: Fix permissions
+        run: sudo chown -R $USER:$USER /home/azureuser/actions-runner/_work
+
+      - uses: actions/checkout@v4
+
+      - name: Set env
+        run: |
+          TAG=dev-${{ github.run_number }}
+          echo "IMAGE_TAG=$TAG" > .env
+          echo "APP_ENV=prod" >> .env
+          echo "ASPNETCORE_ENVIRONMENT=dev" >> .env
+
+      - name: Build
+        run: |
+          docker build -t academy-api:$TAG -f Backend/Academy.API/dockerfile .
+          docker build -t staffing-api:$TAG -f Backend/Staffing/Staffing.API/dockerfile .
+          docker build --build-arg APP_ENV=prod -t academy-fe:$TAG -f Frontend/Academy.FE/dockerfile Frontend/Academy.FE/
+
+      - name: Deploy
+        run: |
+          docker compose down || true
+          docker compose up -d
+
+      - run: sleep 40
+
+      - name: Health
+        run: curl -k -f https://localhost
+
+##################################
+# 🔹 QA JOB (only after release)
+##################################
+  qa-deploy:
+    needs: dev-deploy
+    if: startsWith(github.ref, 'refs/heads/release/')
+    runs-on:
+      - self-hosted
+      - linux
+      - qa   # 🔥 QA VM
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set env
+        run: |
+          TAG=qa-${{ github.run_number }}
+          echo "IMAGE_TAG=$TAG" > .env
+          echo "APP_ENV=prod" >> .env
+          echo "ASPNETCORE_ENVIRONMENT=qa" >> .env
+
+      - name: Deploy
+        run: |
+          docker compose down || true
+          docker compose up -d
+
+      - run: sleep 40
+
+      - name: Health
+        run: curl -k -f https://localhost
+
+##################################
+# 🔹 PROD JOB
+##################################
+  prod-deploy:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    runs-on:
+      - self-hosted
+      - linux
+      - prod   # 🔥 PROD VM
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set env
+        run: |
+          TAG=prod-${{ github.run_number }}
+          echo "IMAGE_TAG=$TAG" > .env
+          echo "APP_ENV=prod" >> .env
+          echo "ASPNETCORE_ENVIRONMENT=prod" >> .env
+
+      - name: Deploy
+        run: |
+          docker compose down || true
+          docker compose up -d
+
+      - run: sleep 40
+
+      - name: Health
+        run: curl -k -f https://localhost
