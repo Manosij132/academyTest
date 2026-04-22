@@ -15,7 +15,7 @@ on:
 jobs:
   dev:
     if: github.ref == 'refs/heads/develop' || github.event_name == 'workflow_dispatch'
-    uses: ./.github/workflows/template-deploy.yml
+    uses: ./.github/workflows/deploy-template.yml
     with:
       env_name: dev
       runner: dev
@@ -24,7 +24,7 @@ jobs:
 
   qa:
     if: startsWith(github.ref, 'refs/heads/release/')
-    uses: ./.github/workflows/template-deploy.yml
+    uses: ./.github/workflows/deploy-template.yml
     with:
       env_name: qa
       runner: qa
@@ -33,7 +33,7 @@ jobs:
 
   prod:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
-    uses: ./.github/workflows/template-deploy.yml
+    uses: ./.github/workflows/deploy-template.yml
     with:
       env_name: prod
       runner: prod
