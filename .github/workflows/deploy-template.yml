@@ -55,11 +55,15 @@ jobs:
           echo "IMAGE_TAG=${{ inputs.env_name }}-${{ github.run_number }}" >> .env
           echo "ASPNETCORE_ENVIRONMENT=${{ inputs.aspnet }}" >> .env
 
-      # 🔹 Debug (temporary - remove later)
-      - name: Debug ENV
+      # 🔹 Debug 
+      - name: Debug secret
         run: |
-          echo "------ .env content ------"
-          cat .env
+          if [ -z "${{ secrets.ENV_FILE }}" ]; then
+            echo "❌ SECRET EMPTY"
+            exit 1
+          else
+            echo "✅ SECRET LOADED"
+          fi
 
       # 🔹 Generate service-specific env files
       - name: Generate env files
