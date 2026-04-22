@@ -65,6 +65,9 @@ jobs:
             echo "✅ SECRET LOADED"
           fi
 
+      - name: Debug academy.env
+        run: cat academy.env
+
       # 🔹 Generate service-specific env files
       - name: Generate env files
         run: |
