@@ -65,14 +65,14 @@ jobs:
             echo "✅ SECRET LOADED"
           fi
 
-      - name: Debug academy.env
-        run: cat academy.env
-
       # 🔹 Generate service-specific env files
       - name: Generate env files
         run: |
           chmod +x generate-env.sh
           ./generate-env.sh
+
+      - name: Debug academy.env
+        run: cat academy.env          
 
       # 🔹 Build Images
       - name: Build Docker Images
